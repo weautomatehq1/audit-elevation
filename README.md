@@ -1,0 +1,241 @@
+# Audit Elevation System
+
+> Structured-audit + self-healing layer for Claude Code, sitting on top of [splittasks](https://github.com/...) and feeding IFleet's M4 fingerprint pipeline. Single-developer internal infrastructure. Built 2026-05-20 → 2026-05-21 across two overnight splits.
+
+---
+
+## What this is
+
+A coordinated system that turns Claude Code's ad-hoc audit chatter into **structured, queryable, self-healing work items.**
+
+Before: `/audit-session` produced a wall of text in chat. Findings vanished after compaction. Nothing else could read them.
+
+After: `/audit-scan` writes `<repo>/.audits/<ISO>.json` with deterministic IDs and fingerprints. Splittasks reads `.audits/index.json` and routes lanes around audit work. Codex (separate quota pool) reviews audit-fix PRs. Fingerprints repeat → DRAFT rules surface for review. Lane scheduler observes everything for future quota pacing.
+
+**Why the name "elevation":** lifts the system from "tool that runs once" to "tool that gets categorically smarter over time."
+
+---
+
+## Goal
+
+Make audit findings *first-class on-disk work items* so:
+
+1. Parallel splittasks lanes can route around audit work safely (no file collisions)
+2. Audit-fix PRs cite finding IDs and a second-opinion reviewer (Codex) can verify closure
+3. Repeated bugs get fingerprinted → after 3 closures, a DRAFT rule surfaces for human approval
+4. The lane scheduler can eventually pace Max-quota burn across concurrent sessions
+5. IFleet's M4 fingerprint+PR-learn pipeline ingests this same data later
+
+---
+
+## Status
+
+| Phase | Status | Date |
+|---|---|---|
+| **Phase 1 — Keystone** (commands + triager + Step 0) | ✅ shipped | 2026-05-20 overnight |
+| **Phase 2 — Codex review + Tiered chain** | ✅ shipped (file-level — Codex CLI smoke pending) | 2026-05-20 overnight |
+| **Phase 2.5 — Hybrid automation** (SessionStart banner + `audit autopilot` keyword) | ✅ shipped | 2026-05-20 overnight |
+| **Phase 3 — Dogfood / 2-week soak** | 🟡 in progress | started 2026-05-21 |
+| **Phase 4 — Self-healing (fingerprint REGRESSION + DRAFT auto-rules)** | ✅ scaffolded | 2026-05-21 overnight |
+| **Phase 5 — Lane scheduler MVP (observation-only)** | ✅ scaffolded, opt-in PM2 entry | 2026-05-21 |
+| **Phase 6 — IFleet fold-in** | 📝 ADRs drafted, 5 Sebastian decisions queued | gated on Phase 3 soak |
+| **Phase 7 — Proposer (M5 of IFleet elevation)** | 📝 spec drafted | future |
+
+6 repos baselined (IFleet, factory, PhillUp, ~/.claude self-audit, + 2 more) with **46 open findings** (9 CRITICAL / 31 IMPORTANT / 6 COSMETIC) as of 2026-05-21.
+
+---
+
+## Data flow (one diagram, all components)
+
+```
+                  ┌──────────────────────────────────────────────┐
+                  │  Sebastian invokes /audit-scan in any repo   │
+                  └─────────────────────┬────────────────────────┘
+                                        ▼
+                  ┌──────────────────────────────────────────────┐
+                  │  critic subagent  ─OR─  audit-scanner agent  │
+                  │  produces structured findings (severity,     │
+                  │  globs, fingerprint hash, parallel_safe)     │
+                  └─────────────────────┬────────────────────────┘
+                                        ▼
+                  ┌──────────────────────────────────────────────┐
+                  │  Writes <repo>/.audits/<ISO>.json            │
+                  │  Updates <repo>/.audits/index.json (rollup)  │
+                  │  Checks fingerprint against closed.json →    │
+                  │  marks as REGRESSION if matches              │
+                  └─────────────────────┬────────────────────────┘
+                                        ▼
+            ┌───────────────────────────┴───────────────────────────┐
+            ▼                                                       ▼
+  ┌────────────────────┐                              ┌──────────────────────┐
+  │  /audit-fix        │                              │  /splittasks         │
+  │  Filters by sev    │                              │  Step 0: reads       │
+  │  or id.            │                              │  .audits/index.json  │
+  │  audit-triager     │                              │  Surfaces open       │
+  │  produces a        │                              │  findings in         │
+  │  splittasks plan.  │                              │  MASTER.md           │
+  │  User pastes.      │                              │  Boundaries          │
+  └─────────┬──────────┘                              └──────────────────────┘
+            │
+            ▼
+  ┌────────────────────────────────────┐
+  │  Worker lanes fix the findings,    │
+  │  open PRs with AUDIT-* in title    │
+  └─────────┬──────────────────────────┘
+            ▼
+  ┌────────────────────────────────────┐
+  │  Strict mode tiered review chain:  │
+  │  - Feature PR → Codex only         │
+  │  - Audit-fix PR → Codex + Claude   │
+  │    verifier in parallel (both PASS)│
+  └─────────┬──────────────────────────┘
+            ▼
+  ┌────────────────────────────────────┐
+  │  Merge → finding closed in         │
+  │  index.json + appended to          │
+  │  closed.json with fingerprint      │
+  └─────────┬──────────────────────────┘
+            ▼
+  ┌────────────────────────────────────┐
+  │  audit-fingerprint-watcher.sh      │
+  │  (cron-runnable, opt-in)           │
+  │  3+ closures of same fingerprint → │
+  │  audit-rule-drafter.sh writes      │
+  │  DRAFT to .audits/proposed-rules/  │
+  │  Sebastian reviews + manually      │
+  │  promotes to .claude/rules/        │
+  └────────────────────────────────────┘
+
+   Concurrent with all of the above:
+   - audit-banner.sh hook prints findings count at SessionStart
+   - "audit autopilot" keyword flips to self-driving mode
+   - audit-broadcast skill posts Discord briefs (dry-run today)
+   - lane-scheduler.mjs observes active terminals (telemetry only)
+```
+
+---
+
+## Where the code lives
+
+| Component | Path | Purpose |
+|---|---|---|
+| **Commands** | | |
+| `/audit-scan` | `~/.claude/commands/audit-scan.md` | Run brutal critique, write structured findings JSON |
+| `/audit-fix` | `~/.claude/commands/audit-fix.md` | Dispatch findings as splittasks plan via triager |
+| `/audit-session` | `~/.claude/commands/audit-session.md` | Alias — scan + suggest fix |
+| `/codex-review` | invokes skill | Per-PR cross-provider review |
+| `/audit-broadcast` | invokes skill | Post brief to Discord |
+| **Subagents** | | |
+| `audit-triager` | `~/.claude/agents/audit-triager.md` | Group findings → splittasks plan |
+| `audit-fingerprinter` | `~/.claude/agents/audit-fingerprinter.md` | Compute deterministic fingerprint |
+| `audit-regression-detector` | `~/.claude/agents/audit-regression-detector.md` | NEW vs REGRESSION vs DUPLICATE |
+| `critic` (existing) | `~/.claude/agents/critic.md` | Reused as scanner role |
+| `verifier` (existing) | `~/.claude/agents/verifier.md` | Used in Tiered chain for audit-fix PRs |
+| **Skills** | | |
+| `codex-review` | `~/.claude/skills/codex-review/` | Per-PR Codex CLI wrapper |
+| `audit-autopilot` | `~/.claude/skills/audit-autopilot/` | Self-driving fix dispatch via keyword |
+| `audit-broadcast` | `~/.claude/skills/audit-broadcast/` | Discord brief formatting + posting |
+| `splittasks` (patched) | `~/.claude/skills/splittasks/SKILL.md` | Step 0 reads .audits/, strict-mode Tiered chain |
+| **Hooks** | | |
+| Audit banner | `~/.claude/hooks/audit-banner.sh` | SessionStart open-findings count |
+| Keyword detector (patched) | `~/.claude/hooks/keyword-detector.mjs` | Routes `audit autopilot` keyword |
+| **Scripts** | | |
+| Rule drafter | `~/.claude/scripts/audit-rule-drafter.sh` | 3+ closures → DRAFT rule |
+| Fingerprint watcher | `~/.claude/scripts/audit-fingerprint-watcher.sh` | Cron-runnable repo sweeper |
+| Lane scheduler | `~/.claude/scripts/lane-scheduler.{sh,mjs}` | Observer daemon (opt-in PM2) |
+| Audit status helper | `~/.claude/scripts/audit-status.sh` | Standalone CLI: finding counts per repo |
+| **Data files** | | |
+| Findings (per repo) | `<repo>/.audits/<ISO>.json` | One file per scan |
+| Open findings rollup | `<repo>/.audits/index.json` | Aggregate across all scans |
+| Closed findings table | `<repo>/.audits/closed.json` | History for fingerprint matching |
+| DRAFT rules | `<repo>/.audits/proposed-rules/` | Pending Sebastian review |
+| Active lanes registry | `~/.omc/active-lanes.json` | Lane scheduler observation data |
+
+---
+
+## Spec docs (in this folder)
+
+| Doc | What it covers |
+|---|---|
+| [plan.md](./plan.md) | The original strategy plan that drove the build. Phases, build order, deferrals, decisions. |
+| [docs/proposer-spec.md](./docs/proposer-spec.md) | The nightly Proposer bot (IFleet M5). 8 sections + ADR + 7 open decisions. |
+| [docs/lane-scheduler-spec.md](./docs/lane-scheduler-spec.md) | Lane scheduler schema (`~/.omc/active-lanes.json`), helper scripts, observer daemon, PM2 opt-in. |
+| [docs/self-heal-pipeline.md](./docs/self-heal-pipeline.md) | Fingerprint → REGRESSION detection → DRAFT auto-rule generation. Lifecycle + failure modes. |
+| [docs/quota-pacing-design.md](./docs/quota-pacing-design.md) | Future design for Max-quota throttling. Not implemented — design only. |
+| [docs/ifleet-integration-adrs.md](./docs/ifleet-integration-adrs.md) | 5 ADRs for the eventual IFleet fold-in (Phase 6). Gated on Phase 3 soak. |
+
+---
+
+## How to use
+
+### First scan in a new repo
+```
+cd <repo>
+/audit-scan
+```
+Findings appear in chat and at `<repo>/.audits/<timestamp>.json`. `index.json` rollup auto-updates.
+
+### Triage + fix
+```
+/audit-fix severity:CRITICAL
+```
+Returns a splittasks plan. Paste into terminals. Each lane closes its assigned finding(s).
+
+### Self-driving for a session
+Type `audit autopilot` mid-session. Parent Claude reads `.audits/index.json`, dispatches the triager, renders paste-box. You paste terminals.
+
+### Check status of any repo
+```
+~/.claude/scripts/audit-status.sh <repo-path>
+# or just `audit-status` if symlinked into PATH
+```
+
+### Manual fingerprint sweep (rule drafting)
+```
+~/.claude/scripts/audit-rule-drafter.sh <repo-path>
+# inspect <repo>/.audits/proposed-rules/
+# promote any to <repo>/.claude/rules/ manually
+```
+
+### Cron-run the watcher (optional)
+See [docs/self-heal-pipeline.md](./docs/self-heal-pipeline.md) for crontab snippet. Not installed by default.
+
+### Lane scheduler (observation only, optional)
+```
+pm2 start ~/.claude/scripts/lane-scheduler.pm2.json
+```
+Telemetry only — no throttling. See [docs/lane-scheduler-spec.md](./docs/lane-scheduler-spec.md).
+
+---
+
+## Open decisions (Sebastian's input needed)
+
+From the 5 IFleet integration ADRs in [docs/ifleet-integration-adrs.md](./docs/ifleet-integration-adrs.md):
+
+1. **Symlink vs copy** — when IFleet integrates, should `~/.claude/agents/audit-*` symlink into IFleet, or be copied?
+2. **Cost cap policy** — Max-plan flat-rate, but what's the safety cap on a runaway audit-fix?
+3. **`IFLEET_MANAGED` flag** — env var that flips behavior when IFleet is driving vs user-driven?
+4. **Lane TTL** — how long before a lane in `active-lanes.json` is considered stale?
+5. **`#ifleet-proposals` channel** — DM Sebastian only, or also broadcast to channel?
+
+Plus 7 open decisions in the Proposer spec (D1-D7).
+
+---
+
+## Safety gates honored throughout
+
+- ✋ No IFleet source code changes (specs only)
+- ✋ Auto-rules DRAFT only — never `.claude/rules/`
+- ✋ Lane scheduler observation-only — no throttling
+- ✋ Discord broadcast `--dry-run` only (live needs explicit go)
+- ✋ PM2 / crontab documented but not installed
+- ✋ No git pushes from audit baselines without explicit approval
+
+---
+
+## Related
+
+- [IFleet ROADMAP](~/dev/ai-products/IFleet/ROADMAP.md) — 6-month elevation plan (M0-M6, M4 is the natural integration point)
+- [Memory entries](~/.claude/projects/-Users-Seb/memory/) — `elevation_audit_shipped_20260521.md`, `project_status_20260521.md`
+- [Split session evidence](~/.omc/splits/20260520-2224-elevation-keystone/) — keystone build T1-T5 done reports
+- [Split session evidence](~/.omc/splits/20260520-2244-elevation-push/) — push build T1-T5 done reports + ADRs
