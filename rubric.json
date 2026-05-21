@@ -43,5 +43,37 @@
     "split-t1": "Invoked by splittasks T1 orchestrator at close-out",
     "session-end-hook": "Invoked by SessionEnd hook on solo sessions",
     "manual": "Invoked manually via /audit-scan"
+  },
+  "online_eval_log_schema": {
+    "table": "public.online_eval_log",
+    "project": "exswghbtgtdykklcsdxq",
+    "columns": {
+      "id":                    { "type": "uuid",      "nullable": false, "default": "gen_random_uuid()" },
+      "schema_version":        { "type": "integer",   "nullable": false, "default": 1 },
+      "rubric_version":        { "type": "text",      "nullable": false },
+      "session_id":            { "type": "text",      "nullable": false },
+      "repo":                  { "type": "text",      "nullable": false },
+      "git_sha":               { "type": "text",      "nullable": true  },
+      "branch":                { "type": "text",      "nullable": true  },
+      "completed_at":          { "type": "timestamptz", "nullable": false, "default": "now()" },
+      "duration_ms":           { "type": "integer",   "nullable": true  },
+      "source":                { "type": "text",      "nullable": false, "values": ["mac", "vps"] },
+      "trigger":               { "type": "text",      "nullable": false, "values": ["split-t1", "session-end-hook", "manual"] },
+      "event":                 { "type": "text",      "nullable": false, "values": ["clean", "completed", "audit-failed", "aborted"] },
+      "lanes":                 { "type": "integer",   "nullable": true  },
+      "audit_model":           { "type": "text",      "nullable": true  },
+      "audit_tokens":          { "type": "integer",   "nullable": true  },
+      "findings_total":        { "type": "integer",   "nullable": false, "default": 0 },
+      "findings_by_severity":  { "type": "jsonb",     "nullable": true  },
+      "top_categories":        { "type": "text[]",    "nullable": true  },
+      "findings_new":          { "type": "integer",   "nullable": true,  "default": 0 },
+      "findings_carried_over": { "type": "integer",   "nullable": true,  "default": 0 },
+      "is_test":               { "type": "boolean",   "nullable": true,  "default": false },
+      "raw_findings_ref":      { "type": "text",      "nullable": true  }
+    },
+    "indexes": [
+      "online_eval_log_repo_completed_idx ON (repo, completed_at DESC)",
+      "online_eval_log_event_completed_idx ON (event, completed_at DESC)"
+    ]
   }
 }

@@ -1,0 +1,227 @@
+{
+  "repo": "audit-elevation",
+  "last_updated": "2026-05-21T17:49:46Z",
+  "open_findings": 0,
+  "by_severity": {
+    "CRITICAL": 0,
+    "IMPORTANT": 0,
+    "COSMETIC": 0
+  },
+  "findings": [
+    {
+      "id": "AUDIT-audit-elevation-ea19316a",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "Phantom file: regressions.json referenced but never defined, created, or written by any component",
+      "fingerprint": "753faf6422fe790c71f6975748abbd482094dad3cdcee7ea26291de24757700b",
+      "status": "closed",
+      "opened_at": "2026-05-21T17:20:59Z",
+      "closed_at": "2026-05-21T17:49:46Z",
+      "closing_pr": "direct-fix",
+      "file_globs": [
+        "docs/proposer-spec.md",
+        "~/.claude/skills/audit-broadcast/SKILL.md"
+      ],
+      "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-777a4813",
+      "severity": "IMPORTANT",
+      "category": "assumption",
+      "title": "README finding counts are stale: claims '46 open (9C/31I/6CO) across 6 repos' but actual data shows 39 open (6C/28I/5CO) across 5 repos",
+      "fingerprint": "dd13bac805b22695642712968ca440f6db668afdefbbc33f6238fa2b5909c1af",
+      "status": "closed",
+      "opened_at": "2026-05-21T17:20:59Z",
+      "closed_at": "2026-05-21T17:49:46Z",
+      "closing_pr": "direct-fix",
+      "file_globs": [
+        "README.md"
+      ],
+      "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-d60264eb",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "rubric.json field name mismatch: audit-scan.md reads 'version' but actual field is 'rubric_version'",
+      "fingerprint": "d355c967655baf0a5658121c728ffb264c1070745694c90aa3108daffee55339",
+      "status": "closed",
+      "opened_at": "2026-05-21T17:20:59Z",
+      "closed_at": "2026-05-21T17:41:49Z",
+      "closing_pr": "direct-fix",
+      "file_globs": [
+        "rubric.json",
+        "~/.claude/commands/audit-scan.md"
+      ],
+      "parallel_safe": false
+    },
+    {
+      "id": "AUDIT-audit-elevation-5bdd8792",
+      "severity": "IMPORTANT",
+      "category": "assumption",
+      "title": "README claims rubric.json is 'schema source-of-truth' for online_eval_log but rubric.json contains no online_eval_log schema",
+      "fingerprint": "63d1c2f7cc6a0061e6069a06d28d20224ff445a075dd95e9a278f1b671ac1091",
+      "status": "closed",
+      "opened_at": "2026-05-21T17:20:59Z",
+      "closed_at": "2026-05-21T17:49:46Z",
+      "closing_pr": "direct-fix",
+      "file_globs": [
+        "README.md",
+        "rubric.json"
+      ],
+      "parallel_safe": false
+    },
+    {
+      "id": "AUDIT-audit-elevation-4fa7eb3a",
+      "severity": "IMPORTANT",
+      "category": "risk",
+      "title": "self-heal-pipeline.md recommends flock for closed.json race condition but flock is unavailable on macOS",
+      "fingerprint": "9a224aca3d483a991e62a5cf54b39612cf4590679e8ac32704481d7aee5e8a65",
+      "status": "closed",
+      "opened_at": "2026-05-21T17:20:59Z",
+      "closed_at": "2026-05-21T17:49:46Z",
+      "closing_pr": "direct-fix",
+      "file_globs": [
+        "docs/self-heal-pipeline.md"
+      ],
+      "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-14de88a1",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "README lists lane-scheduler.{sh,mjs} but lane-scheduler.sh does not exist",
+      "fingerprint": "a84e1c2e4c09fdf459601b6c7c0b6b3c8fae86ef2cc105f9822c47b6ecbe5a82",
+      "status": "closed",
+      "opened_at": "2026-05-21T17:20:59Z",
+      "closed_at": "2026-05-21T17:49:46Z",
+      "closing_pr": "direct-fix",
+      "file_globs": [
+        "README.md"
+      ],
+      "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-b965352b",
+      "severity": "IMPORTANT",
+      "category": "risk",
+      "title": "Proposer watchlist references 3 repos that do not exist on disk",
+      "fingerprint": "abe89cedb9e1231f214fd5e4a8cfa9ebb48395da483f92849c1f6d0706ed9196",
+      "status": "closed",
+      "opened_at": "2026-05-21T17:20:59Z",
+      "closed_at": "2026-05-21T17:49:46Z",
+      "closing_pr": "direct-fix",
+      "file_globs": [
+        "docs/proposer-spec.md"
+      ],
+      "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-99e78e47",
+      "severity": "IMPORTANT",
+      "category": "redo",
+      "title": "ADR-003 references 'eventual-growing-raven.md' \u2014 a stale codename that does not exist",
+      "fingerprint": "33a964502b013a85bbf294d808ed865fd492311af610fa3f8e45228bf09bde0f",
+      "status": "closed",
+      "opened_at": "2026-05-21T17:20:59Z",
+      "closed_at": "2026-05-21T17:49:46Z",
+      "closing_pr": "direct-fix",
+      "file_globs": [
+        "docs/ifleet-integration-adrs.md"
+      ],
+      "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-d562db04",
+      "severity": "IMPORTANT",
+      "category": "assumption",
+      "title": "Codex CLI not installed \u2014 Phase 2 shipped status is misleading since codex --version fails",
+      "fingerprint": "5e8103eeca45451e89ccad8d9f382315dfe7db80881dbe4b3d2366003a73ee47",
+      "status": "closed",
+      "opened_at": "2026-05-21T17:20:59Z",
+      "closed_at": "2026-05-21T17:49:46Z",
+      "closing_pr": "direct-fix",
+      "file_globs": [
+        "README.md",
+        "~/.claude/skills/codex-review/SKILL.md"
+      ],
+      "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-08b15f15",
+      "severity": "IMPORTANT",
+      "category": "risk",
+      "title": "Proposer-spec and ADR-005 have conflicting cron time recommendations",
+      "fingerprint": "17eacb3cc899f583837d1e70c629e52d11cfe59abcd203f0e2fe8aaa7933a53b",
+      "status": "closed",
+      "opened_at": "2026-05-21T17:20:59Z",
+      "closed_at": "2026-05-21T17:49:46Z",
+      "closing_pr": "direct-fix",
+      "file_globs": [
+        "docs/proposer-spec.md",
+        "docs/ifleet-integration-adrs.md"
+      ],
+      "parallel_safe": false
+    },
+    {
+      "id": "AUDIT-audit-elevation-e670b001",
+      "severity": "COSMETIC",
+      "category": "redo",
+      "title": "watched-repos.txt only covers 2 of 5 audited repos \u2014 fingerprint watcher misses 60% of audit data",
+      "fingerprint": "7d1c06baf2b6a024e4eae733f12a813cb9fe50ee2d52b1999f7b04628a8ebc52",
+      "status": "closed",
+      "opened_at": "2026-05-21T17:20:59Z",
+      "closed_at": "2026-05-21T17:49:46Z",
+      "closing_pr": "direct-fix",
+      "file_globs": [
+        "~/.claude/audit-watched-repos.txt"
+      ],
+      "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-d6612de5",
+      "severity": "COSMETIC",
+      "category": "overconfidence",
+      "title": "README data-flow diagram shows closed.json in the merge path but closed.json does not exist in any repo",
+      "fingerprint": "5dfb1d7e22f1e4ad4af4b258d108fc28735f82f7bd5d8aa311b99b194376dad3",
+      "status": "closed",
+      "opened_at": "2026-05-21T17:20:59Z",
+      "closed_at": "2026-05-21T17:49:46Z",
+      "closing_pr": "direct-fix",
+      "file_globs": [
+        "README.md"
+      ],
+      "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-629286f0",
+      "severity": "COSMETIC",
+      "category": "overconfidence",
+      "title": "plan.md findings schema shows 'reopened' as a valid status but no component ever sets it",
+      "fingerprint": "90128c57864bfe120fe89dbb15d33ae0a52affaacf3c8244391798dedd92dca5",
+      "status": "closed",
+      "opened_at": "2026-05-21T17:20:59Z",
+      "closed_at": "2026-05-21T17:49:46Z",
+      "closing_pr": "direct-fix",
+      "file_globs": [
+        "plan.md"
+      ],
+      "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-91e56a7c",
+      "severity": "COSMETIC",
+      "category": "assumption",
+      "title": "README Related section uses tilde paths that won't resolve as clickable links",
+      "fingerprint": "52b66aff6d779c397b895ef98f48ee7967f73867e1ad6322ec99dcc49efdaea0",
+      "status": "closed",
+      "opened_at": "2026-05-21T17:20:59Z",
+      "closed_at": "2026-05-21T17:49:46Z",
+      "closing_pr": "direct-fix",
+      "file_globs": [
+        "README.md"
+      ],
+      "parallel_safe": true
+    }
+  ]
+}

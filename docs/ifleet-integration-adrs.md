@@ -118,7 +118,7 @@ Three placement candidates:
 
 ### Context
 
-The standalone system writes audit findings to `<repo>/.audits/<timestamp>.json` with the schema from `eventual-growing-raven.md` (lines 74-98). Each finding has an `id` (`AUDIT-<repo>-<hash8>`), `fingerprint` (sha256 of category+globs+title), `status` (open/fixing/verifying/closed/reopened), and `closing_pr`. The standalone path keeps `.audits/index.json` in sync.
+The standalone system writes audit findings to `<repo>/.audits/<timestamp>.json` with the schema from `plan.md` (lines 74-98) in the audit-elevation repo. Each finding has an `id` (`AUDIT-<repo>-<hash8>`), `fingerprint` (sha256 of category+globs+title), `status` (open/fixing/verifying/closed/regression), and `closing_pr`. The standalone path keeps `.audits/index.json` in sync.
 
 IFleet's `SprintManager` already owns a canonical event trace per ADR-0001. Events have a `(taskId, seq, ts, role, kind, payload)` shape and persist to SQLite + S3-compatible blob. Audit findings are conceptually trace events too — they have a lifecycle (opened → fixing → verifying → closed/reopened), they reference PRs, and they need replay for the shadow eval and the M4 fingerprinting tables.
 
@@ -246,7 +246,7 @@ Decision rules baked into the Proposer's morning prompt:
 ### Open questions
 
 - Channel name: `#ifleet-proposals` (per `ifleet_elevation_plan.md`) or `#ifleet` (existing brief channel, `1504120127791042631`)? Suggest: new `#ifleet-proposals` so morning proposals don't get lost in operational chatter. **Sebastian decision needed.**
-- Cron timing: 6am local? Sebastian wakes ~6:30am per session history. Suggest: 6:15am, gives 15 min for Discord DM to settle.
+- Cron timing: **03:00 local** — resolved by proposer-spec.md D7 (canonical). 5h buffer before 08:00 start covers Discord MCP retries.
 - Budget gate (per `ifleet_elevation_plan.md` M5 line): does the Proposer estimate cost before DMing, and refuse if over a daily cap? Per `feedback_no_budget_caps_claude_max.md`, NO — Max plan is flat-rate, the scarce resource is lanes not dollars. The 5-lane cap above subsumes the budget gate.
 
 ---

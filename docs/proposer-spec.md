@@ -26,7 +26,7 @@ Read-only. The Proposer never writes to source.
 | Non-goals filter | `~/dev/ai-products/IFleet/NON_GOALS.md` | Drop any proposal whose summary matches |
 | Security gates | `~/dev/ai-products/IFleet/SECURITY.md` | Flag any proposal touching protected paths — require explicit Sebastian approval flag |
 | Audit findings (watch-list) | `<repo>/.audits/index.json` for each repo in `~/.omc/proposer-watchlist.json` | Surface CRITICAL/IMPORTANT findings as candidate tasks |
-| Audit regressions | `<repo>/.audits/regressions.json` | Bump priority on repeat bugs |
+| Audit regressions | `<repo>/.audits/index.json` filtered for `status == "regression"` | Bump priority on repeat bugs |
 | Audit closures | `<repo>/.audits/closed.json` | Suppress already-resolved findings |
 | Lane patterns | `~/.omc/lane-scheduler/log/*.jsonl` (last 7 days) | Detect overload — if yesterday hit lane ceiling, propose smaller plan |
 | Learnings | `~/dev/ai-products/IFleet/learnings.md` | Inform ranking ties (avoid recently-flagged anti-patterns) |
@@ -39,9 +39,8 @@ Read-only. The Proposer never writes to source.
   "repos": [
     "~/dev/ai-products/IFleet",
     "~/dev/coordination/factory",
-    "~/dev/ai-products/voice-discovery",
-    "~/dev/ai-products/spec-template",
-    "~/dev/weautomatehq.com"
+    "~/dev/products/PhillUp",
+    "~/dev/coordination/discord-claude-bot"
   ]
 }
 ```

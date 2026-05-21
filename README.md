@@ -33,7 +33,7 @@ Make audit findings *first-class on-disk work items* so:
 | Phase | Status | Date |
 |---|---|---|
 | **Phase 1 — Keystone** (commands + triager + Step 0) | ✅ shipped | 2026-05-20 overnight |
-| **Phase 2 — Codex review + Tiered chain** | ✅ shipped (file-level — Codex CLI smoke pending) | 2026-05-20 overnight |
+| **Phase 2 — Codex review + Tiered chain** | 🟡 file-level only — Codex CLI not installed | 2026-05-20 overnight |
 | **Phase 2.5 — Hybrid automation** (SessionStart banner + `audit autopilot` keyword) | ✅ shipped | 2026-05-20 overnight |
 | **Online-eval-log v1** (Supabase-backed session-close capture) | ✅ shipped | 2026-05-21 |
 | **Phase 3 — Dogfood / 2-week soak** | 🟡 in progress | started 2026-05-21 |
@@ -42,7 +42,7 @@ Make audit findings *first-class on-disk work items* so:
 | **Phase 6 — IFleet fold-in** | 📝 ADRs drafted, 5 Sebastian decisions queued | gated on Phase 3 soak |
 | **Phase 7 — Proposer (M5 of IFleet elevation)** | 📝 spec drafted | future |
 
-6 repos baselined (IFleet, factory, PhillUp, ~/.claude self-audit, + 2 more) with **46 open findings** (9 CRITICAL / 31 IMPORTANT / 6 COSMETIC) as of 2026-05-21.
+6 repos baselined (IFleet, factory, PhillUp, discord-claude-bot, ~/.claude, audit-elevation) with **52 open findings** (6 CRITICAL / 37 IMPORTANT / 9 COSMETIC) as of 2026-05-21.
 
 ---
 
@@ -74,7 +74,7 @@ Write paths:
 
 - **Project:** iFleet (`exswghbtgtdykklcsdxq`, us-east-1)
 - **Table:** `public.online_eval_log` (22 cols, schema_version=1)
-- **Schema source-of-truth:** `rubric.json` in this repo
+- **Schema source-of-truth:** `rubric.json` (severities/categories/fingerprint) + `rubric.json#online_eval_log_schema` (column list)
 
 ### Env vars required
 
@@ -157,6 +157,8 @@ python3 ~/.claude/scripts/online-eval-stats.py --days 7 --repo IFleet --json | j
   │  Merge → finding closed in         │
   │  index.json + appended to          │
   │  closed.json with fingerprint      │
+  │  [Phase 4 — scaffolded, not yet    │
+  │   active; closed.json not written] │
   └─────────┬──────────────────────────┘
             ▼
   ┌────────────────────────────────────┐
@@ -167,6 +169,8 @@ python3 ~/.claude/scripts/online-eval-stats.py --days 7 --repo IFleet --json | j
   │  DRAFT to .audits/proposed-rules/  │
   │  Sebastian reviews + manually      │
   │  promotes to .claude/rules/        │
+  │  [Phase 4 — scaffolded, not yet    │
+  │   active]                          │
   └────────────────────────────────────┘
 
    Concurrent with all of the above:
@@ -207,7 +211,7 @@ python3 ~/.claude/scripts/online-eval-stats.py --days 7 --repo IFleet --json | j
 | SessionEnd hook | `~/.claude/hooks/online-eval-end.sh` | Fires /audit-scan --emit-online-eval on session close |
 | Rule drafter | `~/.claude/scripts/audit-rule-drafter.sh` | 3+ closures → DRAFT rule |
 | Fingerprint watcher | `~/.claude/scripts/audit-fingerprint-watcher.sh` | Cron-runnable repo sweeper |
-| Lane scheduler | `~/.claude/scripts/lane-scheduler.{sh,mjs}` | Observer daemon (opt-in PM2) |
+| Lane scheduler | `~/.claude/scripts/lane-scheduler.mjs` | Observer daemon (opt-in PM2) |
 | Audit status helper | `~/.claude/scripts/audit-status.sh` | Standalone CLI: finding counts per repo |
 | **Config** | | |
 | rubric.json | `~/dev/ai-products/audit-elevation/rubric.json` | Single source of truth for severities, categories, fingerprint algo, events, triggers |
@@ -302,7 +306,9 @@ Plus 7 open decisions in the Proposer spec (D1-D7).
 
 ## Related
 
-- [IFleet ROADMAP](~/dev/ai-products/IFleet/ROADMAP.md) — 6-month elevation plan (M0-M6, M4 is the natural integration point)
-- [Memory entries](~/.claude/projects/-Users-Seb/memory/) — `elevation_audit_shipped_20260521.md`, `project_status_20260521.md`
-- [Split session evidence](~/.omc/splits/20260520-2224-elevation-keystone/) — keystone build T1-T5 done reports
-- [Split session evidence](~/.omc/splits/20260520-2244-elevation-push/) — push build T1-T5 done reports + ADRs
+> Note: paths below are local filesystem references — they are not clickable links in GitHub/VS Code.
+
+- IFleet ROADMAP: `/Users/Seb/dev/ai-products/IFleet/ROADMAP.md` — 6-month elevation plan (M0-M6, M4 is the natural integration point)
+- Memory entries: `/Users/Seb/.claude/projects/-Users-Seb/memory/` — `elevation_audit_shipped_20260521.md`, `project_status_20260521.md`
+- Split session evidence: `/Users/Seb/.omc/splits/20260520-2224-elevation-keystone/` — keystone build T1-T5 done reports
+- Split session evidence: `/Users/Seb/.omc/splits/20260520-2244-elevation-push/` — push build T1-T5 done reports + ADRs

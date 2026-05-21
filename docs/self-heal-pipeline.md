@@ -289,7 +289,7 @@ the accepted rule from `~/.claude/rules/` first (rare).
 | Watcher's repo list points at a non-repo path | `[skip]` in the log; total_drafts unaffected | Fix the path in `~/.claude/audit-watched-repos.txt`. The watcher does not error on missing dirs. |
 | 3+ closures coincidentally share a fingerprint with unrelated root causes | Draft proposes an irrelevant rule | Reject the draft. Consider widening the fingerprint algorithm (e.g., include a snippet of the offending code) — this is a known limitation. Document the false positive so future scans treat the fingerprint with skepticism. |
 | Closure recorded with `closing_pr: 0` (local-only fix) | Regression-detector returns `REGRESSION:...:0` | Acceptable — surface in the recap. `:0` is a sentinel; the maintainer knows the original fix did not have a PR record. |
-| Drafter run while `/audit-fix` is mid-flight | Race on `closed.json` write | Both processes only `append` to `closures[]`; if both write simultaneously, last writer wins and one closure may be lost. Solution: `/audit-fix` should hold a file lock (`flock`) when appending; drafter is read-only on `closed.json` and is unaffected. |
+| Drafter run while `/audit-fix` is mid-flight | Race on `closed.json` write | Both processes only `append` to `closures[]`; if both write simultaneously, last writer wins and one closure may be lost. Solution: `/audit-fix` should use mkdir-based locking (macOS-compatible; `flock(1)` is not available on macOS) — see `~/.claude/scripts/lane-lock.sh` for the canonical pattern. Drafter is read-only on `closed.json` and is unaffected. |
 
 ## Boundaries — T3's promise
 
