@@ -1,0 +1,47 @@
+{
+  "rubric_version": "1.0.0",
+  "schema_version": 1,
+  "severities": {
+    "CRITICAL": {
+      "definition": "Active threat or guaranteed failure. Production data loss, security breach, broken main branch, data corruption.",
+      "examples": ["secret committed to public repo", "lockfile mismatch breaks CI", "RLS missing on multi-tenant table"]
+    },
+    "IMPORTANT": {
+      "definition": "Latent bug or risk that will cause failure under reasonable conditions. Not yet broken but will break.",
+      "examples": ["dead code shipping to prod", "missing foreign key", "race condition under concurrent writes"]
+    },
+    "COSMETIC": {
+      "definition": "Style, duplication, or hygiene issue with no functional impact. Worth fixing but never urgent.",
+      "examples": ["duplicate config keys with same value", "single point of failure documented elsewhere"]
+    }
+  },
+  "categories": {
+    "logic": "Decisions that seemed correct but have a reasoning flaw",
+    "assumption": "Things taken for granted without verification",
+    "overconfidence": "Places where execution happened without enough questioning",
+    "risk": "Unconsidered consequences or side effects of changes made",
+    "redo": "Work that may need to be redone before it surfaces later"
+  },
+  "fingerprint_algo": {
+    "version": "sha256-v1",
+    "input_fields": ["category", "file_globs", "title"],
+    "normalization": {
+      "category": "lowercase + whitespace-collapse",
+      "file_globs": "sort alphabetically + join with ','",
+      "title": "lowercase + strip punctuation + whitespace-collapse"
+    },
+    "hash": "sha256",
+    "encoding": "hex"
+  },
+  "events": {
+    "completed": "Session finished normally with findings (findings_total > 0)",
+    "clean": "Session finished normally with zero findings",
+    "audit-failed": "Audit subagent failed or returned unparseable output",
+    "aborted": "Session aborted (lane timeout, T1 detected failure)"
+  },
+  "triggers": {
+    "split-t1": "Invoked by splittasks T1 orchestrator at close-out",
+    "session-end-hook": "Invoked by SessionEnd hook on solo sessions",
+    "manual": "Invoked manually via /audit-scan"
+  }
+}

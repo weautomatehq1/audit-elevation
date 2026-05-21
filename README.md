@@ -35,6 +35,7 @@ Make audit findings *first-class on-disk work items* so:
 | **Phase 1 — Keystone** (commands + triager + Step 0) | ✅ shipped | 2026-05-20 overnight |
 | **Phase 2 — Codex review + Tiered chain** | ✅ shipped (file-level — Codex CLI smoke pending) | 2026-05-20 overnight |
 | **Phase 2.5 — Hybrid automation** (SessionStart banner + `audit autopilot` keyword) | ✅ shipped | 2026-05-20 overnight |
+| **Online-eval-log v1** (Supabase-backed session-close capture) | ✅ shipped | 2026-05-21 |
 | **Phase 3 — Dogfood / 2-week soak** | 🟡 in progress | started 2026-05-21 |
 | **Phase 4 — Self-healing (fingerprint REGRESSION + DRAFT auto-rules)** | ✅ scaffolded | 2026-05-21 overnight |
 | **Phase 5 — Lane scheduler MVP (observation-only)** | ✅ scaffolded, opt-in PM2 entry | 2026-05-21 |
@@ -42,6 +43,68 @@ Make audit findings *first-class on-disk work items* so:
 | **Phase 7 — Proposer (M5 of IFleet elevation)** | 📝 spec drafted | future |
 
 6 repos baselined (IFleet, factory, PhillUp, ~/.claude self-audit, + 2 more) with **46 open findings** (9 CRITICAL / 31 IMPORTANT / 6 COSMETIC) as of 2026-05-21.
+
+---
+
+## Online-eval-log (v1, shipped 2026-05-21)
+
+One structured row per session close-out, written to Supabase. Accumulates longitudinal quality data for drift detection.
+
+### Architecture
+
+```
+/audit-scan --emit-online-eval
+       │
+       ├─ critic subagent → findings array
+       ├─ writes <repo>/.audits/<ISO>.json
+       ├─ updates <repo>/.audits/index.json
+       └─ POST → Supabase public.online_eval_log
+              (session_id, event, findings_total,
+               findings_new, findings_carried_over,
+               repo, branch, git_sha, audit_model,
+               rubric_version, trigger, source, is_test)
+
+Write paths:
+  splittasks T1 close-out  →  --trigger split-t1
+  Solo session end         →  ~/.claude/hooks/online-eval-end.sh (SessionEnd)
+  Manual                   →  --trigger manual
+```
+
+### Table
+
+- **Project:** iFleet (`exswghbtgtdykklcsdxq`, us-east-1)
+- **Table:** `public.online_eval_log` (22 cols, schema_version=1)
+- **Schema source-of-truth:** `rubric.json` in this repo
+
+### Env vars required
+
+```bash
+export SUPABASE_URL=https://exswghbtgtdykklcsdxq.supabase.co
+export SUPABASE_SERVICE_KEY=<service_role_secret_from_dashboard>
+```
+
+If either is unset, `/audit-scan --emit-online-eval` skips the POST silently (one-line warning) and continues.
+
+### How to query
+
+```bash
+python3 ~/.claude/scripts/online-eval-stats.py --days 7
+python3 ~/.claude/scripts/online-eval-stats.py --days 7 --repo IFleet --json | jq '.'
+```
+
+### Manual emission
+
+```bash
+/audit-scan --emit-online-eval --session-id <id> --trigger manual
+```
+
+### Deferred to v2
+
+- VPS-side IFleet integration (Mac-only for v1)
+- Per-lane audit rows (currently one row per T1 close-out, not per lane)
+- Drift statistics: CUSUM/EWMA over rolling windows
+- Discord brief automation from weekly aggregator
+- Orphan-reaper for T1 deaths (split aborted, no T1-done written)
 
 ---
 
@@ -140,10 +203,14 @@ Make audit findings *first-class on-disk work items* so:
 | Audit banner | `~/.claude/hooks/audit-banner.sh` | SessionStart open-findings count |
 | Keyword detector (patched) | `~/.claude/hooks/keyword-detector.mjs` | Routes `audit autopilot` keyword |
 | **Scripts** | | |
+| Online-eval aggregator | `~/.claude/scripts/online-eval-stats.py` | Query online_eval_log, print stats + JSON |
+| SessionEnd hook | `~/.claude/hooks/online-eval-end.sh` | Fires /audit-scan --emit-online-eval on session close |
 | Rule drafter | `~/.claude/scripts/audit-rule-drafter.sh` | 3+ closures → DRAFT rule |
 | Fingerprint watcher | `~/.claude/scripts/audit-fingerprint-watcher.sh` | Cron-runnable repo sweeper |
 | Lane scheduler | `~/.claude/scripts/lane-scheduler.{sh,mjs}` | Observer daemon (opt-in PM2) |
 | Audit status helper | `~/.claude/scripts/audit-status.sh` | Standalone CLI: finding counts per repo |
+| **Config** | | |
+| rubric.json | `~/dev/ai-products/audit-elevation/rubric.json` | Single source of truth for severities, categories, fingerprint algo, events, triggers |
 | **Data files** | | |
 | Findings (per repo) | `<repo>/.audits/<ISO>.json` | One file per scan |
 | Open findings rollup | `<repo>/.audits/index.json` | Aggregate across all scans |
