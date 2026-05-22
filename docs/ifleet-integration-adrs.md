@@ -132,7 +132,7 @@ Three new `TraceEvent.kind` values:
 
 - `audit.finding.opened` — payload: full finding JSON (id, severity, fingerprint, file_globs, etc.). Emitted by the audit-scanner role.
 - `audit.finding.closed` — payload: `{ findingId, closingPr, verifierEvidence }`. Emitted by `diff-reviewer.ts` / `cross-provider-reviewer.ts` when a PR merges that cites the finding.
-- `audit.finding.regressed` — payload: `{ findingId, originalClosePr, regressionFingerprint, newOccurrenceTaskId }`. Emitted by the M4 regression detector (T3 builds the standalone version tonight; M4 wires the IFleet version).
+- `audit.finding.regressed` — payload: `{ findingId, originalClosePr, regressionFingerprint, newOccurrenceTaskId, regression_of, regression_closing_pr }`. Emitted by the M4 regression detector (T3 builds the standalone version tonight; M4 wires the IFleet version). Note: `regression_of` (original finding id) and `regression_closing_pr` (PR number of the original fix) align this event with the scan-level regression fields in self-heal-pipeline.md so the bidirectional sync described in this ADR does not lose data.
 
 `.audits/index.json` for IFleet-managed repos is regenerated nightly from `audit.finding.*` events, same cron that derives `learnings.md`. Stale entries (finding marked open in `.audits/` but `audit.finding.closed` in trace) are reconciled — trace wins.
 
@@ -160,7 +160,7 @@ Three new `TraceEvent.kind` values:
 ## ADR-004 — Lane scheduler ↔ IFleet daemon coordination
 
 **Status:** DRAFT
-**Affects:** Future relationship between `~/.claude/scripts/lane-scheduler.{sh,mjs}` (T4 ships tonight) and `IFleet/src/orchestrator/daemon.ts`
+**Affects:** Future relationship between `~/.claude/scripts/lane-scheduler.mjs` (T4 ships tonight) and `IFleet/src/orchestrator/daemon.ts`
 
 ### Context
 
@@ -191,7 +191,7 @@ Concretely:
 
 **Positive:** IFleet stays the IFleet-throttle. Lane scheduler stays the observation-and-eventually-enforcement layer. Either can ship independently; either can be replaced without touching the other.
 
-**Negative:** Shared-file race conditions on registration (two terminals appending simultaneously). Mitigated by a flock-based write or atomic rename pattern in T4's lane-scheduler-spec.md (T1 to verify in Phase C).
+**Negative:** Shared-file race conditions on registration (two terminals appending simultaneously). Mitigated by mkdir-based locking (as used in lane-lock.sh — macOS has no flock(1)) per T4's lane-scheduler-spec.md (T1 to verify in Phase C).
 
 **Reversibility:** Easy — remove the `LaneRegistrar` calls in `daemon.ts`, IFleet reverts to per-product throttling.
 
