@@ -1,6 +1,6 @@
 {
   "repo": "audit-elevation",
-  "last_updated": "2026-05-21T17:49:46Z",
+  "last_updated": "2026-05-22T04:15:32Z",
   "open_findings": 0,
   "by_severity": {
     "CRITICAL": 0,
@@ -120,7 +120,7 @@
       "id": "AUDIT-audit-elevation-99e78e47",
       "severity": "IMPORTANT",
       "category": "redo",
-      "title": "ADR-003 references 'eventual-growing-raven.md' \u2014 a stale codename that does not exist",
+      "title": "ADR-003 references 'eventual-growing-raven.md' — a stale codename that does not exist",
       "fingerprint": "33a964502b013a85bbf294d808ed865fd492311af610fa3f8e45228bf09bde0f",
       "status": "closed",
       "opened_at": "2026-05-21T17:20:59Z",
@@ -135,7 +135,7 @@
       "id": "AUDIT-audit-elevation-d562db04",
       "severity": "IMPORTANT",
       "category": "assumption",
-      "title": "Codex CLI not installed \u2014 Phase 2 shipped status is misleading since codex --version fails",
+      "title": "Codex CLI not installed — Phase 2 shipped status is misleading since codex --version fails",
       "fingerprint": "5e8103eeca45451e89ccad8d9f382315dfe7db80881dbe4b3d2366003a73ee47",
       "status": "closed",
       "opened_at": "2026-05-21T17:20:59Z",
@@ -167,7 +167,7 @@
       "id": "AUDIT-audit-elevation-e670b001",
       "severity": "COSMETIC",
       "category": "redo",
-      "title": "watched-repos.txt only covers 2 of 5 audited repos \u2014 fingerprint watcher misses 60% of audit data",
+      "title": "watched-repos.txt only covers 2 of 5 audited repos — fingerprint watcher misses 60% of audit data",
       "fingerprint": "7d1c06baf2b6a024e4eae733f12a813cb9fe50ee2d52b1999f7b04628a8ebc52",
       "status": "closed",
       "opened_at": "2026-05-21T17:20:59Z",
@@ -220,6 +220,145 @@
       "closing_pr": "direct-fix",
       "file_globs": [
         "README.md"
+      ],
+      "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-3a9f1b2c",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "ADR-004 recommends flock-based locking but text then contradicts itself by citing mkdir-based pattern",
+      "fingerprint": "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2",
+      "status": "fixed",
+      "opened_at": "2026-05-22T04:11:28Z",
+      "closed_at": "2026-05-22T04:15:32Z",
+      "closing_pr": "audit/nightly-2026-05-22",
+      "file_globs": [
+        "docs/ifleet-integration-adrs.md",
+        "docs/lane-scheduler-spec.md"
+      ],
+      "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-7c4e8d1f",
+      "severity": "IMPORTANT",
+      "category": "assumption",
+      "title": "proposer-spec.md references regressions via index.json filter but section 2 input table still lists a separate regressions source path",
+      "fingerprint": "b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3",
+      "status": "fixed",
+      "opened_at": "2026-05-22T04:11:28Z",
+      "closed_at": "2026-05-22T04:15:32Z",
+      "closing_pr": "audit/nightly-2026-05-22",
+      "file_globs": [
+        "docs/proposer-spec.md"
+      ],
+      "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-b2d5a9e3",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "ADR-003 status enum lists 'reopened' but self-heal-pipeline and rubric never define it; trace event schema references it creating dead schema",
+      "fingerprint": "c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4",
+      "status": "fixed",
+      "opened_at": "2026-05-22T04:11:28Z",
+      "closed_at": "2026-05-22T04:15:32Z",
+      "closing_pr": "audit/nightly-2026-05-22",
+      "file_globs": [
+        "docs/ifleet-integration-adrs.md",
+        "docs/self-heal-pipeline.md"
+      ],
+      "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-f8a2c6b7",
+      "severity": "IMPORTANT",
+      "category": "risk",
+      "title": "closed.json schema version field conflicts: top-level 'version' clashes with finding schema 'schema_version' convention",
+      "fingerprint": "d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5",
+      "status": "fixed",
+      "opened_at": "2026-05-22T04:11:28Z",
+      "closed_at": "2026-05-22T04:15:32Z",
+      "closing_pr": "audit/nightly-2026-05-22",
+      "file_globs": [
+        "docs/self-heal-pipeline.md",
+        "rubric.json"
+      ],
+      "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-c1e7d4a8",
+      "severity": "IMPORTANT",
+      "category": "assumption",
+      "title": "Lane scheduler spec references lane-scheduler.pm2.json but ADR-004 describes lane-scheduler.{sh,mjs} with a now-removed .sh — spec/ADR conflict persists",
+      "fingerprint": "e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6",
+      "status": "fixed",
+      "opened_at": "2026-05-22T04:11:28Z",
+      "closed_at": "2026-05-22T04:15:32Z",
+      "closing_pr": "audit/nightly-2026-05-22",
+      "file_globs": [
+        "docs/ifleet-integration-adrs.md"
+      ],
+      "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-d9b3f5e2",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "proposer-spec.md Budget gate logic is inverted: ENABLED flag absent means run, present means send — opposite of standard gating convention",
+      "fingerprint": "f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7",
+      "status": "fixed",
+      "opened_at": "2026-05-22T04:11:28Z",
+      "closed_at": "2026-05-22T04:15:32Z",
+      "closing_pr": "audit/nightly-2026-05-22",
+      "file_globs": [
+        "docs/proposer-spec.md"
+      ],
+      "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-4e8c2f9a",
+      "severity": "COSMETIC",
+      "category": "overconfidence",
+      "title": "lane-scheduler-spec.md describes lane-list.sh color codes but NO_COLOR handling is documented as honored without specifying what 'honors' means",
+      "fingerprint": "a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8",
+      "status": "fixed",
+      "opened_at": "2026-05-22T04:11:28Z",
+      "closed_at": "2026-05-22T04:15:32Z",
+      "closing_pr": "audit/nightly-2026-05-22",
+      "file_globs": [
+        "docs/lane-scheduler-spec.md"
+      ],
+      "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-a5d1b8c4",
+      "severity": "COSMETIC",
+      "category": "redo",
+      "title": "quota-pacing-design.md references claude-opus-4-7 and claude-haiku-4-5 model IDs that may be stale naming conventions",
+      "fingerprint": "b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9",
+      "status": "fixed",
+      "opened_at": "2026-05-22T04:11:28Z",
+      "closed_at": "2026-05-22T04:15:32Z",
+      "closing_pr": "audit/nightly-2026-05-22",
+      "file_globs": [
+        "docs/quota-pacing-design.md",
+        "docs/lane-scheduler-spec.md"
+      ],
+      "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-e6f4c3d9",
+      "severity": "COSMETIC",
+      "category": "assumption",
+      "title": "plan.md Phase 2 prerequisites section omits that Codex CLI install is a Sebastian-owned blocking task, buried in prose",
+      "fingerprint": "c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0",
+      "status": "fixed",
+      "opened_at": "2026-05-22T04:11:28Z",
+      "closed_at": "2026-05-22T04:15:32Z",
+      "closing_pr": "audit/nightly-2026-05-22",
+      "file_globs": [
+        "plan.md"
       ],
       "parallel_safe": true
     }

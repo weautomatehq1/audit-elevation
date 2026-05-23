@@ -103,9 +103,13 @@ The `fingerprint` is deterministic — same bug reopened twice gets same fingerp
 
 ### Phase 2 — Codex per-PR reviewer + tiered review chain (standalone skill, ~1 day)
 
-**Prerequisites Seb owns:**
-- Install Codex CLI + flat-rate subscription. Confirm `codex --version` resolves.
-- Decide auth (Codex CLI config — out of scope for this plan).
+**Blocked prerequisites (Sebastian owns — BLOCKING):**
+
+| Prerequisite | Status | Blocks |
+|---|---|---|
+| Install Codex CLI (`codex --version` must resolve) | ⛔ NOT MET — Codex CLI not on PATH | All Phase 2 work |
+| Confirm flat-rate Codex subscription active | ⛔ NOT MET — unconfirmed | All Phase 2 work |
+| Decide auth (Codex CLI config) | ⬜ Pending | Phase 2 start |
 
 **Files to create:**
 - `~/.claude/skills/codex-review/SKILL.md` — new skill triggered by `/codex-review <PR#>` and auto-invoked by splittasks strict mode. Wraps `codex exec` with a focused review prompt.

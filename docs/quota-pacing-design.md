@@ -44,6 +44,7 @@ A **token-bucket scheduler** layered on top of the existing observation daemon.
 
 - Total weight across active lanes is the "concurrent cost."
 - Configurable bucket capacity (initial guess: 9 — i.e. ~3 Opus lanes comfortably).
+- **Implementation note:** Model IDs in this table must match exactly what the Claude CLI/API returns. Use prefix matching (e.g. `model.startsWith('claude-opus')`) rather than exact match to handle minor version suffixes (e.g. `claude-opus-4-7` vs `claude-opus-4`) gracefully. Unknown suffixes should fall through to the `unknown` weight (2), not error.
 
 ### 3.2 Lane lifecycle changes
 

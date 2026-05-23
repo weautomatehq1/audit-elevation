@@ -25,8 +25,7 @@ Read-only. The Proposer never writes to source.
 | Sprint (this week) | `~/dev/ai-products/IFleet/SPRINT.md` | Identify in-flight tasks vs. open slots |
 | Non-goals filter | `~/dev/ai-products/IFleet/NON_GOALS.md` | Drop any proposal whose summary matches |
 | Security gates | `~/dev/ai-products/IFleet/SECURITY.md` | Flag any proposal touching protected paths — require explicit Sebastian approval flag |
-| Audit findings (watch-list) | `<repo>/.audits/index.json` for each repo in `~/.omc/proposer-watchlist.json` | Surface CRITICAL/IMPORTANT findings as candidate tasks |
-| Audit regressions | `<repo>/.audits/index.json` filtered for `status == "regression"` | Bump priority on repeat bugs |
+| Audit findings (watch-list) | `<repo>/.audits/index.json` for each repo in `~/.omc/proposer-watchlist.json` | Surface CRITICAL/IMPORTANT findings as candidate tasks; regressions (status == "regression") receive +30 score bonus (loaded in same pass — not a separate file read) |
 | Audit closures | `<repo>/.audits/closed.json` | Suppress already-resolved findings |
 | Lane patterns | `~/.omc/lane-scheduler/log/*.jsonl` (last 7 days) | Detect overload — if yesterday hit lane ceiling, propose smaller plan |
 | Learnings | `~/dev/ai-products/IFleet/learnings.md` | Inform ranking ties (avoid recently-flagged anti-patterns) |
@@ -97,13 +96,18 @@ The plan is also written to `~/.omc/proposer/state/proposed-<UTC-date>.md` for a
 | **Sebastian already running a session** | Detected via T4's `~/.omc/active-lanes.json` showing ≥1 entry started within last 6h | DM is sent with a prefix banner: `⚠️ You appear to still be working — see lanes [list]. The plan below assumes a fresh morning; reply ❌ if you'd rather continue current work.` |
 | **All candidates filtered out (NON_GOALS / SECURITY)** | Scoring produced ≥1 candidate, post-filters produced 0 | Send a "filtered to zero" message listing what was dropped and why, so Sebastian can see what the Proposer wanted to suggest. |
 | **Stale input** (roadmap or sprint older than 14 days) | mtime check at start | Send a "Roadmap is stale — refresh before I run again" DM. Skip proposal. |
-| **Budget gate not lifted** (see §7) | Default: gate is closed | Generate the proposal but do NOT send. Write to state file with `WITHHELD_BY_BUDGET_GATE`. |
+| **Budget gate closed** (see §7) — this is the intentional default, not an error | Default: gate is closed | Generate the proposal but do NOT send. Write to state file with `WITHHELD_BY_BUDGET_GATE`. |
 
 ## 7. Gates
 
 ### Budget gate
 
-The Proposer is mute until Sebastian explicitly enables it. Mechanism: a flag file `~/.omc/proposer/ENABLED`. If absent → Proposer runs (computes a proposal, writes state) but does NOT send to Discord. The flag is lifted only on IFleet M5 launch, after Sebastian inspects two weeks of `WITHHELD` proposals and confirms the noise is acceptable.
+The Proposer is mute until Sebastian explicitly enables it. Mechanism: a flag file `~/.omc/proposer/ENABLED`.
+
+- **If absent (default on install):** compute proposal and write to state, but DO NOT send to Discord. This is the INTENTIONAL default, not an error condition.
+- **If present:** compute proposal and send to Discord.
+
+The flag is lifted only on IFleet M5 launch, after Sebastian inspects two weeks of `WITHHELD` proposals and confirms the noise is acceptable.
 
 Rationale: M5's KPI explicitly tolerates "≥1 approved+merged proposal/week, **0 noise complaints**". A Proposer that DMs noise on day one fails the KPI by definition.
 
