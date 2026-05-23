@@ -1,0 +1,50 @@
+{
+  "audit_id": "audit-20260523T045500Z",
+  "repo": "audit-elevation",
+  "scanned_at": "2026-05-23T04:55:00Z",
+  "scanner": "claude-sonnet-4-6-nightly",
+  "findings": [
+    {
+      "id": "AUDIT-audit-elevation-3e4169fd",
+      "severity": "IMPORTANT",
+      "category": "redo",
+      "title": "ifleet_elevation_plan.md is a phantom reference — actual file is plan.md",
+      "detail": "docs/ifleet-integration-adrs.md ADR-005 (lines 248, 250) cites `ifleet_elevation_plan.md` for both the channel name decision and the budget gate spec. This file does not exist anywhere in the repo or filesystem. The actual plan is `plan.md` at the repo root. Workers following the citation for context will find no file.",
+      "file_globs": ["docs/ifleet-integration-adrs.md"],
+      "fix_sketch": "Replace both occurrences of `ifleet_elevation_plan.md` with `plan.md` in ifleet-integration-adrs.md.",
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-05-23T04:55:00Z",
+      "closed_at": "2026-05-23T05:00:00Z",
+      "closing_pr": "audit/nightly-2026-05-23"
+    },
+    {
+      "id": "AUDIT-audit-elevation-1a844c51",
+      "severity": "IMPORTANT",
+      "category": "redo",
+      "title": "Two blocking Sebastian decisions in ADR-005 have no tracking mechanism",
+      "detail": "ifleet-integration-adrs.md §ADR-005 summary table (line 254) lists 5 decisions Sebastian must make before any fold-in PR. Decisions 1 (symlink vs copy) and 5 (channel name #ifleet-proposals vs #ifleet) are flagged 'Sebastian decision needed' with no default and no tracking issue. Without these resolved, the Phase 6 fold-in is technically blocked but the blockage is invisible in any task tracker.",
+      "file_globs": ["docs/ifleet-integration-adrs.md"],
+      "fix_sketch": "Add default recommendations to the two unresolved rows in the decisions table so the fold-in can proceed with explicit defaults that Sebastian can override. Decision 1 default: copy (Windows safety); Decision 5 default: reuse #ifleet (no new channel needed).",
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-05-23T04:55:00Z",
+      "closed_at": "2026-05-23T05:00:00Z",
+      "closing_pr": "audit/nightly-2026-05-23"
+    },
+    {
+      "id": "AUDIT-audit-elevation-2b1762ed",
+      "severity": "COSMETIC",
+      "category": "cosmetic",
+      "title": "README.md finding count (52 open as of 2026-05-21) is stale after 14 fixes today",
+      "detail": "README.md line 45 states '52 open findings as of 2026-05-21'. Today's nightly audit closed 7 findings in IFleet and 7 in factory, reducing the total. The 'as of' qualifier makes it historically accurate but the number reads as current state.",
+      "file_globs": ["README.md"],
+      "fix_sketch": "Update README.md count to reflect post-nightly-audit state with date qualifier.",
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-05-23T04:55:00Z",
+      "closed_at": "2026-05-23T05:00:00Z",
+      "closing_pr": "audit/nightly-2026-05-23"
+    }
+  ]
+}
