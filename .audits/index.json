@@ -1,7 +1,8 @@
 {
   "repo": "audit-elevation",
-  "last_updated": "2026-05-22T04:15:32Z",
+  "last_updated": "2026-05-24T04:21:11Z",
   "open_findings": 0,
+  "fixed_this_run": 1,
   "by_severity": {
     "CRITICAL": 0,
     "IMPORTANT": 0,
@@ -361,6 +362,19 @@
         "plan.md"
       ],
       "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-ae-d9e0f1a2",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "closed.json schema uses 'version' field instead of consistent 'schema_version'",
+      "detail": "self-heal-pipeline.md defined closed.json with 'version' while rubric.json uses 'schema_version'. Three inconsistent conventions for the same system. Fixed by renaming 'version' to 'schema_version' in self-heal-pipeline.md schema and initialization template.",
+      "file_globs": ["docs/self-heal-pipeline.md"],
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-05-24T04:21:11Z",
+      "closed_at": "2026-05-24T04:21:11Z",
+      "closing_pr": "audit/nightly-2026-05-24"
     }
   ]
 }

@@ -36,7 +36,7 @@ and four is too late. The threshold is configurable via `RULE_DRAFT_THRESHOLD`.
 ```json
 {
   "repo": "IFleet",
-  "version": 1,
+  "schema_version": 1,
   "closures": [
     {
       "finding_id": "AUDIT-IFleet-a1b2c3d4",
@@ -89,7 +89,7 @@ implements when closing a finding:
      cached value in `.audits/index.json`).
    - Build the closure record per the schema above.
    - Append to `closures[]` in `<repo>/.audits/closed.json` (initialize file
-     with `{"repo": "<name>", "version": 1, "closures": [], "repeat_counts": {}}`
+     with `{"repo": "<name>", "schema_version": 1, "closures": [], "repeat_counts": {}}`
      if absent).
    - Update `repeat_counts[fingerprint].count`, `last_closed_at`, and
      `closures_history`.
