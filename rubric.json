@@ -20,7 +20,8 @@
     "assumption": "Things taken for granted without verification",
     "overconfidence": "Places where execution happened without enough questioning",
     "risk": "Unconsidered consequences or side effects of changes made",
-    "redo": "Work that may need to be redone before it surfaces later"
+    "redo": "Work that may need to be redone before it surfaces later",
+    "cosmetic": "Style, naming, or hygiene issues with no functional impact; maps to COSMETIC severity findings"
   },
   "fingerprint_algo": {
     "version": "sha256-v1",
