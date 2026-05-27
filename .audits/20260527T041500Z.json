@@ -1,0 +1,53 @@
+{
+  "audit_id": "audit-20260527T041500Z",
+  "repo": "audit-elevation",
+  "scanned_at": "2026-05-27T04:15:00Z",
+  "scanner": "claude-sonnet-4-6-nightly",
+  "findings": [
+    {
+      "id": "AUDIT-audit-elevation-9f3c1d2e",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "self-heal-pipeline.md field-rules prose contradicts schema after 2026-05-24 fix — still names field 'version' but schema now uses 'schema_version'",
+      "detail": "The 2026-05-24 nightly audit (AUDIT-ae-d9e0f1a2) renamed the closed.json top-level version field from 'version' to 'schema_version' in the JSON schema example and in the initialization template. However the field rules prose directly below the schema (line ~63-65) was not updated: it still reads \"this field is named `version` (integer) in closed.json\" and \"do not rename this field retroactively.\" After the fix, both of those statements are false. An implementer reading the prose will write 'version'; one reading the schema will write 'schema_version'. The two are in direct contradiction in the same file section.",
+      "file_globs": ["docs/self-heal-pipeline.md"],
+      "fix_sketch": "Update the field-rules bullet: rename the bullet heading from 'version' to 'schema_version', remove the note that says 'this field is named version (integer) in closed.json', and remove 'do not rename this field retroactively' (the rename already happened). Retain the distinction between schema_version and rubric_version.",
+      "parallel_safe": true,
+      "fingerprint": "8e3d2f1a9c4b7e6d5a0f3c8b1e9d4c7a2f5b0e3d6a9c1f4b7e0d3a6c9f2b5e8",
+      "status": "fixed",
+      "opened_at": "2026-05-27T04:15:00Z",
+      "closed_at": "2026-05-27T04:15:00Z",
+      "closing_pr": "audit/nightly-2026-05-27"
+    },
+    {
+      "id": "AUDIT-audit-elevation-b7d4e1a3",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "plan.md canonical schema documents terminal status as 'closed' but all production audit files use 'fixed' — undocumented status value in every recent scan",
+      "detail": "plan.md (lines 90-97) defines the findings schema with status values 'open|fixing|verifying|closed|regression'. ADR-003 in ifleet-integration-adrs.md explicitly cites 'the schema from plan.md (lines 74-98)' as canonical. However, all audit runs since 2026-05-22 consistently write 'fixed' as the terminal success status (IFleet index.json, factory index.json, audit-elevation entries from 2026-05-22 and 2026-05-24). Earlier entries (2026-05-21) use 'closed'. Both values now coexist in production data. Neither rubric.json, plan.md, nor self-heal-pipeline.md acknowledges 'fixed' as a valid status. Any implementation of the Proposer's status filter, the regression detector's DUPLICATE check, or the fingerprint watcher would need to handle an undocumented value.",
+      "file_globs": ["plan.md"],
+      "fix_sketch": "Update the status enum in plan.md's findings JSON schema to replace 'closed' with 'fixed' (the production-canonical terminal success value) and add a comment noting that early entries (pre-2026-05-22) used 'closed' which is treated as equivalent.",
+      "parallel_safe": true,
+      "fingerprint": "3a7f2c5b8e1d4a9c6f3b0e7d2a5c8f1b4e7a0d3c6f9b2e5a8d1c4f7b0e3a6c",
+      "status": "fixed",
+      "opened_at": "2026-05-27T04:15:00Z",
+      "closed_at": "2026-05-27T04:15:00Z",
+      "closing_pr": "audit/nightly-2026-05-27"
+    },
+    {
+      "id": "AUDIT-audit-elevation-c2f5b8e7",
+      "severity": "COSMETIC",
+      "category": "logic",
+      "title": "ADR-003 audit.finding.regressed event payload mixes camelCase and snake_case field names in a single TypeScript event object",
+      "detail": "docs/ifleet-integration-adrs.md ADR-003 defines the audit.finding.regressed trace event payload as: { findingId, originalClosePr, regressionFingerprint, newOccurrenceTaskId, regression_of, regression_closing_pr }. The first four fields use camelCase (correct for IFleet's TypeScript trace events, which follow the (taskId, seq, ts, role, kind, payload) camelCase convention per ADR-0001). The last two use snake_case. The note at the end of the payload definition acknowledges this mismatch but frames it as alignment with self-heal-pipeline.md's scan-level fields — however, scan-level fields are written to JSON (where snake_case is acceptable) while the trace event payload is TypeScript (where camelCase is standard). An implementer writing the IFleet trace event will have a mixed-convention payload struct.",
+      "file_globs": ["docs/ifleet-integration-adrs.md"],
+      "fix_sketch": "Rename regression_of → regressionOf and regression_closing_pr → regressionClosingPr in the ADR-003 payload spec. Update the note to say the trace event uses camelCase while the scan-level JSON fields use snake_case — both forms exist but at different layers.",
+      "parallel_safe": true,
+      "fingerprint": "7b4e1a8d5c2f9b6e3a0d7c4f1b8e5a2d9c6f3b0e7a4d1c8f5b2e9a6d3c0f7b",
+      "status": "fixed",
+      "opened_at": "2026-05-27T04:15:00Z",
+      "closed_at": "2026-05-27T04:15:00Z",
+      "closing_pr": "audit/nightly-2026-05-27"
+    }
+  ]
+}
