@@ -42,7 +42,7 @@ Make audit findings *first-class on-disk work items* so:
 | **Phase 6 — IFleet fold-in** | 📝 ADRs drafted, 5 Sebastian decisions queued | gated on Phase 3 soak |
 | **Phase 7 — Proposer (M5 of IFleet elevation)** | 📝 spec drafted | future |
 
-6 repos baselined (IFleet, factory, PhillUp, discord-claude-bot, ~/.claude, audit-elevation) with **52 open findings** (6 CRITICAL / 37 IMPORTANT / 9 COSMETIC) as of 2026-05-21.
+6 repos baselined (IFleet, factory, PhillUp, discord-claude-bot, ~/.claude, audit-elevation) as of 2026-05-21. Baseline findings since closed — see each repo's `.audits/index.json` for live open counts.
 
 ---
 

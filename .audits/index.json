@@ -1,6 +1,6 @@
 {
   "repo": "audit-elevation",
-  "last_updated": "2026-05-21T17:49:46Z",
+  "last_updated": "2026-05-28T04:55:00Z",
   "open_findings": 0,
   "by_severity": {
     "CRITICAL": 0,
@@ -221,6 +221,45 @@
       "file_globs": [
         "README.md"
       ],
+      "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-f1a2b3c4",
+      "severity": "IMPORTANT",
+      "category": "assumption",
+      "title": "README.md: stale '52 open findings' — all 14 findings in index.json are already closed",
+      "fingerprint": "f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2",
+      "status": "closed",
+      "opened_at": "2026-05-28T04:50:00Z",
+      "closed_at": "2026-05-28T04:55:00Z",
+      "closing_pr": "audit/nightly-2026-05-28",
+      "file_globs": ["README.md"],
+      "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-g2b3c4d5",
+      "severity": "IMPORTANT",
+      "category": "assumption",
+      "title": "ifleet-integration-adrs.md: ADR numbering inconsistency — headings 'ADR-001', prose 'ADR-0001'",
+      "fingerprint": "g2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3",
+      "status": "closed",
+      "opened_at": "2026-05-28T04:50:00Z",
+      "closed_at": "2026-05-28T04:55:00Z",
+      "closing_pr": "audit/nightly-2026-05-28",
+      "file_globs": ["docs/ifleet-integration-adrs.md"],
+      "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-h3c4d5e6",
+      "severity": "COSMETIC",
+      "category": "cosmetic",
+      "title": "ifleet-integration-adrs.md: 'Docker-unreachable fallback in ADR-0002' is a confusing self-referential parenthetical",
+      "fingerprint": "h3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4",
+      "status": "closed",
+      "opened_at": "2026-05-28T04:50:00Z",
+      "closed_at": "2026-05-28T04:55:00Z",
+      "closing_pr": "audit/nightly-2026-05-28",
+      "file_globs": ["docs/ifleet-integration-adrs.md"],
       "parallel_safe": true
     }
   ]

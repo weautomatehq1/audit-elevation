@@ -88,13 +88,13 @@ Three placement candidates:
 - Both PASS → merge OK
 - Either FAIL → block merge, attach both verdicts to PR
 - Either NEEDS_REVISION → re-queue to editor with combined feedback (max 3 retries, existing pattern)
-- Codex unavailable (rate-limited / CLI missing) → fall back to `diff-reviewer.ts` only, attach a `cross-provider: unavailable` banner (matches the Docker-unreachable fallback in ADR-0002)
+- Codex unavailable (rate-limited / CLI missing) → fall back to `diff-reviewer.ts` only, attach a `cross-provider: unavailable` banner
 
 ### Alternatives considered
 
 1. **Sequential (Option 1).** Rejected — doubles latency on the critical path; audit-fix PRs already cost two model rounds (editor + reviewer), adding a third sequential cuts throughput in half.
 2. **Conditional replacement (Option 3).** Rejected — cross-provider review is valuable on feature PRs too (catches reviewer blind spots the Haiku gate misses). Reserving it for audit-fix only wastes the standing capability.
-3. **Codex as the *only* reviewer when present.** Rejected — violates ADR-0001's MARS pattern (structured pushback between roles needs both reviewers writing to the trace, not one replacing the other).
+3. **Codex as the *only* reviewer when present.** Rejected — violates ADR-001's MARS pattern (structured pushback between roles needs both reviewers writing to the trace, not one replacing the other).
 
 ### Consequences
 
@@ -120,13 +120,13 @@ Three placement candidates:
 
 The standalone system writes audit findings to `<repo>/.audits/<timestamp>.json` with the schema from `plan.md` (lines 74-98) in the audit-elevation repo. Each finding has an `id` (`AUDIT-<repo>-<hash8>`), `fingerprint` (sha256 of category+globs+title), `status` (open/fixing/verifying/closed/regression), and `closing_pr`. The standalone path keeps `.audits/index.json` in sync.
 
-IFleet's `SprintManager` already owns a canonical event trace per ADR-0001. Events have a `(taskId, seq, ts, role, kind, payload)` shape and persist to SQLite + S3-compatible blob. Audit findings are conceptually trace events too — they have a lifecycle (opened → fixing → verifying → closed/reopened), they reference PRs, and they need replay for the shadow eval and the M4 fingerprinting tables.
+IFleet's `SprintManager` already owns a canonical event trace per ADR-001. Events have a `(taskId, seq, ts, role, kind, payload)` shape and persist to SQLite + S3-compatible blob. Audit findings are conceptually trace events too — they have a lifecycle (opened → fixing → verifying → closed/reopened), they reference PRs, and they need replay for the shadow eval and the M4 fingerprinting tables.
 
 The question: do we keep `.audits/index.json` as the source of truth and have IFleet *read* it, or do we make IFleet's trace the source of truth and *derive* `.audits/index.json` from it?
 
 ### Decision
 
-**Bidirectional with one canonical writer per direction. `.audits/index.json` is the source of truth for repos IFleet doesn't manage (writer = `audit-scan` subagent). For repos IFleet *does* manage, the trace is the source of truth and `.audits/index.json` is a derived view (writer = nightly rollup, same pattern as `learnings.md` in ADR-0001).**
+**Bidirectional with one canonical writer per direction. `.audits/index.json` is the source of truth for repos IFleet doesn't manage (writer = `audit-scan` subagent). For repos IFleet *does* manage, the trace is the source of truth and `.audits/index.json` is a derived view (writer = nightly rollup, same pattern as `learnings.md` in ADR-001).**
 
 Three new `TraceEvent.kind` values:
 
@@ -138,7 +138,7 @@ Three new `TraceEvent.kind` values:
 
 ### Alternatives considered
 
-1. **Keep `.audits/index.json` canonical everywhere.** Rejected — violates ADR-0001 single-trace invariant. Anything that mutates audit state outside the trace breaks replay and shadow-eval.
+1. **Keep `.audits/index.json` canonical everywhere.** Rejected — violates ADR-001 single-trace invariant. Anything that mutates audit state outside the trace breaks replay and shadow-eval.
 2. **Drop `.audits/index.json` entirely, only trace.** Rejected — non-IFleet repos (Factory, the standalone `~/.claude/`) need the file-based ledger because they have no SprintManager. Cross-repo audits need to work without IFleet.
 3. **Event-sourced `.audits/` with append-only files instead of `index.json` rollup.** Rejected — adds operational complexity (rollup queries) without the trace-replay benefit; for IFleet-managed repos the SQLite trace already gives us that.
 
@@ -213,7 +213,7 @@ The M5 Proposer is the nightly bot that reads `ROADMAP.md` + `SPRINT.md` and DMs
 
 Three input scopes to nail down:
 
-1. **What does the Proposer read?** `ROADMAP.md` (high-level), `SPRINT.md` (active commits), `.audits/index.json` (open findings, per-repo). Maybe `learnings.md` (derived nightly per ADR-0001) for "don't propose this pattern again" guidance.
+1. **What does the Proposer read?** `ROADMAP.md` (high-level), `SPRINT.md` (active commits), `.audits/index.json` (open findings, per-repo). Maybe `learnings.md` (derived nightly per ADR-001) for "don't propose this pattern again" guidance.
 2. **What does the Proposer NOT read?** Per `NON_GOALS.md`, anything out of explicit scope. Per `SECURITY.md`, protected paths get flagged not auto-proposed.
 3. **Output format:** splittasks paste-box (Sebastian copies into terminals) vs auto-dispatched splittasks session (Proposer creates the session dir, Sebastian only confirms). Standalone audit-autopilot keyword today does the former. The Proposer should do the same — DM in Discord, paste-box format, Sebastian-in-the-loop until 2-week soak validates the workflow.
 

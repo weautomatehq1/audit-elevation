@@ -1,0 +1,50 @@
+{
+  "audit_id": "audit-20260528T045000Z",
+  "repo": "audit-elevation",
+  "scanned_at": "2026-05-28T04:50:00Z",
+  "scanner": "claude-sonnet-4-6-nightly",
+  "findings": [
+    {
+      "id": "AUDIT-audit-elevation-f1a2b3c4",
+      "severity": "IMPORTANT",
+      "category": "assumption",
+      "title": "README.md: stale '52 open findings' — all 14 findings in index.json are already closed",
+      "detail": "README.md line 45 stated '52 open findings (6 CRITICAL / 37 IMPORTANT / 9 COSMETIC) as of 2026-05-21.' However, .audits/index.json (last_updated: 2026-05-21T17:49:46Z) shows open_findings: 0 — all 14 findings were closed by the same-day direct-fix audit pass. The README was written before the fixes were applied and was never updated.",
+      "file_globs": ["README.md"],
+      "fix_sketch": "Update the stale count on line 45 to reference index.json for live status instead of hardcoding the count.",
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-05-28T04:50:00Z",
+      "closed_at": "2026-05-28T04:55:00Z",
+      "closing_pr": "audit/nightly-2026-05-28"
+    },
+    {
+      "id": "AUDIT-audit-elevation-g2b3c4d5",
+      "severity": "IMPORTANT",
+      "category": "assumption",
+      "title": "ifleet-integration-adrs.md: ADR numbering inconsistency — headings use 'ADR-001', prose uses 'ADR-0001'",
+      "detail": "The document used two numbering conventions: section headings use 'ADR-001', 'ADR-002' while prose references used 'ADR-0001', 'ADR-0002'. Specifically: line 91 referenced 'ADR-0002', and lines 97, 123, 129, 141, 216 referenced 'ADR-0001'. Standardized all to 'ADR-001' / 'ADR-002' to match the heading convention.",
+      "file_globs": ["docs/ifleet-integration-adrs.md"],
+      "fix_sketch": "Changed all 'ADR-0001' → 'ADR-001' (5 occurrences) to match the section heading convention.",
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-05-28T04:50:00Z",
+      "closed_at": "2026-05-28T04:55:00Z",
+      "closing_pr": "audit/nightly-2026-05-28"
+    },
+    {
+      "id": "AUDIT-audit-elevation-h3c4d5e6",
+      "severity": "COSMETIC",
+      "category": "cosmetic",
+      "title": "ifleet-integration-adrs.md line 91: 'Docker-unreachable fallback in ADR-0002' is a confusing self-referential parenthetical",
+      "detail": "ADR-002 Decision section contained '(matches the Docker-unreachable fallback in ADR-0002)'. This was confusing: ADR-002 is the document being described, Docker/containers are not part of this system, and no 'Docker-unreachable fallback' is defined anywhere in ADR-002. Appears to be a residual copy-paste from another codebase. Removed the parenthetical.",
+      "file_globs": ["docs/ifleet-integration-adrs.md"],
+      "fix_sketch": "Removed the confusing parenthetical — sentence reads clearly without it.",
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-05-28T04:50:00Z",
+      "closed_at": "2026-05-28T04:55:00Z",
+      "closing_pr": "audit/nightly-2026-05-28"
+    }
+  ]
+}
