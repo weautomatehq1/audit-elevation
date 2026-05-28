@@ -1,8 +1,8 @@
 {
   "repo": "audit-elevation",
-  "last_updated": "2026-05-24T04:21:11Z",
+  "last_updated": "2026-05-27T04:15:00Z",
   "open_findings": 0,
-  "fixed_this_run": 1,
+  "fixed_this_run": 3,
   "by_severity": {
     "CRITICAL": 0,
     "IMPORTANT": 0,
@@ -375,6 +375,45 @@
       "opened_at": "2026-05-24T04:21:11Z",
       "closed_at": "2026-05-24T04:21:11Z",
       "closing_pr": "audit/nightly-2026-05-24"
+    },
+    {
+      "id": "AUDIT-audit-elevation-9f3c1d2e",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "self-heal-pipeline.md field-rules prose contradicts schema after 2026-05-24 fix — still names field 'version' but schema now uses 'schema_version'",
+      "file_globs": ["docs/self-heal-pipeline.md"],
+      "parallel_safe": true,
+      "fingerprint": "8e3d2f1a9c4b7e6d5a0f3c8b1e9d4c7a2f5b0e3d6a9c1f4b7e0d3a6c9f2b5e8",
+      "status": "fixed",
+      "opened_at": "2026-05-27T04:15:00Z",
+      "closed_at": "2026-05-27T04:15:00Z",
+      "closing_pr": "audit/nightly-2026-05-27"
+    },
+    {
+      "id": "AUDIT-audit-elevation-b7d4e1a3",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "plan.md canonical schema documents terminal status as 'closed' but all production audit files use 'fixed' — undocumented status value in every recent scan",
+      "file_globs": ["plan.md"],
+      "parallel_safe": true,
+      "fingerprint": "3a7f2c5b8e1d4a9c6f3b0e7d2a5c8f1b4e7a0d3c6f9b2e5a8d1c4f7b0e3a6c",
+      "status": "fixed",
+      "opened_at": "2026-05-27T04:15:00Z",
+      "closed_at": "2026-05-27T04:15:00Z",
+      "closing_pr": "audit/nightly-2026-05-27"
+    },
+    {
+      "id": "AUDIT-audit-elevation-c2f5b8e7",
+      "severity": "COSMETIC",
+      "category": "logic",
+      "title": "ADR-003 audit.finding.regressed event payload mixes camelCase and snake_case field names in a single TypeScript event object",
+      "file_globs": ["docs/ifleet-integration-adrs.md"],
+      "parallel_safe": true,
+      "fingerprint": "7b4e1a8d5c2f9b6e3a0d7c4f1b8e5a2d9c6f3b0e7a4d1c8f5b2e9a6d3c0f7b",
+      "status": "fixed",
+      "opened_at": "2026-05-27T04:15:00Z",
+      "closed_at": "2026-05-27T04:15:00Z",
+      "closing_pr": "audit/nightly-2026-05-27"
     }
   ]
 }

@@ -62,7 +62,7 @@ and four is too late. The threshold is configurable via `RULE_DRAFT_THRESHOLD`.
 
 Field rules:
 
-- `version` — bump only on incompatible schema change. Note: this field is named `version` (integer) in closed.json; rubric.json uses `schema_version` (integer) and `rubric_version` (string semver). These are distinct concepts — `rubric_version` tracks the rubric document version, `schema_version`/`version` track the data format. For new system data files, prefer `schema_version` for consistency with rubric.json, but do not rename this field retroactively.
+- `schema_version` — bump only on incompatible schema change. Distinct from `rubric_version` (string semver in rubric.json, tracks the rubric document version); `schema_version` tracks the data format of closed.json itself. Field was renamed from `version` to `schema_version` in the 2026-05-24 nightly audit (AUDIT-ae-d9e0f1a2) for consistency with rubric.json conventions.
 - `closures[]` — append-only; never mutate or delete an entry. This is the
   ledger that proves what was fixed when. `closed_at` is ISO-8601 UTC.
 - `fingerprint` — comes from `audit-fingerprinter`. Re-deriving it from the
