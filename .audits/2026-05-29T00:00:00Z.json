@@ -1,0 +1,92 @@
+{
+  "audit_id": "audit-20260529T000000Z",
+  "repo": "audit-elevation",
+  "scanned_at": "2026-05-29T00:00:00Z",
+  "scanner": "claude-sonnet-4-6-nightly",
+  "findings": [
+    {
+      "id": "AUDIT-audit-elevation-8877d455",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "plan.md schema missing closed status value used by all production audit files",
+      "detail": "plan.md line 91 defines the status enum as 'open|fixing|verifying|fixed|regression' but all 27 production findings in .audits/index.json use both 'fixed' (13 records) and 'closed' (14 records) as distinct status values. The value 'closed' is absent from the canonical schema, creating ambiguity about valid status values for any new component that reads the schema.",
+      "file_globs": ["plan.md"],
+      "fix_sketch": "Added 'closed' to the status enum in plan.md line 91: 'open|fixing|verifying|fixed|closed|regression'.",
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-05-29T00:00:00Z",
+      "closed_at": "2026-05-29T00:15:00Z",
+      "closing_pr": "audit/nightly-2026-05-29"
+    },
+    {
+      "id": "AUDIT-audit-elevation-3eb666f0",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "Phantom file eventual-growing-raven.md referenced in ADR instead of plan.md",
+      "detail": "Verified not present: grep found no reference to 'eventual-growing-raven.md' in docs/ifleet-integration-adrs.md. This finding was resolved in a previous audit run. Closing as already-fixed.",
+      "file_globs": ["docs/ifleet-integration-adrs.md"],
+      "fix_sketch": "Already fixed in a prior audit run.",
+      "parallel_safe": true,
+      "status": "closed",
+      "opened_at": "2026-05-29T00:00:00Z",
+      "closed_at": "2026-05-29T00:15:00Z",
+      "closing_pr": "prior-audit"
+    },
+    {
+      "id": "AUDIT-audit-elevation-40f1c01c",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "flock used in two specs but macOS incompatible — lane-scheduler uses mkdir locking",
+      "detail": "Verified not an issue: docs/self-heal-pipeline.md line 292 and docs/ifleet-integration-adrs.md line 194 both explicitly recommend mkdir-based locking and note that flock(1) is unavailable on macOS. The specs are already consistent and correct. Closing as false positive.",
+      "file_globs": ["docs/ifleet-integration-adrs.md", "docs/self-heal-pipeline.md"],
+      "fix_sketch": "False positive — both specs already use mkdir-based locking.",
+      "parallel_safe": true,
+      "status": "closed",
+      "opened_at": "2026-05-29T00:00:00Z",
+      "closed_at": "2026-05-29T00:15:00Z",
+      "closing_pr": "false-positive"
+    },
+    {
+      "id": "AUDIT-audit-elevation-9c18b1a2",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "audit.finding.regressed payload uses camelCase vs snake_case mismatch with index.json",
+      "detail": "Verified already documented: docs/ifleet-integration-adrs.md line 135 explicitly documents that trace events use camelCase (TypeScript context) while .audits/*.json files use snake_case (JSON file context), and names the fields as intentional equivalents. This is a known and documented convention difference, not a bug. Closing as false positive.",
+      "file_globs": ["docs/ifleet-integration-adrs.md", "docs/self-heal-pipeline.md"],
+      "fix_sketch": "False positive — ADR-003 explicitly documents the camelCase/snake_case distinction as intentional.",
+      "parallel_safe": true,
+      "status": "closed",
+      "opened_at": "2026-05-29T00:00:00Z",
+      "closed_at": "2026-05-29T00:15:00Z",
+      "closing_pr": "false-positive"
+    },
+    {
+      "id": "AUDIT-audit-elevation-0a265409",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "proposer-spec cron time 03:00 conflicts with ADR-005 mention of 06:15",
+      "detail": "Verified already resolved: docs/ifleet-integration-adrs.md line 249 explicitly states 'Cron timing: 03:00 local — resolved by proposer-spec.md D7 (canonical). 5h buffer before 08:00 start covers Discord MCP retries.' ADR-005 defers to proposer-spec D7 as canonical. No conflict exists. Closing as false positive.",
+      "file_globs": ["docs/proposer-spec.md", "docs/ifleet-integration-adrs.md"],
+      "fix_sketch": "False positive — ADR-005 already resolves this by deferring to proposer-spec D7 as canonical.",
+      "parallel_safe": true,
+      "status": "closed",
+      "opened_at": "2026-05-29T00:00:00Z",
+      "closed_at": "2026-05-29T00:15:00Z",
+      "closing_pr": "false-positive"
+    },
+    {
+      "id": "AUDIT-audit-elevation-ce743c0d",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "regressions.json phantom file reference in proposer-spec input table",
+      "detail": "Verified already fixed: docs/proposer-spec.md section 2 input table row reads '<repo>/.audits/index.json for each repo in ~/.omc/proposer-watchlist.json' with the explicit note '(loaded in same pass — not a separate file read)' for regressions. A previous audit already corrected this. Closing as already-fixed.",
+      "file_globs": ["docs/proposer-spec.md"],
+      "fix_sketch": "Already fixed in a prior audit run.",
+      "parallel_safe": true,
+      "status": "closed",
+      "opened_at": "2026-05-29T00:00:00Z",
+      "closed_at": "2026-05-29T00:15:00Z",
+      "closing_pr": "prior-audit"
+    }
+  ]
+}

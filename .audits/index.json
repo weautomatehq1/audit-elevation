@@ -1,13 +1,20 @@
 {
   "repo": "audit-elevation",
-  "last_updated": "2026-05-27T04:15:00Z",
+  "last_updated": "2026-05-29T00:15:00Z",
   "open_findings": 0,
-  "fixed_this_run": 3,
+  "fixed_this_run": 1,
   "by_severity": {
     "CRITICAL": 0,
     "IMPORTANT": 0,
     "COSMETIC": 0
   },
+  "nightly_audits": [
+    "2026-05-21T17:20:59Z.json",
+    "2026-05-22T04:11:28Z.json",
+    "2026-05-24T04:21:11Z.json",
+    "20260527T041500Z.json",
+    "2026-05-29T00:00:00Z.json"
+  ],
   "findings": [
     {
       "id": "AUDIT-audit-elevation-ea19316a",
@@ -414,6 +421,18 @@
       "opened_at": "2026-05-27T04:15:00Z",
       "closed_at": "2026-05-27T04:15:00Z",
       "closing_pr": "audit/nightly-2026-05-27"
+    },
+    {
+      "id": "AUDIT-audit-elevation-8877d455",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "plan.md schema missing closed status value used by all production audit files",
+      "file_globs": ["plan.md"],
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-05-29T00:00:00Z",
+      "closed_at": "2026-05-29T00:15:00Z",
+      "closing_pr": "audit/nightly-2026-05-29"
     }
   ]
 }

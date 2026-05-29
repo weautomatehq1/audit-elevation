@@ -88,7 +88,7 @@ Restructure `/audit-session` into two slash commands. Each slash command is a **
       "fix_sketch": "what closing this looks like",
       "parallel_safe": true,
       "fingerprint": "sha256 of category+globs+normalized title",
-      "status": "open|fixing|verifying|fixed|regression",
+      "status": "open|fixing|verifying|fixed|closed|regression",
       "opened_at": "2026-05-20T23:00:00Z",
       "closed_at": null,
       "closing_pr": null
