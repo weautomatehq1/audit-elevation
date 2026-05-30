@@ -76,7 +76,7 @@ Restructure `/audit-session` into two slash commands. Each slash command is a **
   "audit_id": "audit-20260520T2300Z",
   "repo": "IFleet",
   "scanned_at": "2026-05-20T23:00:00Z",
-  "scanner": "claude-opus-4-7",
+  "scanner": "claude-opus-4-8",
   "findings": [
     {
       "id": "AUDIT-IFleet-a1b2c3d4",

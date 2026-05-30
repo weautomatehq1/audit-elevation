@@ -1,8 +1,8 @@
 {
   "repo": "audit-elevation",
-  "last_updated": "2026-05-27T04:15:00Z",
+  "last_updated": "2026-05-30T04:30:00Z",
   "open_findings": 0,
-  "fixed_this_run": 3,
+  "fixed_this_run": 4,
   "by_severity": {
     "CRITICAL": 0,
     "IMPORTANT": 0,
@@ -414,6 +414,58 @@
       "opened_at": "2026-05-27T04:15:00Z",
       "closed_at": "2026-05-27T04:15:00Z",
       "closing_pr": "audit/nightly-2026-05-27"
+    },
+    {
+      "id": "AUDIT-audit-elevation-3d7f2c8a",
+      "severity": "IMPORTANT",
+      "category": "stale-reference",
+      "title": "Model IDs in design docs use claude-opus-4-7 but latest is claude-opus-4-8",
+      "detail": "quota-pacing-design.md weight table, lane-scheduler-spec.md JSON examples and schema note, and plan.md scanner field all referenced the outdated claude-opus-4-7 model ID. quota-pacing-design.md implementation note explicitly states these IDs must match what the Claude CLI/API returns, making stale values load-bearing documentation.",
+      "file_globs": ["docs/quota-pacing-design.md", "docs/lane-scheduler-spec.md", "plan.md"],
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-05-30T04:30:00Z",
+      "closed_at": "2026-05-30T04:30:00Z",
+      "closing_pr": "audit/nightly-2026-05-30"
+    },
+    {
+      "id": "AUDIT-audit-elevation-4e2b9f1c",
+      "severity": "IMPORTANT",
+      "category": "stale-assumption",
+      "title": "README line 45 presents 52 open findings from 2026-05-21 as current with no indication they have since been reduced",
+      "detail": "README stated '52 open findings as of 2026-05-21' with no update. As of 2026-05-30 (day 9 of Phase 3 soak), audit-elevation itself has 0 open findings. Updated line to acknowledge baseline age and direct readers to each repo's .audits/index.json for current counts.",
+      "file_globs": ["README.md"],
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-05-30T04:30:00Z",
+      "closed_at": "2026-05-30T04:30:00Z",
+      "closing_pr": "audit/nightly-2026-05-30"
+    },
+    {
+      "id": "AUDIT-audit-elevation-7f6d4a2e",
+      "severity": "COSMETIC",
+      "category": "logic-consistency",
+      "title": "ADR-003 naming convention note is descriptive-only — no standard stated for new fields",
+      "detail": "The note documenting camelCase (trace) vs snake_case (JSON) convention described the existing mismatch but did not prescribe what to do when adding new fields, risking ongoing inconsistency. Added explicit standard to the note.",
+      "file_globs": ["docs/ifleet-integration-adrs.md"],
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-05-30T04:30:00Z",
+      "closed_at": "2026-05-30T04:30:00Z",
+      "closing_pr": "audit/nightly-2026-05-30"
+    },
+    {
+      "id": "AUDIT-audit-elevation-a1e3b5d9",
+      "severity": "COSMETIC",
+      "category": "placeholder",
+      "title": "proposer-spec.md §5 says 'host TBD per §8' but §8 decision D1 already recommends Mac launchd",
+      "detail": "Internal self-reference was deferred (TBD) when the answer already existed in the same document at §8 D1. Updated to explicitly state the recommendation rather than forcing readers to cross-reference.",
+      "file_globs": ["docs/proposer-spec.md"],
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-05-30T04:30:00Z",
+      "closed_at": "2026-05-30T04:30:00Z",
+      "closing_pr": "audit/nightly-2026-05-30"
     }
   ]
 }

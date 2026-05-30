@@ -83,7 +83,7 @@ The plan is also written to `~/.omc/proposer/state/proposed-<UTC-date>.md` for a
 
 ## 5. Schedule
 
-- **Cron / launchd:** 03:00 local time. Configured via `~/.omc/proposer/launchd/com.weautomatehq.proposer.plist` (host TBD per §8). Not installed by this spec — Sebastian installs after approval.
+- **Cron / launchd:** 03:00 local time. Configured via `~/.omc/proposer/launchd/com.weautomatehq.proposer.plist` (host: Mac launchd per decision D1 in §8 — pending Sebastian approval). Not installed by this spec — Sebastian installs after approval.
 - **Manual:** `/proposer-run` slash command. Runs the same pipeline ad-hoc, marks the output `MANUAL` in the state file. Use cases: Sebastian wants a fresh plan after a long session, Esme wants to see what the Proposer would say.
 - **Frequency cap:** at most one DM per UTC date unless Sebastian explicitly requests another via `/proposer-run --force`.
 
