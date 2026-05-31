@@ -78,11 +78,20 @@ Field rules:
 
 ## How `/audit-fix` appends to `closed.json` (contract for T2 / future updates)
 
+> **FORWARD CONTRACT:** This section describes behavior `/audit-fix` MUST implement
+> in Phase 4. As of the Phase 3 soak, `closed.json` is **not yet written** — see
+> the README status table. This contract is written prescriptively so T2/T4
+> implementers have a clear, auditable spec.
+
 T3 does NOT own `/audit-fix`. This is the contract T2 (or any successor)
 implements when closing a finding:
 
 1. When a finding flips status to `verifying` and the verifier passes, on
    merge of the closing PR:
+   - **Acquire a mkdir-based lock** on `<repo>/.audits/.write-lock` before
+     reading or writing `closed.json`. Use `~/.claude/scripts/lane-lock.sh`
+     (source-able pattern). This MUST happen before any read of `closed.json` to
+     prevent concurrent lanes from losing a closure entry.
    - Read the finding from `.audits/<scan>.json` (the original scan that
      opened the finding).
    - Recompute its fingerprint via `audit-fingerprinter` (do not trust the
@@ -93,6 +102,7 @@ implements when closing a finding:
      if absent).
    - Update `repeat_counts[fingerprint].count`, `last_closed_at`, and
      `closures_history`.
+   - Release the lock.
    - Commit the change in the same PR that closes the finding (so the ledger
      and the fix are atomic).
 
@@ -120,9 +130,17 @@ After the scanner produces a candidate finding (but before it writes to
 The detector returns a single verdict line. The scanner then:
 
 - adds `fingerprint` to the finding's persisted JSON regardless,
-- adds `status: "open" | "regression" | <dropped>` based on the verdict,
+- adds `status: "open" | "regression" | <dropped>` based on the verdict.
+  *(These are the two initial states the scanner writes. The full six-value
+  lifecycle — `open → fixing → verifying → fixed → closed | regression` — is
+  described in plan.md §schema. The scanner only writes the initial state;
+  `/audit-fix` transitions status through the remaining lifecycle states.)*
 - if `REGRESSION`, also records `regression_of: <original_id>` and
-  `regression_closing_pr: <pr>` in the finding.
+  `regression_closing_pr: <pr>` in the finding. Parse the verdict string by
+  splitting on the first two `':'` characters (split limit 3):
+  `parts[0]="REGRESSION"`, `parts[1]=original_id`, `parts[2]=closing_pr_number`.
+  The `AUDIT-<repo>-<hash8>` ID format guarantees `original_id` contains no
+  colons — this invariant must hold for all future ID formats.
 
 This keeps regression awareness inside the data path; downstream tools
 (`/audit-fix`, the drafter, the autopilot skill) can filter on
@@ -186,7 +204,7 @@ audit-fingerprint-watcher.sh [WATCHED_REPOS_TXT]
 
 ```cron
 # 3am daily — check all watched repos for new repeat-fingerprint drafts
-0 3 * * * /Users/Seb/.claude/scripts/audit-fingerprint-watcher.sh >/dev/null 2>&1
+0 3 * * * ~/.claude/scripts/audit-fingerprint-watcher.sh >/dev/null 2>&1
 ```
 
 Install manually with `crontab -e`. The watcher is idempotent and side-effect
@@ -289,7 +307,7 @@ the accepted rule from `~/.claude/rules/` first (rare).
 | Watcher's repo list points at a non-repo path | `[skip]` in the log; total_drafts unaffected | Fix the path in `~/.claude/audit-watched-repos.txt`. The watcher does not error on missing dirs. |
 | 3+ closures coincidentally share a fingerprint with unrelated root causes | Draft proposes an irrelevant rule | Reject the draft. Consider widening the fingerprint algorithm (e.g., include a snippet of the offending code) — this is a known limitation. Document the false positive so future scans treat the fingerprint with skepticism. |
 | Closure recorded with `closing_pr: 0` (local-only fix) | Regression-detector returns `REGRESSION:...:0` | Acceptable — surface in the recap. `:0` is a sentinel; the maintainer knows the original fix did not have a PR record. |
-| Drafter run while `/audit-fix` is mid-flight | Race on `closed.json` write | Both processes only `append` to `closures[]`; if both write simultaneously, last writer wins and one closure may be lost. Solution: `/audit-fix` should use mkdir-based locking (macOS-compatible; `flock(1)` is not available on macOS) — see `~/.claude/scripts/lane-lock.sh` for the canonical pattern. Drafter is read-only on `closed.json` and is unaffected. |
+| Drafter run while `/audit-fix` is mid-flight | Race on `closed.json` write | Both processes only `append` to `closures[]`; if both write simultaneously, last writer wins and one closure may be lost. **`/audit-fix` MUST use mkdir-based locking** (macOS-compatible; `flock(1)` is not available on macOS) — see `~/.claude/scripts/lane-lock.sh` for the canonical pattern. This is a hard requirement, not optional: under ≥2 concurrent lanes a race is deterministic and will cause fingerprint count drift. Drafter is read-only on `closed.json` and needs no lock. |
 
 ## Boundaries — T3's promise
 

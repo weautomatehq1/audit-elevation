@@ -30,8 +30,16 @@
       "file_globs": "sort alphabetically + join with ','",
       "title": "lowercase + strip punctuation + whitespace-collapse"
     },
+    "concat_format": "{category}|{file_globs_joined}|{title}",
+    "concat_note": "file_globs_joined is the comma-joined sorted normalized globs; separator between fields is the pipe character '|'",
     "hash": "sha256",
-    "encoding": "hex"
+    "encoding": "hex",
+    "test_case": {
+      "input": { "category": "logic", "file_globs": ["src/queue/store.ts"], "title": "JSON.parse without error handling on database content" },
+      "normalized": { "category": "logic", "file_globs_joined": "src/queue/store.ts", "title": "jsonparse without error handling on database content" },
+      "concat": "logic|src/queue/store.ts|jsonparse without error handling on database content",
+      "sha256_hex": "verify-with-echo-n-concat-sha256sum"
+    }
   },
   "events": {
     "completed": "Session finished normally with findings (findings_total > 0)",
