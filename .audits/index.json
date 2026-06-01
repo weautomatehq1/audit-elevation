@@ -1,438 +1,55 @@
 {
   "repo": "audit-elevation",
-  "last_updated": "2026-05-29T00:15:00Z",
+  "last_updated": "2026-06-01T04:24:00Z",
   "open_findings": 0,
-  "fixed_this_run": 1,
-  "by_severity": {
-    "CRITICAL": 0,
-    "IMPORTANT": 0,
-    "COSMETIC": 0
-  },
+  "by_severity": { "CRITICAL": 0, "IMPORTANT": 0, "COSMETIC": 0 },
   "nightly_audits": [
     "2026-05-21T17:20:59Z.json",
     "2026-05-22T04:11:28Z.json",
     "2026-05-24T04:21:11Z.json",
     "20260527T041500Z.json",
-    "2026-05-29T00:00:00Z.json"
+    "2026-05-29T00:00:00Z.json",
+    "20260601T043500Z.json"
   ],
   "findings": [
     {
-      "id": "AUDIT-audit-elevation-ea19316a",
+      "id": "AUDIT-audit-elevation-2be7a108",
       "severity": "IMPORTANT",
       "category": "logic",
-      "title": "Phantom file: regressions.json referenced but never defined, created, or written by any component",
-      "fingerprint": "753faf6422fe790c71f6975748abbd482094dad3cdcee7ea26291de24757700b",
-      "status": "closed",
-      "opened_at": "2026-05-21T17:20:59Z",
-      "closed_at": "2026-05-21T17:49:46Z",
-      "closing_pr": "direct-fix",
-      "file_globs": [
-        "docs/proposer-spec.md",
-        "~/.claude/skills/audit-broadcast/SKILL.md"
-      ],
-      "parallel_safe": true
-    },
-    {
-      "id": "AUDIT-audit-elevation-777a4813",
-      "severity": "IMPORTANT",
-      "category": "assumption",
-      "title": "README finding counts are stale: claims '46 open (9C/31I/6CO) across 6 repos' but actual data shows 39 open (6C/28I/5CO) across 5 repos",
-      "fingerprint": "dd13bac805b22695642712968ca440f6db668afdefbbc33f6238fa2b5909c1af",
-      "status": "closed",
-      "opened_at": "2026-05-21T17:20:59Z",
-      "closed_at": "2026-05-21T17:49:46Z",
-      "closing_pr": "direct-fix",
-      "file_globs": [
-        "README.md"
-      ],
-      "parallel_safe": true
-    },
-    {
-      "id": "AUDIT-audit-elevation-d60264eb",
-      "severity": "IMPORTANT",
-      "category": "logic",
-      "title": "rubric.json field name mismatch: audit-scan.md reads 'version' but actual field is 'rubric_version'",
-      "fingerprint": "d355c967655baf0a5658121c728ffb264c1070745694c90aa3108daffee55339",
-      "status": "closed",
-      "opened_at": "2026-05-21T17:20:59Z",
-      "closed_at": "2026-05-21T17:41:49Z",
-      "closing_pr": "direct-fix",
-      "file_globs": [
-        "rubric.json",
-        "~/.claude/commands/audit-scan.md"
-      ],
-      "parallel_safe": false
-    },
-    {
-      "id": "AUDIT-audit-elevation-5bdd8792",
-      "severity": "IMPORTANT",
-      "category": "assumption",
-      "title": "README claims rubric.json is 'schema source-of-truth' for online_eval_log but rubric.json contains no online_eval_log schema",
-      "fingerprint": "63d1c2f7cc6a0061e6069a06d28d20224ff445a075dd95e9a278f1b671ac1091",
-      "status": "closed",
-      "opened_at": "2026-05-21T17:20:59Z",
-      "closed_at": "2026-05-21T17:49:46Z",
-      "closing_pr": "direct-fix",
-      "file_globs": [
-        "README.md",
-        "rubric.json"
-      ],
-      "parallel_safe": false
-    },
-    {
-      "id": "AUDIT-audit-elevation-4fa7eb3a",
-      "severity": "IMPORTANT",
-      "category": "risk",
-      "title": "self-heal-pipeline.md recommends flock for closed.json race condition but flock is unavailable on macOS",
-      "fingerprint": "9a224aca3d483a991e62a5cf54b39612cf4590679e8ac32704481d7aee5e8a65",
-      "status": "closed",
-      "opened_at": "2026-05-21T17:20:59Z",
-      "closed_at": "2026-05-21T17:49:46Z",
-      "closing_pr": "direct-fix",
-      "file_globs": [
-        "docs/self-heal-pipeline.md"
-      ],
-      "parallel_safe": true
-    },
-    {
-      "id": "AUDIT-audit-elevation-14de88a1",
-      "severity": "IMPORTANT",
-      "category": "logic",
-      "title": "README lists lane-scheduler.{sh,mjs} but lane-scheduler.sh does not exist",
-      "fingerprint": "a84e1c2e4c09fdf459601b6c7c0b6b3c8fae86ef2cc105f9822c47b6ecbe5a82",
-      "status": "closed",
-      "opened_at": "2026-05-21T17:20:59Z",
-      "closed_at": "2026-05-21T17:49:46Z",
-      "closing_pr": "direct-fix",
-      "file_globs": [
-        "README.md"
-      ],
-      "parallel_safe": true
-    },
-    {
-      "id": "AUDIT-audit-elevation-b965352b",
-      "severity": "IMPORTANT",
-      "category": "risk",
-      "title": "Proposer watchlist references 3 repos that do not exist on disk",
-      "fingerprint": "abe89cedb9e1231f214fd5e4a8cfa9ebb48395da483f92849c1f6d0706ed9196",
-      "status": "closed",
-      "opened_at": "2026-05-21T17:20:59Z",
-      "closed_at": "2026-05-21T17:49:46Z",
-      "closing_pr": "direct-fix",
-      "file_globs": [
-        "docs/proposer-spec.md"
-      ],
-      "parallel_safe": true
-    },
-    {
-      "id": "AUDIT-audit-elevation-99e78e47",
-      "severity": "IMPORTANT",
-      "category": "redo",
-      "title": "ADR-003 references 'eventual-growing-raven.md' — a stale codename that does not exist",
-      "fingerprint": "33a964502b013a85bbf294d808ed865fd492311af610fa3f8e45228bf09bde0f",
-      "status": "closed",
-      "opened_at": "2026-05-21T17:20:59Z",
-      "closed_at": "2026-05-21T17:49:46Z",
-      "closing_pr": "direct-fix",
-      "file_globs": [
-        "docs/ifleet-integration-adrs.md"
-      ],
-      "parallel_safe": true
-    },
-    {
-      "id": "AUDIT-audit-elevation-d562db04",
-      "severity": "IMPORTANT",
-      "category": "assumption",
-      "title": "Codex CLI not installed — Phase 2 shipped status is misleading since codex --version fails",
-      "fingerprint": "5e8103eeca45451e89ccad8d9f382315dfe7db80881dbe4b3d2366003a73ee47",
-      "status": "closed",
-      "opened_at": "2026-05-21T17:20:59Z",
-      "closed_at": "2026-05-21T17:49:46Z",
-      "closing_pr": "direct-fix",
-      "file_globs": [
-        "README.md",
-        "~/.claude/skills/codex-review/SKILL.md"
-      ],
-      "parallel_safe": true
-    },
-    {
-      "id": "AUDIT-audit-elevation-08b15f15",
-      "severity": "IMPORTANT",
-      "category": "risk",
-      "title": "Proposer-spec and ADR-005 have conflicting cron time recommendations",
-      "fingerprint": "17eacb3cc899f583837d1e70c629e52d11cfe59abcd203f0e2fe8aaa7933a53b",
-      "status": "closed",
-      "opened_at": "2026-05-21T17:20:59Z",
-      "closed_at": "2026-05-21T17:49:46Z",
-      "closing_pr": "direct-fix",
-      "file_globs": [
-        "docs/proposer-spec.md",
-        "docs/ifleet-integration-adrs.md"
-      ],
-      "parallel_safe": false
-    },
-    {
-      "id": "AUDIT-audit-elevation-e670b001",
-      "severity": "COSMETIC",
-      "category": "redo",
-      "title": "watched-repos.txt only covers 2 of 5 audited repos — fingerprint watcher misses 60% of audit data",
-      "fingerprint": "7d1c06baf2b6a024e4eae733f12a813cb9fe50ee2d52b1999f7b04628a8ebc52",
-      "status": "closed",
-      "opened_at": "2026-05-21T17:20:59Z",
-      "closed_at": "2026-05-21T17:49:46Z",
-      "closing_pr": "direct-fix",
-      "file_globs": [
-        "~/.claude/audit-watched-repos.txt"
-      ],
-      "parallel_safe": true
-    },
-    {
-      "id": "AUDIT-audit-elevation-d6612de5",
-      "severity": "COSMETIC",
-      "category": "overconfidence",
-      "title": "README data-flow diagram shows closed.json in the merge path but closed.json does not exist in any repo",
-      "fingerprint": "5dfb1d7e22f1e4ad4af4b258d108fc28735f82f7bd5d8aa311b99b194376dad3",
-      "status": "closed",
-      "opened_at": "2026-05-21T17:20:59Z",
-      "closed_at": "2026-05-21T17:49:46Z",
-      "closing_pr": "direct-fix",
-      "file_globs": [
-        "README.md"
-      ],
-      "parallel_safe": true
-    },
-    {
-      "id": "AUDIT-audit-elevation-629286f0",
-      "severity": "COSMETIC",
-      "category": "overconfidence",
-      "title": "plan.md findings schema shows 'reopened' as a valid status but no component ever sets it",
-      "fingerprint": "90128c57864bfe120fe89dbb15d33ae0a52affaacf3c8244391798dedd92dca5",
-      "status": "closed",
-      "opened_at": "2026-05-21T17:20:59Z",
-      "closed_at": "2026-05-21T17:49:46Z",
-      "closing_pr": "direct-fix",
-      "file_globs": [
-        "plan.md"
-      ],
-      "parallel_safe": true
-    },
-    {
-      "id": "AUDIT-audit-elevation-91e56a7c",
-      "severity": "COSMETIC",
-      "category": "assumption",
-      "title": "README Related section uses tilde paths that won't resolve as clickable links",
-      "fingerprint": "52b66aff6d779c397b895ef98f48ee7967f73867e1ad6322ec99dcc49efdaea0",
-      "status": "closed",
-      "opened_at": "2026-05-21T17:20:59Z",
-      "closed_at": "2026-05-21T17:49:46Z",
-      "closing_pr": "direct-fix",
-      "file_globs": [
-        "README.md"
-      ],
-      "parallel_safe": true
-    },
-    {
-      "id": "AUDIT-audit-elevation-3a9f1b2c",
-      "severity": "IMPORTANT",
-      "category": "logic",
-      "title": "ADR-004 recommends flock-based locking but text then contradicts itself by citing mkdir-based pattern",
-      "fingerprint": "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2",
-      "status": "fixed",
-      "opened_at": "2026-05-22T04:11:28Z",
-      "closed_at": "2026-05-22T04:15:32Z",
-      "closing_pr": "audit/nightly-2026-05-22",
-      "file_globs": [
-        "docs/ifleet-integration-adrs.md",
-        "docs/lane-scheduler-spec.md"
-      ],
-      "parallel_safe": true
-    },
-    {
-      "id": "AUDIT-audit-elevation-7c4e8d1f",
-      "severity": "IMPORTANT",
-      "category": "assumption",
-      "title": "proposer-spec.md references regressions via index.json filter but section 2 input table still lists a separate regressions source path",
-      "fingerprint": "b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3",
-      "status": "fixed",
-      "opened_at": "2026-05-22T04:11:28Z",
-      "closed_at": "2026-05-22T04:15:32Z",
-      "closing_pr": "audit/nightly-2026-05-22",
-      "file_globs": [
-        "docs/proposer-spec.md"
-      ],
-      "parallel_safe": true
-    },
-    {
-      "id": "AUDIT-audit-elevation-b2d5a9e3",
-      "severity": "IMPORTANT",
-      "category": "logic",
-      "title": "ADR-003 status enum lists 'reopened' but self-heal-pipeline and rubric never define it; trace event schema references it creating dead schema",
-      "fingerprint": "c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4",
-      "status": "fixed",
-      "opened_at": "2026-05-22T04:11:28Z",
-      "closed_at": "2026-05-22T04:15:32Z",
-      "closing_pr": "audit/nightly-2026-05-22",
-      "file_globs": [
-        "docs/ifleet-integration-adrs.md",
-        "docs/self-heal-pipeline.md"
-      ],
-      "parallel_safe": true
-    },
-    {
-      "id": "AUDIT-audit-elevation-f8a2c6b7",
-      "severity": "IMPORTANT",
-      "category": "risk",
-      "title": "closed.json schema version field conflicts: top-level 'version' clashes with finding schema 'schema_version' convention",
-      "fingerprint": "d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5",
-      "status": "fixed",
-      "opened_at": "2026-05-22T04:11:28Z",
-      "closed_at": "2026-05-22T04:15:32Z",
-      "closing_pr": "audit/nightly-2026-05-22",
-      "file_globs": [
-        "docs/self-heal-pipeline.md",
-        "rubric.json"
-      ],
-      "parallel_safe": true
-    },
-    {
-      "id": "AUDIT-audit-elevation-c1e7d4a8",
-      "severity": "IMPORTANT",
-      "category": "assumption",
-      "title": "Lane scheduler spec references lane-scheduler.pm2.json but ADR-004 describes lane-scheduler.{sh,mjs} with a now-removed .sh — spec/ADR conflict persists",
-      "fingerprint": "e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6",
-      "status": "fixed",
-      "opened_at": "2026-05-22T04:11:28Z",
-      "closed_at": "2026-05-22T04:15:32Z",
-      "closing_pr": "audit/nightly-2026-05-22",
-      "file_globs": [
-        "docs/ifleet-integration-adrs.md"
-      ],
-      "parallel_safe": true
-    },
-    {
-      "id": "AUDIT-audit-elevation-d9b3f5e2",
-      "severity": "IMPORTANT",
-      "category": "logic",
-      "title": "proposer-spec.md Budget gate logic is inverted: ENABLED flag absent means run, present means send — opposite of standard gating convention",
-      "fingerprint": "f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7",
-      "status": "fixed",
-      "opened_at": "2026-05-22T04:11:28Z",
-      "closed_at": "2026-05-22T04:15:32Z",
-      "closing_pr": "audit/nightly-2026-05-22",
-      "file_globs": [
-        "docs/proposer-spec.md"
-      ],
-      "parallel_safe": true
-    },
-    {
-      "id": "AUDIT-audit-elevation-4e8c2f9a",
-      "severity": "COSMETIC",
-      "category": "overconfidence",
-      "title": "lane-scheduler-spec.md describes lane-list.sh color codes but NO_COLOR handling is documented as honored without specifying what 'honors' means",
-      "fingerprint": "a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8",
-      "status": "fixed",
-      "opened_at": "2026-05-22T04:11:28Z",
-      "closed_at": "2026-05-22T04:15:32Z",
-      "closing_pr": "audit/nightly-2026-05-22",
-      "file_globs": [
-        "docs/lane-scheduler-spec.md"
-      ],
-      "parallel_safe": true
-    },
-    {
-      "id": "AUDIT-audit-elevation-a5d1b8c4",
-      "severity": "COSMETIC",
-      "category": "redo",
-      "title": "quota-pacing-design.md references claude-opus-4-7 and claude-haiku-4-5 model IDs that may be stale naming conventions",
-      "fingerprint": "b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9",
-      "status": "fixed",
-      "opened_at": "2026-05-22T04:11:28Z",
-      "closed_at": "2026-05-22T04:15:32Z",
-      "closing_pr": "audit/nightly-2026-05-22",
-      "file_globs": [
-        "docs/quota-pacing-design.md",
-        "docs/lane-scheduler-spec.md"
-      ],
-      "parallel_safe": true
-    },
-    {
-      "id": "AUDIT-audit-elevation-e6f4c3d9",
-      "severity": "COSMETIC",
-      "category": "assumption",
-      "title": "plan.md Phase 2 prerequisites section omits that Codex CLI install is a Sebastian-owned blocking task, buried in prose",
-      "fingerprint": "c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0",
-      "status": "fixed",
-      "opened_at": "2026-05-22T04:11:28Z",
-      "closed_at": "2026-05-22T04:15:32Z",
-      "closing_pr": "audit/nightly-2026-05-22",
-      "file_globs": [
-        "plan.md"
-      ],
-      "parallel_safe": true
-    },
-    {
-      "id": "AUDIT-ae-d9e0f1a2",
-      "severity": "IMPORTANT",
-      "category": "logic",
-      "title": "closed.json schema uses 'version' field instead of consistent 'schema_version'",
-      "detail": "self-heal-pipeline.md defined closed.json with 'version' while rubric.json uses 'schema_version'. Three inconsistent conventions for the same system. Fixed by renaming 'version' to 'schema_version' in self-heal-pipeline.md schema and initialization template.",
+      "title": "self-heal-pipeline.md failure table 'Bump version' → corrected to 'Bump schema_version'",
       "file_globs": ["docs/self-heal-pipeline.md"],
+      "fix_sketch": "Changed 'Bump version' to 'Bump schema_version' in failure-modes table",
       "parallel_safe": true,
       "status": "fixed",
-      "opened_at": "2026-05-24T04:21:11Z",
-      "closed_at": "2026-05-24T04:21:11Z",
-      "closing_pr": "audit/nightly-2026-05-24"
+      "opened_at": "2026-06-01T04:35:00Z",
+      "closed_at": "2026-06-01T04:24:00Z",
+      "closing_pr": null
     },
     {
-      "id": "AUDIT-audit-elevation-9f3c1d2e",
-      "severity": "IMPORTANT",
-      "category": "logic",
-      "title": "self-heal-pipeline.md field-rules prose contradicts schema after 2026-05-24 fix — still names field 'version' but schema now uses 'schema_version'",
-      "file_globs": ["docs/self-heal-pipeline.md"],
-      "parallel_safe": true,
-      "fingerprint": "8e3d2f1a9c4b7e6d5a0f3c8b1e9d4c7a2f5b0e3d6a9c1f4b7e0d3a6c9f2b5e8",
-      "status": "fixed",
-      "opened_at": "2026-05-27T04:15:00Z",
-      "closed_at": "2026-05-27T04:15:00Z",
-      "closing_pr": "audit/nightly-2026-05-27"
-    },
-    {
-      "id": "AUDIT-audit-elevation-b7d4e1a3",
-      "severity": "IMPORTANT",
-      "category": "logic",
-      "title": "plan.md canonical schema documents terminal status as 'closed' but all production audit files use 'fixed' — undocumented status value in every recent scan",
-      "file_globs": ["plan.md"],
-      "parallel_safe": true,
-      "fingerprint": "3a7f2c5b8e1d4a9c6f3b0e7d2a5c8f1b4e7a0d3c6f9b2e5a8d1c4f7b0e3a6c",
-      "status": "fixed",
-      "opened_at": "2026-05-27T04:15:00Z",
-      "closed_at": "2026-05-27T04:15:00Z",
-      "closing_pr": "audit/nightly-2026-05-27"
-    },
-    {
-      "id": "AUDIT-audit-elevation-c2f5b8e7",
+      "id": "AUDIT-audit-elevation-df6774f0",
       "severity": "COSMETIC",
-      "category": "logic",
-      "title": "ADR-003 audit.finding.regressed event payload mixes camelCase and snake_case field names in a single TypeScript event object",
+      "category": "cosmetic",
+      "title": "ADR inline references normalised from 4-digit (ADR-0001/0002) to 3-digit (ADR-001/002)",
       "file_globs": ["docs/ifleet-integration-adrs.md"],
+      "fix_sketch": "Normalised ADR-0001 → ADR-001 and ADR-0002 → ADR-001 (self-reference corrected)",
       "parallel_safe": true,
-      "fingerprint": "7b4e1a8d5c2f9b6e3a0d7c4f1b8e5a2d9c6f3b0e7a4d1c8f5b2e9a6d3c0f7b",
       "status": "fixed",
-      "opened_at": "2026-05-27T04:15:00Z",
-      "closed_at": "2026-05-27T04:15:00Z",
-      "closing_pr": "audit/nightly-2026-05-27"
+      "opened_at": "2026-06-01T04:35:00Z",
+      "closed_at": "2026-06-01T04:24:00Z",
+      "closing_pr": null
     },
     {
-      "id": "AUDIT-audit-elevation-8877d455",
-      "severity": "IMPORTANT",
-      "category": "logic",
-      "title": "plan.md schema missing closed status value used by all production audit files",
-      "file_globs": ["plan.md"],
+      "id": "AUDIT-audit-elevation-5e7f3870",
+      "severity": "COSMETIC",
+      "category": "cosmetic",
+      "title": "ADR-002 self-reference 'ADR-0002' corrected to 'ADR-001'",
+      "file_globs": ["docs/ifleet-integration-adrs.md"],
+      "fix_sketch": "Changed self-referential 'ADR-0002' to 'ADR-001' in line 91",
       "parallel_safe": true,
       "status": "fixed",
-      "opened_at": "2026-05-29T00:00:00Z",
-      "closed_at": "2026-05-29T00:15:00Z",
-      "closing_pr": "audit/nightly-2026-05-29"
+      "opened_at": "2026-06-01T04:35:00Z",
+      "closed_at": "2026-06-01T04:24:00Z",
+      "closing_pr": null
     }
   ]
 }

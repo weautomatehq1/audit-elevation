@@ -1,0 +1,50 @@
+{
+  "audit_id": "audit-20260601T043500Z",
+  "repo": "audit-elevation",
+  "scanned_at": "2026-06-01T04:35:00Z",
+  "scanner": "claude-sonnet-4-6-nightly",
+  "findings": [
+    {
+      "id": "AUDIT-audit-elevation-2be7a108",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "self-heal-pipeline.md failure table says 'Bump version' but the field is schema_version",
+      "detail": "docs/self-heal-pipeline.md failure-modes table (fingerprint-drift row) instructs operators to 'Bump `version` in `closed.json`', but the canonical schema at lines 39/92 names the field `schema_version`. This mismatch was created when the field was renamed (documented at line 65), but the failure table was not updated.",
+      "file_globs": ["docs/self-heal-pipeline.md"],
+      "fix_sketch": "Change 'Bump `version` in `closed.json`' to 'Bump `schema_version` in `closed.json`' in the failure-modes table.",
+      "parallel_safe": true,
+      "status": "open",
+      "opened_at": "2026-06-01T04:35:00Z",
+      "closed_at": null,
+      "closing_pr": null
+    },
+    {
+      "id": "AUDIT-audit-elevation-df6774f0",
+      "severity": "COSMETIC",
+      "category": "cosmetic",
+      "title": "ADR headings use 3-digit format (ADR-001) but inline references use 4-digit (ADR-0001)",
+      "detail": "ifleet-integration-adrs.md headings are formatted 'ADR-001', 'ADR-002', 'ADR-003' (3 digits) while inline cross-references use 'ADR-0001' and 'ADR-0002' (4 digits). This inconsistency makes automated tooling or grep-based cross-referencing unreliable.",
+      "file_globs": ["docs/ifleet-integration-adrs.md"],
+      "fix_sketch": "Normalise to 3-digit format throughout: change ADR-0001 → ADR-001, ADR-0002 → ADR-002 in inline references.",
+      "parallel_safe": true,
+      "status": "open",
+      "opened_at": "2026-06-01T04:35:00Z",
+      "closed_at": null,
+      "closing_pr": null
+    },
+    {
+      "id": "AUDIT-audit-elevation-5e7f3870",
+      "severity": "COSMETIC",
+      "category": "cosmetic",
+      "title": "ADR-002 line 91 self-references 'ADR-0002' for a fallback pattern that appears to originate in ADR-001",
+      "detail": "docs/ifleet-integration-adrs.md line 91, within the body of ADR-002, reads 'matches the Docker-unreachable fallback in ADR-0002'. Referencing the document you're currently writing is a self-reference that confuses readers. Based on context (ADR-001 covers Codex/Docker wiring), the intended reference is likely ADR-001.",
+      "file_globs": ["docs/ifleet-integration-adrs.md"],
+      "fix_sketch": "Change 'ADR-0002' to 'ADR-001' on that line, or rephrase to 'the same unavailability-banner pattern defined earlier in this ADR'.",
+      "parallel_safe": true,
+      "status": "open",
+      "opened_at": "2026-06-01T04:35:00Z",
+      "closed_at": null,
+      "closing_pr": null
+    }
+  ]
+}
