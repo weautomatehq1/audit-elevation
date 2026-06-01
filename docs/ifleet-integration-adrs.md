@@ -88,13 +88,13 @@ Three placement candidates:
 - Both PASS → merge OK
 - Either FAIL → block merge, attach both verdicts to PR
 - Either NEEDS_REVISION → re-queue to editor with combined feedback (max 3 retries, existing pattern)
-- Codex unavailable (rate-limited / CLI missing) → fall back to `diff-reviewer.ts` only, attach a `cross-provider: unavailable` banner (matches the Docker-unreachable fallback in ADR-0002)
+- Codex unavailable (rate-limited / CLI missing) → fall back to `diff-reviewer.ts` only, attach a `cross-provider: unavailable` banner (matches the Docker-unreachable fallback in ADR-001)
 
 ### Alternatives considered
 
 1. **Sequential (Option 1).** Rejected — doubles latency on the critical path; audit-fix PRs already cost two model rounds (editor + reviewer), adding a third sequential cuts throughput in half.
 2. **Conditional replacement (Option 3).** Rejected — cross-provider review is valuable on feature PRs too (catches reviewer blind spots the Haiku gate misses). Reserving it for audit-fix only wastes the standing capability.
-3. **Codex as the *only* reviewer when present.** Rejected — violates ADR-0001's MARS pattern (structured pushback between roles needs both reviewers writing to the trace, not one replacing the other).
+3. **Codex as the *only* reviewer when present.** Rejected — violates ADR-001's MARS pattern (structured pushback between roles needs both reviewers writing to the trace, not one replacing the other).
 
 ### Consequences
 
