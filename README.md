@@ -308,7 +308,7 @@ Plus 7 open decisions in the Proposer spec (D1-D7).
 
 > Note: paths below are local filesystem references — they are not clickable links in GitHub/VS Code.
 
-- IFleet ROADMAP: `/Users/Seb/dev/ai-products/IFleet/ROADMAP.md` — 6-month elevation plan (M0-M6, M4 is the natural integration point)
-- Memory entries: `/Users/Seb/.claude/projects/-Users-Seb/memory/` — `elevation_audit_shipped_20260521.md`, `project_status_20260521.md`
-- Split session evidence: `/Users/Seb/.omc/splits/20260520-2224-elevation-keystone/` — keystone build T1-T5 done reports
-- Split session evidence: `/Users/Seb/.omc/splits/20260520-2244-elevation-push/` — push build T1-T5 done reports + ADRs
+- IFleet ROADMAP: `~/dev/ai-products/IFleet/ROADMAP.md` — 6-month elevation plan (M0-M6, M4 is the natural integration point)
+- Memory entries: `~/.claude/projects/-Users-Seb/memory/` — `elevation_audit_shipped_20260521.md`, `project_status_20260521.md`
+- Split session evidence: `~/.omc/splits/20260520-2224-elevation-keystone/` — keystone build T1-T5 done reports
+- Split session evidence: `~/.omc/splits/20260520-2244-elevation-push/` — push build T1-T5 done reports + ADRs

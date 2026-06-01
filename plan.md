@@ -123,7 +123,7 @@ The `fingerprint` is deterministic — same bug reopened twice gets same fingerp
   | Feature PR (no `AUDIT-*` cited) | Codex only — `/codex-review <PR#>` | Fast (~30–60s), one provider, sufficient for greenfield work |
   | Audit-fix PR (cites `AUDIT-*`) | **Codex + Claude `verifier` subagent in parallel** | Finding closure is high-stakes. Two providers, two angles. Both must PASS to merge. ~60–90s. |
 
-  T1 reads the PR title/body. If it matches `/AUDIT-[A-Za-z0-9_-]+/`, runs the sandwich. Otherwise just Codex. The Claude side uses the existing `verifier` agent from the OMC catalog — no new agent needed.
+  T1 reads the PR title/body. If it matches `/AUDIT-[A-Za-z0-9_-]+/i` (case-insensitive — repo names in IDs preserve filesystem casing, e.g. `IFleet` vs `factory`), runs the sandwich. Otherwise just Codex. The Claude side uses the existing `verifier` agent from the OMC catalog — no new agent needed.
 
 **Reviewer prompt shape (compact, same for both providers):**
 ```

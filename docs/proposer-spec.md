@@ -46,6 +46,8 @@ Read-only. The Proposer never writes to source.
 
 ## 3. Ranking algorithm
 
+**Pre-filter (before scoring):** drop any finding with `status` not in `["open", "regression"]`. DUPLICATE findings are excluded from `index.json` by the regression-detector; if any appear (scanner bug), log a warning and skip them. COSMETIC findings with `status: "closed"` or `"fixed"` are also skipped — only open work items enter scoring.
+
 Each candidate task gets a numeric score. Higher score → higher position in the morning plan.
 
 | Class | Priority base | Notes |
