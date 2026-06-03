@@ -99,6 +99,19 @@ Restructure `/audit-session` into two slash commands. Each slash command is a **
 
 The `fingerprint` is deterministic — same bug reopened twice gets same fingerprint → enables repeat-finding detection in Phase 3.
 
+**Status lifecycle:**
+
+| Status | Who writes it | Meaning |
+|---|---|---|
+| `open` | scanner | Finding freshly detected; not yet being worked |
+| `fixing` | `/audit-fix` | Lane assigned; PR in flight |
+| `verifying` | `/audit-fix` | PR open; awaiting verifier review |
+| `fixed` | `/audit-fix` | PR merged; fix is live in the branch |
+| `closed` | `/audit-fix` | Recorded in `closed.json` ledger post-merge; fingerprint count updated |
+| `regression` | scanner | Finding re-detected after a previous `closed` entry for its fingerprint |
+
+`fixed` → `closed` is a two-step: the `/audit-fix` marks `fixed` at merge time, then appends to `closed.json` and flips to `closed`. Scanners only ever write `open` or `regression`.
+
 **`.gitignore` decision:** `.audits/` ignored by default. Per-repo opt-in by removing the ignore line + adding `.audits/.gitkeep`. Public repos like IFleet: keep ignored (don't leak open issues to the world). Private repos: commit and let teammates see.
 
 ### Phase 2 — Codex per-PR reviewer + tiered review chain (standalone skill, ~1 day)

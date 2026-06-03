@@ -1,0 +1,50 @@
+{
+  "audit_id": "audit-20260602T041140Z",
+  "repo": "audit-elevation",
+  "scanned_at": "2026-06-02T04:11:40Z",
+  "scanner": "claude-sonnet-4-6-nightly",
+  "findings": [
+    {
+      "id": "AUDIT-audit-elevation-a1b2c301",
+      "severity": "IMPORTANT",
+      "category": "assumption",
+      "title": "README stale finding count — 52 open findings claim outdated since index.json shows 0 open",
+      "detail": "README line 45 stated '52 open findings (6 CRITICAL / 37 IMPORTANT / 9 COSMETIC) as of 2026-05-21' but as of 2026-06-02 index.json reports open_findings: 0. Stale headline count undermines trust in the document accuracy.",
+      "file_globs": ["README.md"],
+      "fix_sketch": "Update the headline to reflect current state and clarify that 52 was the initial baseline count.",
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-06-02T04:11:40Z",
+      "closed_at": "2026-06-02T04:11:40Z",
+      "closing_pr": null
+    },
+    {
+      "id": "AUDIT-audit-elevation-b3c4d502",
+      "severity": "IMPORTANT",
+      "category": "assumption",
+      "title": "Phase 2 status shows ambiguous 🟡 'file-level only' instead of 🔴 BLOCKED",
+      "detail": "README Phase 2 row showed '🟡 file-level only — Codex CLI not installed'. The 🟡 emoji implies in-progress, but the reality is BLOCKED pending Sebastian setup. Misleading status affects sprint planning decisions.",
+      "file_globs": ["README.md"],
+      "fix_sketch": "Change to 🔴 BLOCKED with explicit note that Codex CLI setup is required.",
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-06-02T04:11:40Z",
+      "closed_at": "2026-06-02T04:11:40Z",
+      "closing_pr": null
+    },
+    {
+      "id": "AUDIT-audit-elevation-c5d6e703",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "plan.md schema lists fixed and closed status values without defining the distinction",
+      "detail": "The status field in plan.md schema shows 'open|fixing|verifying|fixed|closed|regression' but nowhere explains that fixed = PR merged (fix live) and closed = ledger entry written to closed.json. Implementers seeing both values would not know when to use which.",
+      "file_globs": ["plan.md"],
+      "fix_sketch": "Add a status lifecycle table after the schema block documenting each value, who writes it, and what it means.",
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-06-02T04:11:40Z",
+      "closed_at": "2026-06-02T04:11:40Z",
+      "closing_pr": null
+    }
+  ]
+}
