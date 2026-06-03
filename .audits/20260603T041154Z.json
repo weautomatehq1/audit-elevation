@@ -1,0 +1,64 @@
+{
+  "audit_id": "audit-20260603T041154Z",
+  "repo": "audit-elevation",
+  "scanned_at": "2026-06-03T04:11:54Z",
+  "scanner": "claude-sonnet-4-6-nightly",
+  "findings": [
+    {
+      "id": "AUDIT-audit-elevation-9be31463",
+      "severity": "IMPORTANT",
+      "category": "assumption",
+      "title": "rubric.json test case sha256_hex is placeholder instruction not actual hash",
+      "detail": "rubric.json line 41 has `\"sha256_hex\": \"verify-with-echo-n-concat-sha256sum\"` — a human instruction text rather than the actual computed SHA256. Any tool consuming rubric.json to validate fingerprints would silently skip the test or incorrectly compare against a non-hex string. The test case is meant to document and verify the fingerprint algorithm, not instruct the user to manually compute it.",
+      "file_globs": ["rubric.json"],
+      "fix_sketch": "Replace placeholder with actual SHA256. Input: 'logic|src/queue/store.ts|jsonparse without error handling on database content' → sha256 = '0fbc4d44bf190b06b63015d48d6edee394613c022fa71162551afc6e63542bf7'",
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-06-03T04:11:54Z",
+      "closed_at": "2026-06-03T04:25:00Z",
+      "closing_pr": null
+    },
+    {
+      "id": "AUDIT-audit-elevation-ba426722",
+      "severity": "COSMETIC",
+      "category": "cosmetic",
+      "title": "README placeholder GitHub URL for splittasks",
+      "detail": "README.md line 3 has a placeholder URL `https://github.com/...` for the splittasks skill. This is a dead link that would fail any link checker and misleads readers trying to find the actual skill.",
+      "file_globs": ["README.md"],
+      "fix_sketch": "Replace with the actual splittasks path reference: since splittasks is a local Claude Code skill at `~/.claude/skills/splittasks/SKILL.md` and not a public repo, remove the hyperlink or change to a local path reference.",
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-06-03T04:11:54Z",
+      "closed_at": "2026-06-03T04:25:00Z",
+      "closing_pr": null
+    },
+    {
+      "id": "AUDIT-audit-elevation-60ce08f8",
+      "severity": "COSMETIC",
+      "category": "cosmetic",
+      "title": "README Phase 3 soak 13 days elapsed, deadline passed with no status update",
+      "detail": "README status table says Phase 3 '2-week soak' is 'in progress' started 2026-05-21. Today is 2026-06-03, 13 days later. The 2-week window has elapsed. The status should reflect that the Phase 3 soak period is complete and Phase 4 fold-in decision is now due.",
+      "file_globs": ["README.md"],
+      "fix_sketch": "Update Phase 3 row from '🟡 in progress — started 2026-05-21' to '🟡 complete (2-week window elapsed 2026-06-04) — Phase 4 fold-in decision pending'",
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-06-03T04:11:54Z",
+      "closed_at": "2026-06-03T04:25:00Z",
+      "closing_pr": null
+    },
+    {
+      "id": "AUDIT-audit-elevation-89ca9028",
+      "severity": "COSMETIC",
+      "category": "cosmetic",
+      "title": "README open findings count 52 from 2026-05-21 is stale",
+      "detail": "README.md line 45 says '52 open findings (6 CRITICAL / 37 IMPORTANT / 9 COSMETIC) as of 2026-05-21'. Since then, multiple nightly audits have closed findings across IFleet and factory. The current count is unknown without querying each repo's index.json, but '52 open' is no longer accurate as of 2026-06-03.",
+      "file_globs": ["README.md"],
+      "fix_sketch": "Add the 'as of 2026-05-21' qualifier inline so the number is clearly a baseline snapshot, not a live count. Or replace with a link to the individual repo index files.",
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-06-03T04:11:54Z",
+      "closed_at": "2026-06-03T04:25:00Z",
+      "closing_pr": null
+    }
+  ]
+}

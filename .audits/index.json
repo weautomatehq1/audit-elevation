@@ -1,8 +1,7 @@
 {
   "repo": "audit-elevation",
-  "last_updated": "2026-05-31T04:26:00Z",
+  "last_updated": "2026-06-03T04:25:00Z",
   "open_findings": 0,
-  "fixed_this_run": 8,
   "by_severity": {
     "CRITICAL": 0,
     "IMPORTANT": 0,
@@ -14,7 +13,8 @@
     "2026-05-24T04:21:11Z.json",
     "20260527T041500Z.json",
     "2026-05-29T00:00:00Z.json",
-    "20260531T042437Z.json"
+    "20260531T042437Z.json",
+    "20260603T041154Z.json"
   ],
   "findings": [
     {
@@ -434,6 +434,46 @@
       "opened_at": "2026-05-29T00:00:00Z",
       "closed_at": "2026-05-29T00:15:00Z",
       "closing_pr": "audit/nightly-2026-05-29"
+    },
+    {
+      "id": "AUDIT-audit-elevation-9be31463",
+      "severity": "IMPORTANT",
+      "category": "assumption",
+      "title": "rubric.json test case sha256_hex is placeholder instruction not actual hash",
+      "status": "fixed",
+      "opened_at": "2026-06-03T04:11:54Z",
+      "closed_at": "2026-06-03T04:25:00Z",
+      "closing_pr": null
+    },
+    {
+      "id": "AUDIT-audit-elevation-ba426722",
+      "severity": "COSMETIC",
+      "category": "cosmetic",
+      "title": "README placeholder GitHub URL for splittasks",
+      "status": "fixed",
+      "opened_at": "2026-06-03T04:11:54Z",
+      "closed_at": "2026-06-03T04:25:00Z",
+      "closing_pr": null
+    },
+    {
+      "id": "AUDIT-audit-elevation-60ce08f8",
+      "severity": "COSMETIC",
+      "category": "cosmetic",
+      "title": "README Phase 3 soak 13 days elapsed, deadline passed with no status update",
+      "status": "fixed",
+      "opened_at": "2026-06-03T04:11:54Z",
+      "closed_at": "2026-06-03T04:25:00Z",
+      "closing_pr": null
+    },
+    {
+      "id": "AUDIT-audit-elevation-89ca9028",
+      "severity": "COSMETIC",
+      "category": "cosmetic",
+      "title": "README open findings count 52 from 2026-05-21 is stale",
+      "status": "fixed",
+      "opened_at": "2026-06-03T04:11:54Z",
+      "closed_at": "2026-06-03T04:25:00Z",
+      "closing_pr": null
     }
   ]
 }

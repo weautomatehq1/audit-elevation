@@ -1,6 +1,6 @@
 # Audit Elevation System
 
-> Structured-audit + self-healing layer for Claude Code, sitting on top of [splittasks](https://github.com/...) and feeding IFleet's M4 fingerprint pipeline. Single-developer internal infrastructure. Built 2026-05-20 → 2026-05-21 across two overnight splits.
+> Structured-audit + self-healing layer for Claude Code, sitting on top of splittasks (`~/.claude/skills/splittasks/SKILL.md`) and feeding IFleet's M4 fingerprint pipeline. Single-developer internal infrastructure. Built 2026-05-20 → 2026-05-21 across two overnight splits.
 
 ---
 
@@ -36,13 +36,13 @@ Make audit findings *first-class on-disk work items* so:
 | **Phase 2 — Codex review + Tiered chain** | 🟡 file-level only — Codex CLI not installed | 2026-05-20 overnight |
 | **Phase 2.5 — Hybrid automation** (SessionStart banner + `audit autopilot` keyword) | ✅ shipped | 2026-05-20 overnight |
 | **Online-eval-log v1** (Supabase-backed session-close capture) | ✅ shipped | 2026-05-21 |
-| **Phase 3 — Dogfood / 2-week soak** | 🟡 in progress | started 2026-05-21 |
+| **Phase 3 — Dogfood / 2-week soak** | 🟡 window elapsed 2026-06-04 — Phase 4 fold-in decision pending | started 2026-05-21 |
 | **Phase 4 — Self-healing (fingerprint REGRESSION + DRAFT auto-rules)** | ✅ scaffolded | 2026-05-21 overnight |
 | **Phase 5 — Lane scheduler MVP (observation-only)** | ✅ scaffolded, opt-in PM2 entry | 2026-05-21 |
 | **Phase 6 — IFleet fold-in** | 📝 ADRs drafted, 5 Sebastian decisions queued | gated on Phase 3 soak |
 | **Phase 7 — Proposer (M5 of IFleet elevation)** | 📝 spec drafted | future |
 
-6 repos baselined (IFleet, factory, PhillUp, discord-claude-bot, ~/.claude, audit-elevation) with **52 open findings** (6 CRITICAL / 37 IMPORTANT / 9 COSMETIC) as of 2026-05-21.
+6 repos baselined (IFleet, factory, PhillUp, discord-claude-bot, ~/.claude, audit-elevation) with **52 open findings** (6 CRITICAL / 37 IMPORTANT / 9 COSMETIC) as of baseline 2026-05-21. Count has decreased as subsequent nightly audits have closed findings — check each repo's `.audits/index.json` for current totals.
 
 ---
 

@@ -38,7 +38,7 @@
       "input": { "category": "logic", "file_globs": ["src/queue/store.ts"], "title": "JSON.parse without error handling on database content" },
       "normalized": { "category": "logic", "file_globs_joined": "src/queue/store.ts", "title": "jsonparse without error handling on database content" },
       "concat": "logic|src/queue/store.ts|jsonparse without error handling on database content",
-      "sha256_hex": "verify-with-echo-n-concat-sha256sum"
+      "sha256_hex": "0fbc4d44bf190b06b63015d48d6edee394613c022fa71162551afc6e63542bf7"
     }
   },
   "events": {
