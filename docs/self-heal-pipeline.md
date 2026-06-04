@@ -323,4 +323,4 @@ the accepted rule from `~/.claude/rules/` first (rare).
 
 A synthetic 3-closure scenario was executed during the T3 lane of the
 `20260520-2244-elevation-push` split. The captured draft is at
-`/Users/Seb/.omc/splits/20260520-2244-elevation-push/T3-synthetic-proof.md`.
+`~/.omc/splits/20260520-2244-elevation-push/T3-synthetic-proof.md`.

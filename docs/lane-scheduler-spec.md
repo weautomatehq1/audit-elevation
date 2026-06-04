@@ -23,7 +23,7 @@ Canonical schema (version `1`):
       "started_at": "2026-05-21T02:50:32Z",
       "last_heartbeat": "2026-05-21T02:51:01Z",
       "owns_globs": ["src/api/**", ".audits/**"],
-      "session_dir": "/Users/Seb/.omc/splits/<id>/",
+      "session_dir": "~/.omc/splits/<id>/",
       "terminal_label": "T2 — dogfood-audit",
       "estimated_done_at": null
     }
@@ -113,7 +113,7 @@ Behavior:
 - **No** PM2 lifecycle management — Sebastian opts in by running:
 
   ```bash
-  pm2 start /Users/Seb/.claude/scripts/lane-scheduler.pm2.json
+  pm2 start ~/.claude/scripts/lane-scheduler.pm2.json
   pm2 save
   ```
 
