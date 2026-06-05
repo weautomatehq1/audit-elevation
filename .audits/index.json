@@ -1,6 +1,6 @@
 {
   "repo": "audit-elevation",
-  "last_updated": "2026-06-02T04:11:40Z",
+  "last_updated": "2026-06-05T04:35:00Z",
   "open_findings": 0,
   "fixed_this_run": 3,
   "by_severity": {
@@ -15,7 +15,8 @@
     "20260527T041500Z.json",
     "2026-05-29T00:00:00Z.json",
     "20260531T042437Z.json",
-    "20260602T041140Z.json"
+    "20260602T041140Z.json",
+    "2026-06-05T04:35:00Z.json"
   ],
   "findings": [
     {
@@ -435,6 +436,90 @@
       "opened_at": "2026-05-29T00:00:00Z",
       "closed_at": "2026-05-29T00:15:00Z",
       "closing_pr": "audit/nightly-2026-05-29"
+    },
+    {
+      "id": "AUDIT-audit-elevation-a1b2c301",
+      "severity": "IMPORTANT",
+      "category": "assumption",
+      "title": "README stale finding count — 52 open findings claim outdated since index.json shows 0 open",
+      "detail": "README line 45 stated '52 open findings (6 CRITICAL / 37 IMPORTANT / 9 COSMETIC) as of 2026-05-21' but as of 2026-06-02 index.json reports open_findings: 0. Stale headline count undermines trust in the document accuracy.",
+      "file_globs": ["README.md"],
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-06-02T04:11:40Z",
+      "closed_at": "2026-06-02T04:11:40Z",
+      "closing_pr": null
+    },
+    {
+      "id": "AUDIT-audit-elevation-b3c4d502",
+      "severity": "IMPORTANT",
+      "category": "assumption",
+      "title": "Phase 2 status shows ambiguous 🟡 'file-level only' instead of 🔴 BLOCKED",
+      "detail": "README Phase 2 row showed '🟡 file-level only — Codex CLI not installed'. The 🟡 emoji implies in-progress, but the reality is BLOCKED pending Sebastian setup. Misleading status affects sprint planning decisions.",
+      "file_globs": ["README.md"],
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-06-02T04:11:40Z",
+      "closed_at": "2026-06-02T04:11:40Z",
+      "closing_pr": null
+    },
+    {
+      "id": "AUDIT-audit-elevation-c5d6e703",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "plan.md schema lists fixed and closed status values without defining the distinction",
+      "detail": "The status field in plan.md schema shows 'open|fixing|verifying|fixed|closed|regression' but nowhere explains that fixed = PR merged (fix live) and closed = ledger entry written to closed.json. Implementers seeing both values would not know when to use which.",
+      "file_globs": ["plan.md"],
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-06-02T04:11:40Z",
+      "closed_at": "2026-06-02T04:11:40Z",
+      "closing_pr": null
+    },
+    {
+      "id": "AUDIT-audit-elevation-9a624f01",
+      "severity": "IMPORTANT",
+      "category": "redo",
+      "title": "Phase 3 dogfood soak is 15 days old — README still shows 🟡 in progress, blocking Phase 6 decision",
+      "detail": "Phase 3 'Dogfood / 2-week soak' started 2026-05-21. As of 2026-06-05, 15 days have elapsed — the soak period ended on 2026-06-04. README still displayed '🟡 in progress | started 2026-05-21'. Phase 6 (IFleet fold-in) is gated on Phase 3 soak — the gate has now lifted and a decision on IFleet fold-in should be recorded.",
+      "file_globs": ["README.md"],
+      "fix_sketch": "Update Phase 3 status to soak complete; update Phase 6 note to reflect gate is lifted.",
+      "parallel_safe": true,
+      "fingerprint": "9a624f01831242fe8f45766f1f100c2d32f371cae7942924bf2224991f650993",
+      "status": "fixed",
+      "opened_at": "2026-06-05T04:35:00Z",
+      "closed_at": "2026-06-05T04:35:00Z",
+      "closing_pr": "audit/nightly-2026-06-05"
+    },
+    {
+      "id": "AUDIT-audit-elevation-9af605c1",
+      "severity": "IMPORTANT",
+      "category": "redo",
+      "title": "lane-scheduler-spec.md default model fallback (claude-opus-4-7) is stale — successor model is claude-opus-4-8",
+      "detail": "lane-scheduler-spec.md §1 Schema rules stated 'Helpers default to claude-opus-4-7 if omitted.' The model claude-opus-4-7 no longer exists (current: claude-opus-4-8, confirmed in IFleet audit). Previous fix AUDIT-audit-elevation-a5d1b8c4 included lane-scheduler-spec.md in scope but only added implementation note to quota-pacing-design.md. Schema example values in the JSON blocks also showed claude-opus-4-7.",
+      "file_globs": ["docs/lane-scheduler-spec.md"],
+      "fix_sketch": "Update default model to claude-opus-4-8; update example model ID values in schema blocks.",
+      "parallel_safe": true,
+      "fingerprint": "9af605c156c375e00a16f79132409867d5c956fd30b620ad83c223f8531d0834",
+      "status": "fixed",
+      "opened_at": "2026-06-05T04:35:00Z",
+      "closed_at": "2026-06-05T04:35:00Z",
+      "closing_pr": "audit/nightly-2026-06-05"
+    },
+    {
+      "id": "AUDIT-audit-elevation-90ae7afe",
+      "severity": "COSMETIC",
+      "category": "redo",
+      "title": "quota-pacing-design.md token bucket table still shows claude-opus-4-7 and claude-haiku-4-5 despite previous fix",
+      "detail": "quota-pacing-design.md §3.1 token bucket weight table listed claude-opus-4-7 and claude-haiku-4-5 as model IDs. Previous fix added implementation note about prefix matching but did not update the table values. Current canonical IDs are claude-opus-4-8 and claude-haiku-4-5-20251001. The implementation note example also cited claude-opus-4-7 as the suffix-handling example.",
+      "file_globs": ["docs/quota-pacing-design.md"],
+      "fix_sketch": "Update weight table model IDs to claude-opus-4-8 and claude-haiku-4-5-20251001; update implementation note example.",
+      "parallel_safe": true,
+      "fingerprint": "90ae7afeebc7844ad7b3f2a5606ecc5202faf5c0e0246085cecaa04fdd6ffe60",
+      "status": "fixed",
+      "opened_at": "2026-06-05T04:35:00Z",
+      "closed_at": "2026-06-05T04:35:00Z",
+      "closing_pr": "audit/nightly-2026-06-05"
     }
   ]
 }

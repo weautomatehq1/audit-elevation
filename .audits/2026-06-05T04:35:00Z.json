@@ -1,0 +1,53 @@
+{
+  "audit_id": "audit-20260605T043500Z",
+  "repo": "audit-elevation",
+  "scanned_at": "2026-06-05T04:35:00Z",
+  "scanner": "claude-sonnet-4-6-nightly",
+  "findings": [
+    {
+      "id": "AUDIT-audit-elevation-9a624f01",
+      "severity": "IMPORTANT",
+      "category": "redo",
+      "title": "Phase 3 dogfood soak is 15 days old — README still shows 🟡 in progress, blocking Phase 6 decision",
+      "detail": "Phase 3 'Dogfood / 2-week soak' started 2026-05-21. As of 2026-06-05, 15 days have elapsed — the 2-week soak period ended on 2026-06-04. README still displays '🟡 in progress | started 2026-05-21', which incorrectly signals work in progress rather than complete. plan.md §Phase 3 lists explicit success criteria that should have been evaluated: ≥5 findings closed with Codex gate, ≥1 Codex catch Claude missed, zero phantom-open findings, splittasks MASTER.md surfaced findings correctly in every session. Phase 6 (IFleet fold-in) is explicitly 'gated on Phase 3 soak' — the gate has lifted and no decision has been recorded.",
+      "file_globs": ["README.md"],
+      "fix_sketch": "Update Phase 3 status row to '✅ soak complete | 2026-05-21 → 2026-06-05 (15 days)'. Update Phase 6 row note from 'gated on Phase 3 soak' to 'Phase 3 gate lifted 2026-06-05 — awaiting IFleet fold-in decision'. Add a brief note on which Phase 3 success criteria were or were not met.",
+      "parallel_safe": true,
+      "fingerprint": "9a624f01831242fe8f45766f1f100c2d32f371cae7942924bf2224991f650993",
+      "status": "fixed",
+      "opened_at": "2026-06-05T04:35:00Z",
+      "closed_at": "2026-06-05T04:35:00Z",
+      "closing_pr": "audit/nightly-2026-06-05"
+    },
+    {
+      "id": "AUDIT-audit-elevation-9af605c1",
+      "severity": "IMPORTANT",
+      "category": "redo",
+      "title": "lane-scheduler-spec.md default model fallback (claude-opus-4-7) is stale — successor model is claude-opus-4-8",
+      "detail": "lane-scheduler-spec.md §1 Schema rules line 51 states 'Helpers default to claude-opus-4-7 if omitted.' The model claude-opus-4-7 no longer exists — the current model is claude-opus-4-8 (confirmed in IFleet audit this session: config/routing.json and src/classifier/index.ts both updated). The previous finding AUDIT-audit-elevation-a5d1b8c4 (marked fixed in audit/nightly-2026-05-22) included lane-scheduler-spec.md in its file_globs but the fix only added an implementation note to quota-pacing-design.md; the schema default fallback in lane-scheduler-spec.md was not updated. Any agent or script following this spec to provide a default model field would record a non-existent model ID. The schema example values at lines 22 and 37 also still show claude-opus-4-7.",
+      "file_globs": ["docs/lane-scheduler-spec.md"],
+      "fix_sketch": "Update line 51 default: 'Helpers default to claude-opus-4-8 if omitted.' Update schema example values at lines 22 and 37 (lanes[] entry and completed_today entry) from claude-opus-4-7 to claude-opus-4-8.",
+      "parallel_safe": true,
+      "fingerprint": "9af605c156c375e00a16f79132409867d5c956fd30b620ad83c223f8531d0834",
+      "status": "fixed",
+      "opened_at": "2026-06-05T04:35:00Z",
+      "closed_at": "2026-06-05T04:35:00Z",
+      "closing_pr": "audit/nightly-2026-06-05"
+    },
+    {
+      "id": "AUDIT-audit-elevation-90ae7afe",
+      "severity": "COSMETIC",
+      "category": "redo",
+      "title": "quota-pacing-design.md token bucket table still shows claude-opus-4-7 and claude-haiku-4-5 despite previous fix",
+      "detail": "quota-pacing-design.md §3.1 Token bucket weight table lists claude-opus-4-7 (weight 3) and claude-haiku-4-5 (weight 0.3) as model ID examples. The previous fix AUDIT-audit-elevation-a5d1b8c4 added an implementation note about prefix matching but did not update the table values themselves. Current canonical model IDs are claude-opus-4-8 and claude-haiku-4-5-20251001. The implementation note at the end of §3.1 also cites 'claude-opus-4-7 vs claude-opus-4' as the motivating example for version-suffix handling — this is now wrong (should be claude-opus-4-8 vs claude-opus-4). Since this is design-only documentation and the implementation note covers the matching case, this is COSMETIC.",
+      "file_globs": ["docs/quota-pacing-design.md"],
+      "fix_sketch": "Update the weight table rows: claude-opus-4-7 → claude-opus-4-8, claude-haiku-4-5 → claude-haiku-4-5-20251001. Update the implementation note example from 'claude-opus-4-7 vs claude-opus-4' to 'claude-opus-4-8 vs claude-opus-4'.",
+      "parallel_safe": true,
+      "fingerprint": "90ae7afeebc7844ad7b3f2a5606ecc5202faf5c0e0246085cecaa04fdd6ffe60",
+      "status": "fixed",
+      "opened_at": "2026-06-05T04:35:00Z",
+      "closed_at": "2026-06-05T04:35:00Z",
+      "closing_pr": "audit/nightly-2026-06-05"
+    }
+  ]
+}

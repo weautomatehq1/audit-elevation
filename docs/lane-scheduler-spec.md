@@ -19,7 +19,7 @@ Canonical schema (version `1`):
     {
       "id": "T2-push-20260520-2244",
       "kind": "audit-scan | audit-fix | dogfood | self-heal | scheduler | broadcast | feature | other",
-      "model": "claude-opus-4-7",
+      "model": "claude-opus-4-8",
       "started_at": "2026-05-21T02:50:32Z",
       "last_heartbeat": "2026-05-21T02:51:01Z",
       "owns_globs": ["src/api/**", ".audits/**"],
@@ -32,7 +32,7 @@ Canonical schema (version `1`):
     {
       "id": "T2-push-20260520-2244",
       "kind": "dogfood",
-      "model": "claude-opus-4-7",
+      "model": "claude-opus-4-8",
       "started_at": "2026-05-21T02:50:32Z",
       "ended_at": "2026-05-21T03:42:00Z",
       "duration_seconds": 3088,
@@ -48,7 +48,7 @@ Canonical schema (version `1`):
 - `lanes` is an array. Order is **not significant**; helpers identify lanes by `id`.
 - `id` must be unique among active lanes. Convention: `T<N>-<purpose>-<YYYYMMDD-HHMM>`.
 - `kind` is a free-form lowercase tag. Recommended values: `audit-scan`, `audit-fix`, `dogfood`, `self-heal`, `scheduler`, `broadcast`, `feature`, `other`. Other lanes from the elevation split (`20260520-2244-elevation-push`) extended this with task-specific kinds like `orchestrator+adr-author` and `proposer-spec-and-broadcast`. **Treat unknown kinds as informational, never reject them.**
-- `model` SHOULD be a Claude model ID (e.g. `claude-opus-4-7`, `claude-sonnet-4-6`, `claude-haiku-4-5`). Helpers default to `claude-opus-4-7` if omitted.
+- `model` SHOULD be a Claude model ID (e.g. `claude-opus-4-8`, `claude-sonnet-4-6`, `claude-haiku-4-5-20251001`). Helpers default to `claude-opus-4-8` if omitted.
 - `started_at`, `last_heartbeat`, `estimated_done_at` are ISO-8601 UTC with the `Z` suffix.
 - `owns_globs` is an array. Empty array is fine. Globs are advisory hints for humans diagnosing overlap.
 - `session_dir`, `terminal_label`, `estimated_done_at` are nullable.
