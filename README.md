@@ -1,6 +1,6 @@
 # Audit Elevation System
 
-> Structured-audit + self-healing layer for Claude Code, sitting on top of [splittasks](https://github.com/...) and feeding IFleet's M4 fingerprint pipeline. Single-developer internal infrastructure. Built 2026-05-20 → 2026-05-21 across two overnight splits.
+> Structured-audit + self-healing layer for Claude Code, sitting on top of splittasks (`~/.claude/skills/splittasks/SKILL.md` — local infrastructure, no public repo) and feeding IFleet's M4 fingerprint pipeline. Single-developer internal infrastructure. Built 2026-05-20 → 2026-05-21 across two overnight splits.
 
 ---
 

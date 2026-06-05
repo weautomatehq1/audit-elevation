@@ -1,8 +1,8 @@
 {
   "repo": "audit-elevation",
-  "last_updated": "2026-06-02T04:11:40Z",
+  "last_updated": "2026-06-04T05:00:00Z",
   "open_findings": 0,
-  "fixed_this_run": 3,
+  "fixed_this_run": 6,
   "by_severity": {
     "CRITICAL": 0,
     "IMPORTANT": 0,
@@ -15,7 +15,8 @@
     "20260527T041500Z.json",
     "2026-05-29T00:00:00Z.json",
     "20260531T042437Z.json",
-    "20260602T041140Z.json"
+    "20260602T041140Z.json",
+    "20260604T050000Z.json"
   ],
   "findings": [
     {
@@ -435,6 +436,78 @@
       "opened_at": "2026-05-29T00:00:00Z",
       "closed_at": "2026-05-29T00:15:00Z",
       "closing_pr": "audit/nightly-2026-05-29"
+    },
+    {
+      "id": "AUDIT-audit-elevation-20260604-01",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "rubric.json fingerprint test_case sha256_hex is a placeholder instruction string, not an actual hash",
+      "file_globs": ["rubric.json"],
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-06-04T05:00:00Z",
+      "closed_at": "2026-06-04T05:10:00Z",
+      "closing_pr": "audit/nightly-2026-06-04"
+    },
+    {
+      "id": "AUDIT-audit-elevation-20260604-02",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "rubric.json categories dict does not include 'cosmetic', but scan files emit findings with category:'cosmetic'",
+      "file_globs": ["rubric.json"],
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-06-04T05:00:00Z",
+      "closed_at": "2026-06-04T05:10:00Z",
+      "closing_pr": "audit/nightly-2026-06-04"
+    },
+    {
+      "id": "AUDIT-audit-elevation-20260604-03",
+      "severity": "IMPORTANT",
+      "category": "assumption",
+      "title": "ADR-005 in ifleet-integration-adrs.md references phantom file 'ifleet_elevation_plan.md'",
+      "file_globs": ["docs/ifleet-integration-adrs.md"],
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-06-04T05:00:00Z",
+      "closed_at": "2026-06-04T05:10:00Z",
+      "closing_pr": "audit/nightly-2026-06-04"
+    },
+    {
+      "id": "AUDIT-audit-elevation-20260604-04",
+      "severity": "COSMETIC",
+      "category": "redo",
+      "title": "README.md splittasks link is a placeholder (https://github.com/...)",
+      "file_globs": ["README.md"],
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-06-04T05:00:00Z",
+      "closed_at": "2026-06-04T05:10:00Z",
+      "closing_pr": "audit/nightly-2026-06-04"
+    },
+    {
+      "id": "AUDIT-audit-elevation-20260604-05",
+      "severity": "COSMETIC",
+      "category": "assumption",
+      "title": "lane-scheduler-spec.md has hard-coded /Users/Seb absolute paths in two places",
+      "file_globs": ["docs/lane-scheduler-spec.md"],
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-06-04T05:00:00Z",
+      "closed_at": "2026-06-04T05:10:00Z",
+      "closing_pr": "audit/nightly-2026-06-04"
+    },
+    {
+      "id": "AUDIT-audit-elevation-20260604-06",
+      "severity": "COSMETIC",
+      "category": "assumption",
+      "title": "self-heal-pipeline.md synthetic proof path uses absolute /Users/Seb reference",
+      "file_globs": ["docs/self-heal-pipeline.md"],
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-06-04T05:00:00Z",
+      "closed_at": "2026-06-04T05:10:00Z",
+      "closing_pr": "audit/nightly-2026-06-04"
     }
   ]
 }

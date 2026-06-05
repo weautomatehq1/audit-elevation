@@ -245,9 +245,9 @@ Decision rules baked into the Proposer's morning prompt:
 
 ### Open questions
 
-- Channel name: `#ifleet-proposals` (per `ifleet_elevation_plan.md`) or `#ifleet` (existing brief channel, `1504120127791042631`)? Suggest: new `#ifleet-proposals` so morning proposals don't get lost in operational chatter. **Sebastian decision needed.**
+- Channel name: `#ifleet-proposals` (per `plan.md`) or `#ifleet` (existing brief channel, `1504120127791042631`)? Suggest: new `#ifleet-proposals` so morning proposals don't get lost in operational chatter. **Sebastian decision needed.**
 - Cron timing: **03:00 local** — resolved by proposer-spec.md D7 (canonical). 5h buffer before 08:00 start covers Discord MCP retries.
-- Budget gate (per `ifleet_elevation_plan.md` M5 line): does the Proposer estimate cost before DMing, and refuse if over a daily cap? Per `feedback_no_budget_caps_claude_max.md`, NO — Max plan is flat-rate, the scarce resource is lanes not dollars. The 5-lane cap above subsumes the budget gate.
+- Budget gate (per `plan.md` M5 line): does the Proposer estimate cost before DMing, and refuse if over a daily cap? Per `feedback_no_budget_caps_claude_max.md`, NO — Max plan is flat-rate, the scarce resource is lanes not dollars. The 5-lane cap above subsumes the budget gate.
 
 ---
 

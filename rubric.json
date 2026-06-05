@@ -20,7 +20,8 @@
     "assumption": "Things taken for granted without verification",
     "overconfidence": "Places where execution happened without enough questioning",
     "risk": "Unconsidered consequences or side effects of changes made",
-    "redo": "Work that may need to be redone before it surfaces later"
+    "redo": "Work that may need to be redone before it surfaces later",
+    "cosmetic": "Style, duplication, or hygiene with no functional impact"
   },
   "fingerprint_algo": {
     "version": "sha256-v1",
@@ -38,7 +39,7 @@
       "input": { "category": "logic", "file_globs": ["src/queue/store.ts"], "title": "JSON.parse without error handling on database content" },
       "normalized": { "category": "logic", "file_globs_joined": "src/queue/store.ts", "title": "jsonparse without error handling on database content" },
       "concat": "logic|src/queue/store.ts|jsonparse without error handling on database content",
-      "sha256_hex": "verify-with-echo-n-concat-sha256sum"
+      "sha256_hex": "0fbc4d44bf190b06b63015d48d6edee394613c022fa71162551afc6e63542bf7"
     }
   },
   "events": {
