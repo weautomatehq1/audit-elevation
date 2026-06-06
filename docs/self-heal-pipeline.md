@@ -302,7 +302,7 @@ the accepted rule from `~/.claude/rules/` first (rare).
 | Failure | Symptom | Recovery |
 |---|---|---|
 | `closed.json` corrupted (invalid JSON) | Drafter exits 2 | Restore from git; the ledger is in-repo and version-controlled. Never edit by hand without `jq empty <file>` afterward. |
-| Fingerprint drifted (algorithm changed) | Same defect produces a different hash → regression detection misses | Bump `version` in `closed.json` and document the algorithm change. Old closures retain their hashes; new closures use the new hash. Do NOT retroactively rewrite hashes. |
+| Fingerprint drifted (algorithm changed) | Same defect produces a different hash → regression detection misses | Bump `schema_version` in `closed.json` and document the algorithm change. Old closures retain their hashes; new closures use the new hash. Do NOT retroactively rewrite hashes. |
 | Drafter writes to `.claude/rules/` | Catastrophe — auto-applied rules circumvent review | Scripts explicitly only write to `.audits/proposed-rules/`. If you see a draft in `.claude/rules/` without a `mv` in shell history, the drafter has been modified — `git diff` it. |
 | Watcher's repo list points at a non-repo path | `[skip]` in the log; total_drafts unaffected | Fix the path in `~/.claude/audit-watched-repos.txt`. The watcher does not error on missing dirs. |
 | 3+ closures coincidentally share a fingerprint with unrelated root causes | Draft proposes an irrelevant rule | Reject the draft. Consider widening the fingerprint algorithm (e.g., include a snippet of the offending code) — this is a known limitation. Document the false positive so future scans treat the fingerprint with skepticism. |

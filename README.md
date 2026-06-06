@@ -214,7 +214,7 @@ python3 ~/.claude/scripts/online-eval-stats.py --days 7 --repo IFleet --json | j
 | Lane scheduler | `~/.claude/scripts/lane-scheduler.mjs` | Observer daemon (opt-in PM2) |
 | Audit status helper | `~/.claude/scripts/audit-status.sh` | Standalone CLI: finding counts per repo |
 | **Config** | | |
-| rubric.json | `~/dev/ai-products/audit-elevation/rubric.json` | Single source of truth for severities, categories, fingerprint algo, events, triggers |
+| rubric.json | `rubric.json` | Single source of truth for severities, categories, fingerprint algo, events, triggers |
 | **Data files** | | |
 | Findings (per repo) | `<repo>/.audits/<ISO>.json` | One file per scan |
 | Open findings rollup | `<repo>/.audits/index.json` | Aggregate across all scans |
@@ -289,7 +289,7 @@ From the 5 IFleet integration ADRs in [docs/ifleet-integration-adrs.md](./docs/i
 4. **Lane TTL** — how long before a lane in `active-lanes.json` is considered stale?
 5. **`#ifleet-proposals` channel** — DM Sebastian only, or also broadcast to channel?
 
-Plus 7 open decisions in the Proposer spec (D1-D7).
+Plus 8 open decisions in the Proposer spec (D1-D7 plus ADR-Proposer-001).
 
 ---
 
