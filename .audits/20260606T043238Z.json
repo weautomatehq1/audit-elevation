@@ -1,0 +1,68 @@
+{
+  "audit_id": "audit-20260606T043238Z",
+  "repo": "audit-elevation",
+  "scanned_at": "2026-06-06T04:32:38Z",
+  "scanner": "claude-sonnet-4-6-nightly",
+  "findings": [
+    {
+      "id": "AUDIT-audit-elevation-f1a2b3c4",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "self-heal-pipeline.md failure-mode table still says Bump 'version' in closed.json after field was renamed to 'schema_version'",
+      "detail": "Line 305 of docs/self-heal-pipeline.md in the 'Fingerprint drifted' failure-mode row advises: 'Bump `version` in `closed.json`'. However, the `version` field was renamed to `schema_version` in the 2026-05-24 nightly audit (AUDIT-ae-d9e0f1a2), and line 65 of the same file documents this rename. The failure-mode table row was not updated when the rename was made, creating an internal contradiction within the same document. This is a regression — the prior fix (AUDIT-audit-elevation-9f3c1d2e) updated the field-rules prose in §Field rules but missed the failure-mode table.",
+      "file_globs": ["docs/self-heal-pipeline.md"],
+      "fix_sketch": "Change 'Bump `version` in `closed.json`' to 'Bump `schema_version` in `closed.json`' in the Fingerprint drifted recovery column on line 305.",
+      "parallel_safe": true,
+      "fingerprint": "3e9a7c2f5b8d1e4a6c0f9b3e7a1d5c8f2b6e0a4d8c1f5b9e3a7d0c4f8b2e6a",
+      "status": "open",
+      "opened_at": "2026-06-06T04:32:38Z",
+      "closed_at": null,
+      "closing_pr": null
+    },
+    {
+      "id": "AUDIT-audit-elevation-d5e6f7a8",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "ADR-003 context paragraph describes finding lifecycle as 'closed/reopened' but the system uses 'closed' and 'regression' — 'reopened' is not a valid status",
+      "detail": "Line 123 of docs/ifleet-integration-adrs.md describes the audit finding lifecycle as 'opened → fixing → verifying → closed/reopened'. The actual canonical lifecycle defined in plan.md and rubric.json uses 'open → fixing → verifying → fixed → closed | regression'. The status 'reopened' was never defined in the rubric, the schema, or any scanner — 're-opened' findings appear as new findings with status 'regression'. A prior fix (AUDIT-audit-elevation-b2d5a9e3) updated the trace event payload to drop the reopened field but left this context paragraph unchanged, making ADR-003's lifecycle description inconsistent with the surrounding spec.",
+      "file_globs": ["docs/ifleet-integration-adrs.md"],
+      "fix_sketch": "Change 'closed/reopened' on line 123 to 'closed | regression' to match the actual status lifecycle documented in plan.md and rubric.json.",
+      "parallel_safe": true,
+      "fingerprint": "8b3c2d1e9f4a7b6c5d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2",
+      "status": "open",
+      "opened_at": "2026-06-06T04:32:38Z",
+      "closed_at": null,
+      "closing_pr": null
+    },
+    {
+      "id": "AUDIT-audit-elevation-b9c0d1e2",
+      "severity": "COSMETIC",
+      "category": "assumption",
+      "title": "README.md reports 7 open decisions in Proposer spec but proposer-spec.md says eight (D1-D7 plus ADR-001)",
+      "detail": "README.md Open decisions section states 'Plus 7 open decisions in the Proposer spec (D1-D7)'. However, proposer-spec.md's plain-language recap section (last line) explicitly says 'The eight open decisions at the bottom (D1–D7 plus ADR-001)'. The proposer-spec contains 7 numbered decisions (D1–D7) plus one embedded ADR (ADR-Proposer-001), totalling 8 decision points Sebastian must answer. The README undercounts by 1.",
+      "file_globs": ["README.md"],
+      "fix_sketch": "Change '7 open decisions in the Proposer spec (D1-D7)' to '8 open decisions in the Proposer spec (D1-D7 plus ADR-Proposer-001)' in the Open decisions section of README.md.",
+      "parallel_safe": true,
+      "fingerprint": "2c5f8a1d4b7e0c3f6a9d2b5e8a1c4f7d0b3e6a9c2f5b8d1e4a7c0f3b6e9a2d5",
+      "status": "open",
+      "opened_at": "2026-06-06T04:32:38Z",
+      "closed_at": null,
+      "closing_pr": null
+    },
+    {
+      "id": "AUDIT-audit-elevation-c3d4e5f6",
+      "severity": "COSMETIC",
+      "category": "assumption",
+      "title": "README.md 'Where the code lives' table lists rubric.json with its internal machine path instead of its repo-relative path",
+      "detail": "README.md line 217, in the 'Where the code lives' table under '**Config**', shows rubric.json path as `~/dev/ai-products/audit-elevation/rubric.json`. This is the absolute machine path on Sebastian's Mac, not a usable reference for anyone reading the repo. Since rubric.json lives at the root of this repo, the path should be `./rubric.json` or just `rubric.json` — consistent with how plan.md, docs/, and other files are referenced in the same table.",
+      "file_globs": ["README.md"],
+      "fix_sketch": "Change the rubric.json path from '~/dev/ai-products/audit-elevation/rubric.json' to 'rubric.json' in the Where the code lives table (line 217).",
+      "parallel_safe": true,
+      "fingerprint": "6e1a4d7c0f3b6e9a2c5f8b1d4a7e0c3f6b9d2e5a8c1f4b7e0d3a6c9f2b5e8a1",
+      "status": "open",
+      "opened_at": "2026-06-06T04:32:38Z",
+      "closed_at": null,
+      "closing_pr": null
+    }
+  ]
+}
