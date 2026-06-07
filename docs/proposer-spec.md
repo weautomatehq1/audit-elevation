@@ -25,8 +25,8 @@ Read-only. The Proposer never writes to source.
 | Sprint (this week) | `~/dev/ai-products/IFleet/SPRINT.md` | Identify in-flight tasks vs. open slots |
 | Non-goals filter | `~/dev/ai-products/IFleet/NON_GOALS.md` | Drop any proposal whose summary matches |
 | Security gates | `~/dev/ai-products/IFleet/SECURITY.md` | Flag any proposal touching protected paths — require explicit Sebastian approval flag |
-| Audit findings (watch-list) | `<repo>/.audits/index.json` for each repo in `~/.omc/proposer-watchlist.json` | Surface CRITICAL/IMPORTANT findings as candidate tasks; regressions (status == "regression") receive +30 score bonus (loaded in same pass — not a separate file read) |
-| Audit closures | `<repo>/.audits/closed.json` | Suppress already-resolved findings |
+| Audit findings (watch-list) | `<repo>/.audits/index.json` for each repo in `~/.omc/proposer-watchlist.json` | Surface CRITICAL/IMPORTANT findings as candidate tasks; regressions (status == "regression") receive +30 score bonus (loaded in same pass — not a separate file read). `index.json` carries only summary fields (`id`, `severity`, `category`, `title`, `status`, `file_globs`). When surfacing a finding for the morning plan, the Proposer must also load the originating scan file (`<repo>/.audits/<audit_id>.json`) to retrieve `detail` and `fix_sketch` — those fields are needed by the downstream audit-triager to generate actionable lane briefs. |
+| Audit closures | `<repo>/.audits/closed.json` | Suppress findings resolved before the current `index.json` ledger was established. **Distinct from the §3 status pre-filter:** the pre-filter drops findings already marked `closed`/`fixed` in `index.json`; `closed.json` covers resolutions that predate `index.json` and provides the fingerprint history needed for cross-session regression detection. |
 | Lane patterns | `~/.omc/lane-scheduler/log/*.jsonl` (last 7 days) | Detect overload — if yesterday hit lane ceiling, propose smaller plan |
 | Learnings | `~/dev/ai-products/IFleet/learnings.md` | Inform ranking ties (avoid recently-flagged anti-patterns) |
 | Yesterday's proposal | `~/.omc/proposer/state/last-proposal.json` | Suppress duplicates; track Sebastian's accept/reject pattern |
@@ -53,9 +53,9 @@ Each candidate task gets a numeric score. Higher score → higher position in th
 | Class | Priority base | Notes |
 |---|---|---|
 | CRITICAL audit findings | **100** | One per finding. Always above roadmap work. |
-| REGRESSION (any severity) | **+30 bonus** added to its underlying-finding base | Stacks: a CRITICAL regression scores 130. |
-| IMPORTANT findings affecting roadmap items | **80** | Affected = the finding's globs overlap a roadmap item's owned glob set. |
-| Roadmap items unblocked + no findings on their globs | **60** | "Unblocked" = all predecessor IDs in ROADMAP.md marked `done`. |
+| REGRESSION (any severity) | **+30 bonus** added to its underlying-finding base | Stacks: a CRITICAL regression scores 130. **Cap:** the bonus cannot elevate a finding's score above the base of the next higher severity class — an IMPORTANT regression scores at most 99 (CRITICAL base − 1); a COSMETIC regression scores at most 49 (IMPORTANT base − 1). Only CRITICAL findings may score ≥ 100. |
+| IMPORTANT findings affecting roadmap items | **80** | Affected = the finding's globs overlap a roadmap item's owned glob set. **Note:** ROADMAP.md milestones do not carry explicit glob sets; the Proposer infers ownership from milestone descriptions, or treats all IMPORTANT findings as roadmap-adjacent (scoring 80) when inference is ambiguous. |
+| Roadmap items unblocked + no findings on their globs | **60** | "Unblocked" = all predecessor IDs in ROADMAP.md are in a terminal status (`completed`). **Note:** ROADMAP.md uses `planned`, `deferred`, `in-progress`, `completed`; only `completed` counts as done. As of 2026-06-07, no milestone uses `status: completed` — this row is inactive until milestones ship. |
 | IMPORTANT findings NOT on the roadmap | **50** | Tech debt; eligible for proposal but loses ties to roadmap work. |
 | COSMETIC findings | **20** | Batched into one "cosmetic sweep" task — never one per finding. |
 | Already-proposed-yesterday (rejected by Sebastian) | **−40 penalty** | Suppress nagging. Drops items below the cut-line. |
@@ -64,7 +64,10 @@ After scoring:
 
 1. Apply the **NON_GOALS filter**: drop any candidate whose summary text matches a non-goal heading or bullet (case-insensitive substring match — keep it dumb; if Sebastian wants stricter matching, that's an open decision).
 2. Apply the **SECURITY filter**: any candidate touching a path under `SECURITY.md`'s protected-paths list gets a `requires_security_approval: true` flag AND drops in rank to the bottom of its class. The morning DM then lists it under a "🔒 requires explicit approval" section, never auto-mixed with normal work.
-3. Apply the **lane-budget filter**: based on T4's lane scheduler observations from yesterday — if Sebastian ran ≥5 lanes for ≥4h, cap morning plan at 3 lanes; if ≤2 lanes for ≤2h, allow up to 6 lanes. Default cap: 5 lanes.
+3. Apply the **lane-budget filter**: based on T4's lane scheduler observations from yesterday:
+   - ≥5 lanes AND ≥4h → cap morning plan at **3 lanes**
+   - ≤2 lanes AND ≤2h → allow up to **6 lanes**
+   - Otherwise (3–4 lanes, or duration in the 2–4h range, or the two conditions point in different directions) → cap at **5 lanes** (default)
 4. Top N (by score, post-filters) become the proposal. N = lane-budget cap.
 
 Tie-breaking (same score): older finding wins, then alphabetical by repo, then by id.
@@ -130,7 +133,7 @@ Mandatory in the Discord DM (per CLAUDE.md "Plain-language recap" rule). The Pro
 | **D3** | DM Sebastian only, or also post to `#ifleet` / `#ifleet-proposals`? | (a) DM only. (b) DM + summary line in #ifleet. (c) Dedicated `#ifleet-proposals` channel (per ROADMAP M5 line). | **(c) — match ROADMAP.** ROADMAP M5 explicitly lists `#ifleet-proposals`. Create it on enable; DM Sebastian a pointer, post the full plan in the new channel so Esme can also see it. |
 | **D4** | Allow Esme to ✅ a proposal? | (a) Sebastian only. (b) Either of them. | **(a) Sebastian only for v1.** Esme can react with comments; only Sebastian's ✅ greenlights. Revisit after first month. |
 | **D5** | What does the worker do when picking up an approved plan? | (a) Sebastian copies into a fresh splittasks invocation by hand. (b) Slash command `/proposer-accept` auto-builds the splittasks dir from the state file. | **(b) for v1.5.** Start with (a) — fewer moving parts; once the format settles, automate. |
-| **D6** | Reject feedback loop | Should ❌ reactions become learnings? | **Yes — store reject reasons in `~/.omc/proposer/state/rejections.jsonl` and feed into next-night's `−40` penalty calculation.** This is the first behavioral-fingerprinting touch point ahead of M4. |
+| **D6** | Reject feedback loop | Should ❌ reactions become learnings? | **Yes.** Two-file protocol: (1) `last-proposal.json` (§2 input) is updated at accept/reject time — it stores the day's full proposal plus Sebastian's outcome. (2) `rejections.jsonl` is an append-only audit log of reject events, derived from `last-proposal.json`. The `−40` penalty reads from `rejections.jsonl` (append-log is easier to query for repeat-rejection patterns). These are complementary, not conflicting: `last-proposal.json` is the mutable daily state; `rejections.jsonl` is the immutable history. |
 | **D7** | Cron time | 03:00 local? Earlier? | **03:00 local.** Sebastian usually starts at 08:00; 5h buffer covers Discord MCP retries. |
 
 These decisions block any IFleet PR. Sebastian answers on wake; T5 (or whoever's next) re-spins the spec with answers baked in.

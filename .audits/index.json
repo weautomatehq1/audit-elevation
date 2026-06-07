@@ -1,8 +1,7 @@
 {
   "repo": "audit-elevation",
-  "last_updated": "2026-06-04T05:00:00Z",
+  "last_updated": "2026-06-07T04:12:44Z",
   "open_findings": 0,
-  "fixed_this_run": 6,
   "by_severity": {
     "CRITICAL": 0,
     "IMPORTANT": 0,
@@ -16,7 +15,8 @@
     "2026-05-29T00:00:00Z.json",
     "20260531T042437Z.json",
     "20260602T041140Z.json",
-    "20260604T050000Z.json"
+    "20260604T050000Z.json",
+    "2026-06-07T041244Z.json"
   ],
   "findings": [
     {
@@ -28,7 +28,7 @@
       "status": "closed",
       "opened_at": "2026-05-21T17:20:59Z",
       "closed_at": "2026-05-21T17:49:46Z",
-      "closing_pr": "direct-fix",
+      "closing_pr": 0,
       "file_globs": [
         "docs/proposer-spec.md",
         "~/.claude/skills/audit-broadcast/SKILL.md"
@@ -44,7 +44,7 @@
       "status": "closed",
       "opened_at": "2026-05-21T17:20:59Z",
       "closed_at": "2026-05-21T17:49:46Z",
-      "closing_pr": "direct-fix",
+      "closing_pr": 0,
       "file_globs": [
         "README.md"
       ],
@@ -59,7 +59,7 @@
       "status": "closed",
       "opened_at": "2026-05-21T17:20:59Z",
       "closed_at": "2026-05-21T17:41:49Z",
-      "closing_pr": "direct-fix",
+      "closing_pr": 0,
       "file_globs": [
         "rubric.json",
         "~/.claude/commands/audit-scan.md"
@@ -75,7 +75,7 @@
       "status": "closed",
       "opened_at": "2026-05-21T17:20:59Z",
       "closed_at": "2026-05-21T17:49:46Z",
-      "closing_pr": "direct-fix",
+      "closing_pr": 0,
       "file_globs": [
         "README.md",
         "rubric.json"
@@ -91,7 +91,7 @@
       "status": "closed",
       "opened_at": "2026-05-21T17:20:59Z",
       "closed_at": "2026-05-21T17:49:46Z",
-      "closing_pr": "direct-fix",
+      "closing_pr": 0,
       "file_globs": [
         "docs/self-heal-pipeline.md"
       ],
@@ -106,7 +106,7 @@
       "status": "closed",
       "opened_at": "2026-05-21T17:20:59Z",
       "closed_at": "2026-05-21T17:49:46Z",
-      "closing_pr": "direct-fix",
+      "closing_pr": 0,
       "file_globs": [
         "README.md"
       ],
@@ -121,7 +121,7 @@
       "status": "closed",
       "opened_at": "2026-05-21T17:20:59Z",
       "closed_at": "2026-05-21T17:49:46Z",
-      "closing_pr": "direct-fix",
+      "closing_pr": 0,
       "file_globs": [
         "docs/proposer-spec.md"
       ],
@@ -136,7 +136,7 @@
       "status": "closed",
       "opened_at": "2026-05-21T17:20:59Z",
       "closed_at": "2026-05-21T17:49:46Z",
-      "closing_pr": "direct-fix",
+      "closing_pr": 0,
       "file_globs": [
         "docs/ifleet-integration-adrs.md"
       ],
@@ -151,7 +151,7 @@
       "status": "closed",
       "opened_at": "2026-05-21T17:20:59Z",
       "closed_at": "2026-05-21T17:49:46Z",
-      "closing_pr": "direct-fix",
+      "closing_pr": 0,
       "file_globs": [
         "README.md",
         "~/.claude/skills/codex-review/SKILL.md"
@@ -167,7 +167,7 @@
       "status": "closed",
       "opened_at": "2026-05-21T17:20:59Z",
       "closed_at": "2026-05-21T17:49:46Z",
-      "closing_pr": "direct-fix",
+      "closing_pr": 0,
       "file_globs": [
         "docs/proposer-spec.md",
         "docs/ifleet-integration-adrs.md"
@@ -183,7 +183,7 @@
       "status": "closed",
       "opened_at": "2026-05-21T17:20:59Z",
       "closed_at": "2026-05-21T17:49:46Z",
-      "closing_pr": "direct-fix",
+      "closing_pr": 0,
       "file_globs": [
         "~/.claude/audit-watched-repos.txt"
       ],
@@ -198,7 +198,7 @@
       "status": "closed",
       "opened_at": "2026-05-21T17:20:59Z",
       "closed_at": "2026-05-21T17:49:46Z",
-      "closing_pr": "direct-fix",
+      "closing_pr": 0,
       "file_globs": [
         "README.md"
       ],
@@ -213,7 +213,7 @@
       "status": "closed",
       "opened_at": "2026-05-21T17:20:59Z",
       "closed_at": "2026-05-21T17:49:46Z",
-      "closing_pr": "direct-fix",
+      "closing_pr": 0,
       "file_globs": [
         "plan.md"
       ],
@@ -228,7 +228,7 @@
       "status": "closed",
       "opened_at": "2026-05-21T17:20:59Z",
       "closed_at": "2026-05-21T17:49:46Z",
-      "closing_pr": "direct-fix",
+      "closing_pr": 0,
       "file_globs": [
         "README.md"
       ],
@@ -239,11 +239,11 @@
       "severity": "IMPORTANT",
       "category": "logic",
       "title": "ADR-004 recommends flock-based locking but text then contradicts itself by citing mkdir-based pattern",
-      "fingerprint": "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2",
+      "fingerprint": "f454de78be42aaac2de991524677966389973be630a40ab68690127ab2cc1896",
       "status": "fixed",
       "opened_at": "2026-05-22T04:11:28Z",
       "closed_at": "2026-05-22T04:15:32Z",
-      "closing_pr": "audit/nightly-2026-05-22",
+      "closing_pr": 0,
       "file_globs": [
         "docs/ifleet-integration-adrs.md",
         "docs/lane-scheduler-spec.md"
@@ -255,11 +255,11 @@
       "severity": "IMPORTANT",
       "category": "assumption",
       "title": "proposer-spec.md references regressions via index.json filter but section 2 input table still lists a separate regressions source path",
-      "fingerprint": "b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3",
+      "fingerprint": "de2f7ee35740e914199e407dc4681507819e07eb03714f37c2c658ed88f8f189",
       "status": "fixed",
       "opened_at": "2026-05-22T04:11:28Z",
       "closed_at": "2026-05-22T04:15:32Z",
-      "closing_pr": "audit/nightly-2026-05-22",
+      "closing_pr": 0,
       "file_globs": [
         "docs/proposer-spec.md"
       ],
@@ -270,11 +270,11 @@
       "severity": "IMPORTANT",
       "category": "logic",
       "title": "ADR-003 status enum lists 'reopened' but self-heal-pipeline and rubric never define it; trace event schema references it creating dead schema",
-      "fingerprint": "c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4",
+      "fingerprint": "3f4641acb4318fdaca2976684cdf0b992b9c30a5ed2acd4aa7165004644a7772",
       "status": "fixed",
       "opened_at": "2026-05-22T04:11:28Z",
       "closed_at": "2026-05-22T04:15:32Z",
-      "closing_pr": "audit/nightly-2026-05-22",
+      "closing_pr": 0,
       "file_globs": [
         "docs/ifleet-integration-adrs.md",
         "docs/self-heal-pipeline.md"
@@ -286,11 +286,11 @@
       "severity": "IMPORTANT",
       "category": "risk",
       "title": "closed.json schema version field conflicts: top-level 'version' clashes with finding schema 'schema_version' convention",
-      "fingerprint": "d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5",
+      "fingerprint": "64dc2aa7875a55c85b6c934e8a36489bb82dd200e357976611b6521f57116954",
       "status": "fixed",
       "opened_at": "2026-05-22T04:11:28Z",
       "closed_at": "2026-05-22T04:15:32Z",
-      "closing_pr": "audit/nightly-2026-05-22",
+      "closing_pr": 0,
       "file_globs": [
         "docs/self-heal-pipeline.md",
         "rubric.json"
@@ -302,11 +302,11 @@
       "severity": "IMPORTANT",
       "category": "assumption",
       "title": "Lane scheduler spec references lane-scheduler.pm2.json but ADR-004 describes lane-scheduler.{sh,mjs} with a now-removed .sh — spec/ADR conflict persists",
-      "fingerprint": "e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6",
+      "fingerprint": "907a676f141910235298e64a7440534d60b2ea9eeb21eb63aa6342ea84e40c5e",
       "status": "fixed",
       "opened_at": "2026-05-22T04:11:28Z",
       "closed_at": "2026-05-22T04:15:32Z",
-      "closing_pr": "audit/nightly-2026-05-22",
+      "closing_pr": 0,
       "file_globs": [
         "docs/ifleet-integration-adrs.md"
       ],
@@ -317,11 +317,11 @@
       "severity": "IMPORTANT",
       "category": "logic",
       "title": "proposer-spec.md Budget gate logic is inverted: ENABLED flag absent means run, present means send — opposite of standard gating convention",
-      "fingerprint": "f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7",
+      "fingerprint": "15ced3486b9988cfdf6f4e6350af7e9345b6e6a4aa4d56f06adf1a7634d01de4",
       "status": "fixed",
       "opened_at": "2026-05-22T04:11:28Z",
       "closed_at": "2026-05-22T04:15:32Z",
-      "closing_pr": "audit/nightly-2026-05-22",
+      "closing_pr": 0,
       "file_globs": [
         "docs/proposer-spec.md"
       ],
@@ -332,11 +332,11 @@
       "severity": "COSMETIC",
       "category": "overconfidence",
       "title": "lane-scheduler-spec.md describes lane-list.sh color codes but NO_COLOR handling is documented as honored without specifying what 'honors' means",
-      "fingerprint": "a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8",
+      "fingerprint": "33a48c504adf03023925a57cfa49283da0da03e0ebd5f507fd304f87a2fce63d",
       "status": "fixed",
       "opened_at": "2026-05-22T04:11:28Z",
       "closed_at": "2026-05-22T04:15:32Z",
-      "closing_pr": "audit/nightly-2026-05-22",
+      "closing_pr": 0,
       "file_globs": [
         "docs/lane-scheduler-spec.md"
       ],
@@ -347,11 +347,11 @@
       "severity": "COSMETIC",
       "category": "redo",
       "title": "quota-pacing-design.md references claude-opus-4-7 and claude-haiku-4-5 model IDs that may be stale naming conventions",
-      "fingerprint": "b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9",
+      "fingerprint": "f8e7f3a43169d99b8c506e66dbda87504a5f13650c694870b7978ff8cc66d82c",
       "status": "fixed",
       "opened_at": "2026-05-22T04:11:28Z",
       "closed_at": "2026-05-22T04:15:32Z",
-      "closing_pr": "audit/nightly-2026-05-22",
+      "closing_pr": 0,
       "file_globs": [
         "docs/quota-pacing-design.md",
         "docs/lane-scheduler-spec.md"
@@ -363,11 +363,11 @@
       "severity": "COSMETIC",
       "category": "assumption",
       "title": "plan.md Phase 2 prerequisites section omits that Codex CLI install is a Sebastian-owned blocking task, buried in prose",
-      "fingerprint": "c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0",
+      "fingerprint": "abc2a286037357dd2fd5cc8f0d74c79ed974f1131d81101c6dcfdbe91c30c771",
       "status": "fixed",
       "opened_at": "2026-05-22T04:11:28Z",
       "closed_at": "2026-05-22T04:15:32Z",
-      "closing_pr": "audit/nightly-2026-05-22",
+      "closing_pr": 0,
       "file_globs": [
         "plan.md"
       ],
@@ -384,7 +384,7 @@
       "status": "fixed",
       "opened_at": "2026-05-24T04:21:11Z",
       "closed_at": "2026-05-24T04:21:11Z",
-      "closing_pr": "audit/nightly-2026-05-24"
+      "closing_pr": 0
     },
     {
       "id": "AUDIT-audit-elevation-9f3c1d2e",
@@ -393,11 +393,11 @@
       "title": "self-heal-pipeline.md field-rules prose contradicts schema after 2026-05-24 fix — still names field 'version' but schema now uses 'schema_version'",
       "file_globs": ["docs/self-heal-pipeline.md"],
       "parallel_safe": true,
-      "fingerprint": "8e3d2f1a9c4b7e6d5a0f3c8b1e9d4c7a2f5b0e3d6a9c1f4b7e0d3a6c9f2b5e8",
+      "fingerprint": "31694de12ed4c603da34b9501bfe055ba81f89374d849b41e1964531a6db5951",
       "status": "fixed",
       "opened_at": "2026-05-27T04:15:00Z",
       "closed_at": "2026-05-27T04:15:00Z",
-      "closing_pr": "audit/nightly-2026-05-27"
+      "closing_pr": 0
     },
     {
       "id": "AUDIT-audit-elevation-b7d4e1a3",
@@ -406,24 +406,24 @@
       "title": "plan.md canonical schema documents terminal status as 'closed' but all production audit files use 'fixed' — undocumented status value in every recent scan",
       "file_globs": ["plan.md"],
       "parallel_safe": true,
-      "fingerprint": "3a7f2c5b8e1d4a9c6f3b0e7d2a5c8f1b4e7a0d3c6f9b2e5a8d1c4f7b0e3a6c",
+      "fingerprint": "83405385b698e9db3d4efc8912d2f23beb0f424c7a311999d8c2b71d66704d61",
       "status": "fixed",
       "opened_at": "2026-05-27T04:15:00Z",
       "closed_at": "2026-05-27T04:15:00Z",
-      "closing_pr": "audit/nightly-2026-05-27"
+      "closing_pr": 0
     },
     {
       "id": "AUDIT-audit-elevation-c2f5b8e7",
       "severity": "COSMETIC",
-      "category": "logic",
+      "category": "cosmetic",
       "title": "ADR-003 audit.finding.regressed event payload mixes camelCase and snake_case field names in a single TypeScript event object",
       "file_globs": ["docs/ifleet-integration-adrs.md"],
       "parallel_safe": true,
-      "fingerprint": "7b4e1a8d5c2f9b6e3a0d7c4f1b8e5a2d9c6f3b0e7a4d1c8f5b2e9a6d3c0f7b",
+      "fingerprint": "92fc14c343283574851f6eef8b5831b2e4fdfc3697198ba0bf19b77af31505ea",
       "status": "fixed",
       "opened_at": "2026-05-27T04:15:00Z",
       "closed_at": "2026-05-27T04:15:00Z",
-      "closing_pr": "audit/nightly-2026-05-27"
+      "closing_pr": 0
     },
     {
       "id": "AUDIT-audit-elevation-8877d455",
@@ -435,7 +435,7 @@
       "status": "fixed",
       "opened_at": "2026-05-29T00:00:00Z",
       "closed_at": "2026-05-29T00:15:00Z",
-      "closing_pr": "audit/nightly-2026-05-29"
+      "closing_pr": 0
     },
     {
       "id": "AUDIT-audit-elevation-20260604-01",
@@ -444,10 +444,11 @@
       "title": "rubric.json fingerprint test_case sha256_hex is a placeholder instruction string, not an actual hash",
       "file_globs": ["rubric.json"],
       "parallel_safe": true,
+      "fingerprint": "43e7c623f3ef44c95390cc14af31c69cde563f6b2321b3e505a4980b42bbe6fa",
       "status": "fixed",
       "opened_at": "2026-06-04T05:00:00Z",
       "closed_at": "2026-06-04T05:10:00Z",
-      "closing_pr": "audit/nightly-2026-06-04"
+      "closing_pr": 0
     },
     {
       "id": "AUDIT-audit-elevation-20260604-02",
@@ -456,10 +457,11 @@
       "title": "rubric.json categories dict does not include 'cosmetic', but scan files emit findings with category:'cosmetic'",
       "file_globs": ["rubric.json"],
       "parallel_safe": true,
+      "fingerprint": "51c930e59272f07e3416b5cd82d5f04ef709bf5eaefd4873bbaae9126e639213",
       "status": "fixed",
       "opened_at": "2026-06-04T05:00:00Z",
       "closed_at": "2026-06-04T05:10:00Z",
-      "closing_pr": "audit/nightly-2026-06-04"
+      "closing_pr": 0
     },
     {
       "id": "AUDIT-audit-elevation-20260604-03",
@@ -468,10 +470,11 @@
       "title": "ADR-005 in ifleet-integration-adrs.md references phantom file 'ifleet_elevation_plan.md'",
       "file_globs": ["docs/ifleet-integration-adrs.md"],
       "parallel_safe": true,
+      "fingerprint": "a704e4b41092edf07fccd977dec34c7acf50076fc2df46bd4cea0fe0e1799451",
       "status": "fixed",
       "opened_at": "2026-06-04T05:00:00Z",
       "closed_at": "2026-06-04T05:10:00Z",
-      "closing_pr": "audit/nightly-2026-06-04"
+      "closing_pr": 0
     },
     {
       "id": "AUDIT-audit-elevation-20260604-04",
@@ -480,10 +483,11 @@
       "title": "README.md splittasks link is a placeholder (https://github.com/...)",
       "file_globs": ["README.md"],
       "parallel_safe": true,
+      "fingerprint": "dafcf9f6b93ee94788484be09cad2c7337e4f041122a3af81b69002f3b2f72c3",
       "status": "fixed",
       "opened_at": "2026-06-04T05:00:00Z",
       "closed_at": "2026-06-04T05:10:00Z",
-      "closing_pr": "audit/nightly-2026-06-04"
+      "closing_pr": 0
     },
     {
       "id": "AUDIT-audit-elevation-20260604-05",
@@ -492,10 +496,11 @@
       "title": "lane-scheduler-spec.md has hard-coded /Users/Seb absolute paths in two places",
       "file_globs": ["docs/lane-scheduler-spec.md"],
       "parallel_safe": true,
+      "fingerprint": "aad5b4cd500516986c1a4e724ca412c26a652fa34d6e6d222196ad5679640e3b",
       "status": "fixed",
       "opened_at": "2026-06-04T05:00:00Z",
       "closed_at": "2026-06-04T05:10:00Z",
-      "closing_pr": "audit/nightly-2026-06-04"
+      "closing_pr": 0
     },
     {
       "id": "AUDIT-audit-elevation-20260604-06",
@@ -504,10 +509,251 @@
       "title": "self-heal-pipeline.md synthetic proof path uses absolute /Users/Seb reference",
       "file_globs": ["docs/self-heal-pipeline.md"],
       "parallel_safe": true,
+      "fingerprint": "ac6764a4f8a3ef7bb5bd19e71907d8301622891698bff249b639eef4de40e6e2",
       "status": "fixed",
       "opened_at": "2026-06-04T05:00:00Z",
       "closed_at": "2026-06-04T05:10:00Z",
-      "closing_pr": "audit/nightly-2026-06-04"
+      "closing_pr": 0
+    },
+    {
+      "id": "AUDIT-audit-elevation-20260607-01",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "20260604T050000Z.json uses scan_id field instead of audit_id, file string instead of file_globs array, and is missing fingerprint fields",
+      "detail": "The 2026-06-04 scan file used scan_id instead of the canonical audit_id field name, stored file paths as a bare string 'file' instead of the file_globs array, and omitted the fingerprint field from all 6 findings. These deviations break any tooling that reads the canonical schema (e.g. regression detection, audit-triager).",
+      "file_globs": [".audits/20260604T050000Z.json"],
+      "fix_sketch": "Rename scan_id → audit_id. Change each finding's file string to file_globs array. Compute and add fingerprint for each finding using rubric sha256-v1 algorithm.",
+      "parallel_safe": false,
+      "fingerprint": "69a1faf71b0f01a805314ab3c772d4c7c09539d0711e2f0d67903d3e6a9f5ea0",
+      "status": "fixed",
+      "opened_at": "2026-06-07T04:12:44Z",
+      "closed_at": "2026-06-07T04:12:44Z",
+      "closing_pr": 0
+    },
+    {
+      "id": "AUDIT-audit-elevation-20260607-02",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "index.json closing_pr field uses string values (\"direct-fix\", branch names) instead of integer PR number per canonical schema",
+      "detail": "self-heal-pipeline.md canonical schema specifies closing_pr as an integer PR number (or null/0 for direct fixes). index.json entries from 2026-05-21 through 2026-06-04 use the strings 'direct-fix' and 'audit/nightly-YYYY-MM-DD', which fail type checks and break any tooling that expects an integer.",
+      "file_globs": [".audits/index.json"],
+      "fix_sketch": "Replace all closing_pr string values with 0 (direct fix, no PR opened). Future entries that close via a real PR should use the integer PR number.",
+      "parallel_safe": false,
+      "fingerprint": "7bf48ccbe68581724e48447f84839f915f6772994bd2d0d60486dc0411e97749",
+      "status": "fixed",
+      "opened_at": "2026-06-07T04:12:44Z",
+      "closed_at": "2026-06-07T04:12:44Z",
+      "closing_pr": 0
+    },
+    {
+      "id": "AUDIT-audit-elevation-20260607-03",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "Proposer ranking bug: IMPORTANT regression scores 110 which exceeds CRITICAL non-regression base of 100",
+      "detail": "proposer-spec.md §3 scoring table: IMPORTANT base=80, regression bonus=+30 → effective score=110. CRITICAL non-regression base=100. An IMPORTANT regression outranks a CRITICAL non-regression, which is counterintuitive — CRITICAL always means 'active threat or guaranteed failure' which should dominate IMPORTANT at any regression status.",
+      "file_globs": ["docs/proposer-spec.md"],
+      "fix_sketch": "Cap the regression bonus per severity class: IMPORTANT regression ≤ 99 (CRITICAL base − 1), COSMETIC regression ≤ 49 (IMPORTANT base − 1). Only CRITICAL findings may score ≥ 100.",
+      "parallel_safe": true,
+      "fingerprint": "ef822d08d4723b8601dab013134c0c21dc3c40b5a86103244877ce53fff3148b",
+      "status": "fixed",
+      "opened_at": "2026-06-07T04:12:44Z",
+      "closed_at": "2026-06-07T04:12:44Z",
+      "closing_pr": 0
+    },
+    {
+      "id": "AUDIT-audit-elevation-20260607-04",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "proposer-spec.md audit-triager cannot retrieve detail and fix_sketch from index.json which only carries summary fields",
+      "detail": "index.json carries only summary fields (id, severity, category, title, status, file_globs). The audit-triager needs detail and fix_sketch to generate actionable lane briefs. The proposer-spec.md §2 does not document that the proposer/triager must load the originating scan file to get these fields.",
+      "file_globs": ["docs/proposer-spec.md"],
+      "fix_sketch": "Document in the §2 audit findings row that the Proposer must load the originating scan file (<repo>/.audits/<audit_id>.json) to retrieve detail and fix_sketch when surfacing a finding.",
+      "parallel_safe": true,
+      "fingerprint": "3f7148359b91a35059a759ad374a35ac7da7af80c84ee76627168b8daf215b13",
+      "status": "fixed",
+      "opened_at": "2026-06-07T04:12:44Z",
+      "closed_at": "2026-06-07T04:12:44Z",
+      "closing_pr": 0
+    },
+    {
+      "id": "AUDIT-audit-elevation-20260607-05",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "proposer-spec.md closed.json suppression in section 2 is not distinguished from section 3 status pre-filter creating confusion about their separate purposes",
+      "detail": "§2 lists closed.json as 'Suppress already-resolved findings'. §3 pre-filter drops any finding with status not in ['open','regression'], which already handles findings closed in index.json. A reader cannot tell why closed.json exists separately or what work it does that the pre-filter doesn't.",
+      "file_globs": ["docs/proposer-spec.md"],
+      "fix_sketch": "Clarify in the §2 closed.json row: it covers resolutions that predate index.json establishment, and provides fingerprint history for cross-session regression detection. These are distinct from the §3 status pre-filter which only acts on index.json status fields.",
+      "parallel_safe": true,
+      "fingerprint": "26cb7205580acdc98c48d00b90b820d8fedc107bfa31326b8cb18be0b91b5866",
+      "status": "fixed",
+      "opened_at": "2026-06-07T04:12:44Z",
+      "closed_at": "2026-06-07T04:12:44Z",
+      "closing_pr": 0
+    },
+    {
+      "id": "AUDIT-audit-elevation-20260607-06",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "proposer-spec.md lane-budget filter has no explicit else branch for the 3-4 lane or 2-4h middle range case",
+      "detail": "§3 step 3 documents two cases: ≥5 lanes ≥4h → cap 3, and ≤2 lanes ≤2h → allow 6. The 3-4 lane case and the 2-4h middle duration case are not covered. Implementors would be left to guess whether the default cap applies or something in between.",
+      "file_globs": ["docs/proposer-spec.md"],
+      "fix_sketch": "Add explicit else branch: 3-4 lanes or 2-4h range or mixed signals → cap at 5 lanes (default). This makes the filter complete and removes implementation ambiguity.",
+      "parallel_safe": true,
+      "fingerprint": "b8ba93462ca97d2396b82205e939f755f6c2af7b55cb157697672a05a95a238e",
+      "status": "fixed",
+      "opened_at": "2026-06-07T04:12:44Z",
+      "closed_at": "2026-06-07T04:12:44Z",
+      "closing_pr": 0
+    },
+    {
+      "id": "AUDIT-audit-elevation-20260607-07",
+      "severity": "IMPORTANT",
+      "category": "assumption",
+      "title": "proposer-spec.md IMPORTANT roadmap-affecting score assumes milestones have owned glob sets which ROADMAP.md does not define",
+      "detail": "§3 scoring: 'IMPORTANT findings affecting roadmap items: 80. Affected = the finding's globs overlap a roadmap item's owned glob set.' ROADMAP.md milestones have no 'owned glob set' field. An implementor following this spec would have no way to determine which findings 'affect' which milestone.",
+      "file_globs": ["docs/proposer-spec.md"],
+      "fix_sketch": "Document that glob-set ownership must be inferred from milestone descriptions (e.g. if a milestone title mentions a file or pattern), or as a conservative default treat all IMPORTANT findings as roadmap-adjacent (scoring 80). Note this is an open design decision.",
+      "parallel_safe": true,
+      "fingerprint": "7cb1ea3230fce14a028541ef99ed299e0259633288e7496cea7e5d1eeeb06373",
+      "status": "fixed",
+      "opened_at": "2026-06-07T04:12:44Z",
+      "closed_at": "2026-06-07T04:12:44Z",
+      "closing_pr": 0
+    },
+    {
+      "id": "AUDIT-audit-elevation-20260607-08",
+      "severity": "IMPORTANT",
+      "category": "assumption",
+      "title": "proposer-spec.md roadmap unblocked score assumes predecessors can be identified as done but ROADMAP.md uses no completed status",
+      "detail": "§3: 'Roadmap items unblocked = all predecessor IDs in ROADMAP.md marked done.' ROADMAP.md uses status values planned, deferred, in-progress — none of which is 'done' or 'completed'. As of 2026-06-07 no milestone uses a terminal status, making this scoring row permanently inactive without documentation.",
+      "file_globs": ["docs/proposer-spec.md"],
+      "fix_sketch": "Document that 'done' maps to ROADMAP.md status:completed (the terminal value). Note that as of 2026-06-07 no milestone is completed so this scoring class is inactive. When milestones begin completing, update ROADMAP.md to use status:completed.",
+      "parallel_safe": true,
+      "fingerprint": "7478f5e00dc59b633cbe4ec591736341880e545632f3754f550e48ed11969607",
+      "status": "fixed",
+      "opened_at": "2026-06-07T04:12:44Z",
+      "closed_at": "2026-06-07T04:12:44Z",
+      "closing_pr": 0
+    },
+    {
+      "id": "AUDIT-audit-elevation-20260607-09",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "proposer-spec.md D6 references rejections.jsonl for the minus-40 penalty but section 2 input table references last-proposal.json creating two conflicting sources",
+      "detail": "§2 input: 'Yesterday's proposal: ~/.omc/proposer/state/last-proposal.json — track Sebastian's accept/reject pattern'. D6: 'store reject reasons in rejections.jsonl and feed into next-night's −40 penalty calculation'. These appear to be two conflicting sources of truth for the penalty. An implementor would not know which file to read for penalty calculation.",
+      "file_globs": ["docs/proposer-spec.md"],
+      "fix_sketch": "Clarify the two-file protocol: last-proposal.json is the mutable daily state file updated at accept/reject time. rejections.jsonl is an append-only audit log of reject events derived from last-proposal.json. The −40 penalty reads from rejections.jsonl. Both are needed; they are complementary, not conflicting.",
+      "parallel_safe": true,
+      "fingerprint": "6c3c44bbfd078a7290496383c7df01e79a57e674b2a719554d206aea9e415b32",
+      "status": "fixed",
+      "opened_at": "2026-06-07T04:12:44Z",
+      "closed_at": "2026-06-07T04:12:44Z",
+      "closing_pr": 0
+    },
+    {
+      "id": "AUDIT-audit-elevation-20260607-10",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "plan.md findings schema detail field documents 2-3 paragraph description but a single JSON string cannot contain formatted paragraphs",
+      "detail": "plan.md Phase 1 schema example shows: 'detail': '2-3 paragraph description'. A JSON string field cannot contain paragraph-formatted text in a useful way. All production scan files use 2-3 sentence descriptions in practice. The comment misrepresents the expected format and could cause an implementor to write verbosely structured detail fields.",
+      "file_globs": ["plan.md"],
+      "fix_sketch": "Change '2-3 paragraph description' to '2-3 sentence description' in the schema comment to match actual production usage.",
+      "parallel_safe": true,
+      "fingerprint": "7c8d281300d409f18cfee59ffb3c9795a2f9e85bf6f206c59430077d062b2f2c",
+      "status": "fixed",
+      "opened_at": "2026-06-07T04:12:44Z",
+      "closed_at": "2026-06-07T04:12:44Z",
+      "closing_pr": 0
+    },
+    {
+      "id": "AUDIT-audit-elevation-20260607-11",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "index.json 2026-05-22 batch contains 9 fabricated sequential byte-rotation fingerprints that do not match rubric sha256-v1 algorithm",
+      "detail": "9 entries from the 2026-05-22 audit batch have fingerprints following a clear sequential byte-rotation pattern (a1b2c3d4..., b2c3d4e5..., c3d4e5f6..., etc.). These are fabricated placeholders, not sha256 hashes of the category|globs|title concatenation. Regression detection would fail to match these findings against future scans of the same bugs.",
+      "file_globs": [".audits/index.json"],
+      "fix_sketch": "Compute correct sha256-v1 fingerprints for all 9 entries using rubric normalization: lowercase(category)|sorted_globs_comma_joined|lowercase_strip_punct_whitespace_collapse(title). Replace fabricated values.",
+      "parallel_safe": false,
+      "fingerprint": "3692539674710d1488ff067b447d94ef7cdbde6a0a7c8429e5bb94e5608e5bd0",
+      "status": "fixed",
+      "opened_at": "2026-06-07T04:12:44Z",
+      "closed_at": "2026-06-07T04:12:44Z",
+      "closing_pr": 0
+    },
+    {
+      "id": "AUDIT-audit-elevation-20260607-12",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "index.json 2026-05-27 batch contains 3 fingerprints truncated to 62-63 hex characters instead of the required 64 for sha256",
+      "detail": "3 entries from the 2026-05-27 batch (9f3c1d2e, b7d4e1a3, c2f5b8e7) have fingerprints of length 63, 62, and 62 hex characters respectively. SHA-256 always produces 64 hex characters. These are also clearly fabricated (sequential pattern) but truncated, making them doubly invalid.",
+      "file_globs": [".audits/index.json"],
+      "fix_sketch": "Compute correct 64-character sha256-v1 fingerprints for all 3 entries using the rubric algorithm. Replace truncated values.",
+      "parallel_safe": false,
+      "fingerprint": "450ca57a9f49efcfcac594bc1e21ebeb152c6b80e5a9d2a2864315b5472fed43",
+      "status": "fixed",
+      "opened_at": "2026-06-07T04:12:44Z",
+      "closed_at": "2026-06-07T04:12:44Z",
+      "closing_pr": 0
+    },
+    {
+      "id": "AUDIT-audit-elevation-20260607-13",
+      "severity": "IMPORTANT",
+      "category": "assumption",
+      "title": "index.json is described as open findings rollup in plan.md but contains all findings including closed and fixed status entries",
+      "detail": "plan.md Phase 1 schema doc says the scanner 'Updates <repo-root>/.audits/index.json (open findings rollup)'. But index.json in practice contains all historical findings across all statuses (open, fixed, closed). The open_findings count field tracks open subset correctly but the file description is misleading.",
+      "file_globs": [".audits/index.json", "plan.md"],
+      "fix_sketch": "Update plan.md description to 'full findings ledger — all statuses; open_findings field tracks the open subset'. This is accurate and prevents implementors from assuming the file should be pruned to only open findings.",
+      "parallel_safe": true,
+      "fingerprint": "a880a255638c7a053173e66ef25a0dc4424e52ba22db0a3090e59e348bf9d78e",
+      "status": "fixed",
+      "opened_at": "2026-06-07T04:12:44Z",
+      "closed_at": "2026-06-07T04:12:44Z",
+      "closing_pr": 0
+    },
+    {
+      "id": "AUDIT-audit-elevation-20260607-14",
+      "severity": "COSMETIC",
+      "category": "cosmetic",
+      "title": "nightly_audits filenames mix ISO 8601 format and compact format creating inconsistency",
+      "detail": "index.json nightly_audits array contains filenames in two formats: ISO 8601 with separators (2026-05-21T17:20:59Z.json) and compact without separators (20260527T041500Z.json). This is cosmetic but hinders sorting by filename and creates confusion about the canonical naming convention.",
+      "file_globs": [".audits/"],
+      "fix_sketch": "Adopt one format going forward. Recommendation: compact format (20260607T041244Z.json) to match the pattern used in the IFleet and factory audit branches. Document in plan.md that new scan files use compact ISO format YYYYMMDDTHHMMSSZ.",
+      "parallel_safe": true,
+      "fingerprint": "f2f93b82a7270fadc58998fd1bdc974a577600689fa642f9d14263a13fc03201",
+      "status": "fixed",
+      "opened_at": "2026-06-07T04:12:44Z",
+      "closed_at": "2026-06-07T04:12:44Z",
+      "closing_pr": 0
+    },
+    {
+      "id": "AUDIT-audit-elevation-20260607-15",
+      "severity": "COSMETIC",
+      "category": "cosmetic",
+      "title": "index.json fixed_this_run is a transient session count that does not belong in a persistent ledger file",
+      "detail": "index.json contained a fixed_this_run: 6 field from the 2026-06-04 session. This is a session-scoped count that becomes stale and misleading the moment the next audit runs. The persistent ledger should only contain durable state; transient session metrics belong in the per-scan file or only in memory.",
+      "file_globs": [".audits/index.json"],
+      "fix_sketch": "Remove fixed_this_run from index.json. Per-session fix counts are available from the scan file's findings_count and status fields.",
+      "parallel_safe": true,
+      "fingerprint": "d8f35024e010596e8e017e36debea303180b83b5af2514ae718323e5a7a0a102",
+      "status": "fixed",
+      "opened_at": "2026-06-07T04:12:44Z",
+      "closed_at": "2026-06-07T04:12:44Z",
+      "closing_pr": 0
+    },
+    {
+      "id": "AUDIT-audit-elevation-20260607-16",
+      "severity": "COSMETIC",
+      "category": "cosmetic",
+      "title": "plan.md schema comment says 2-3 paragraph description rather than 2-3 sentence description misleading about appropriate detail length",
+      "detail": "plan.md schema example field detail shows '2-3 paragraph description' as the placeholder value comment. A JSON string field containing 2-3 full paragraphs would be unwieldy for the audit-triager to surface in a Discord message. All production scan files use 2-3 sentence summaries. The wording is cosmetically misleading about expected detail verbosity.",
+      "file_globs": ["plan.md"],
+      "fix_sketch": "Update schema comment from '2-3 paragraph description' to '2-3 sentence description'.",
+      "parallel_safe": true,
+      "fingerprint": "f7e03a52743f1fdba2494786b5608ca9a7931c4467d2f9303c7f597473961158",
+      "status": "fixed",
+      "opened_at": "2026-06-07T04:12:44Z",
+      "closed_at": "2026-06-07T04:12:44Z",
+      "closing_pr": 0
     }
   ]
 }

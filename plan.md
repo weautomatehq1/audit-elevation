@@ -55,7 +55,7 @@ Restructure `/audit-session` into two slash commands. Each slash command is a **
 - `~/.claude/commands/audit-scan.md` — thin wrapper. Invokes the `audit-scanner` subagent (or reuses existing `critic` agent for the first cut). The subagent:
   1. Produces findings in chat as today (for review)
   2. **Also** writes `<repo-root>/.audits/<ISO-timestamp>.json` with the schema below
-  3. Updates `<repo-root>/.audits/index.json` (open findings rollup)
+  3. Updates `<repo-root>/.audits/index.json` (full findings ledger — all statuses; `open_findings` field tracks the open subset)
   4. Prints finding IDs at end of chat output
 - `~/.claude/commands/audit-fix.md` — thin wrapper. Invokes the `audit-triager` subagent (NEW) which:
   1. Reads `.audits/index.json`
@@ -83,7 +83,7 @@ Restructure `/audit-session` into two slash commands. Each slash command is a **
       "severity": "CRITICAL|IMPORTANT|COSMETIC",
       "category": "logic|assumption|overconfidence|risk|redo",
       "title": "one-line summary",
-      "detail": "2-3 paragraph description",
+      "detail": "2-3 sentence description",
       "file_globs": ["src/pipeline/**", "src/workers/codex.ts"],
       "fix_sketch": "what closing this looks like",
       "parallel_safe": true,
