@@ -1,0 +1,53 @@
+{
+  "audit_id": "audit-elevation-20260608T043500Z",
+  "repo": "audit-elevation",
+  "scanned_at": "2026-06-08T04:35:00Z",
+  "scanner": "claude-sonnet-4-6-nightly",
+  "findings": [
+    {
+      "id": "AUDIT-audit-elevation-e2f3a4b5",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "ifleet-integration-adrs.md ADR-004 references 'Phase C' — stale alphabet phase naming",
+      "detail": "docs/ifleet-integration-adrs.md line 194: '(T1 to verify in Phase C)'. The document uses numeric phases throughout (Phase 4, Phase 5). 'Phase C' is an alphabet naming convention from IFleet's routing migration (see CLAUDE.md) and does not apply here. Based on context — verifying mkdir-based locking for the Phase 4 lane scheduler — the correct reference is 'Phase 4'.",
+      "file_globs": ["docs/ifleet-integration-adrs.md"],
+      "fix_sketch": "Change '(T1 to verify in Phase C)' to '(T1 to verify in Phase 4)'.",
+      "parallel_safe": true,
+      "fingerprint": "audit-elevation-adr004-phase-c-stale-2026-06-08",
+      "status": "fixed",
+      "opened_at": "2026-06-08T04:35:00Z",
+      "closed_at": "2026-06-08T04:37:00Z",
+      "closing_pr": null
+    },
+    {
+      "id": "AUDIT-audit-elevation-f4g5h6i7",
+      "severity": "COSMETIC",
+      "category": "cosmetic",
+      "title": "ifleet-integration-adrs.md lifecycle description uses 'opened' instead of status value 'open'",
+      "detail": "docs/ifleet-integration-adrs.md line 123 describes the finding lifecycle as 'opened → fixing → verifying → closed | regression'. The actual status field uses 'open' (not 'opened') as confirmed by the schema definition on line 121 and rubric.json. The 'opened' confusion arises from the timestamp field name 'opened_at'.",
+      "file_globs": ["docs/ifleet-integration-adrs.md"],
+      "fix_sketch": "Change 'opened → fixing' to 'open → fixing' in the lifecycle description.",
+      "parallel_safe": true,
+      "fingerprint": "audit-elevation-lifecycle-opened-vs-open-2026-06-08",
+      "status": "fixed",
+      "opened_at": "2026-06-08T04:35:00Z",
+      "closed_at": "2026-06-08T04:37:00Z",
+      "closing_pr": null
+    },
+    {
+      "id": "AUDIT-audit-elevation-j8k9l0m1",
+      "severity": "COSMETIC",
+      "category": "cosmetic",
+      "title": "README.md table entry for proposer-spec.md says '7 open decisions' but spec says 8",
+      "detail": "README.md line 232 table entry says '8 sections + ADR + 7 open decisions'. However proposer-spec.md line 170 explicitly states 'eight open decisions (D1-D7 plus ADR-001)' — the ADR-Proposer-001 counts as a decision point. README line 292 (summary line) already correctly says 'Plus 8 open decisions'. The table entry is inconsistent with both the summary and the spec itself.",
+      "file_globs": ["README.md"],
+      "fix_sketch": "Change '8 sections + ADR + 7 open decisions' to '8 sections + 8 open decisions (D1-D7 + ADR-Proposer-001)'.",
+      "parallel_safe": true,
+      "fingerprint": "audit-elevation-readme-decision-count-2026-06-08",
+      "status": "fixed",
+      "opened_at": "2026-06-08T04:35:00Z",
+      "closed_at": "2026-06-08T04:37:00Z",
+      "closing_pr": null
+    }
+  ]
+}

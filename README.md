@@ -229,7 +229,7 @@ python3 ~/.claude/scripts/online-eval-stats.py --days 7 --repo IFleet --json | j
 | Doc | What it covers |
 |---|---|
 | [plan.md](./plan.md) | The original strategy plan that drove the build. Phases, build order, deferrals, decisions. |
-| [docs/proposer-spec.md](./docs/proposer-spec.md) | The nightly Proposer bot (IFleet M5). 8 sections + ADR + 7 open decisions. |
+| [docs/proposer-spec.md](./docs/proposer-spec.md) | The nightly Proposer bot (IFleet M5). 8 sections + 8 open decisions (D1-D7 + ADR-Proposer-001). |
 | [docs/lane-scheduler-spec.md](./docs/lane-scheduler-spec.md) | Lane scheduler schema (`~/.omc/active-lanes.json`), helper scripts, observer daemon, PM2 opt-in. |
 | [docs/self-heal-pipeline.md](./docs/self-heal-pipeline.md) | Fingerprint → REGRESSION detection → DRAFT auto-rule generation. Lifecycle + failure modes. |
 | [docs/quota-pacing-design.md](./docs/quota-pacing-design.md) | Future design for Max-quota throttling. Not implemented — design only. |
