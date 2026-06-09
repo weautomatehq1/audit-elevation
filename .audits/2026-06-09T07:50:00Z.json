@@ -1,0 +1,22 @@
+{
+  "audit_id": "audit-20260609T075000Z",
+  "repo": "audit-elevation",
+  "scanned_at": "2026-06-09T07:50:00Z",
+  "scanner": "claude-sonnet-4-6-nightly",
+  "findings": [
+    {
+      "id": "AUDIT-audit-elevation-f1e7d4c6",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "ADR-003 audit.finding.regressed payload has undocumented originalClosePr field alongside documented regressionClosingPr",
+      "detail": "docs/ifleet-integration-adrs.md line 135 defined the audit.finding.regressed payload as including both originalClosePr and regressionClosingPr. The explanatory note only documented regressionClosingPr (PR number of the original fix) as the camelCase equivalent of regression_closing_pr — leaving originalClosePr unexplained. Both fields appear to represent the same data, creating ambiguity for M4 implementers.",
+      "file_globs": ["docs/ifleet-integration-adrs.md"],
+      "fix_sketch": "Removed originalClosePr from the payload. Clarified regressionClosingPr note to explicitly reference the closingPr field from the prior audit.finding.closed event, making the lineage unambiguous.",
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-06-09T07:50:00Z",
+      "closed_at": "2026-06-09T07:52:00Z",
+      "closing_pr": null
+    }
+  ]
+}
