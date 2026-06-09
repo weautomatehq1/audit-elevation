@@ -120,7 +120,7 @@ Three placement candidates:
 
 The standalone system writes audit findings to `<repo>/.audits/<timestamp>.json` with the schema from `plan.md` (lines 74-98) in the audit-elevation repo. Each finding has an `id` (`AUDIT-<repo>-<hash8>`), `fingerprint` (sha256 of category+globs+title), `status` (open/fixing/verifying/closed/regression), and `closing_pr`. The standalone path keeps `.audits/index.json` in sync.
 
-IFleet's `SprintManager` already owns a canonical event trace per ADR-0001. Events have a `(taskId, seq, ts, role, kind, payload)` shape and persist to SQLite + S3-compatible blob. Audit findings are conceptually trace events too — they have a lifecycle (opened → fixing → verifying → closed | regression), they reference PRs, and they need replay for the shadow eval and the M4 fingerprinting tables.
+IFleet's `SprintManager` already owns a canonical event trace per ADR-0001. Events have a `(taskId, seq, ts, role, kind, payload)` shape and persist to SQLite + S3-compatible blob. Audit findings are conceptually trace events too — they have a lifecycle (open → fixing → verifying → closed | regression), they reference PRs, and they need replay for the shadow eval and the M4 fingerprinting tables.
 
 The question: do we keep `.audits/index.json` as the source of truth and have IFleet *read* it, or do we make IFleet's trace the source of truth and *derive* `.audits/index.json` from it?
 
@@ -191,7 +191,7 @@ Concretely:
 
 **Positive:** IFleet stays the IFleet-throttle. Lane scheduler stays the observation-and-eventually-enforcement layer. Either can ship independently; either can be replaced without touching the other.
 
-**Negative:** Shared-file race conditions on registration (two terminals appending simultaneously). Mitigated by mkdir-based locking (as used in lane-lock.sh — macOS has no flock(1)) per T4's lane-scheduler-spec.md (T1 to verify in Phase C).
+**Negative:** Shared-file race conditions on registration (two terminals appending simultaneously). Mitigated by mkdir-based locking (as used in lane-lock.sh — macOS has no flock(1)) per T4's lane-scheduler-spec.md (T1 to verify in Phase 4).
 
 **Reversibility:** Easy — remove the `LaneRegistrar` calls in `daemon.ts`, IFleet reverts to per-product throttling.
 

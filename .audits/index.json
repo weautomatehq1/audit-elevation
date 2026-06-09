@@ -1,8 +1,8 @@
 {
   "repo": "audit-elevation",
-  "last_updated": "2026-06-06T04:32:38Z",
+  "last_updated": "2026-06-08T04:37:00Z",
   "open_findings": 0,
-  "fixed_this_run": 4,
+  "fixed_this_run": 3,
   "by_severity": {
     "CRITICAL": 0,
     "IMPORTANT": 0,
@@ -17,7 +17,8 @@
     "20260531T042437Z.json",
     "20260602T041140Z.json",
     "20260604T050000Z.json",
-    "20260606T043238Z.json"
+    "20260606T043238Z.json",
+    "2026-06-08T04:35:00Z.json"
   ],
   "findings": [
     {
@@ -569,6 +570,48 @@
       "opened_at": "2026-06-06T04:32:38Z",
       "closed_at": "2026-06-06T04:32:38Z",
       "closing_pr": "audit/nightly-2026-06-06"
+    },
+    {
+      "id": "AUDIT-audit-elevation-e2f3a4b5",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "ifleet-integration-adrs.md ADR-004 references 'Phase C' — stale alphabet phase naming",
+      "detail": "Line 194: 'T1 to verify in Phase C'. The document uses numeric phases (Phase 4, Phase 5). 'Phase C' is from IFleet's routing migration alphabet convention, not this spec's numbering.",
+      "file_globs": ["docs/ifleet-integration-adrs.md"],
+      "parallel_safe": true,
+      "fingerprint": "audit-elevation-adr004-phase-c-stale-2026-06-08",
+      "status": "fixed",
+      "opened_at": "2026-06-08T04:35:00Z",
+      "closed_at": "2026-06-08T04:37:00Z",
+      "closing_pr": null
+    },
+    {
+      "id": "AUDIT-audit-elevation-f4g5h6i7",
+      "severity": "COSMETIC",
+      "category": "cosmetic",
+      "title": "ifleet-integration-adrs.md lifecycle uses 'opened' instead of status value 'open'",
+      "detail": "Line 123 lifecycle description says 'opened → fixing' but the actual status field value is 'open' (not 'opened').",
+      "file_globs": ["docs/ifleet-integration-adrs.md"],
+      "parallel_safe": true,
+      "fingerprint": "audit-elevation-lifecycle-opened-vs-open-2026-06-08",
+      "status": "fixed",
+      "opened_at": "2026-06-08T04:35:00Z",
+      "closed_at": "2026-06-08T04:37:00Z",
+      "closing_pr": null
+    },
+    {
+      "id": "AUDIT-audit-elevation-j8k9l0m1",
+      "severity": "COSMETIC",
+      "category": "cosmetic",
+      "title": "README.md table says '7 open decisions' for proposer-spec but spec and summary line say 8",
+      "detail": "README table line 232 says '8 sections + ADR + 7 open decisions'. proposer-spec.md line 170 and README line 292 both say 8 decisions (D1-D7 + ADR-Proposer-001).",
+      "file_globs": ["README.md"],
+      "parallel_safe": true,
+      "fingerprint": "audit-elevation-readme-decision-count-2026-06-08",
+      "status": "fixed",
+      "opened_at": "2026-06-08T04:35:00Z",
+      "closed_at": "2026-06-08T04:37:00Z",
+      "closing_pr": null
     }
   ]
 }
