@@ -1,0 +1,41 @@
+{
+  "audit_id": "audit-20260610T042614Z",
+  "repo": "audit-elevation",
+  "scanned_at": "2026-06-10T04:26:14Z",
+  "scanner": "claude-sonnet-4-6-nightly",
+  "findings": [
+    {
+      "id": "AUDIT-audit-elevation-d7c46f4f",
+      "severity": "IMPORTANT",
+      "category": "risk",
+      "title": "plan.md Phase 1 missing locking requirement cross-reference for /audit-fix closed.json writes",
+      "detail": "self-heal-pipeline.md \u00a73 defines a HARD requirement: /audit-fix MUST use mkdir-based locking before reading or writing closed.json (macOS has no flock(1)). Under \u22652 concurrent audit-fix lanes this race is deterministic and causes fingerprint count drift. Phase 1 of plan.md documents the fixed\u2192closed lifecycle but has no cross-reference to this critical constraint, so implementers working from plan.md alone would miss it.",
+      "file_globs": [
+        "plan.md",
+        "docs/self-heal-pipeline.md"
+      ],
+      "fix_sketch": "Add a WARNING block after the status lifecycle table in plan.md Phase 1 pointing to self-heal-pipeline.md \u00a73 locking contract.",
+      "parallel_safe": false,
+      "status": "fixed",
+      "opened_at": "2026-06-10T04:26:14Z",
+      "closed_at": "2026-06-10T04:26:14Z",
+      "closing_pr": "audit/nightly-2026-06-10"
+    },
+    {
+      "id": "AUDIT-audit-elevation-1ca03dd4",
+      "severity": "IMPORTANT",
+      "category": "redo",
+      "title": "self-heal-pipeline.md failure-mode table correctly uses schema_version (false positive \u2014 already fixed)",
+      "detail": "Audit agent flagged a potential discrepancy between \"version\" and \"schema_version\" in the failure-mode table at line 305. On inspection the file already uses schema_version correctly at line 305. Recorded as a false-positive finding for audit trail completeness.",
+      "file_globs": [
+        "docs/self-heal-pipeline.md"
+      ],
+      "fix_sketch": "No fix needed \u2014 file already correct.",
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-06-10T04:26:14Z",
+      "closed_at": "2026-06-10T04:26:14Z",
+      "closing_pr": "audit/nightly-2026-06-10"
+    }
+  ]
+}
