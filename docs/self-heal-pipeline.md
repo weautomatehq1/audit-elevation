@@ -26,9 +26,13 @@ and four is too late. The threshold is configurable via `RULE_DRAFT_THRESHOLD`.
 | `audit-fingerprinter` (subagent) | `~/.claude/agents/audit-fingerprinter.md` | T3 | Compute SHA-256 over the normalized triple. |
 | `audit-regression-detector` (subagent) | `~/.claude/agents/audit-regression-detector.md` | T3 | Classify a candidate finding as NEW / REGRESSION / DUPLICATE. |
 | `closed.json` (data) | `<repo>/.audits/closed.json` | `/audit-fix` (T2) | Append-only ledger of finding closures. Schema below. |
-| `audit-rule-drafter.sh` | `~/.claude/scripts/audit-rule-drafter.sh` | T3 | Walk `closed.json`, draft a rule per fingerprint with count >= threshold. |
-| `audit-fingerprint-watcher.sh` | `~/.claude/scripts/audit-fingerprint-watcher.sh` | T3 | Cron-friendly wrapper that invokes the drafter across a list of repos. |
-| `audit-watched-repos.txt` | `~/.claude/audit-watched-repos.txt` | T3 | Newline-separated repo list. |
+| `audit-rule-drafter.sh` | `~/.claude/scripts/audit-rule-drafter.sh` | T2 | Walk `closed.json`, draft a rule per fingerprint with count >= threshold. |
+| `audit-fingerprint-watcher.sh` | `~/.claude/scripts/audit-fingerprint-watcher.sh` | T2 | Cron-friendly wrapper that invokes the drafter across a list of repos. |
+| `audit-watched-repos.txt` | `~/.claude/audit-watched-repos.txt` | T2 | Newline-separated repo list. |
+| `audit-rejected-gate.sh` | `~/.claude/scripts/audit-rejected-gate.sh` | T3 | Gate: check/register/clear per-repo rejected fingerprints. |
+| `audit-prune-stale-closures.sh` | `~/.claude/scripts/audit-prune-stale-closures.sh` | T4 | Move stale closures (globs match zero HEAD files) to `closed.archive.json`. |
+| `rejected-fingerprints.json` (data) | `<repo>/.audits/rejected-fingerprints.json` | T3 | Per-repo registry of fingerprints Sebastian has rejected. |
+| `closed.archive.json` (data) | `<repo>/.audits/closed.archive.json` | prune script | Archive of stale closures pruned by T4's script. |
 | `.audits/proposed-rules/<fp-short>.md` | `<repo>/.audits/proposed-rules/` | drafter | DRAFT rules. Sebastian-only promotion path. |
 
 ## Canonical schema — `<repo>/.audits/closed.json`
@@ -144,7 +148,7 @@ audit-rule-drafter.sh [REPO_PATH]
   - If a draft for this fingerprint already exists, the drafter SKIPS it
     (idempotent).
 - Prints a one-line summary on stdout: `Drafted N proposed rules from M repeat
-  fingerprints (threshold>=K; skipped X below-threshold, Y already-drafted).`
+  fingerprints (threshold>=K; skipped X below-threshold, Y already-drafted, Z by filter).`
 - Exit code:
   - `0` on success (including 0 drafts produced).
   - `2` if `closed.json` is missing or invalid JSON, or the repo path is bad.
@@ -169,18 +173,56 @@ The body explains why the rule was drafted (which closures, fix summaries),
 prompts the human to write the actual invariant, and shows the `mv` command
 to promote the rule.
 
+### Flag: `--pre-draft-filter <cmd>`
+
+Optional. Lets an external gate (e.g. T3's `audit-rejected-gate.sh`)
+suppress drafts for fingerprints the maintainer has already rejected.
+
+Semantics: for each fingerprint that passes the count-≥-threshold check
+and would otherwise be drafted, the drafter pipes the full 64-char
+fingerprint hex to `<cmd>` on stdin (before the existing-draft check).
+
+- `<cmd>` exits **0** → drafter proceeds (existing-draft check, then write).
+- `<cmd>` exits **1** → drafter SKIPS the fingerprint and increments `skipped_filtered`.
+- Any other exit → drafter logs a `WARN` to stderr and treats it as exit 1
+  (fail safe — never auto-draft when the gate is misbehaving).
+
+The one-line stdout summary is extended with a fourth bucket (see above).
+
+The semantic spec for the rejected-gate command itself lives in the
+"Rejected fingerprints" section below. The drafter only declares the wire.
+
 ## `audit-fingerprint-watcher.sh` contract
 
 ```
-audit-fingerprint-watcher.sh [WATCHED_REPOS_TXT]
+audit-fingerprint-watcher.sh [REPOS_FILE]
+                             [--pre-draft-filter <cmd>]
+                             [--prune]
 ```
 
-- Iterates lines of the file (default `~/.claude/audit-watched-repos.txt`).
-- Skips blank lines and `#`-comment lines. Expands `~/...`.
-- For each repo: invokes the drafter; if drafter exits non-zero, marks the
-  repo as skipped and continues with the next.
-- Aggregates a summary: `repos_scanned`, `repos_skipped`, `total_drafts`.
-- Writes a full log to `~/.omc/audit-fingerprint-runs/<ISO>.log`.
+- Iterates lines of `REPOS_FILE` (default `~/.claude/audit-watched-repos.txt`).
+- Skips blank lines and `#`-comment lines. Expands leading `~/` and `$HOME/`.
+- For each repo: invokes the drafter; if the drafter exits non-zero, the repo
+  is recorded as skipped and the watcher continues.
+- Aggregates a stdout summary: `repos_scanned=N repos_skipped=M total_drafts=K`.
+- Writes a full per-repo log to `~/.claude/audit-fingerprint-runs/<ISO>.log`
+  (path corrected from `~/.omc/...` — the rebuild moved off `~/.omc/`).
+
+### Flag: `--pre-draft-filter <cmd>`
+
+Passthrough to the drafter. Same semantics as the drafter flag (see above).
+T3's `audit-rejected-gate.sh check` plugs in here so the gate applies to
+every repo the watcher visits.
+
+### Flag: `--prune`
+
+Opt-in. After a successful drafter run, if
+`/Users/Seb/.claude/scripts/audit-prune-stale-closures.sh` exists AND is
+executable, the watcher invokes it as `audit-prune-stale-closures.sh --apply <repo>`.
+If the prune script is absent, the watcher writes `[no prune script — skipping]`
+to the log and continues — so T4's script can be missing without breaking the watcher.
+
+Semantic spec for `--prune` lives in the "Closure decay / archival" section below.
 
 ### Suggested crontab (NOT installed — Sebastian opts in)
 
@@ -221,6 +263,82 @@ The drafter is idempotent on accepted drafts (file moved out) — so when the
 fingerprint count hits 4, 5, 6 closures, the drafter does NOT re-draft because
 the file is gone from `.audits/proposed-rules/`. To force a re-draft, delete
 the accepted rule from `~/.claude/rules/` first (rare).
+
+## Rejected fingerprints
+
+When Sebastian rejects a draft (moves it to `.audits/proposed-rules/rejected/` or
+deletes it), the system previously forgot the decision. Three more closures of the
+same fingerprint would produce the same rejected draft on the next drafter run.
+
+The rejected-fingerprints registry closes this gap.
+
+### Registry schema — `<repo>/.audits/rejected-fingerprints.json`
+
+```json
+{
+  "repo": "<basename>",
+  "version": 1,
+  "rejections": [
+    {
+      "fingerprint": "<64-char lowercase sha256 hex>",
+      "rejected_at": "<ISO-8601 UTC>",
+      "rejected_by": "Sebastian",
+      "reason": "<free text — why this rule shape is not worth a standing rule>",
+      "expires_at": null
+    }
+  ]
+}
+```
+
+Field rules:
+- `expires_at: null` — permanent rejection (the default). Set to an ISO-8601 UTC
+  date if Sebastian wants the rejection to lapse (rare).
+- `version` — bump only on incompatible schema change.
+- `rejections[]` — mutable; entries can be added and removed via the CLI.
+
+### CLI: `audit-rejected-gate.sh`
+
+Path: `~/.claude/scripts/audit-rejected-gate.sh`
+
+```
+audit-rejected-gate.sh check    --repo <path>
+audit-rejected-gate.sh reject   --repo <path> --fingerprint <hex> --reason "<text>" [--expires <ISO>]
+audit-rejected-gate.sh unreject --repo <path> --fingerprint <hex>
+audit-rejected-gate.sh list     --repo <path>
+```
+
+**`check` (T2 drafter interface — invoked via `--pre-draft-filter`):**
+- Reads one fingerprint hex from stdin (whitespace-trimmed).
+- If the registry does not exist: exit 0 (no rejections — ok to draft).
+- If the registry is malformed JSON: exit 0 with a stderr warning (fail-open;
+  worst case is one duplicate draft, which Sebastian re-rejects).
+- If the fingerprint is present with `expires_at == null` OR `expires_at > now`: exit 1 (skip).
+- Otherwise: exit 0 (ok to draft).
+
+**`reject`:**
+- Initializes the registry if absent.
+- Refuses to add a duplicate active rejection (warns, exits 0).
+- Appends the new rejection via atomic temp+rename.
+- Prints: `Rejected fingerprint <fp-short> in <repo> (reason: <reason>)`.
+
+**`unreject`:**
+- Removes the matching entry. Prints "not found" if absent, exits 0.
+
+**`list`:**
+- Prints a table with columns: `fingerprint(12)`, `rejected_at`, `expires_at`, `reason(50)`.
+- Skips expired rejections.
+
+### Design decision: per-repo registry
+
+Per-repo (`<repo>/.audits/rejected-fingerprints.json`) was chosen over a global
+`~/.claude/audit-rejected-fingerprints.json`. Rationale:
+- Matches the existing pattern: `closed.json` is already per-repo.
+- Rejection decisions are context-dependent. The same fingerprint shape could
+  be worth a rule in one repo but coincidental in another.
+- A global registry carries a higher blast radius: one bad rejection silences
+  the fingerprint across every watched repo.
+- Per-repo files are version-controlled alongside the code they reference,
+  making audit history reproducible from the repo alone.
 
 ## Lifecycle diagram
 
@@ -290,19 +408,126 @@ the accepted rule from `~/.claude/rules/` first (rare).
 | 3+ closures coincidentally share a fingerprint with unrelated root causes | Draft proposes an irrelevant rule | Reject the draft. Consider widening the fingerprint algorithm (e.g., include a snippet of the offending code) — this is a known limitation. Document the false positive so future scans treat the fingerprint with skepticism. |
 | Closure recorded with `closing_pr: 0` (local-only fix) | Regression-detector returns `REGRESSION:...:0` | Acceptable — surface in the recap. `:0` is a sentinel; the maintainer knows the original fix did not have a PR record. |
 | Drafter run while `/audit-fix` is mid-flight | Race on `closed.json` write | Both processes only `append` to `closures[]`; if both write simultaneously, last writer wins and one closure may be lost. Solution: `/audit-fix` should use mkdir-based locking (macOS-compatible; `flock(1)` is not available on macOS) — see `~/.claude/scripts/lane-lock.sh` for the canonical pattern. Drafter is read-only on `closed.json` and is unaffected. |
+| Rejected fingerprint registry corrupted (invalid JSON) | `check` logs a warning to stderr and fails open — drafter proceeds; T2 may produce a duplicate draft | Run `jq empty <repo>/.audits/rejected-fingerprints.json` to confirm corruption. Restore from git (`git checkout HEAD -- .audits/rejected-fingerprints.json`) or delete the file and re-enter any known rejections via `audit-rejected-gate.sh reject`. |
+| Glob match resolves false-positive zero (e.g., git submodule path; file exists in submodule but `git ls-files` from the parent repo doesn't enumerate it) | Closure archived despite the pattern still being relevant | Restore from `closed.archive.json` by hand (copy the entry back into `closures[]` in `closed.json`); raise `--threshold-days` to give recently-active patterns a wider grace window; or add the repo/submodule path to a `.pruneexclude` list (Tier 2 enhancement). |
+
+## Closure decay / archival
+
+Over time `closures[]` accumulates entries whose `file_globs` no longer match any
+file in the repo's HEAD. These stale closures have no active code to protect and
+pollute `repeat_counts`, causing the drafter to surface fingerprints for patterns
+that no longer exist in the codebase. The prune script keeps the ledger relevant
+by moving stale entries to a sibling archive file.
+
+**Script:** `~/.claude/scripts/audit-prune-stale-closures.sh`
+
+```
+audit-prune-stale-closures.sh <repo-path> [--apply] [--respect-rejected] [--threshold-days N]
+```
+
+**Default (no `--apply`):** dry-run. Prints a table of stale candidates:
+`finding_id`, `fingerprint(12)`, `closed_at`, `file_globs`. Exit 0.
+
+**`--apply`:** moves stale closures to `<repo>/.audits/closed.archive.json`.
+Rewrites `closed.json` with survivors only and recomputed `repeat_counts`.
+
+**`--threshold-days N`** (default 30): skip closures younger than N days.
+Protects recently-closed findings whose associated code may have been renamed
+or temporarily deleted mid-flight.
+
+**`--respect-rejected`:** before archiving a stale closure, pipes its fingerprint
+to `~/.claude/scripts/audit-rejected-gate.sh check --repo <repo>`. If the gate
+exits 1 (active rejection), the closure is kept in `closed.json` rather than
+archived. Rationale: Sebastian's explicit rejection of a fingerprint signals that
+he considered the pattern meaningful; archiving the closure would strip the context
+that informed that rejection decision, and could cause the fingerprint to
+re-accumulate toward the draft threshold from a clean slate.
+
+### Stale detection method
+
+Uses `git ls-files | grep -E` with the glob converted to an extended regex:
+
+- `**` → `.*`
+- `*` (single-level) → `[^/]*`
+- `?` → `[^/]`
+- Literal `.` → `\.`
+
+Chosen over `compgen -G` because macOS ships bash 3.2 which does not expand `**`
+in `compgen -G`. The `git ls-files` approach is consistent with the repo-tracked
+view of the filesystem and avoids matching untracked generated files.
+
+Edge case: a closure with no `file_globs` is skipped — the script cannot determine
+staleness without globs and treats the closure as relevant.
+
+### repeat_counts rebuild decision
+
+After archiving, the script **clears `repeat_counts` and recomputes it from scratch**
+from the surviving `closures[]`. The doc notes that `repeat_counts` is advisory and
+the drafter recomputes for safety anyway. Clearing and recomputing inline is cheaper
+than a follow-up drafter run and avoids surfacing inflated counts for fingerprints
+whose closures were partially archived.
+
+### Archive file format
+
+`<repo>/.audits/closed.archive.json`:
+
+```json
+{
+  "repo": "<name>",
+  "version": 1,
+  "archived_at": "<ISO-8601 UTC of most recent prune>",
+  "closures": [ ]
+}
+```
+
+Writes are atomic (temp file + rename). The archive accumulates across runs;
+`archived_at` reflects the most recent prune.
+
+### Integration point with watcher (`--prune`)
+
+The prune script is standalone. T2's `audit-fingerprint-watcher.sh` exposes a
+`--prune` flag; when set, the watcher invokes `audit-prune-stale-closures.sh <repo> --apply`
+after the drafter completes for each repo. No shared code between T4's script
+and T2's watcher.
+
+## Boundaries — T2's promise
+
+T2 owns the resurrection lane (drafter + watcher). T2 never:
+- Writes to `~/.claude/rules/`.
+- Installs a crontab.
+- Modifies `/audit-fix.md` or `/audit-scan.md`.
+
+T2's mutable outputs: `audit-rule-drafter.sh`, `audit-fingerprint-watcher.sh`,
+`~/.claude/audit-watched-repos.txt`, and the watcher run logs under
+`~/.claude/audit-fingerprint-runs/`.
 
 ## Boundaries — T3's promise
 
-- T3 never writes to `~/.claude/rules/`.
-- T3 never installs a crontab.
-- T3 never modifies `/audit-fix.md` or `/audit-scan.md` (T2 owns those; T3
-  documents the contract).
-- T3's only mutable outputs are: the two subagent files, the two scripts, this
-  doc, `~/.claude/audit-watched-repos.txt`, and the watcher's run logs under
-  `~/.omc/audit-fingerprint-runs/`.
+T3 owns the rejected-fingerprints gate. T3 never:
+- Writes to `~/.claude/rules/`.
+- Installs a crontab.
+- Modifies `/audit-fix.md`, `/audit-scan.md`, or any T2-owned script.
+
+T3's mutable outputs: `audit-rejected-gate.sh` and per-repo
+`<repo>/.audits/rejected-fingerprints.json`.
+
+## Boundaries — T4's promise
+
+T4 owns the closures-decay prune script. T4 never:
+- Writes to `~/.claude/rules/` or `closed.json` except via the `--apply` flag.
+- Installs a crontab.
+- Modifies any T2 or T3-owned script.
+
+T4's mutable outputs: `audit-prune-stale-closures.sh` and (when `--apply` is
+passed) `<repo>/.audits/closed.json` and `<repo>/.audits/closed.archive.json`.
 
 ## Synthetic proof
 
-A synthetic 3-closure scenario was executed during the T3 lane of the
-`20260520-2244-elevation-push` split. The captured draft is at
-`/Users/Seb/.omc/splits/20260520-2244-elevation-push/T3-synthetic-proof.md`.
+A synthetic 3-closure end-to-end test was executed during the T1 orchestration
+lane of the `20260601-1525-tier1-curation` split (Tests A, B, C all PASS).
+Worker synthetic proofs are at:
+- `~/.claude/splits/20260601-1525-tier1-curation/T2-synthetic-proof.md`
+- `~/.claude/splits/20260601-1525-tier1-curation/T3-synthetic-proof.md`
+- `~/.claude/splits/20260601-1525-tier1-curation/T4-synthetic-proof.md`
+
+Prior proof (archived): `~/.omc/splits/20260520-2244-elevation-push/T3-synthetic-proof.md`

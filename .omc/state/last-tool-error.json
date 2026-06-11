@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"ls -la /Users/Seb/.claude/scripts/online-eval-stats.py /Users/Seb/.claude/scripts/audit-rule-drafter.sh /Users/Seb/.claude/scripts/audit-fingerprint-watcher.sh /Users/Seb/.claude/scripts/l...",
+  "error": "Exit code 1\nls: /Users/Seb/.claude/scripts/lane-scheduler.sh: No such file or directory\n-rwxr-xr-x  1 Seb  staff  2570 May 20 22:53 /Users/Seb/.claude/scripts/audit-fingerprint-watcher.sh\n-rwxr-xr-x  1 Seb  staff  4793 May 21 10:53 /Users/Seb/.claude/scripts/audit-rule-drafter.sh\n-rwxr-xr-x  1 Seb  staff   532 May 20 23:19 /Users/Seb/.claude/scripts/audit-status.sh\n-rw-r--r--  1 Seb  staff  3471 May 20 22:52 /Users/Seb/.claude/scripts/lane-scheduler.mjs\n-rwxr-xr-x  1 Seb  staff  5355 May 21 12:5...",
+  "timestamp": "2026-05-21T17:14:29.659Z",
+  "retry_count": 1
+}
