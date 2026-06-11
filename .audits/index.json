@@ -1,8 +1,8 @@
 {
   "repo": "audit-elevation",
-  "last_updated": "2026-06-02T04:11:40Z",
+  "last_updated": "2026-06-11T04:07:14Z",
   "open_findings": 0,
-  "fixed_this_run": 3,
+  "fixed_this_run": 2,
   "by_severity": {
     "CRITICAL": 0,
     "IMPORTANT": 0,
@@ -435,6 +435,34 @@
       "opened_at": "2026-05-29T00:00:00Z",
       "closed_at": "2026-05-29T00:15:00Z",
       "closing_pr": "audit/nightly-2026-05-29"
+    },
+    {
+      "id": "AUDIT-audit-elevation-d8f1a2b3",
+      "severity": "IMPORTANT",
+      "category": "assumption",
+      "title": "README Phase 3 soak window expired with Codex gate prerequisite still BLOCKED — success criteria unachievable",
+      "detail": "README Phase 3 row shows '🟡 in progress' but the 14-day soak window started 2026-05-21 ended ~2026-06-04. As of 2026-06-11 (21 days elapsed), Phase 2 (Codex CLI) remains BLOCKED and the success criterion '≥5 audit findings closed end-to-end with Codex gate' is unachievable until Phase 2 is unblocked. Sebastian needs to explicitly extend the soak window, redefine success criteria given the Phase 2 blocker, or mark Phase 3 as incomplete-with-caveat.",
+      "file_globs": ["README.md"],
+      "fix_sketch": "Update README Phase 3 status to ⚠️ soak window expired with explanation. Flag the Codex gate prerequisite dependency explicitly.",
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-06-11T04:07:14Z",
+      "closed_at": "2026-06-11T04:07:14Z",
+      "closing_pr": "audit/nightly-2026-06-11"
+    },
+    {
+      "id": "AUDIT-audit-elevation-e9f2a3c4",
+      "severity": "COSMETIC",
+      "category": "cosmetic",
+      "title": "README 'As of 2026-06-02' date stale — 9 days since last audit confirmation",
+      "detail": "README line 45 said 'As of 2026-06-02: audit-elevation has 0 open findings'. Today is 2026-06-11; updated to reflect the current nightly scan result.",
+      "file_globs": ["README.md"],
+      "fix_sketch": "Update 'As of 2026-06-02' to 'As of 2026-06-11'.",
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-06-11T04:07:14Z",
+      "closed_at": "2026-06-11T04:07:14Z",
+      "closing_pr": "audit/nightly-2026-06-11"
     }
   ]
 }
