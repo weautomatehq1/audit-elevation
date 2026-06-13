@@ -1,8 +1,8 @@
 {
   "repo": "audit-elevation",
-  "last_updated": "2026-06-10T04:26:14Z",
+  "last_updated": "2026-06-13T04:18:34Z",
   "open_findings": 0,
-  "fixed_this_run": 2,
+  "fixed_this_run": 0,
   "by_severity": {},
   "nightly_audits": [
     "2026-05-21T17:20:59Z.json",
@@ -14,7 +14,9 @@
     "20260602T041140Z.json",
     "20260604T050000Z.json",
     "20260606T043238Z.json",
-    "2026-06-08T04:35:00Z.json"
+    "2026-06-08T04:35:00Z.json",
+    "20260610T042614Z.json",
+    "20260613T041834Z.json"
   ],
   "findings": [
     {
