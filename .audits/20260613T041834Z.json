@@ -1,0 +1,12 @@
+{
+  "run_id": "nightly-2026-06-13",
+  "repo": "audit-elevation",
+  "branch": "audit/nightly-2026-06-13",
+  "started_at": "2026-06-13T04:18:34Z",
+  "finished_at": "2026-06-13T04:18:34Z",
+  "rubric": "CRITICAL/IMPORTANT/COSMETIC",
+  "result": "Clean scan",
+  "files_scanned": "docs/*.md, plan.md, rubric.json",
+  "new_findings": 0,
+  "note": "All documents reviewed. Dates within spec examples (lane-scheduler-spec.md, self-heal-pipeline.md, plan.md) are historical example data appropriate to the document content, not metadata requiring update. No new findings. All prior findings remain closed."
+}
