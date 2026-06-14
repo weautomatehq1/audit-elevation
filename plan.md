@@ -81,7 +81,7 @@ Restructure `/audit-session` into two slash commands. Each slash command is a **
     {
       "id": "AUDIT-IFleet-a1b2c3d4",
       "severity": "CRITICAL|IMPORTANT|COSMETIC",
-      "category": "logic|assumption|overconfidence|risk|redo",
+      "category": "logic|assumption|overconfidence|risk|redo|cosmetic",
       "title": "one-line summary",
       "detail": "2-3 paragraph description",
       "file_globs": ["src/pipeline/**", "src/workers/codex.ts"],

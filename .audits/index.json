@@ -1,6 +1,6 @@
 {
   "repo": "audit-elevation",
-  "last_updated": "2026-06-10T04:26:14Z",
+  "last_updated": "2026-06-14T00:05:00.000Z",
   "open_findings": 0,
   "fixed_this_run": 2,
   "by_severity": {},
@@ -14,7 +14,9 @@
     "20260602T041140Z.json",
     "20260604T050000Z.json",
     "20260606T043238Z.json",
-    "2026-06-08T04:35:00Z.json"
+    "2026-06-08T04:35:00Z.json",
+    "20260610T042614Z.json",
+    "2026-06-14T00:00:00.000Z.json"
   ],
   "findings": [
     {
@@ -129,7 +131,7 @@
       "id": "AUDIT-audit-elevation-99e78e47",
       "severity": "IMPORTANT",
       "category": "redo",
-      "title": "ADR-003 references 'eventual-growing-raven.md' \u2014 a stale codename that does not exist",
+      "title": "ADR-003 references 'eventual-growing-raven.md' — a stale codename that does not exist",
       "fingerprint": "33a964502b013a85bbf294d808ed865fd492311af610fa3f8e45228bf09bde0f",
       "status": "closed",
       "opened_at": "2026-05-21T17:20:59Z",
@@ -144,7 +146,7 @@
       "id": "AUDIT-audit-elevation-d562db04",
       "severity": "IMPORTANT",
       "category": "assumption",
-      "title": "Codex CLI not installed \u2014 Phase 2 shipped status is misleading since codex --version fails",
+      "title": "Codex CLI not installed — Phase 2 shipped status is misleading since codex --version fails",
       "fingerprint": "5e8103eeca45451e89ccad8d9f382315dfe7db80881dbe4b3d2366003a73ee47",
       "status": "closed",
       "opened_at": "2026-05-21T17:20:59Z",
@@ -176,7 +178,7 @@
       "id": "AUDIT-audit-elevation-e670b001",
       "severity": "COSMETIC",
       "category": "redo",
-      "title": "watched-repos.txt only covers 2 of 5 audited repos \u2014 fingerprint watcher misses 60% of audit data",
+      "title": "watched-repos.txt only covers 2 of 5 audited repos — fingerprint watcher misses 60% of audit data",
       "fingerprint": "7d1c06baf2b6a024e4eae733f12a813cb9fe50ee2d52b1999f7b04628a8ebc52",
       "status": "closed",
       "opened_at": "2026-05-21T17:20:59Z",
@@ -299,7 +301,7 @@
       "id": "AUDIT-audit-elevation-c1e7d4a8",
       "severity": "IMPORTANT",
       "category": "assumption",
-      "title": "Lane scheduler spec references lane-scheduler.pm2.json but ADR-004 describes lane-scheduler.{sh,mjs} with a now-removed .sh \u2014 spec/ADR conflict persists",
+      "title": "Lane scheduler spec references lane-scheduler.pm2.json but ADR-004 describes lane-scheduler.{sh,mjs} with a now-removed .sh — spec/ADR conflict persists",
       "fingerprint": "e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6",
       "status": "fixed",
       "opened_at": "2026-05-22T04:11:28Z",
@@ -314,7 +316,7 @@
       "id": "AUDIT-audit-elevation-d9b3f5e2",
       "severity": "IMPORTANT",
       "category": "logic",
-      "title": "proposer-spec.md Budget gate logic is inverted: ENABLED flag absent means run, present means send \u2014 opposite of standard gating convention",
+      "title": "proposer-spec.md Budget gate logic is inverted: ENABLED flag absent means run, present means send — opposite of standard gating convention",
       "fingerprint": "f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7",
       "status": "fixed",
       "opened_at": "2026-05-22T04:11:28Z",
@@ -390,7 +392,7 @@
       "id": "AUDIT-audit-elevation-9f3c1d2e",
       "severity": "IMPORTANT",
       "category": "logic",
-      "title": "self-heal-pipeline.md field-rules prose contradicts schema after 2026-05-24 fix \u2014 still names field 'version' but schema now uses 'schema_version'",
+      "title": "self-heal-pipeline.md field-rules prose contradicts schema after 2026-05-24 fix — still names field 'version' but schema now uses 'schema_version'",
       "file_globs": [
         "docs/self-heal-pipeline.md"
       ],
@@ -405,7 +407,7 @@
       "id": "AUDIT-audit-elevation-b7d4e1a3",
       "severity": "IMPORTANT",
       "category": "logic",
-      "title": "plan.md canonical schema documents terminal status as 'closed' but all production audit files use 'fixed' \u2014 undocumented status value in every recent scan",
+      "title": "plan.md canonical schema documents terminal status as 'closed' but all production audit files use 'fixed' — undocumented status value in every recent scan",
       "file_globs": [
         "plan.md"
       ],
@@ -550,8 +552,8 @@
       "id": "AUDIT-audit-elevation-d5e6f7a8",
       "severity": "IMPORTANT",
       "category": "logic",
-      "title": "ADR-003 context paragraph describes finding lifecycle as 'closed/reopened' but the system uses 'closed' and 'regression' \u2014 'reopened' is not a valid status",
-      "detail": "Line 123 of docs/ifleet-integration-adrs.md describes the audit finding lifecycle as 'opened \u2192 fixing \u2192 verifying \u2192 closed/reopened'. The actual canonical lifecycle uses 'closed | regression'. The status 'reopened' was never defined. Prior fix AUDIT-audit-elevation-b2d5a9e3 updated the trace event payload but left this context paragraph unchanged.",
+      "title": "ADR-003 context paragraph describes finding lifecycle as 'closed/reopened' but the system uses 'closed' and 'regression' — 'reopened' is not a valid status",
+      "detail": "Line 123 of docs/ifleet-integration-adrs.md describes the audit finding lifecycle as 'opened → fixing → verifying → closed/reopened'. The actual canonical lifecycle uses 'closed | regression'. The status 'reopened' was never defined. Prior fix AUDIT-audit-elevation-b2d5a9e3 updated the trace event payload but left this context paragraph unchanged.",
       "file_globs": [
         "docs/ifleet-integration-adrs.md"
       ],
@@ -568,7 +570,7 @@
       "severity": "COSMETIC",
       "category": "assumption",
       "title": "README.md reports 7 open decisions in Proposer spec but proposer-spec.md says eight (D1-D7 plus ADR-001)",
-      "detail": "README.md Open decisions section states 'Plus 7 open decisions in the Proposer spec (D1-D7)'. However, proposer-spec.md plain-language recap says 'The eight open decisions at the bottom (D1\u2013D7 plus ADR-001)'. The Proposer spec has 7 D-numbered decisions plus one embedded ADR-Proposer-001, totalling 8.",
+      "detail": "README.md Open decisions section stated 'Plus 7 open decisions in the Proposer spec (D1-D7)'. However, proposer-spec.md plain-language recap says 'The eight open decisions at the bottom (D1–D7 plus ADR-001)'. The Proposer spec has 7 D-numbered decisions plus one embedded ADR-Proposer-001, totalling 8.",
       "file_globs": [
         "README.md"
       ],
@@ -585,7 +587,7 @@
       "severity": "COSMETIC",
       "category": "assumption",
       "title": "README.md 'Where the code lives' table lists rubric.json with its internal machine path instead of its repo-relative path",
-      "detail": "README.md line 217 shows rubric.json path as '~/dev/ai-products/audit-elevation/rubric.json' \u2014 an absolute machine path on Sebastian's Mac. Since rubric.json lives at the root of this repo, the path should simply be 'rubric.json', consistent with other entries in the same table.",
+      "detail": "README.md line 217 showed rubric.json path as '~/dev/ai-products/audit-elevation/rubric.json' — an absolute machine path on Sebastian's Mac. Since rubric.json lives at the root of this repo, the path should simply be 'rubric.json', consistent with other entries in the same table.",
       "file_globs": [
         "README.md"
       ],
@@ -601,7 +603,7 @@
       "id": "AUDIT-audit-elevation-e2f3a4b5",
       "severity": "IMPORTANT",
       "category": "logic",
-      "title": "ifleet-integration-adrs.md ADR-004 references 'Phase C' \u2014 stale alphabet phase naming",
+      "title": "ifleet-integration-adrs.md ADR-004 references 'Phase C' — stale alphabet phase naming",
       "detail": "Line 194: 'T1 to verify in Phase C'. The document uses numeric phases (Phase 4, Phase 5). 'Phase C' is from IFleet's routing migration alphabet convention, not this spec's numbering.",
       "file_globs": [
         "docs/ifleet-integration-adrs.md"
@@ -618,7 +620,7 @@
       "severity": "COSMETIC",
       "category": "cosmetic",
       "title": "ifleet-integration-adrs.md lifecycle uses 'opened' instead of status value 'open'",
-      "detail": "Line 123 lifecycle description says 'opened \u2192 fixing' but the actual status field value is 'open' (not 'opened').",
+      "detail": "Line 123 lifecycle description said 'opened → fixing' but the actual status field value is 'open' (not 'opened').",
       "file_globs": [
         "docs/ifleet-integration-adrs.md"
       ],
@@ -634,7 +636,7 @@
       "severity": "COSMETIC",
       "category": "cosmetic",
       "title": "README.md table says '7 open decisions' for proposer-spec but spec and summary line say 8",
-      "detail": "README table line 232 says '8 sections + ADR + 7 open decisions'. proposer-spec.md line 170 and README line 292 both say 8 decisions (D1-D7 + ADR-Proposer-001).",
+      "detail": "README table line 232 said '8 sections + ADR + 7 open decisions'. proposer-spec.md line 170 and README line 292 both say 8 decisions (D1-D7 + ADR-Proposer-001).",
       "file_globs": [
         "README.md"
       ],
@@ -650,12 +652,12 @@
       "severity": "IMPORTANT",
       "category": "risk",
       "title": "plan.md Phase 1 missing locking requirement cross-reference for /audit-fix closed.json writes",
-      "detail": "self-heal-pipeline.md \u00a73 defines a HARD requirement: /audit-fix MUST use mkdir-based locking before reading or writing closed.json (macOS has no flock(1)). Under \u22652 concurrent audit-fix lanes this race is deterministic and causes fingerprint count drift. Phase 1 of plan.md documents the fixed\u2192closed lifecycle but has no cross-reference to this critical constraint, so implementers working from plan.md alone would miss it.",
+      "detail": "self-heal-pipeline.md §3 defines a HARD requirement: /audit-fix MUST use mkdir-based locking before reading or writing closed.json (macOS has no flock(1)). Under ≥2 concurrent audit-fix lanes this race is deterministic and causes fingerprint count drift. Phase 1 of plan.md documents the fixed→closed lifecycle but has no cross-reference to this critical constraint, so implementers working from plan.md alone would miss it.",
       "file_globs": [
         "plan.md",
         "docs/self-heal-pipeline.md"
       ],
-      "fix_sketch": "Add a WARNING block after the status lifecycle table in plan.md Phase 1 pointing to self-heal-pipeline.md \u00a73 locking contract.",
+      "fix_sketch": "Add a WARNING block after the status lifecycle table in plan.md Phase 1 pointing to self-heal-pipeline.md §3 locking contract.",
       "parallel_safe": false,
       "status": "fixed",
       "opened_at": "2026-06-10T04:26:14Z",
@@ -666,17 +668,47 @@
       "id": "AUDIT-audit-elevation-1ca03dd4",
       "severity": "IMPORTANT",
       "category": "redo",
-      "title": "self-heal-pipeline.md failure-mode table correctly uses schema_version (false positive \u2014 already fixed)",
+      "title": "self-heal-pipeline.md failure-mode table correctly uses schema_version (false positive — already fixed)",
       "detail": "Audit agent flagged a potential discrepancy between \"version\" and \"schema_version\" in the failure-mode table at line 305. On inspection the file already uses schema_version correctly at line 305. Recorded as a false-positive finding for audit trail completeness.",
       "file_globs": [
         "docs/self-heal-pipeline.md"
       ],
-      "fix_sketch": "No fix needed \u2014 file already correct.",
+      "fix_sketch": "No fix needed — file already correct.",
       "parallel_safe": true,
       "status": "fixed",
       "opened_at": "2026-06-10T04:26:14Z",
       "closed_at": "2026-06-10T04:26:14Z",
       "closing_pr": "audit/nightly-2026-06-10"
+    },
+    {
+      "id": "AUDIT-audit-elevation-d65ce88f",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "index.json nightly_audits list missing most recent scan file 20260610T042614Z.json",
+      "detail": ".audits/index.json nightly_audits array listed 10 scan files ending at 2026-06-08T04:35:00Z.json. The file 20260610T042614Z.json existed on disk and contained 2 findings from the 2026-06-10 nightly audit run, but was absent from the nightly_audits list. Any tool that reads nightly_audits to enumerate past scans would miss the most recent audit.",
+      "file_globs": [".audits/index.json"],
+      "fix_sketch": "Append '20260610T042614Z.json' to the nightly_audits array in .audits/index.json.",
+      "parallel_safe": true,
+      "fingerprint": "d65ce88fac91e4e9d132d5bfec66c0a3c192e2d4ebd9dc7adbe185235aa7d1be",
+      "status": "fixed",
+      "opened_at": "2026-06-14T00:00:00.000Z",
+      "closed_at": "2026-06-14T00:05:00.000Z",
+      "closing_pr": "audit/nightly-2026-06-14"
+    },
+    {
+      "id": "AUDIT-audit-elevation-0e4f5db0",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "plan.md schema category enum missing cosmetic",
+      "detail": "plan.md line 84 showed the findings schema with category field as 'logic|assumption|overconfidence|risk|redo' — missing the 'cosmetic' value. rubric.json (the canonical authority) defines 'cosmetic' as a valid category. Production scan files in .audits/ include findings with category:'cosmetic'. The schema in plan.md is the load-bearing reference for implementers and its incomplete category enum could lead implementers to reject or incorrectly classify cosmetic findings.",
+      "file_globs": ["plan.md"],
+      "fix_sketch": "Change 'logic|assumption|overconfidence|risk|redo' to 'logic|assumption|overconfidence|risk|redo|cosmetic' in the findings schema on line 84 of plan.md.",
+      "parallel_safe": true,
+      "fingerprint": "0e4f5db0b6e7e5fe7623df85d7b45aea2b6cc9653b73d5f54cddd5452a7806f2",
+      "status": "fixed",
+      "opened_at": "2026-06-14T00:00:00.000Z",
+      "closed_at": "2026-06-14T00:05:00.000Z",
+      "closing_pr": "audit/nightly-2026-06-14"
     }
   ]
 }

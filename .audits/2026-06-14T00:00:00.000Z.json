@@ -1,0 +1,38 @@
+{
+  "audit_id": "audit-20260614T000000Z",
+  "repo": "audit-elevation",
+  "scanned_at": "2026-06-14T00:00:00.000Z",
+  "scanner": "claude-sonnet-4-6-nightly",
+  "findings": [
+    {
+      "id": "AUDIT-audit-elevation-d65ce88f",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "index.json nightly_audits list missing most recent scan file 20260610T042614Z.json",
+      "detail": ".audits/index.json nightly_audits array lists 10 scan files ending at 2026-06-08T04:35:00Z.json. The file 20260610T042614Z.json exists on disk and contains 2 findings from the 2026-06-10 nightly audit run, but is absent from the nightly_audits list. The index.json last_updated field correctly shows 2026-06-10T04:26:14Z, which is the timestamp of the missing file, proving the audit ran but the nightly_audits list was not updated. Any tool that reads nightly_audits to enumerate past scans will miss the most recent audit.",
+      "file_globs": [".audits/index.json"],
+      "fix_sketch": "Append '20260610T042614Z.json' to the nightly_audits array in .audits/index.json.",
+      "parallel_safe": true,
+      "fingerprint": "d65ce88fac91e4e9d132d5bfec66c0a3c192e2d4ebd9dc7adbe185235aa7d1be",
+      "status": "fixed",
+      "opened_at": "2026-06-14T00:00:00.000Z",
+      "closed_at": "2026-06-14T00:05:00.000Z",
+      "closing_pr": "audit/nightly-2026-06-14"
+    },
+    {
+      "id": "AUDIT-audit-elevation-0e4f5db0",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "plan.md schema category enum missing cosmetic",
+      "detail": "plan.md line 84 shows the findings schema with category field as 'logic|assumption|overconfidence|risk|redo' — missing the 'cosmetic' value. rubric.json (the canonical authority for severities and categories) defines 'cosmetic' as a valid category. Production scan files in .audits/ include findings with category:'cosmetic'. The schema in plan.md is the load-bearing reference for implementers and its category enum is incomplete, which could lead implementers to reject or incorrectly classify cosmetic findings.",
+      "file_globs": ["plan.md"],
+      "fix_sketch": "Change 'logic|assumption|overconfidence|risk|redo' to 'logic|assumption|overconfidence|risk|redo|cosmetic' in the findings schema on line 84 of plan.md.",
+      "parallel_safe": true,
+      "fingerprint": "0e4f5db0b6e7e5fe7623df85d7b45aea2b6cc9653b73d5f54cddd5452a7806f2",
+      "status": "fixed",
+      "opened_at": "2026-06-14T00:00:00.000Z",
+      "closed_at": "2026-06-14T00:05:00.000Z",
+      "closing_pr": "audit/nightly-2026-06-14"
+    }
+  ]
+}
