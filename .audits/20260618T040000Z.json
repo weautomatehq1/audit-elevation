@@ -1,0 +1,13 @@
+{
+  "run_id": "nightly-2026-06-18",
+  "repo": "audit-elevation",
+  "branch": "audit/nightly-2026-06-18",
+  "started_at": "2026-06-18T04:00:00Z",
+  "finished_at": "2026-06-18T04:15:00Z",
+  "rubric": "CRITICAL/IMPORTANT/COSMETIC",
+  "scanner": "claude-sonnet-4-6-nightly",
+  "result": "Clean scan",
+  "files_scanned": "docs/*.md, plan.md, rubric.json, README.md",
+  "new_findings": 0,
+  "note": "All documents reviewed. schema_version consistency confirmed (self-heal-pipeline.md, rubric.json). ifleet-integration-adrs.md lifecycle terms verified ('open' not 'opened'; 'regression' not 'reopened'). Phase numbering correct. All prior findings remain closed."
+}
