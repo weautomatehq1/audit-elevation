@@ -1,0 +1,22 @@
+{
+  "audit_id": "audit-20260619T040828Z",
+  "repo": "audit-elevation",
+  "scanned_at": "2026-06-19T04:08:28Z",
+  "scanner": "claude-sonnet-4-6-nightly",
+  "findings": [
+    {
+      "id": "AUDIT-audit-elevation-f2a3b4c5",
+      "severity": "COSMETIC",
+      "category": "cosmetic",
+      "title": "lane-scheduler-spec.md and quota-pacing-design.md use stale claude-opus-4-7 model ID (current is claude-opus-4-8)",
+      "detail": "Three occurrences in lane-scheduler-spec.md (JSON examples and schema rules note) and one in the quota-pacing-design.md weight table reference claude-opus-4-7. The current Opus model is claude-opus-4-8. The implementation note already recommends prefix matching which handles version drift, but keeping example values current prevents confusion for developers reading the spec. Previously flagged as AUDIT-audit-elevation-a5d1b8c4 (2026-05-22); the prior fix added the prefix-match note but did not update the example model IDs themselves.",
+      "file_globs": ["docs/lane-scheduler-spec.md", "docs/quota-pacing-design.md"],
+      "fix_sketch": "Replace all claude-opus-4-7 occurrences with claude-opus-4-8 in both files.",
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-06-19T04:08:28Z",
+      "closed_at": "2026-06-19T04:25:00Z",
+      "closing_pr": "audit/nightly-2026-06-19"
+    }
+  ]
+}
