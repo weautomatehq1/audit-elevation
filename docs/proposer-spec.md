@@ -2,7 +2,7 @@
 
 > **Status:** DRAFT — design only. No IFleet source code lands until Sebastian approves on wake.
 > **Author:** T5 (overnight split `20260520-2244-elevation-push`).
-> **Predecessors:** ROADMAP.md M5, ADR-0001 (single-shared-trace), `docs/elevation/upgrades/05-goal-driven.md` (if present), SECURITY.md, NON_GOALS.md.
+> **Predecessors:** ROADMAP.md M5, ADR-0001 (single-shared-trace), SECURITY.md, NON_GOALS.md.
 > **Companion:** `~/.claude/skills/audit-broadcast/` — the channel the Proposer reuses for its morning DM/post.
 
 The Proposer is the nightly autonomous bot that reads what we know (roadmap, sprint, audits, learnings) and proposes the next morning's splittasks plan via Discord. Sebastian approves with ✅ before any worker runs.
