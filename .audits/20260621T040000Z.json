@@ -1,0 +1,53 @@
+{
+  "audit_id": "audit-20260621T040000Z",
+  "repo": "audit-elevation",
+  "scanned_at": "2026-06-21T04:00:00Z",
+  "scanner": "claude-sonnet-4-6-nightly",
+  "findings": [
+    {
+      "id": "AUDIT-audit-elevation-fae2f8ba",
+      "severity": "IMPORTANT",
+      "category": "risk",
+      "title": "Phase 3 two-week soak window elapsed with no gate assessment",
+      "detail": "Phase 3 'Dogfood / 2-week soak' started 2026-05-21. The plan.md §Phase 3 defines a 7–14 day window with four success criteria before Phase 6 (IFleet fold-in) can proceed: ≥5 findings closed end-to-end with Codex gate, ≥1 Codex catch Claude missed, zero phantom opens, splittasks MASTER.md surfaced findings correctly every session. As of 2026-06-21 (31 days elapsed), the 14-day max closed on 2026-06-04 with no recorded gate assessment. README.md still shows '🟡 in progress', leaving Phase 6 in an ambiguously blocked state.",
+      "file_globs": ["README.md"],
+      "fix_sketch": "Update Phase 3 status in the README.md status table to indicate the soak window elapsed and a gate assessment is due. Separately, Sebastian should evaluate the four criteria from plan.md §Phase 3 and update Phase 6 status accordingly.",
+      "parallel_safe": true,
+      "fingerprint": "fae2f8ba60404110ac1ae3ca07aac0d08b9fb28f7d7d9fa36826e2b11e58a8f8",
+      "status": "open",
+      "opened_at": "2026-06-21T04:00:00Z",
+      "closed_at": null,
+      "closing_pr": null
+    },
+    {
+      "id": "AUDIT-audit-elevation-d1cea000",
+      "severity": "COSMETIC",
+      "category": "cosmetic",
+      "title": "README.md as-of date 2026-06-02 is 19 days stale",
+      "detail": "Line 45 of README.md stated 'As of 2026-06-02: audit-elevation has 0 open findings'. The .audits/index.json confirms 0 open findings as of today (2026-06-21), but the embedded date creates a misleading claim that the status was last verified 19 days ago.",
+      "file_globs": ["README.md"],
+      "fix_sketch": "Update '2026-06-02' to '2026-06-21' in the status section.",
+      "parallel_safe": true,
+      "fingerprint": "d1cea000023d0b5589f79d0c7bfb91bb1302a3d2ef46acd44b10de14e5a97c12",
+      "status": "fixed",
+      "opened_at": "2026-06-21T04:00:00Z",
+      "closed_at": "2026-06-21T04:00:00Z",
+      "closing_pr": null
+    },
+    {
+      "id": "AUDIT-audit-elevation-632bb686",
+      "severity": "COSMETIC",
+      "category": "assumption",
+      "title": "proposer-spec.md watch-list default hard-codes Mac-local paths",
+      "detail": "The Proposer spec §2 default watch-list JSON hard-codes Mac-local paths (~/dev/ai-products/IFleet, ~/dev/coordination/factory, etc.). If open decision D1 resolves to VPS hosting (options b or c), these paths won't resolve — IFleet on the VPS lives at /home/user/IFleet. No deployment note existed to warn implementers of this path dependency.",
+      "file_globs": ["docs/proposer-spec.md"],
+      "fix_sketch": "Add a deployment note after the watch-list JSON block flagging that paths must be updated when D1 resolves.",
+      "parallel_safe": true,
+      "fingerprint": "632bb68646f080862db6f5fe2e53e0a5e51bf43c11d77fa30cd60e77cc5e3a9b",
+      "status": "fixed",
+      "opened_at": "2026-06-21T04:00:00Z",
+      "closed_at": "2026-06-21T04:00:00Z",
+      "closing_pr": null
+    }
+  ]
+}

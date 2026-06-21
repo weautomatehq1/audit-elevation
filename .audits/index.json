@@ -1,9 +1,11 @@
 {
   "repo": "audit-elevation",
-  "last_updated": "2026-06-18T04:00:00Z",
-  "open_findings": 0,
-  "fixed_this_run": 0,
-  "by_severity": {},
+  "last_updated": "2026-06-21T04:00:00Z",
+  "open_findings": 1,
+  "fixed_this_run": 2,
+  "by_severity": {
+    "IMPORTANT": 1
+  },
   "nightly_audits": [
     "2026-05-21T17:20:59Z.json",
     "2026-05-22T04:11:28Z.json",
@@ -17,7 +19,18 @@
     "2026-06-08T04:35:00Z.json",
     "20260610T042614Z.json",
     "20260613T041834Z.json",
-    "20260618T040000Z.json"
+    "20260618T040000Z.json",
+    {
+      "audit_id": "audit-20260621T040000Z",
+      "scanned_at": "2026-06-21T04:00:00Z",
+      "findings_total": 3,
+      "open": 1,
+      "fixed_this_run": 2,
+      "by_severity": {
+        "IMPORTANT": 1,
+        "COSMETIC": 2
+      }
+    }
   ],
   "findings": [
     {
@@ -680,6 +693,51 @@
       "opened_at": "2026-06-10T04:26:14Z",
       "closed_at": "2026-06-10T04:26:14Z",
       "closing_pr": "audit/nightly-2026-06-10"
+    },
+    {
+      "id": "AUDIT-audit-elevation-fae2f8ba",
+      "severity": "IMPORTANT",
+      "category": "risk",
+      "title": "Phase 3 two-week soak window elapsed with no gate assessment",
+      "fingerprint": "fae2f8ba60404110ac1ae3ca07aac0d08b9fb28f7d7d9fa36826e2b11e58a8f8",
+      "status": "open",
+      "opened_at": "2026-06-21T04:00:00Z",
+      "closed_at": null,
+      "closing_pr": null,
+      "file_globs": [
+        "README.md"
+      ],
+      "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-d1cea000",
+      "severity": "COSMETIC",
+      "category": "cosmetic",
+      "title": "README.md as-of date 2026-06-02 is 19 days stale",
+      "fingerprint": "d1cea000023d0b5589f79d0c7bfb91bb1302a3d2ef46acd44b10de14e5a97c12",
+      "status": "fixed",
+      "opened_at": "2026-06-21T04:00:00Z",
+      "closed_at": "2026-06-21T04:00:00Z",
+      "closing_pr": null,
+      "file_globs": [
+        "README.md"
+      ],
+      "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-632bb686",
+      "severity": "COSMETIC",
+      "category": "assumption",
+      "title": "proposer-spec.md watch-list default hard-codes Mac-local paths",
+      "fingerprint": "632bb68646f080862db6f5fe2e53e0a5e51bf43c11d77fa30cd60e77cc5e3a9b",
+      "status": "fixed",
+      "opened_at": "2026-06-21T04:00:00Z",
+      "closed_at": "2026-06-21T04:00:00Z",
+      "closing_pr": null,
+      "file_globs": [
+        "docs/proposer-spec.md"
+      ],
+      "parallel_safe": true
     }
   ]
 }

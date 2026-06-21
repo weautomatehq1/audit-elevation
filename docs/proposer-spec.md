@@ -44,6 +44,8 @@ Read-only. The Proposer never writes to source.
 }
 ```
 
+> **Deployment note (D1 dependency):** The paths above are Mac-local (`~/dev/ai-products/…`). On the Hostinger VPS, IFleet lives at `/home/user/IFleet` and factory at `/home/user/factory`. Update this file when D1 (Mac vs VPS hosting) resolves.
+
 ## 3. Ranking algorithm
 
 **Pre-filter (before scoring):** drop any finding with `status` not in `["open", "regression"]`. DUPLICATE findings are excluded from `index.json` by the regression-detector; if any appear (scanner bug), log a warning and skip them. COSMETIC findings with `status: "closed"` or `"fixed"` are also skipped — only open work items enter scoring.
