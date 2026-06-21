@@ -36,7 +36,7 @@ Make audit findings *first-class on-disk work items* so:
 | **Phase 2 — Codex review + Tiered chain** | 🔴 BLOCKED — Codex CLI not installed; requires Sebastian setup | 2026-05-20 (design only) |
 | **Phase 2.5 — Hybrid automation** (SessionStart banner + `audit autopilot` keyword) | ✅ shipped | 2026-05-20 overnight |
 | **Online-eval-log v1** (Supabase-backed session-close capture) | ✅ shipped | 2026-05-21 |
-| **Phase 3 — Dogfood / 2-week soak** | 🟡 in progress | started 2026-05-21 |
+| **Phase 3 — Dogfood / 2-week soak** | 🟡 soak complete (30 days elapsed as of 2026-06-20) — Phase 4 gate evaluation pending | started 2026-05-21 |
 | **Phase 4 — Self-healing (fingerprint REGRESSION + DRAFT auto-rules)** | ✅ scaffolded | 2026-05-21 overnight |
 | **Phase 5 — Lane scheduler MVP (observation-only)** | ✅ scaffolded, opt-in PM2 entry | 2026-05-21 |
 | **Phase 6 — IFleet fold-in** | 📝 ADRs drafted, 5 Sebastian decisions queued | gated on Phase 3 soak |
@@ -229,7 +229,7 @@ python3 ~/.claude/scripts/online-eval-stats.py --days 7 --repo IFleet --json | j
 | Doc | What it covers |
 |---|---|
 | [plan.md](./plan.md) | The original strategy plan that drove the build. Phases, build order, deferrals, decisions. |
-| [docs/proposer-spec.md](./docs/proposer-spec.md) | The nightly Proposer bot (IFleet M5). 8 sections + 8 open decisions (D1-D7 + ADR-Proposer-001). |
+| [docs/proposer-spec.md](./docs/proposer-spec.md) | The nightly Proposer bot (IFleet M5). 9 sections + 8 open decisions (D1-D7 + ADR-Proposer-001). |
 | [docs/lane-scheduler-spec.md](./docs/lane-scheduler-spec.md) | Lane scheduler schema (`~/.omc/active-lanes.json`), helper scripts, observer daemon, PM2 opt-in. |
 | [docs/self-heal-pipeline.md](./docs/self-heal-pipeline.md) | Fingerprint → REGRESSION detection → DRAFT auto-rule generation. Lifecycle + failure modes. |
 | [docs/quota-pacing-design.md](./docs/quota-pacing-design.md) | Future design for Max-quota throttling. Not implemented — design only. |

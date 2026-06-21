@@ -81,9 +81,9 @@ Restructure `/audit-session` into two slash commands. Each slash command is a **
     {
       "id": "AUDIT-IFleet-a1b2c3d4",
       "severity": "CRITICAL|IMPORTANT|COSMETIC",
-      "category": "logic|assumption|overconfidence|risk|redo",
+      "category": "logic|assumption|overconfidence|risk|redo|cosmetic",
       "title": "one-line summary",
-      "detail": "2-3 paragraph description",
+      "detail": "2-3 sentence description",
       "file_globs": ["src/pipeline/**", "src/workers/codex.ts"],
       "fix_sketch": "what closing this looks like",
       "parallel_safe": true,
@@ -97,7 +97,7 @@ Restructure `/audit-session` into two slash commands. Each slash command is a **
 }
 ```
 
-The `fingerprint` is deterministic — same bug reopened twice gets same fingerprint → enables repeat-finding detection in Phase 3.
+The `fingerprint` is deterministic — same bug surfacing as a regression gets same fingerprint → enables repeat-finding detection in Phase 3.
 
 **Status lifecycle:**
 
