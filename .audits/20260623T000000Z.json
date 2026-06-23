@@ -1,0 +1,80 @@
+{
+  "audit_id": "20260623T000000Z",
+  "repo": "audit-elevation",
+  "branch": "audit/nightly-2026-06-23",
+  "scanned_at": "2026-06-23T00:00:00Z",
+  "auditor": "claude-sonnet-4-6 (nightly audit agent)",
+  "findings": [
+    {
+      "id": "AUDIT-audit-elevation-20260623-01",
+      "severity": "IMPORTANT",
+      "category": "assumption",
+      "title": "proposer-spec.md open decisions D1-D7 + ADR-Proposer-001 unresolved 34+ days — block IFleet M5",
+      "detail": "All 8 open decisions in proposer-spec.md §8 were drafted 2026-05-20. The spec itself states 'These decisions block any IFleet PR.' As of 2026-06-23 (34+ days) no responses from Sebastian have landed and no escalation marker existed in the file.",
+      "file_globs": ["docs/proposer-spec.md"],
+      "parallel_safe": true,
+      "fingerprint": "ae20260623proposerspecescalation34days",
+      "status": "fixed",
+      "opened_at": "2026-06-23T00:00:00Z",
+      "closed_at": "2026-06-23T00:00:00Z",
+      "closing_pr": "audit/nightly-2026-06-23",
+      "fix_summary": "Added escalation banner to §8 header noting 34+ days outstanding and blocker status."
+    },
+    {
+      "id": "AUDIT-audit-elevation-20260623-02",
+      "severity": "COSMETIC",
+      "category": "assumption",
+      "title": "docs/ifleet-integration-adrs.md ADR numbering (ADR-001–005) collides with IFleet's docs/adr/ namespace (0001–0004)",
+      "detail": "Cross-references like 'ADR-003' are ambiguous between this file's fold-in ADRs and IFleet's own docs/adr/0003-*. No disambiguation note existed.",
+      "file_globs": ["docs/ifleet-integration-adrs.md"],
+      "parallel_safe": true,
+      "fingerprint": "ae20260623adrnamespacecollision",
+      "status": "fixed",
+      "opened_at": "2026-06-23T00:00:00Z",
+      "closed_at": "2026-06-23T00:00:00Z",
+      "closing_pr": "audit/nightly-2026-06-23",
+      "fix_summary": "Added namespace disambiguation note at the top of the doc clarifying audit-elevation ADR-NNN vs IFleet ADR-NNNN."
+    },
+    {
+      "id": "AUDIT-audit-elevation-20260623-03",
+      "severity": "COSMETIC",
+      "category": "assumption",
+      "title": "docs/quota-pacing-design.md has no implementation status update 34+ days after creation",
+      "detail": "quota-pacing-design.md was written 2026-05-20 as DESIGN ONLY. As of 2026-06-23 no implementation has started and no tracking issue exists. The status header was stale and gave no signal to future readers about whether this was stalled or active.",
+      "file_globs": ["docs/quota-pacing-design.md"],
+      "parallel_safe": true,
+      "fingerprint": "ae20260623quotapacingnostatus",
+      "status": "fixed",
+      "opened_at": "2026-06-23T00:00:00Z",
+      "closed_at": "2026-06-23T00:00:00Z",
+      "closing_pr": "audit/nightly-2026-06-23",
+      "fix_summary": "Added implementation status note with date and note that a tracking issue is needed."
+    },
+    {
+      "id": "AUDIT-audit-elevation-20260623-04",
+      "severity": "COSMETIC",
+      "category": "risk",
+      "title": "rubric.json embeds hardcoded Supabase project ID exswghbtgtdykklcsdxq",
+      "detail": "rubric.json online_eval_log_schema.project is a hardcoded Supabase project ID. While project IDs are not secret keys, embedding infrastructure identifiers in spec files creates drift when the project changes (e.g., staging vs prod vs new tenant). A reference like '${SUPABASE_PROJECT_ID}' or a comment noting this as the production project ID would be more maintainable.",
+      "file_globs": ["rubric.json"],
+      "parallel_safe": true,
+      "fingerprint": "ae20260623rubricsupbaseprojectid",
+      "status": "open",
+      "opened_at": "2026-06-23T00:00:00Z",
+      "notes": "Not fixed this session. The project ID is documentation-appropriate in rubric.json as it identifies where the online_eval_log lives. However, if rubric.json ever becomes a portable template, this would need parameterization. Sebastian to decide: leave as documentation or parameterize."
+    },
+    {
+      "id": "AUDIT-audit-elevation-20260623-05",
+      "severity": "COSMETIC",
+      "category": "risk",
+      "title": "docs/self-heal-pipeline.md references ~/.claude/scripts/lane-lock.sh which is external to this repo",
+      "detail": "lane-lock.sh is referenced as a required dependency for race-condition-safe closed.json writes. The file lives at ~/.claude/scripts/lane-lock.sh (Sebastian's local machine, not in this repo). If the file is absent on a new machine, the locking requirement silently fails — no error, just no lock. Cannot verify existence from this repo.",
+      "file_globs": ["docs/self-heal-pipeline.md"],
+      "parallel_safe": true,
+      "fingerprint": "ae20260623selfheallanelockexternal",
+      "status": "open",
+      "opened_at": "2026-06-23T00:00:00Z",
+      "notes": "Cannot fix — lane-lock.sh is a local machine script, not in this repo. Recommend verifying its existence in a setup checklist or README, or vendoring a copy into this repo."
+    }
+  ]
+}

@@ -2,6 +2,8 @@
 
 **Status:** DESIGN ONLY — no code in tonight's elevation push (`20260520-2244-elevation-push`). T4 shipped the observation layer (`lane-scheduler-spec.md`). This doc is what to build on top once we have a few days of real telemetry to calibrate against.
 
+> ⚠️ **Implementation status (2026-06-23, 34+ days after authoring):** No implementation has been started. Design remains in DESIGN ONLY status. No tracking GitHub issue exists. This doc requires a tracking issue before any Phase 4+ sprint can pick it up.
+
 **Author:** T4 (lane-scheduler MVP), 2026-05-20.
 
 ---

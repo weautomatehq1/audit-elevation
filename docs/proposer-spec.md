@@ -123,6 +123,8 @@ Mandatory in the Discord DM (per CLAUDE.md "Plain-language recap" rule). The Pro
 
 ## 8. Open decisions for Sebastian
 
+> ⚠️ **ESCALATION REQUIRED (2026-06-23, 34+ days outstanding):** All eight decisions below (D1–D7 + ADR-Proposer-001) were drafted 2026-05-20 and flagged "Sebastian answers on wake." No responses have landed as of 2026-06-23. Per the spec: "These decisions block any IFleet PR." Sebastian must answer before M5 implementation can begin.
+
 | # | Decision | Options | T5's recommendation |
 |---|---|---|---|
 | **D1** | Run on Sebastian's Mac via launchd, or on Hostinger VPS where the IFleet daemon lives? | (a) Mac launchd — closest to repos, no SSH friction. (b) VPS daemon — runs even when Mac sleeps. (c) Both, with Mac as primary and VPS as 24h fallback. | **(a) Mac launchd for v1.** The Proposer reads from `~/dev/...` directly; rsyncing repos to VPS is its own headache. Move to VPS only if morning misses become a pattern. |

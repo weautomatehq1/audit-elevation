@@ -14,6 +14,8 @@ Supersedes: None
 **Author:** T1 on split `20260520-2244-elevation-push`
 **Scope:** Architectural decisions for *eventually* folding the standalone audit + Codex + lane-scheduler + Proposer system into IFleet. No IFleet code changes proposed in this document — ADRs only.
 
+> **Namespace note (2026-06-23):** ADRs in this document are numbered ADR-001 through ADR-005 within the *audit-elevation fold-in* scope. These are **distinct** from `weautomatehq1/IFleet/docs/adr/` ADRs (zero-padded 4-digit numbers: 0001–0004). When cross-referencing, always qualify: "audit-elevation ADR-NNN" vs "IFleet ADR-NNNN" to avoid ambiguity.
+
 ## Why these ADRs exist now
 
 The standalone elevation system (`/audit-scan`, `/audit-fix`, `codex-review` skill, `audit-autopilot`, the self-healing pipeline T3 builds, the lane-scheduler T4 builds, the audit-broadcast + Proposer specs T5 builds) is designed to live outside IFleet for a 2-week soak (per `~/dev/ai-products/audit-elevation/plan.md` Phase 3). The *next* plan after soak is the IFleet fold-in, and Sebastian wants the architectural decisions written down **before** that plan starts so M2-M5 implementation doesn't relitigate them.

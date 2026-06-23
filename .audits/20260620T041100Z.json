@@ -1,5 +1,5 @@
 {
-  "scan_id": "20260620T041100Z",
+  "audit_id": "20260620T041100Z",
   "repo": "audit-elevation",
   "branch": "audit/nightly-2026-06-20",
   "git_sha": "HEAD",
