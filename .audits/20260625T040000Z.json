@@ -1,0 +1,35 @@
+{
+  "scan_id": "20260625T040000Z",
+  "scanned_at": "2026-06-25T04:00:00Z",
+  "repo": "audit-elevation",
+  "findings": [
+    {
+      "id": "AUDIT-audit-elevation-soak-date-stale",
+      "severity": "COSMETIC",
+      "category": "assumption",
+      "title": "README.md Phase 3 soak elapsed count stale (30 days as of 2026-06-20, now 35 days as of 2026-06-25)",
+      "detail": "README.md Status table row for Phase 3 said '30 days elapsed as of 2026-06-20'. As of 2026-06-25 the soak started 2026-05-21, making it 35 days elapsed. No other files changed since 2026-06-22 clean scan.",
+      "file_globs": ["README.md"],
+      "fix_sketch": "Update count to 35 and date to 2026-06-25.",
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-06-25T04:00:00Z",
+      "closed_at": "2026-06-25T04:30:00Z",
+      "closing_pr": "audit/nightly-2026-06-25"
+    },
+    {
+      "id": "AUDIT-audit-elevation-status-as-of-stale",
+      "severity": "COSMETIC",
+      "category": "assumption",
+      "title": "README.md 'As of 2026-06-02' open findings date is 23 days stale (last scan was 2026-06-22)",
+      "detail": "README.md Status section said 'As of 2026-06-02: audit-elevation has 0 open findings'. The most recent audit scan was 2026-06-22 (a clean scan with 0 findings). The 'as of' date should reflect the most recent scan.",
+      "file_globs": ["README.md"],
+      "fix_sketch": "Update 'As of 2026-06-02' to 'As of 2026-06-22'.",
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-06-25T04:00:00Z",
+      "closed_at": "2026-06-25T04:30:00Z",
+      "closing_pr": "audit/nightly-2026-06-25"
+    }
+  ]
+}
