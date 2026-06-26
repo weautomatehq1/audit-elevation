@@ -112,7 +112,7 @@ The `fingerprint` is deterministic — same bug surfacing as a regression gets s
 
 `fixed` → `closed` is a two-step: the `/audit-fix` marks `fixed` at merge time, then appends to `closed.json` and flips to `closed`. Scanners only ever write `open` or `regression`.
 
-> ⚠️ **Critical implementation requirement for `/audit-fix` (Phase 1):** Before any read or write of `closed.json`, `/audit-fix` MUST acquire a mkdir-based lock on `<repo>/.audits/.write-lock`. macOS has no `flock(1)` — use `~/.claude/scripts/lane-lock.sh` (the canonical pattern). Under ≥2 concurrent audit-fix lanes, a race on `closed.json` is deterministic and will cause fingerprint count drift. This is documented in full in `docs/self-heal-pipeline.md` §3 — that document is the contract; this note is the cross-reference so Phase 1 implementers don't miss it. (AUDIT-ae-locking-gap)
+> ⚠️ **Critical implementation requirement for `/audit-fix` (Phase 1):** Before any read or write of `closed.json`, `/audit-fix` MUST acquire a mkdir-based lock on `<repo>/.audits/.write-lock`. macOS has no `flock(1)` — use `~/.claude/scripts/lane-lock.sh` (the canonical pattern). Under ≥2 concurrent audit-fix lanes, a race on `closed.json` is deterministic and will cause fingerprint count drift. This is documented in full in `docs/self-heal-pipeline.md` §"How `/audit-fix` appends to `closed.json`" — that document is the contract; this note is the cross-reference so Phase 1 implementers don't miss it. (AUDIT-ae-locking-gap)
 
 **`.gitignore` decision:** `.audits/` ignored by default. Per-repo opt-in by removing the ignore line + adding `.audits/.gitkeep`. Public repos like IFleet: keep ignored (don't leak open issues to the world). Private repos: commit and let teammates see.
 
