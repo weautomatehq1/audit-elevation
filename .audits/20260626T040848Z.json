@@ -1,0 +1,22 @@
+{
+  "audit_id": "audit-20260626T040848Z",
+  "repo": "audit-elevation",
+  "scanned_at": "2026-06-26T04:08:48Z",
+  "scanner": "claude-sonnet-4-6-nightly",
+  "findings": [
+    {
+      "id": "AUDIT-ae-plan-section-ref",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "plan.md §3 cross-reference to self-heal-pipeline.md points to wrong section",
+      "detail": "plan.md line 115 cross-references 'docs/self-heal-pipeline.md §3' for the locking contract. self-heal-pipeline.md has no numbered §3 — its sections are unnumbered headings. The actual locking contract is in the section titled 'How /audit-fix appends to closed.json'. Implementers following the §3 reference land in 'Failure modes & recovery' (which happens to be the approximate third heading), completely missing the mkdir-lock requirement.",
+      "file_globs": ["plan.md"],
+      "fix_sketch": "Replace '§3' with '§\"How /audit-fix appends to closed.json\"' to link to the actual section heading.",
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-06-26T04:08:48Z",
+      "closed_at": "2026-06-26T04:16:00Z",
+      "closing_pr": null
+    }
+  ]
+}
