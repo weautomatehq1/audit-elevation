@@ -34,9 +34,9 @@ Make audit findings *first-class on-disk work items* so:
 |---|---|---|
 | **Phase 1 — Keystone** (commands + triager + Step 0) | ✅ shipped | 2026-05-20 overnight |
 | **Phase 2 — Codex review + Tiered chain** | 🔴 BLOCKED — Codex CLI not installed; requires Sebastian setup | 2026-05-20 (design only) |
-| **Phase 2.5 — Hybrid automation** (SessionStart banner + `audit autopilot` keyword) | ✅ shipped | 2026-05-20 overnight |
+| **Phase 2a — Hybrid automation** (SessionStart banner + `audit autopilot` keyword) | ✅ shipped | 2026-05-20 overnight |
 | **Online-eval-log v1** (Supabase-backed session-close capture) | ✅ shipped | 2026-05-21 |
-| **Phase 3 — Dogfood / 2-week soak** | 🟡 soak complete (30 days elapsed as of 2026-06-20) — Phase 4 gate evaluation pending | started 2026-05-21 |
+| **Phase 3 — Dogfood / 2-week soak** | 🟡 soak complete (37 days elapsed as of 2026-06-27) — Phase 4 gate evaluation OVERDUE; Sebastian decision needed | started 2026-05-21 |
 | **Phase 4 — Self-healing (fingerprint REGRESSION + DRAFT auto-rules)** | ✅ scaffolded | 2026-05-21 overnight |
 | **Phase 5 — Lane scheduler MVP (observation-only)** | ✅ scaffolded, opt-in PM2 entry | 2026-05-21 |
 | **Phase 6 — IFleet fold-in** | 📝 ADRs drafted, 5 Sebastian decisions queued | gated on Phase 3 soak |

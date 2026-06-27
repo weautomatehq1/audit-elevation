@@ -1,6 +1,6 @@
 # Lane Scheduler — Specification
 
-**Status:** observation-only MVP (Phase 4 will add quota pacing). See `quota-pacing-design.md` for the future design.
+**Status:** observation-only MVP (Phase 5 will add quota pacing, per system plan.md phasing). See `quota-pacing-design.md` for the future design.
 
 **Owner lane:** T4 of split `20260520-2244-elevation-push`.
 

@@ -87,7 +87,7 @@ Restructure `/audit-session` into two slash commands. Each slash command is a **
       "file_globs": ["src/pipeline/**", "src/workers/codex.ts"],
       "fix_sketch": "what closing this looks like",
       "parallel_safe": true,
-      "fingerprint": "sha256 of category+globs+normalized title",
+      "fingerprint": "sha256(category|sorted-file-globs-joined-with-comma|normalized-title) — pipe-separated, per rubric.json fingerprint_algo",
       "status": "open|fixing|verifying|fixed|closed|regression",
       "opened_at": "2026-05-20T23:00:00Z",
       "closed_at": null,
@@ -160,7 +160,7 @@ Output ONE of: PASS | FAIL | NEEDS_REVISION
 With 1-paragraph evidence. No preamble.
 ```
 
-### Phase 2.5 — Hybrid automation layer (~3–4 hours)
+### Phase 2a — Hybrid automation layer (~3–4 hours)
 
 Default behavior stays Conservative (you type the commands). One keyword flips a session into Aggressive.
 
@@ -201,10 +201,10 @@ Hard rule: **no IFleet PRs in Phase 3.** Just use the system. Track in a single 
 | `~/.claude/skills/splittasks/SKILL.md` | modify (Step 0 reads `.audits/index.json` + Tiered review chain in strict mode) | 1 + 2 |
 | `~/.claude/skills/codex-review/SKILL.md` | create | 2 |
 | `~/.claude/skills/codex-review/review-prompt.md` | create | 2 |
-| `~/.claude/hooks/audit-banner.sh` | create (SessionStart, suggest-only) | 2.5 |
-| `~/.claude/skills/audit-autopilot/SKILL.md` | create (trigger: `audit autopilot`) | 2.5 |
-| `~/.claude/settings.json` | modify (register audit-banner hook) | 2.5 |
-| `~/.claude/hooks/keyword-detector.mjs` | modify (add `audit autopilot` trigger) | 2.5 |
+| `~/.claude/hooks/audit-banner.sh` | create (SessionStart, suggest-only) | 2a |
+| `~/.claude/skills/audit-autopilot/SKILL.md` | create (trigger: `audit autopilot`) | 2a |
+| `~/.claude/settings.json` | modify (register audit-banner hook) | 2a |
+| `~/.claude/hooks/keyword-detector.mjs` | modify (add `audit autopilot` trigger) | 2a |
 | Per-repo `.audits/.gitignore` policy | document in each repo's CLAUDE.md when first audit runs | 1 (operational) |
 
 **Not touched in this plan:**

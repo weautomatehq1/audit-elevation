@@ -28,7 +28,7 @@ Read-only. The Proposer never writes to source.
 | Audit findings (watch-list) | `<repo>/.audits/index.json` for each repo in `~/.omc/proposer-watchlist.json` | Surface CRITICAL/IMPORTANT findings as candidate tasks; regressions (status == "regression") receive +30 score bonus (loaded in same pass — not a separate file read) |
 | Audit closures | `<repo>/.audits/closed.json` | Suppress already-resolved findings |
 | Lane patterns | `~/.omc/lane-scheduler/log/*.jsonl` (last 7 days) | Detect overload — if yesterday hit lane ceiling, propose smaller plan |
-| Learnings | `~/dev/ai-products/IFleet/learnings.md` | Inform ranking ties (avoid recently-flagged anti-patterns) |
+| Learnings | `~/dev/ai-products/IFleet/.omc/learnings.md` | Inform ranking ties (avoid recently-flagged anti-patterns) |
 | Yesterday's proposal | `~/.omc/proposer/state/last-proposal.json` | Suppress duplicates; track Sebastian's accept/reject pattern |
 
 **Watch-list file** (`~/.omc/proposer-watchlist.json`) is the single source of truth for which repos the Proposer scans. Sebastian edits this by hand. Default contents:

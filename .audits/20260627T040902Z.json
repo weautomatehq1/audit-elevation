@@ -1,0 +1,170 @@
+{
+  "schema_version": "1.1",
+  "repo": "weautomatehq1/audit-elevation",
+  "scanned_at": "2026-06-27T04:09:02Z",
+  "scanner": "nightly-audit-agent",
+  "summary": {
+    "total": 14,
+    "critical": 3,
+    "important": 7,
+    "cosmetic": 4,
+    "fixed_this_run": 7,
+    "open_after_fix": 7
+  },
+  "findings": [
+    {
+      "id": "AUDIT-audit-elevation-edf61076",
+      "title": "proposer-spec.md learnings path is wrong",
+      "category": "logic",
+      "severity": "CRITICAL",
+      "status": "fixed",
+      "parallel_safe": true,
+      "file": "docs/proposer-spec.md",
+      "detail": "Line 31 of proposer-spec.md lists the Learnings input as `~/dev/ai-products/IFleet/learnings.md`. IFleet's operational state files live in the `.omc/` directory. The file does not exist at the repo root. The correct path (derived nightly per ADR-0001) is `~/dev/ai-products/IFleet/.omc/learnings.md`. An incorrect path here causes the Proposer to silently skip learning-informed ranking on launch day.",
+      "remediation": "Update the Inputs table row for Learnings to use `~/dev/ai-products/IFleet/.omc/learnings.md`."
+    },
+    {
+      "id": "AUDIT-audit-elevation-7e005f9e",
+      "title": "README Phase numbering contradicts lane-scheduler-spec.md",
+      "category": "assumption",
+      "severity": "CRITICAL",
+      "status": "fixed",
+      "parallel_safe": false,
+      "file": "docs/lane-scheduler-spec.md",
+      "detail": "README.md status table defines Phase 4 as 'Self-healing (fingerprint REGRESSION + DRAFT auto-rules)' and Phase 5 as 'Lane scheduler MVP'. However, lane-scheduler-spec.md header says 'Phase 4 will add quota pacing' — this refers to Phase 4 of the lane scheduler's own internal roadmap, but collides with the system-level Phase 4 label. Workers reading the spec in isolation will confuse lane-scheduler Phase 4 with system Phase 4 (self-healing).",
+      "remediation": "Update lane-scheduler-spec.md status header to say 'Phase 5 (quota pacing, per system plan.md)' to align with the README numbering."
+    },
+    {
+      "id": "AUDIT-audit-elevation-c6cdd0c9",
+      "title": "plan.md fingerprint description uses '+' separator but rubric.json uses '|'",
+      "category": "logic",
+      "severity": "CRITICAL",
+      "status": "fixed",
+      "parallel_safe": true,
+      "file": "plan.md",
+      "detail": "plan.md line 90 describes the fingerprint as 'sha256 of category+globs+title' (using `+` as separator). rubric.json `fingerprint_algo.concat_format` is `{category}|{file_globs_joined}|{title}` (using `|` as separator). An implementer following plan.md will produce a different hash than one following rubric.json, causing two implementations of the same bug to get different fingerprints and defeating regression detection.",
+      "remediation": "Update plan.md fingerprint description to match rubric.json: 'sha256(category|sorted-file-globs-joined-with-comma|normalized-title) — pipe-separated, per rubric.json fingerprint_algo'."
+    },
+    {
+      "id": "AUDIT-audit-elevation-de60f7a3",
+      "title": "ifleet-integration-adrs.md references phantom IFleet ADR file docs/adr/0001-0003.md",
+      "category": "assumption",
+      "severity": "IMPORTANT",
+      "status": "fixed",
+      "parallel_safe": true,
+      "file": "docs/ifleet-integration-adrs.md",
+      "detail": "Line 21 of ifleet-integration-adrs.md says 'ADRs follow the IFleet style (`docs/adr/0001-0003.md`)'. There is no file named `0001-0003.md` in IFleet's `docs/adr/` directory — each ADR is a separate file (`0001-*.md`, `0002-*.md`, etc.). This phantom reference will confuse workers trying to look up the style guide.",
+      "remediation": "Change the reference to `docs/adr/` (the directory) or a specific concrete ADR filename like `docs/adr/0001-single-shared-trace.md`."
+    },
+    {
+      "id": "AUDIT-audit-elevation-901bddf6",
+      "title": "ADR-001 stale codex.ts LOC count (says 201, actual is higher)",
+      "category": "assumption",
+      "severity": "IMPORTANT",
+      "status": "open",
+      "parallel_safe": true,
+      "file": "docs/ifleet-integration-adrs.md",
+      "detail": "ADR-001 context paragraph says 'a 201-line WorkerAdapter (binary=codex, sandbox=workspace-write)'. IFleet has shipped additional code to codex.ts since this was written. The LOC count is now stale. Workers reading ADR-001 to understand the fold-in scope will underestimate the diff size.",
+      "remediation": "Verify current LOC of IFleet/src/workers/codex.ts and update the count in ADR-001. If the file has grown significantly, note any new capabilities."
+    },
+    {
+      "id": "AUDIT-audit-elevation-8f78858f",
+      "title": "ADR-005 claims D7 (cron time) is resolved by proposer-spec, but D7 remains an open decision",
+      "category": "overconfidence",
+      "severity": "IMPORTANT",
+      "status": "fixed",
+      "parallel_safe": true,
+      "file": "docs/ifleet-integration-adrs.md",
+      "detail": "ADR-005 Open Questions ends with: 'Cron timing: **03:00 local** — resolved by proposer-spec.md D7 (canonical).' proposer-spec.md D7 lists 03:00 as T5's recommendation but it is still marked as an open decision requiring Sebastian's approval ('These decisions block any IFleet PR. Sebastian answers on wake'). ADR-005 treating a pending decision as resolved could cause a worker to proceed without Sebastian's sign-off.",
+      "remediation": "Change ADR-005 open-questions cron line to: 'Cron timing: 03:00 local — T5 recommendation; **pending Sebastian approval** (see proposer-spec.md D7)'. Do NOT mark as resolved until Sebastian approves."
+    },
+    {
+      "id": "AUDIT-audit-elevation-12443d19",
+      "title": "ADR-004 lane-scheduler Phase 4 label clashes with system Phase 4 (self-healing)",
+      "category": "assumption",
+      "severity": "IMPORTANT",
+      "status": "fixed",
+      "parallel_safe": true,
+      "file": "docs/ifleet-integration-adrs.md",
+      "detail": "ADR-004 Consequences references 'Phase 4' for when the lane scheduler adds enforcement. README.md defines Phase 4 as 'Self-healing (fingerprint REGRESSION + DRAFT auto-rules)' and Phase 5 as 'Lane scheduler'. The ADR's 'Phase 4 enforcement' actually maps to the system's Phase 5+. Workers reading ADR-004 will believe lane enforcement is tied to self-healing work.",
+      "remediation": "Update ADR-004 references from 'Phase 4' to 'Phase 5+ (per system plan.md phasing)' when referring to future lane-scheduler enforcement."
+    },
+    {
+      "id": "AUDIT-audit-elevation-ecc4c533",
+      "title": "ADR-005 budget gate description conflicts with proposer-spec.md §7",
+      "category": "logic",
+      "severity": "IMPORTANT",
+      "status": "open",
+      "parallel_safe": false,
+      "file": "docs/ifleet-integration-adrs.md",
+      "detail": "ADR-005 references the Proposer's budget gate and describes the Discord reaction handshake mechanism. However, proposer-spec.md §7 (Gates) describes the budget gate as 'flag file ~/.omc/proposer/ENABLED' with absence = silently withheld. ADR-005 does not reference this flag file mechanism. A reader of ADR-005 has an incomplete picture of the gate that may lead to incorrect implementation.",
+      "remediation": "Add a reference in ADR-005 to proposer-spec.md §7: 'Budget gate implementation: flag file ~/.omc/proposer/ENABLED — absent by default, see proposer-spec.md §7 for full behavior.'"
+    },
+    {
+      "id": "AUDIT-audit-elevation-c2899163",
+      "title": "ADR-003 vs proposer-spec.md conflict on learnings.md input authority",
+      "category": "assumption",
+      "severity": "IMPORTANT",
+      "status": "open",
+      "parallel_safe": false,
+      "file": "docs/ifleet-integration-adrs.md",
+      "detail": "ADR-003 §Decision says 'The M5 Proposer reads from one place (the trace) for IFleet-managed repos'. But proposer-spec.md §2 Inputs table includes learnings.md as a separate input alongside the .audits/index.json sources. If the Proposer reads learnings.md directly (file-based) AND the trace (event-based), it has two inputs — contradicting ADR-003's 'one place' statement.",
+      "remediation": "Clarify in ADR-003 whether learnings.md is a trace-derived file (nightly rollup, like index.json) or a separate file-based input. Update proposer-spec.md §2 to note the source of authority."
+    },
+    {
+      "id": "AUDIT-audit-elevation-d2d2e28f",
+      "title": "plan.md Phase 2.5 numbering inconsistent with README phase table",
+      "category": "assumption",
+      "severity": "IMPORTANT",
+      "status": "fixed",
+      "parallel_safe": true,
+      "file": "plan.md",
+      "detail": "plan.md introduces 'Phase 2.5 — Hybrid automation (SessionStart banner + audit autopilot keyword)' as a sub-phase. README.md status table lists it as a separate row between Phase 2 and Phase 3 labeled 'Phase 2.5' (with a shipped date). However, the README table says it as shipped alongside Phase 2. The fractional phase number is unusual for a shipped deliverable and may confuse workers counting phases.",
+      "remediation": "Either rename Phase 2.5 to a named phase '2a' or fold it into Phase 2's description with a note. Update both plan.md and README.md consistently."
+    },
+    {
+      "id": "AUDIT-audit-elevation-15b7fd08",
+      "title": "README Phase 3 soak shows gate evaluation still pending (30+ days elapsed)",
+      "category": "assumption",
+      "severity": "COSMETIC",
+      "status": "fixed",
+      "parallel_safe": true,
+      "file": "README.md",
+      "detail": "README.md Phase 3 status was updated in a prior audit (2026-06-20) to reflect the soak complete but 'Phase 4 gate evaluation pending'. As of 2026-06-27 (37 days since soak started), the gate evaluation remains pending. The status entry should more urgently flag this as a blocking decision.",
+      "remediation": "Update Phase 3 status note to: '🟡 soak complete (37 days elapsed as of 2026-06-27) — Phase 4 gate evaluation OVERDUE; Sebastian decision needed'."
+    },
+    {
+      "id": "AUDIT-audit-elevation-e7b0a373",
+      "title": "proposer-spec.md plain-language recap says 'eight open decisions' but D1-D7 + ADR-001 = 8 — count is correct",
+      "category": "assumption",
+      "severity": "COSMETIC",
+      "status": "fixed",
+      "parallel_safe": true,
+      "file": "docs/proposer-spec.md",
+      "detail": "proposer-spec.md plain-language recap (final section) says 'The eight open decisions at the bottom (D1-D7 plus ADR-001)'. This is accurate: D1 through D7 = 7 decisions, plus ADR-Proposer-001 = 8. Previously recorded as a mismatch but on re-verification the count is correct. Recording as verified-accurate finding.",
+      "remediation": "No fix needed — count is correct."
+    },
+    {
+      "id": "AUDIT-audit-elevation-4535f6f6",
+      "title": "plan.md fingerprint description comment form doesn't match rubric.json example format",
+      "category": "cosmetic",
+      "severity": "COSMETIC",
+      "status": "fixed",
+      "parallel_safe": true,
+      "file": "plan.md",
+      "detail": "plan.md describes the fingerprint as 'sha256 of category+globs+title' using informal plus-sign notation. After fixing the CRITICAL separator inconsistency (AUDIT-audit-elevation-c6cdd0c9), the description is updated to use pipe notation matching rubric.json. This COSMETIC entry tracks the human-readable description update.",
+      "remediation": "Covered by fix for AUDIT-audit-elevation-c6cdd0c9."
+    },
+    {
+      "id": "AUDIT-audit-elevation-35478cd2",
+      "title": "ADR-002 describes a 201-LOC plan-reviewer but IFleet has shipped additions since the ADR was written",
+      "category": "assumption",
+      "severity": "COSMETIC",
+      "status": "open",
+      "parallel_safe": true,
+      "file": "docs/ifleet-integration-adrs.md",
+      "detail": "ADR-002 context says 'plan-reviewer (M2, 502 LOC, veto-capable)' and 'diff-reviewer (251 LOC, Haiku-gated, Claude-only by default)'. These LOC counts are from May 2026. IFleet has shipped multiple PRs since then. The counts may be stale but this is purely informational — the ADR's decisions are not LOC-dependent.",
+      "remediation": "Optionally verify and update LOC counts for plan-reviewer.ts and diff-reviewer.ts in IFleet for future reference accuracy."
+    }
+  ]
+}

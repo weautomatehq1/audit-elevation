@@ -18,7 +18,7 @@ Supersedes: None
 
 The standalone elevation system (`/audit-scan`, `/audit-fix`, `codex-review` skill, `audit-autopilot`, the self-healing pipeline T3 builds, the lane-scheduler T4 builds, the audit-broadcast + Proposer specs T5 builds) is designed to live outside IFleet for a 2-week soak (per `~/dev/ai-products/audit-elevation/plan.md` Phase 3). The *next* plan after soak is the IFleet fold-in, and Sebastian wants the architectural decisions written down **before** that plan starts so M2-M5 implementation doesn't relitigate them.
 
-ADRs follow the IFleet style (`docs/adr/0001-0003.md`): Status, Context, Decision, Alternatives, Consequences, Reversibility, References. Each is sized for one focused fold-in PR.
+ADRs follow the IFleet style (`docs/adr/` directory — one file per ADR, e.g. `docs/adr/0001-single-shared-trace.md`): Status, Context, Decision, Alternatives, Consequences, Reversibility, References. Each is sized for one focused fold-in PR.
 
 ---
 
@@ -164,7 +164,7 @@ Three new `TraceEvent.kind` values:
 
 ### Context
 
-T4 ships an observation-only lane scheduler tonight that reads `~/.omc/active-lanes.json` and emits telemetry. Each Claude Code terminal registers itself on start (kind, owns_globs, started_at). The scheduler does NOT throttle or block — Phase 4+ adds enforcement once 2 weeks of telemetry inform the policy.
+T4 ships an observation-only lane scheduler tonight that reads `~/.omc/active-lanes.json` and emits telemetry. Each Claude Code terminal registers itself on start (kind, owns_globs, started_at). The scheduler does NOT throttle or block — Phase 5+ (per system plan.md phasing) adds enforcement once 2 weeks of telemetry inform the policy.
 
 IFleet has its own daemon (`src/orchestrator/daemon.ts`) that manages sprint queue depth, worker pool pressure (`pressure.ts`), and capability gating (`capabilities.ts`). It already throttles — it just doesn't know about Claude Code terminals that aren't IFleet sprints (Sebastian's REPL session, audit-scan invocations, splittasks lanes).
 
@@ -178,8 +178,8 @@ Concretely:
 
 1. `IFleet/src/orchestrator/daemon.ts` gains a `LaneRegistrar` interface that appends an entry to `~/.omc/active-lanes.json` on sprint-start and removes it on sprint-end. Schema matches T4's spec (`{id, kind, started_at, owns_globs}`).
 2. Before spawning a new sprint, IFleet's daemon checks `~/.omc/active-lanes.json` for the system-wide lane count. If above the soft cap (Phase 4 sets the number), the sprint queues instead of spawning.
-3. The lane scheduler stays observation-only in Phase 4; *IFleet's* daemon enforces the cap because it's the one that owns sprint lifecycle. Other Claude Code terminals (audit-scan, splittasks) keep being unregulated — they're transient and bursty by nature.
-4. If the lane scheduler later grows enforcement (Phase 5+, blocking new terminal spawns), IFleet's daemon defers to it — both read the same cap from `~/.omc/lane-config.json`.
+3. The lane scheduler stays observation-only in Phase 5 (its system-level MVP, per system plan.md phasing); *IFleet's* daemon enforces the cap because it's the one that owns sprint lifecycle. Other Claude Code terminals (audit-scan, splittasks) keep being unregulated — they're transient and bursty by nature.
+4. If the lane scheduler later grows enforcement (Phase 6+ in system terms, blocking new terminal spawns), IFleet's daemon defers to it — both read the same cap from `~/.omc/lane-config.json`.
 
 ### Alternatives considered
 
@@ -197,7 +197,7 @@ Concretely:
 
 ### Open questions
 
-- Should the lane scheduler get a vote on *which* sprint IFleet runs next (prioritize audit-fix sprints over feature sprints when capacity is tight)? Suggest: NO in Phase 4 — too much coupling. Reconsider for Phase 5.
+- Should the lane scheduler get a vote on *which* sprint IFleet runs next (prioritize audit-fix sprints over feature sprints when capacity is tight)? Suggest: NO in Phase 5 (Lane-scheduler MVP) — too much coupling. Reconsider for Phase 6+ (IFleet fold-in, per system plan.md phasing).
 - Lane TTL: if IFleet crashes mid-sprint, the entry stays in `active-lanes.json` forever. Suggest: each entry has a `heartbeat_ts` field; scheduler reaps entries older than 30 minutes.
 
 ---
@@ -246,7 +246,7 @@ Decision rules baked into the Proposer's morning prompt:
 ### Open questions
 
 - Channel name: `#ifleet-proposals` (per `plan.md`) or `#ifleet` (existing brief channel, `1504120127791042631`)? Suggest: new `#ifleet-proposals` so morning proposals don't get lost in operational chatter. **Sebastian decision needed.**
-- Cron timing: **03:00 local** — resolved by proposer-spec.md D7 (canonical). 5h buffer before 08:00 start covers Discord MCP retries.
+- Cron timing: 03:00 local — T5 recommendation; **pending Sebastian approval** (see proposer-spec.md D7). 5h buffer before 08:00 start covers Discord MCP retries.
 - Budget gate (per `plan.md` M5 line): does the Proposer estimate cost before DMing, and refuse if over a daily cap? Per `feedback_no_budget_caps_claude_max.md`, NO — Max plan is flat-rate, the scarce resource is lanes not dollars. The 5-lane cap above subsumes the budget gate.
 
 ---

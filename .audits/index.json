@@ -1,12 +1,12 @@
 {
   "repo": "audit-elevation",
-  "last_updated": "2026-06-24T00:00:00Z",
-  "open_findings": 0,
-  "fixed_this_run": 1,
+  "last_updated": "2026-06-27T04:09:02Z",
+  "open_findings": 4,
+  "fixed_this_run": 7,
   "by_severity": {
     "CRITICAL": 0,
-    "IMPORTANT": 0,
-    "COSMETIC": 0
+    "IMPORTANT": 3,
+    "COSMETIC": 1
   },
   "nightly_audits": [
     "2026-05-21T17:20:59Z.json",
@@ -24,7 +24,8 @@
     "20260618T040000Z.json",
     "20260620T041100Z.json",
     "20260622T041450Z.json",
-    "20260624T000000Z.json"
+    "20260624T000000Z.json",
+    "20260627T040902Z.json"
   ],
   "findings": [
     {
@@ -765,6 +766,174 @@
       "opened_at": "2026-06-20T04:11:00Z",
       "closed_at": "2026-06-20T04:11:00Z",
       "closing_pr": "audit/nightly-2026-06-20"
+    },
+    {
+      "id": "AUDIT-audit-elevation-edf61076",
+      "severity": "CRITICAL",
+      "category": "logic",
+      "title": "proposer-spec.md learnings path is wrong",
+      "file_globs": ["docs/proposer-spec.md"],
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-06-27T04:09:02Z",
+      "closed_at": "2026-06-27T04:09:02Z",
+      "closing_pr": "audit/nightly-2026-06-27"
+    },
+    {
+      "id": "AUDIT-audit-elevation-7e005f9e",
+      "severity": "CRITICAL",
+      "category": "assumption",
+      "title": "README Phase numbering contradicts lane-scheduler-spec.md",
+      "file_globs": ["docs/lane-scheduler-spec.md"],
+      "parallel_safe": false,
+      "status": "fixed",
+      "opened_at": "2026-06-27T04:09:02Z",
+      "closed_at": "2026-06-27T04:09:02Z",
+      "closing_pr": "audit/nightly-2026-06-27"
+    },
+    {
+      "id": "AUDIT-audit-elevation-c6cdd0c9",
+      "severity": "CRITICAL",
+      "category": "logic",
+      "title": "plan.md fingerprint description uses '+' separator but rubric.json uses '|'",
+      "file_globs": ["plan.md"],
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-06-27T04:09:02Z",
+      "closed_at": "2026-06-27T04:09:02Z",
+      "closing_pr": "audit/nightly-2026-06-27"
+    },
+    {
+      "id": "AUDIT-audit-elevation-de60f7a3",
+      "severity": "IMPORTANT",
+      "category": "assumption",
+      "title": "ifleet-integration-adrs.md references phantom IFleet ADR file docs/adr/0001-0003.md",
+      "file_globs": ["docs/ifleet-integration-adrs.md"],
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-06-27T04:09:02Z",
+      "closed_at": "2026-06-27T04:09:02Z",
+      "closing_pr": "audit/nightly-2026-06-27"
+    },
+    {
+      "id": "AUDIT-audit-elevation-901bddf6",
+      "severity": "IMPORTANT",
+      "category": "assumption",
+      "title": "ADR-001 stale codex.ts LOC count (says 201, actual is higher)",
+      "file_globs": ["docs/ifleet-integration-adrs.md"],
+      "parallel_safe": true,
+      "status": "open",
+      "opened_at": "2026-06-27T04:09:02Z",
+      "closed_at": null,
+      "closing_pr": null
+    },
+    {
+      "id": "AUDIT-audit-elevation-8f78858f",
+      "severity": "IMPORTANT",
+      "category": "overconfidence",
+      "title": "ADR-005 claims D7 (cron time) is resolved by proposer-spec, but D7 remains an open decision",
+      "file_globs": ["docs/ifleet-integration-adrs.md"],
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-06-27T04:09:02Z",
+      "closed_at": "2026-06-27T04:09:02Z",
+      "closing_pr": "audit/nightly-2026-06-27"
+    },
+    {
+      "id": "AUDIT-audit-elevation-12443d19",
+      "severity": "IMPORTANT",
+      "category": "assumption",
+      "title": "ADR-004 lane-scheduler Phase 4 label clashes with system Phase 4 (self-healing)",
+      "file_globs": ["docs/ifleet-integration-adrs.md"],
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-06-27T04:09:02Z",
+      "closed_at": "2026-06-27T04:09:02Z",
+      "closing_pr": "audit/nightly-2026-06-27"
+    },
+    {
+      "id": "AUDIT-audit-elevation-ecc4c533",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "ADR-005 budget gate description conflicts with proposer-spec.md §7",
+      "file_globs": ["docs/ifleet-integration-adrs.md"],
+      "parallel_safe": false,
+      "status": "open",
+      "opened_at": "2026-06-27T04:09:02Z",
+      "closed_at": null,
+      "closing_pr": null
+    },
+    {
+      "id": "AUDIT-audit-elevation-c2899163",
+      "severity": "IMPORTANT",
+      "category": "assumption",
+      "title": "ADR-003 vs proposer-spec.md conflict on learnings.md input authority",
+      "file_globs": ["docs/ifleet-integration-adrs.md"],
+      "parallel_safe": false,
+      "status": "open",
+      "opened_at": "2026-06-27T04:09:02Z",
+      "closed_at": null,
+      "closing_pr": null
+    },
+    {
+      "id": "AUDIT-audit-elevation-d2d2e28f",
+      "severity": "IMPORTANT",
+      "category": "assumption",
+      "title": "plan.md Phase 2.5 numbering inconsistent with README phase table",
+      "file_globs": ["plan.md"],
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-06-27T04:09:02Z",
+      "closed_at": "2026-06-27T04:09:02Z",
+      "closing_pr": "audit/nightly-2026-06-27"
+    },
+    {
+      "id": "AUDIT-audit-elevation-15b7fd08",
+      "severity": "COSMETIC",
+      "category": "assumption",
+      "title": "README Phase 3 soak shows gate evaluation still pending (30+ days elapsed)",
+      "file_globs": ["README.md"],
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-06-27T04:09:02Z",
+      "closed_at": "2026-06-27T04:09:02Z",
+      "closing_pr": "audit/nightly-2026-06-27"
+    },
+    {
+      "id": "AUDIT-audit-elevation-e7b0a373",
+      "severity": "COSMETIC",
+      "category": "assumption",
+      "title": "proposer-spec.md plain-language recap says 'eight open decisions' but count is correct",
+      "file_globs": ["docs/proposer-spec.md"],
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-06-27T04:09:02Z",
+      "closed_at": "2026-06-27T04:09:02Z",
+      "closing_pr": "audit/nightly-2026-06-27"
+    },
+    {
+      "id": "AUDIT-audit-elevation-4535f6f6",
+      "severity": "COSMETIC",
+      "category": "cosmetic",
+      "title": "plan.md fingerprint description comment form doesn't match rubric.json example format",
+      "file_globs": ["plan.md"],
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-06-27T04:09:02Z",
+      "closed_at": "2026-06-27T04:09:02Z",
+      "closing_pr": "audit/nightly-2026-06-27"
+    },
+    {
+      "id": "AUDIT-audit-elevation-35478cd2",
+      "severity": "COSMETIC",
+      "category": "assumption",
+      "title": "ADR-002 describes a 201-LOC plan-reviewer but IFleet has shipped additions since the ADR was written",
+      "file_globs": ["docs/ifleet-integration-adrs.md"],
+      "parallel_safe": true,
+      "status": "open",
+      "opened_at": "2026-06-27T04:09:02Z",
+      "closed_at": null,
+      "closing_pr": null
     }
   ]
 }
