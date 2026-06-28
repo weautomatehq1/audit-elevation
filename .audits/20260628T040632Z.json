@@ -1,0 +1,22 @@
+{
+  "audit_id": "audit-20260628T040632Z",
+  "repo": "audit-elevation",
+  "scanned_at": "2026-06-28T04:06:32Z",
+  "scanner": "claude-sonnet-4-6-nightly",
+  "findings": [
+    {
+      "id": "AUDIT-ae-1998cc99",
+      "severity": "COSMETIC",
+      "category": "cosmetic",
+      "title": "README.md Phase 3 soak elapsed count stale (30 days as of 2026-06-20, should be 38 days as of 2026-06-28)",
+      "detail": "README.md status table Phase 3 row said 'soak complete (30 days elapsed as of 2026-06-20)'. As of 2026-06-28, the elapsed count from Phase 3 start (2026-05-21) is 38 days. The '2026-06-20' reference date was 8 days stale.",
+      "file_globs": ["README.md"],
+      "fix_sketch": "Update elapsed count from 30 to 38 and reference date from 2026-06-20 to 2026-06-28.",
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-06-28T04:06:32Z",
+      "closed_at": "2026-06-28T04:30:00Z",
+      "closing_pr": "audit/nightly-2026-06-28"
+    }
+  ]
+}
