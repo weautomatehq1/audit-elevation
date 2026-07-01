@@ -1,0 +1,50 @@
+{
+  "audit_id": "audit-20260701T040000Z",
+  "repo": "audit-elevation",
+  "scanned_at": "2026-07-01T04:00:00Z",
+  "scanner": "claude-sonnet-4-6-nightly",
+  "findings": [
+    {
+      "id": "AUDIT-audit-elevation-c3a7f912",
+      "severity": "IMPORTANT",
+      "category": "risk",
+      "title": "Phase 4 gate evaluation 27 days overdue — IFleet fold-in blocked",
+      "detail": "Phase 3 soak (2-week dogfood) started 2026-05-21 and completed around 2026-06-04. Phase 4 gate evaluation (Sebastian's decision to proceed to self-healing) has been pending for 27 days as of 2026-07-01. Phase 6 (IFleet fold-in, 5 ADRs queued) is gated on this decision. No automated fix possible — requires Sebastian's review.",
+      "file_globs": ["README.md", "docs/ifleet-integration-adrs.md"],
+      "fix_sketch": "Sebastian must evaluate the Phase 3 soak results and decide whether to proceed to Phase 4 (self-healing pipeline) or defer further. Update README.md status table accordingly.",
+      "parallel_safe": false,
+      "status": "open",
+      "opened_at": "2026-07-01T04:00:00Z",
+      "closed_at": null,
+      "closing_pr": null
+    },
+    {
+      "id": "AUDIT-audit-elevation-8b2e4a51",
+      "severity": "COSMETIC",
+      "category": "cosmetic",
+      "title": "README.md Phase 3 elapsed count stale: 38 days as of 2026-06-28 → 41 days as of 2026-07-01",
+      "detail": "README.md status table row for Phase 3 said '38 days elapsed as of 2026-06-28'. As of 2026-07-01 the count is 41 days. Also updated to add overdue notice for Phase 4 gate evaluation.",
+      "file_globs": ["README.md"],
+      "fix_sketch": "Update date and count in Phase 3 row. Add Phase 4 gate overdue notice.",
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-07-01T04:00:00Z",
+      "closed_at": "2026-07-01T04:30:00Z",
+      "closing_pr": "audit/nightly-2026-07-01"
+    },
+    {
+      "id": "AUDIT-audit-elevation-d1f5c039",
+      "severity": "COSMETIC",
+      "category": "cosmetic",
+      "title": "Stale model ID claude-opus-4-7 in lane-scheduler-spec.md and quota-pacing-design.md examples",
+      "detail": "Example schema JSON and the quota-pacing weight table referenced claude-opus-4-7 as the current Opus model. The current model is claude-opus-4-8 (as of 2026). The spec's own implementation note prescribes prefix matching, but example IDs should be current to avoid confusing workers.",
+      "file_globs": ["docs/lane-scheduler-spec.md", "docs/quota-pacing-design.md"],
+      "fix_sketch": "Replace claude-opus-4-7 with claude-opus-4-8 in all example JSON blocks and the quota weight table.",
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-07-01T04:00:00Z",
+      "closed_at": "2026-07-01T04:30:00Z",
+      "closing_pr": "audit/nightly-2026-07-01"
+    }
+  ]
+}
