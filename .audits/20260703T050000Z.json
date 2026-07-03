@@ -1,0 +1,36 @@
+{
+  "audit_id": "audit-20260703T050000Z",
+  "repo": "audit-elevation",
+  "scanned_at": "2026-07-03T05:00:00Z",
+  "scanner": "claude-sonnet-4-6-nightly",
+  "findings": [
+    {
+      "id": "AUDIT-audit-elevation-readme-stale-2026-07-03",
+      "severity": "COSMETIC",
+      "category": "cosmetic",
+      "title": "README.md Phase 3 elapsed count and Phase 4 overdue count stale (41→43 days, 27→29 days)",
+      "detail": "README.md status table Phase 3 row shows '41 days elapsed as of 2026-07-01' and 'Phase 4 gate evaluation 27 days overdue'. Today is 2026-07-03 (+2 days). Correct values: 43 days elapsed as of 2026-07-03; Phase 4 gate 29 days overdue.",
+      "file_globs": ["README.md"],
+      "fix_sketch": "Update '41 days elapsed as of 2026-07-01' → '43 days elapsed as of 2026-07-03', and '27 days overdue' → '29 days overdue'.",
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-07-03T05:00:00Z",
+      "closed_at": "2026-07-03T05:00:00Z",
+      "closing_pr": "audit/nightly-2026-07-03"
+    },
+    {
+      "id": "AUDIT-audit-elevation-c3a7f912",
+      "severity": "IMPORTANT",
+      "category": "risk",
+      "title": "Phase 4 gate evaluation 29 days overdue — IFleet fold-in blocked",
+      "detail": "Phase 3 soak (2-week dogfood) started 2026-05-21 and completed around 2026-06-04. Phase 4 gate evaluation (Sebastian's decision to proceed to self-healing) has been pending for 29 days as of 2026-07-03. Phase 6 (IFleet fold-in, 5 ADRs queued) is gated on this decision. No automated fix possible — requires Sebastian's review.",
+      "file_globs": ["README.md", "docs/ifleet-integration-adrs.md"],
+      "fix_sketch": "Sebastian must evaluate the Phase 3 soak results and decide whether to proceed to Phase 4 (self-healing pipeline) or defer further. Update README.md status table accordingly.",
+      "parallel_safe": false,
+      "status": "open",
+      "opened_at": "2026-07-01T04:00:00Z",
+      "closed_at": null,
+      "closing_pr": null
+    }
+  ]
+}
