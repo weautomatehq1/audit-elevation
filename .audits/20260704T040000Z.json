@@ -1,0 +1,45 @@
+{
+  "scan_id": "20260704T040000Z",
+  "scanned_at": "2026-07-04T04:00:00Z",
+  "scanner": "nightly-audit-agent",
+  "branch": "audit/nightly-2026-07-04",
+  "summary": "Nightly audit — 3 new findings (3 IMPORTANT). 2 fixed in this run. 2 require human review (AUDIT-audit-elevation-c3a7f912 Phase 4 gate evaluation, AUDIT-audit-elevation-6c1a9d4b drafter idempotency design ambiguity).",
+  "findings": [
+    {
+      "id": "AUDIT-audit-elevation-3e7f2a1c",
+      "severity": "IMPORTANT",
+      "status": "fixed",
+      "title": "README.md misidentifies IFLEET_MANAGED as an env var; ADR-003 defines it as a .audits/.config.json key",
+      "file": "README.md",
+      "fix": "Updated README.md Open decisions item #3 from 'env var that flips behavior...' to 'key in .audits/.config.json (Boolean, default false per ADR-003) that flips behavior...' to match ADR-003's actual resolved mechanism.",
+      "fixed_at": "2026-07-04T04:00:00Z"
+    },
+    {
+      "id": "AUDIT-audit-elevation-b4d8e5f2",
+      "severity": "IMPORTANT",
+      "status": "fixed",
+      "title": "ADR-005 internal contradiction: Decision text commits to #ifleet-proposals but Summary Table default gives 'Reuse #ifleet'",
+      "file": "docs/ifleet-integration-adrs.md",
+      "fix": "Updated Summary Table row 5 default from 'Reuse #ifleet (1504120127791042631)' to '#ifleet-proposals (create on enable, per ADR-005 Decision text)' to align with the ADR-005 Decision paragraph and proposer-spec.md D3.",
+      "fixed_at": "2026-07-04T04:00:00Z"
+    },
+    {
+      "id": "AUDIT-audit-elevation-6c1a9d4b",
+      "severity": "IMPORTANT",
+      "status": "open",
+      "title": "self-heal-pipeline.md drafter idempotency claim is logically inverted relative to the drafter contract",
+      "file": "docs/self-heal-pipeline.md",
+      "description": "The DRAFT→ACCEPTED workflow section states the drafter does NOT re-draft after acceptance 'because the file is gone from .audits/proposed-rules/' — but per the drafter contract, absence of the file is exactly what triggers re-drafting (skip fires only when the file is present). The claim is logically inverted. The follow-on 'force a re-draft by deleting from ~/.claude/rules/' implies the drafter checks ~/.claude/rules/, but that check is absent from the drafter contract. Requires Sebastian to confirm intent: (a) add ~/.claude/rules/ check to drafter contract, or (b) correct the idempotency claim to say the drafter WILL re-draft after acceptance.",
+      "opened_at": "2026-07-04T04:00:00Z"
+    },
+    {
+      "id": "AUDIT-audit-elevation-c3a7f912",
+      "severity": "IMPORTANT",
+      "status": "open",
+      "title": "Phase 4 gate evaluation is overdue — 2-week soak ended 2026-06-04, no go/no-go decision recorded",
+      "file": "README.md",
+      "description": "The 2-week Phase 3 soak started 2026-05-21 and ended 2026-06-04. Phase 4 gate evaluation (go/no-go on IFleet fold-in) requires Sebastian's decision. As of 2026-07-04 this is 30 days past the evaluation window. Carried open from prior scans.",
+      "opened_at": "2026-07-01T04:00:00Z"
+    }
+  ]
+}

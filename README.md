@@ -285,7 +285,7 @@ From the 5 IFleet integration ADRs in [docs/ifleet-integration-adrs.md](./docs/i
 
 1. **Symlink vs copy** — when IFleet integrates, should `~/.claude/agents/audit-*` symlink into IFleet, or be copied?
 2. **Cost cap policy** — Max-plan flat-rate, but what's the safety cap on a runaway audit-fix?
-3. **`IFLEET_MANAGED` flag** — env var that flips behavior when IFleet is driving vs user-driven?
+3. **`IFLEET_MANAGED` flag** — key in `.audits/.config.json` (Boolean, default false per ADR-003) that flips behavior when IFleet is driving vs user-driven
 4. **Lane TTL** — how long before a lane in `active-lanes.json` is considered stale?
 5. **`#ifleet-proposals` channel** — DM Sebastian only, or also broadcast to channel?
 

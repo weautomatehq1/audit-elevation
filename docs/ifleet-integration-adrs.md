@@ -259,7 +259,7 @@ Decision rules baked into the Proposer's morning prompt:
 | 2 | Cross-provider reviewer own cost cap value | 002 | 15% of architect cost |
 | 3 | `.audits/.config.json` `IFLEET_MANAGED` flag schema | 003 | Boolean, default false |
 | 4 | Lane TTL / heartbeat interval | 004 | 30 min idle reap |
-| 5 | `#ifleet-proposals` channel creation | 005 | Reuse `#ifleet` (1504120127791042631) |
+| 5 | `#ifleet-proposals` channel creation | 005 | `#ifleet-proposals` (create on enable, per ADR-005 Decision text) |
 
 ## Plain-language recap
 
