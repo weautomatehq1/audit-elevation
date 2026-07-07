@@ -1,0 +1,23 @@
+{
+  "audit_id": "20260707T041832Z",
+  "repo": "audit-elevation",
+  "scanned_at": "2026-07-07T04:18:32Z",
+  "scanner": "nightly-audit-agent",
+  "branch": "audit/nightly-2026-07-07",
+  "findings": [
+    {
+      "id": "AUDIT-ae-c4f2b8e1",
+      "severity": "COSMETIC",
+      "category": "assumption",
+      "title": "README.md Phase 3 soak elapsed count stale (38 days as of 2026-06-28 → should be 47 days as of 2026-07-07)",
+      "detail": "Phase 3 soak started 2026-05-21. README.md line 39 still says '38 days elapsed as of 2026-06-28'. As of 2026-07-07 the correct count is 47 days elapsed. Phase 4 gate evaluation remains pending.",
+      "file_globs": ["audit-elevation/README.md"],
+      "fix_sketch": "Update line 39 to '47 days elapsed as of 2026-07-07'.",
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-07-07T04:18:32Z",
+      "closed_at": "2026-07-07T04:18:32Z",
+      "closing_pr": "audit/nightly-2026-07-07"
+    }
+  ]
+}
