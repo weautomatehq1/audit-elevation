@@ -1,2 +1,6 @@
 .DS_Store
 *.bak
+# .audits/ ignored by default per plan.md §'gitignore decision'.
+# Per-repo opt-in: remove this line + add .audits/.gitkeep
+# audit-elevation: OPTED IN (private repo, tracking enabled — do NOT re-add this ignore)
+# .audits/
