@@ -16,7 +16,8 @@
       "status": "fixed",
       "opened_at": "2026-07-03T05:00:00Z",
       "closed_at": "2026-07-03T05:00:00Z",
-      "closing_pr": "audit/nightly-2026-07-03"
+      "closing_pr": 0,
+      "fix_summary": "Fixed directly on branch audit/nightly-2026-07-03 without a formal PR (nightly audit branch)."
     },
     {
       "id": "AUDIT-audit-elevation-c3a7f912",

@@ -11,12 +11,12 @@ Supersedes: None
 # IFleet integration ADRs — fold-in of the standalone elevation system
 
 **Status:** DRAFT (5 ADRs, awaiting Sebastian review)
-**Author:** T1 on split `20260520-2244-elevation-push`
+**Author:** T1 on split `20260520-2244-elevation-push` (authored 2026-05-20; soak completed 2026-06-04; Phase 4 gate evaluation 35 days overdue as of 2026-07-09)
 **Scope:** Architectural decisions for *eventually* folding the standalone audit + Codex + lane-scheduler + Proposer system into IFleet. No IFleet code changes proposed in this document — ADRs only.
 
 ## Why these ADRs exist now
 
-The standalone elevation system (`/audit-scan`, `/audit-fix`, `codex-review` skill, `audit-autopilot`, the self-healing pipeline T3 builds, the lane-scheduler T4 builds, the audit-broadcast + Proposer specs T5 builds) is designed to live outside IFleet for a 2-week soak (per `~/dev/ai-products/audit-elevation/plan.md` Phase 3). The *next* plan after soak is the IFleet fold-in, and Sebastian wants the architectural decisions written down **before** that plan starts so M2-M5 implementation doesn't relitigate them.
+The standalone elevation system (`/audit-scan`, `/audit-fix`, `codex-review` skill, `audit-autopilot`, the self-healing pipeline T3 built, the lane-scheduler T4 built, the audit-broadcast + Proposer specs T5 built) was designed to live outside IFleet for a 2-week soak (per `~/dev/ai-products/audit-elevation/plan.md` Phase 3). The soak completed ~2026-06-04. The *next* plan after soak is the IFleet fold-in, and Sebastian wants the architectural decisions written down **before** that plan starts so M2-M5 implementation doesn't relitigate them.
 
 ADRs follow the IFleet style (`docs/adr/0001-0003.md`): Status, Context, Decision, Alternatives, Consequences, Reversibility, References. Each is sized for one focused fold-in PR.
 
@@ -132,7 +132,7 @@ Three new `TraceEvent.kind` values:
 
 - `audit.finding.opened` — payload: full finding JSON (id, severity, fingerprint, file_globs, etc.). Emitted by the audit-scanner role.
 - `audit.finding.closed` — payload: `{ findingId, closingPr, verifierEvidence }`. Emitted by `diff-reviewer.ts` / `cross-provider-reviewer.ts` when a PR merges that cites the finding.
-- `audit.finding.regressed` — payload: `{ findingId, originalClosePr, regressionFingerprint, newOccurrenceTaskId, regressionOf, regressionClosingPr }`. Emitted by the M4 regression detector (T3 builds the standalone version tonight; M4 wires the IFleet version). Note: `regressionOf` (original finding id) and `regressionClosingPr` (PR number of the original fix) are the camelCase trace-event equivalents of the snake_case scan-level fields `regression_of` / `regression_closing_pr` written to `.audits/*.json` by self-heal-pipeline.md — both layers track the same data, different naming conventions per their respective contexts (TypeScript event vs. JSON file).
+- `audit.finding.regressed` — payload: `{ findingId, originalClosePr, regressionFingerprint, newOccurrenceTaskId, regressionOf, regressionClosingPr }`. Emitted by the M4 regression detector (T3 built the standalone version on 2026-05-20; M4 wires the IFleet version — gated on Phase 4 gate). Note: `regressionOf` (original finding id) and `regressionClosingPr` (PR number of the original fix) are the camelCase trace-event equivalents of the snake_case scan-level fields `regression_of` / `regression_closing_pr` written to `.audits/*.json` by self-heal-pipeline.md — both layers track the same data, different naming conventions per their respective contexts (TypeScript event vs. JSON file).
 
 `.audits/index.json` for IFleet-managed repos is regenerated nightly from `audit.finding.*` events, same cron that derives `learnings.md`. Stale entries (finding marked open in `.audits/` but `audit.finding.closed` in trace) are reconciled — trace wins.
 
@@ -160,11 +160,11 @@ Three new `TraceEvent.kind` values:
 ## ADR-004 — Lane scheduler ↔ IFleet daemon coordination
 
 **Status:** DRAFT
-**Affects:** Future relationship between `~/.claude/scripts/lane-scheduler.mjs` (T4 ships tonight) and `IFleet/src/orchestrator/daemon.ts`
+**Affects:** Future relationship between `~/.claude/scripts/lane-scheduler.mjs` (T4 shipped 2026-05-21 as observation-only) and `IFleet/src/orchestrator/daemon.ts`
 
 ### Context
 
-T4 ships an observation-only lane scheduler tonight that reads `~/.omc/active-lanes.json` and emits telemetry. Each Claude Code terminal registers itself on start (kind, owns_globs, started_at). The scheduler does NOT throttle or block — Phase 4+ adds enforcement once 2 weeks of telemetry inform the policy.
+T4 shipped an observation-only lane scheduler on 2026-05-21 (elevation-push) that reads `~/.omc/active-lanes.json` and emits telemetry. Each Claude Code terminal registers itself on start (kind, owns_globs, started_at). The scheduler does NOT throttle or block — Phase 4+ adds enforcement once 2 weeks of telemetry inform the policy.
 
 IFleet has its own daemon (`src/orchestrator/daemon.ts`) that manages sprint queue depth, worker pool pressure (`pressure.ts`), and capability gating (`capabilities.ts`). It already throttles — it just doesn't know about Claude Code terminals that aren't IFleet sprints (Sebastian's REPL session, audit-scan invocations, splittasks lanes).
 
@@ -205,7 +205,7 @@ Concretely:
 ## ADR-005 — Proposer (M5) consuming audit findings
 
 **Status:** DRAFT
-**Affects:** M5 Proposer architecture (currently spec-only, T5 drafts the spec tonight)
+**Affects:** M5 Proposer architecture (spec drafted by T5 on 2026-05-20 — see docs/proposer-spec.md)
 
 ### Context
 
@@ -263,9 +263,9 @@ Decision rules baked into the Proposer's morning prompt:
 
 ## Plain-language recap
 
-These five draft ADRs describe how the standalone elevation system (the audit scanner, Codex reviewer, lane scheduler, and Proposer that get built this week and next) would eventually fold into IFleet so they aren't permanently separate. The big calls: (1) the standalone Codex review skill stays usable for non-IFleet repos but IFleet itself gets a thin in-pipeline wrapper that calls the existing `WorkerAdapter` so we don't end up with two prompt templates drifting; (2) audit findings become real trace events inside IFleet for repos IFleet manages, and a derived `.audits/index.json` file outside IFleet for everything else; (3) IFleet's daemon and the new lane scheduler coordinate by sharing a JSON file in `~/.omc/`, not by merging into one mega-daemon; (4) the M5 morning Proposer always prioritizes open CRITICAL audit findings over new feature work, and DMs you a paste-box in Discord rather than auto-dispatching, until the soak proves it can be trusted. None of this gets built tonight — these ADRs are the architectural skeleton so when the fold-in plan starts (after the 2-week soak), we already agree on the shape. Five small decisions need your input before any code lands; the table above lists them with safe defaults.
+These five draft ADRs describe how the standalone elevation system (the audit scanner, Codex reviewer, lane scheduler, and Proposer built during the 2026-05-20 overnight elevation push) would eventually fold into IFleet so they aren't permanently separate. The big calls: (1) the standalone Codex review skill stays usable for non-IFleet repos but IFleet itself gets a thin in-pipeline wrapper that calls the existing `WorkerAdapter` so we don't end up with two prompt templates drifting; (2) audit findings become real trace events inside IFleet for repos IFleet manages, and a derived `.audits/index.json` file outside IFleet for everything else; (3) IFleet's daemon and the new lane scheduler coordinate by sharing a JSON file in `~/.omc/`, not by merging into one mega-daemon; (4) the M5 morning Proposer always prioritizes open CRITICAL audit findings over new feature work, and DMs you a paste-box in Discord rather than auto-dispatching, until the soak proves it can be trusted. None of this was built during the overnight push — these ADRs are the architectural skeleton so when the fold-in plan starts (after the Phase 3 soak, which completed 2026-06-04), we already agree on the shape. Five small decisions need your input before any code lands; the table above lists them with safe defaults.
 
 ---
 
 🗣️ In plain terms:
-Tonight's overnight build is happening as five parallel terminals; T1 (this) writes the documents that say how everything we ship tonight will *eventually* connect into IFleet (the autonomous fleet repo) months from now. The five ADRs are draft-only — no IFleet code changes — and each ends with the specific decisions you need to make before the actual fold-in PRs are written. The morning brief will surface these decisions explicitly so you can answer them over coffee instead of digging through this file.
+The 2026-05-20 overnight build ran as five parallel terminals; T1 (this) wrote the documents that say how everything shipped that night will *eventually* connect into IFleet (the autonomous fleet repo) months from now. The five ADRs are draft-only — no IFleet code changes — and each ends with the specific decisions you need to make before the actual fold-in PRs are written. The morning brief will surface these decisions explicitly so you can answer them over coffee instead of digging through this file.

@@ -79,9 +79,9 @@ Field rules:
 ## How `/audit-fix` appends to `closed.json` (contract for T2 / future updates)
 
 > **FORWARD CONTRACT:** This section describes behavior `/audit-fix` MUST implement
-> in Phase 4. As of the Phase 3 soak, `closed.json` is **not yet written** — see
-> the README status table. This contract is written prescriptively so T2/T4
-> implementers have a clear, auditable spec.
+> in Phase 4. As of 2026-07-09 (Phase 4 gated on Sebastian decision — see README),
+> `closed.json` is **not yet written**. This contract is written prescriptively so
+> T2/T4 implementers have a clear, auditable spec.
 
 T3 does NOT own `/audit-fix`. This is the contract T2 (or any successor)
 implements when closing a finding:
