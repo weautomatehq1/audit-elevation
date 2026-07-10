@@ -1,30 +1,23 @@
 {
+  "audit_id": "20260624T000000Z",
   "repo": "audit-elevation",
-  "audited_at": "2026-06-24T00:00:00Z",
-  "auditor": "claude-sonnet-4-6 / nightly-audit",
   "branch": "audit/nightly-2026-06-24",
+  "scanned_at": "2026-06-24T00:00:00Z",
+  "scanner": "claude-sonnet-4-6 / nightly-audit",
   "findings": [
     {
       "id": "AUDIT-audit-elevation-20260624-01",
       "severity": "IMPORTANT",
       "category": "logic",
       "title": ".audits/index.json nightly_audits array missing 20260622T041450Z.json",
-      "file": ".audits/index.json",
-      "description": "The audit file 20260622T041450Z.json exists on disk and the index last_updated is 2026-06-22T04:14:50Z, but the nightly_audits array was not updated to include it. The array ends at 20260620T041100Z.json. Any tooling that reads nightly_audits for the audit history will not see the 2026-06-22 scan.",
-      "fix": "Append '20260622T041450Z.json' to the nightly_audits array in .audits/index.json.",
+      "detail": "The audit file 20260622T041450Z.json exists on disk and the index last_updated is 2026-06-22T04:14:50Z, but the nightly_audits array was not updated to include it. The array ends at 20260620T041100Z.json. Any tooling that reads nightly_audits for the audit history will not see the 2026-06-22 scan.",
+      "file_globs": [".audits/index.json"],
+      "fix_sketch": "Append '20260622T041450Z.json' to the nightly_audits array in .audits/index.json.",
+      "parallel_safe": true,
       "status": "fixed",
+      "opened_at": "2026-06-24T00:00:00Z",
       "closed_at": "2026-06-24T00:00:00Z",
-      "fix_pr_branch": "audit/nightly-2026-06-24"
+      "closing_pr": "audit/nightly-2026-06-24"
     }
-  ],
-  "summary": {
-    "total": 1,
-    "open": 0,
-    "fixed_this_run": 1,
-    "by_severity": {
-      "CRITICAL": 0,
-      "IMPORTANT": 1,
-      "COSMETIC": 0
-    }
-  }
+  ]
 }

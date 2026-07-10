@@ -1,0 +1,156 @@
+{
+  "audit_id": "20260710T040000Z",
+  "repo": "audit-elevation",
+  "scanned_at": "2026-07-10T04:00:00Z",
+  "scanner": "nightly-audit-agent",
+  "branch": "audit/nightly-2026-07-10",
+  "findings_fixed_from_prior_open": [],
+  "findings_new_fixed": [
+    {
+      "id": "AUDIT-audit-elevation-a8429a85",
+      "severity": "IMPORTANT",
+      "category": "assumption",
+      "title": "README.md Phase 3 status row stale — elapsed days and Phase 4 overdue count not updated",
+      "detail": "README.md Phase 3 row showed '43 days elapsed as of 2026-07-03' and 'Phase 4 gate evaluation 29 days overdue'. As of 2026-07-10, Phase 3 has been complete for 50 days and Phase 4 gate evaluation is 36 days overdue. The row text was not updated by the 2026-07-07 audit.",
+      "file_globs": ["README.md"],
+      "fix_sketch": "Updated '43 days elapsed as of 2026-07-03' to '50 days elapsed as of 2026-07-10' and '29 days overdue' to '36 days overdue'.",
+      "parallel_safe": true,
+      "fingerprint": "a8429a85146d49b51e8fc2543393c97ee0aa523c9c720aa9aef593df181d05dd",
+      "status": "fixed",
+      "opened_at": "2026-07-10T04:00:00Z",
+      "closed_at": "2026-07-10T04:00:00Z",
+      "closing_pr": "audit/nightly-2026-07-10"
+    },
+    {
+      "id": "AUDIT-audit-elevation-4d1bb968",
+      "severity": "IMPORTANT",
+      "category": "assumption",
+      "title": "README.md Phase 6 gate condition stale — shows 'gated on Phase 3 soak' but Phase 3 soak is complete",
+      "detail": "README.md Phase 6 row status column read 'gated on Phase 3 soak'. Phase 3 soak completed 2026-06-04 (50 days ago). The gate condition for Phase 6 is now the Phase 4 gate evaluation decision (pending Sebastian). The Phase 3 soak reference is stale and misleading.",
+      "file_globs": ["README.md"],
+      "fix_sketch": "Updated Phase 6 gate to 'gated on Phase 4 gate decision (Phase 3 soak complete; decision pending)'.",
+      "parallel_safe": true,
+      "fingerprint": "4d1bb968c8ff3b7f5709f15b2592dd5471fcbcd4efe492aef961746f869e8c0d",
+      "status": "fixed",
+      "opened_at": "2026-07-10T04:00:00Z",
+      "closed_at": "2026-07-10T04:00:00Z",
+      "closing_pr": "audit/nightly-2026-07-10"
+    },
+    {
+      "id": "AUDIT-audit-elevation-632764d6",
+      "severity": "IMPORTANT",
+      "category": "assumption",
+      "title": "README.md status section open findings count stale — shows 0 open as of 2026-06-02, now 1 open",
+      "detail": "README.md status section read 'As of 2026-06-02: audit-elevation has 0 open findings (all 2026-05-21 baseline findings closed/fixed)'. As of 2026-07-01 there is 1 open finding (AUDIT-audit-elevation-c3a7f912 — Phase 4 gate evaluation overdue). The '0 open findings' claim is factually incorrect.",
+      "file_globs": ["README.md"],
+      "fix_sketch": "Updated to 'As of 2026-07-10: audit-elevation has 1 open finding (AUDIT-audit-elevation-c3a7f912 — Phase 4 gate evaluation overdue; Sebastian decision needed)'.",
+      "parallel_safe": true,
+      "fingerprint": "632764d62c401f8c90ee56ba01595aa2e03a8a7e8b936bb3e4e9474f72e1d8db",
+      "status": "fixed",
+      "opened_at": "2026-07-10T04:00:00Z",
+      "closed_at": "2026-07-10T04:00:00Z",
+      "closing_pr": "audit/nightly-2026-07-10"
+    },
+    {
+      "id": "AUDIT-audit-elevation-322e2fbb",
+      "severity": "IMPORTANT",
+      "category": "assumption",
+      "title": "plan.md schema example uses stale scanner model claude-opus-4-7",
+      "detail": "plan.md line 79 shows '\"scanner\": \"claude-opus-4-7\"' in the canonical findings JSON schema example. The current latest Claude model is claude-opus-4-8 (as of 2026-07-10). Schema examples should reference current model IDs to avoid downstream implementors targeting a deprecated model.",
+      "file_globs": ["plan.md"],
+      "fix_sketch": "Changed 'claude-opus-4-7' to 'claude-opus-4-8' in the schema example.",
+      "parallel_safe": true,
+      "fingerprint": "322e2fbb0d72b7b713d4531105e217d06f1a9c1fb02cbc93910da596f5882edd",
+      "status": "fixed",
+      "opened_at": "2026-07-10T04:00:00Z",
+      "closed_at": "2026-07-10T04:00:00Z",
+      "closing_pr": "audit/nightly-2026-07-10"
+    },
+    {
+      "id": "AUDIT-audit-elevation-e559d823",
+      "severity": "IMPORTANT",
+      "category": "logic",
+      "title": "docs/proposer-spec.md D5 recommendation text inverted — leads with option b but option a is correct for v1",
+      "detail": "proposer-spec.md D5 row recommendation column read '**(b) for v1.5.** Start with (a) — fewer moving parts; once the format settles, automate.' This is inverted: the recommendation is actually option (a) for v1 (paste-box by hand), with (b) deferred to v1.5. Leading with '(b) for v1.5' implies (b) is the chosen path for the current version, which is backwards.",
+      "file_globs": ["docs/proposer-spec.md"],
+      "fix_sketch": "Changed to '**(a) for v1** (paste-box by hand). Automate to (b) in v1.5 once format settles.'",
+      "parallel_safe": true,
+      "fingerprint": "e559d823a062d3181e86300c1906006e97e2dd09a6f238b201e3b981f760c1e5",
+      "status": "fixed",
+      "opened_at": "2026-07-10T04:00:00Z",
+      "closed_at": "2026-07-10T04:00:00Z",
+      "closing_pr": "audit/nightly-2026-07-10"
+    },
+    {
+      "id": "AUDIT-audit-elevation-380f4afd",
+      "severity": "COSMETIC",
+      "category": "cosmetic",
+      "title": "7 historical audit scan JSON files use non-conformant field names",
+      "detail": "Seven scan files used non-conformant top-level field names instead of the rubric.json canonical schema: scan_id/run_id instead of audit_id, auditor/audited_by instead of scanner, audited_at/started_at instead of scanned_at. Four files also had non-conformant finding-level fields: file (string) instead of file_globs (array), description instead of detail, fix instead of fix_sketch, fix_pr_branch instead of closing_pr. Two files (20260613T041834Z.json, 20260618T040000Z.json) had no findings array. One file (20260620T041100Z.json) had rubric_version '1.0' instead of '1.0.0'.",
+      "file_globs": [
+        ".audits/20260604T050000Z.json",
+        ".audits/20260613T041834Z.json",
+        ".audits/20260618T040000Z.json",
+        ".audits/20260620T041100Z.json",
+        ".audits/20260622T041450Z.json",
+        ".audits/20260624T000000Z.json",
+        ".audits/20260630T000000Z.json"
+      ],
+      "fix_sketch": "Renamed all non-conformant fields to canonical names. Added findings: [] to clean-scan files. Corrected rubric_version. Preserved all finding IDs, content, and status values.",
+      "parallel_safe": true,
+      "fingerprint": "380f4afddf84bb4cf695f8ae7150ae46d9914e9ab37acb88c288a082999fffce",
+      "status": "fixed",
+      "opened_at": "2026-07-10T04:00:00Z",
+      "closed_at": "2026-07-10T04:00:00Z",
+      "closing_pr": "audit/nightly-2026-07-10"
+    },
+    {
+      "id": "AUDIT-audit-elevation-7225c3ea",
+      "severity": "COSMETIC",
+      "category": "cosmetic",
+      "title": "index.json open finding AUDIT-audit-elevation-c3a7f912 has null fingerprint",
+      "detail": "The open finding c3a7f912 in .audits/index.json had fingerprint: null. The rubric.json fingerprint_algo (sha256-v1) requires concat format '{category}|{file_globs_sorted_comma_joined}|{normalized_title}'. Computing for category='risk', file_globs=['README.md','docs/ifleet-integration-adrs.md'] (sorted: README.md first, then docs/...), title normalized from 'Phase 4 gate evaluation 29 days overdue — IFleet fold-in blocked' → fingerprint 12ae858fcd1e1de7841a976f980f493b029f4d368785742120f45b53cc1fc859.",
+      "file_globs": [".audits/index.json"],
+      "fix_sketch": "Filled in computed fingerprint 12ae858fcd1e1de7841a976f980f493b029f4d368785742120f45b53cc1fc859 in index.json open finding.",
+      "parallel_safe": true,
+      "fingerprint": "7225c3ea0fb2090b48bcb36ceb5e82b33a68464c17d63a4f03974610b462fe2e",
+      "status": "fixed",
+      "opened_at": "2026-07-10T04:00:00Z",
+      "closed_at": "2026-07-10T04:00:00Z",
+      "closing_pr": "audit/nightly-2026-07-10"
+    }
+  ],
+  "findings_deferred": [
+    {
+      "id": "AUDIT-audit-elevation-legacy-text-fingerprints",
+      "severity": "COSMETIC",
+      "category": "cosmetic",
+      "title": "2026-06-08T04:35:00Z.json uses text fingerprints and non-hex finding IDs (pre-SHA256 era)",
+      "detail": "The 2026-06-08 scan file predates the SHA256-v1 fingerprint algorithm. Its three findings use human-readable text fingerprints ('audit-elevation-adr004-phase-c-stale-2026-06-08') and two finding IDs contain non-hex characters (f4g5h6i7, j8k9l0m1). Similarly, 20260604T050000Z.json and 20260624T000000Z.json use date-based non-SHA256 IDs (20260604-01, 20260624-01).",
+      "file_globs": [
+        "2026-06-08T04:35:00Z.json",
+        ".audits/20260604T050000Z.json",
+        ".audits/20260624T000000Z.json"
+      ],
+      "fix_sketch": "N/A — deferred as legacy. Pre-fingerprinting-era scan files are exempt from SHA256 ID/fingerprint conformance. Modifying historical IDs would invalidate any external references. These files are documented here for awareness.",
+      "status": "deferred",
+      "notes": "by-design: scan files pre-dating the SHA256-v1 fingerprint algorithm retain their original IDs and fingerprint formats. The rubric.json fingerprint_algo applies to new findings going forward.",
+      "opened_at": "2026-07-10T04:00:00Z"
+    }
+  ],
+  "findings_still_open": [
+    {
+      "id": "AUDIT-audit-elevation-c3a7f912",
+      "severity": "IMPORTANT",
+      "title": "Phase 4 gate evaluation 36 days overdue — IFleet fold-in blocked (updated from 29 days at opening)",
+      "notes": "Carried forward; requires Sebastian to decide on Phase 4 gate (fingerprint REGRESSION + DRAFT auto-rules). Overdue count updated from 29 days (at 2026-07-01 opening) to 36 days (as of 2026-07-10). Fingerprint filled in this session: 12ae858fcd1e1de7841a976f980f493b029f4d368785742120f45b53cc1fc859."
+    }
+  ],
+  "summary": {
+    "fixed_from_prior_open": 0,
+    "fixed_new": 7,
+    "deferred": 1,
+    "still_open": 1,
+    "total_open_after_run": 1
+  }
+}

@@ -1,8 +1,7 @@
 {
   "repo": "audit-elevation",
-  "last_updated": "2026-07-03T05:00:00Z",
+  "last_updated": "2026-07-10T04:00:00Z",
   "open_findings": 1,
-  "fixed_this_run": 1,
   "by_severity": {
     "CRITICAL": 0,
     "IMPORTANT": 1,
@@ -29,15 +28,16 @@
     "20260628T040632Z.json",
     "20260630T000000Z.json",
     "20260701T040000Z.json",
-    "20260703T050000Z.json"
+    "20260703T050000Z.json",
+    "20260710T040000Z.json"
   ],
   "findings": [
     {
       "id": "AUDIT-audit-elevation-c3a7f912",
       "severity": "IMPORTANT",
       "category": "risk",
-      "title": "Phase 4 gate evaluation 29 days overdue — IFleet fold-in blocked",
-      "fingerprint": null,
+      "title": "Phase 4 gate evaluation 36 days overdue — IFleet fold-in blocked",
+      "fingerprint": "12ae858fcd1e1de7841a976f980f493b029f4d368785742120f45b53cc1fc859",
       "status": "open",
       "opened_at": "2026-07-01T04:00:00Z",
       "closed_at": null,

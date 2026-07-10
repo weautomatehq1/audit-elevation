@@ -1,11 +1,11 @@
 {
-  "scan_id": "20260620T041100Z",
+  "audit_id": "20260620T041100Z",
   "repo": "audit-elevation",
   "branch": "audit/nightly-2026-06-20",
   "git_sha": "HEAD",
   "scanned_at": "2026-06-20T04:11:00Z",
-  "auditor": "nightly-audit-agent",
-  "rubric_version": "1.0",
+  "scanner": "nightly-audit-agent",
+  "rubric_version": "1.0.0",
   "findings": [
     {
       "id": "AUDIT-audit-elevation-20260620-01",
