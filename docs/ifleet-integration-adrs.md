@@ -11,7 +11,7 @@ Supersedes: None
 # IFleet integration ADRs — fold-in of the standalone elevation system
 
 **Status:** DRAFT (5 ADRs, awaiting Sebastian review)
-**Author:** T1 on split `20260520-2244-elevation-push` (authored 2026-05-20; soak completed 2026-06-04; Phase 4 gate evaluation 35 days overdue as of 2026-07-09)
+**Author:** T1 on split `20260520-2244-elevation-push` (authored 2026-05-20; soak completed 2026-06-04; Phase 4 gate evaluation 37 days overdue as of 2026-07-11)
 **Scope:** Architectural decisions for *eventually* folding the standalone audit + Codex + lane-scheduler + Proposer system into IFleet. No IFleet code changes proposed in this document — ADRs only.
 
 ## Why these ADRs exist now
@@ -25,6 +25,9 @@ ADRs follow the IFleet style (`docs/adr/0001-0003.md`): Status, Context, Decisio
 ## ADR-001 — `codex-review` skill → IFleet `src/workers/codex.ts` wiring
 
 **Status:** DRAFT
+**Date:** 2026-05-20
+**Author:** T1 (overnight elevation-push, split 20260520-2244)
+**Decider:** Sebastian Puig (pending review)
 **Affects:** M2 (plan-reviewer slot) and the existing `src/workers/codex.ts` `WorkerAdapter`
 
 ### Context
@@ -67,6 +70,9 @@ Concretely:
 ## ADR-002 — `cross-provider-reviewer.ts` placement in the IFleet pipeline
 
 **Status:** DRAFT
+**Date:** 2026-05-20
+**Author:** T1 (overnight elevation-push, split 20260520-2244)
+**Decider:** Sebastian Puig (pending review)
 **Affects:** Pipeline ordering — sits between `plan-reviewer.ts` and `diff-reviewer.ts`
 
 ### Context
@@ -114,6 +120,9 @@ Three placement candidates:
 ## ADR-003 — Audit findings as IFleet trace events
 
 **Status:** DRAFT
+**Date:** 2026-05-20
+**Author:** T1 (overnight elevation-push, split 20260520-2244)
+**Decider:** Sebastian Puig (pending review)
 **Affects:** `SprintManager` event bus, `.audits/index.json` ↔ trace bidirectional mapping
 
 ### Context
@@ -160,6 +169,9 @@ Three new `TraceEvent.kind` values:
 ## ADR-004 — Lane scheduler ↔ IFleet daemon coordination
 
 **Status:** DRAFT
+**Date:** 2026-05-20
+**Author:** T1 (overnight elevation-push, split 20260520-2244)
+**Decider:** Sebastian Puig (pending review)
 **Affects:** Future relationship between `~/.claude/scripts/lane-scheduler.mjs` (T4 shipped 2026-05-21 as observation-only) and `IFleet/src/orchestrator/daemon.ts`
 
 ### Context
@@ -205,6 +217,9 @@ Concretely:
 ## ADR-005 — Proposer (M5) consuming audit findings
 
 **Status:** DRAFT
+**Date:** 2026-05-20
+**Author:** T1 (overnight elevation-push, split 20260520-2244)
+**Decider:** Sebastian Puig (pending review)
 **Affects:** M5 Proposer architecture (spec drafted by T5 on 2026-05-20 — see docs/proposer-spec.md)
 
 ### Context
