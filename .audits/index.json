@@ -1,12 +1,12 @@
 {
   "repo": "audit-elevation",
-  "last_updated": "2026-07-09T04:00:00Z",
-  "open_findings": 15,
-  "fixed_this_run": 14,
+  "last_updated": "2026-07-11T04:00:00Z",
+  "open_findings": 6,
+  "fixed_this_run": 2,
   "by_severity": {
     "CRITICAL": 0,
-    "IMPORTANT": 13,
-    "COSMETIC": 2
+    "IMPORTANT": 5,
+    "COSMETIC": 1
   },
   "nightly_audits": [
     "2026-05-21T17:20:59Z.json",
@@ -30,22 +30,25 @@
     "20260630T000000Z.json",
     "20260701T040000Z.json",
     "20260703T050000Z.json",
-    "20260709T040000Z.json"
+    "20260709T040000Z.json",
+    "20260711T040000Z.json"
   ],
   "findings": [
     {
       "id": "AUDIT-audit-elevation-c3a7f912",
       "severity": "IMPORTANT",
       "category": "risk",
-      "title": "Phase 4 gate evaluation 35 days overdue — IFleet fold-in blocked",
+      "title": "Phase 4 gate evaluation overdue — IFleet fold-in blocked",
       "fingerprint": "291e24964218402ba34f2e30e08e57cea910f7eb2d9dca2b6817dade05754129",
-      "status": "open",
+      "status": "fixed",
       "opened_at": "2026-07-01T04:00:00Z",
-      "closed_at": null,
-      "closing_pr": null,
+      "closed_at": "2026-07-11T04:00:00Z",
+      "closing_pr": "audit/nightly-2026-07-11",
+      "fix_summary": "Updated overdue day counts to 37 days in README.md, proposer-spec.md, and ifleet-integration-adrs.md. Underlying blocker (Phase 4 gate) still requires Sebastian decision.",
       "file_globs": [
         "README.md",
-        "docs/ifleet-integration-adrs.md"
+        "docs/ifleet-integration-adrs.md",
+        "docs/proposer-spec.md"
       ],
       "parallel_safe": false
     },
@@ -55,10 +58,11 @@
       "category": "yaml",
       "title": "ADR-001 through ADR-005 each missing Date, Author, Decider in per-ADR frontmatter sections",
       "fingerprint": "07d9c3e8e1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8",
-      "status": "open",
+      "status": "fixed",
       "opened_at": "2026-07-09T04:00:00Z",
-      "closed_at": null,
-      "closing_pr": null,
+      "closed_at": "2026-07-11T04:00:00Z",
+      "closing_pr": "audit/nightly-2026-07-11",
+      "fix_summary": "Added Date: 2026-05-20, Author: T1 (overnight elevation-push, split 20260520-2244), Decider: Sebastian Puig (pending review) to ADR-001 through ADR-005 in docs/ifleet-integration-adrs.md.",
       "file_globs": ["docs/ifleet-integration-adrs.md"],
       "parallel_safe": true
     },
