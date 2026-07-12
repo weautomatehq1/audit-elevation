@@ -140,6 +140,9 @@ These decisions block any IFleet PR. Sebastian answers on wake; T5 (or whoever's
 ## ADR-Proposer-001: Single-source-of-truth for ranking input
 
 **Status:** DRAFT — Sebastian to approve
+**Date:** 2026-05-20
+**Author:** T5 (split `20260520-2244-elevation-push`)
+**Decider:** Sebastian Puig (pending — Phase 4 gate evaluation 38 days overdue as of 2026-07-12)
 
 **Context:** The Proposer reads from at least eight sources (ROADMAP, SPRINT, NON_GOALS, SECURITY, multiple `.audits/`, lane logs, learnings, yesterday's state). Any stale input produces a wrong proposal. If the proposal is wrong, Sebastian loses trust in the Proposer fast, and the M5 KPI ("0 noise complaints") fails. We need an explicit decision about how the Proposer determines which inputs are authoritative on a given morning.
 

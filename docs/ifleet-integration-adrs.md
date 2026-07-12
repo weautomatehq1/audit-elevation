@@ -25,6 +25,9 @@ ADRs follow the IFleet style (`docs/adr/0001-0003.md`): Status, Context, Decisio
 ## ADR-001 — `codex-review` skill → IFleet `src/workers/codex.ts` wiring
 
 **Status:** DRAFT
+**Date:** 2026-05-20
+**Author:** T1 (split `20260520-2244-elevation-push`)
+**Decider:** Sebastian Puig (pending)
 **Affects:** M2 (plan-reviewer slot) and the existing `src/workers/codex.ts` `WorkerAdapter`
 
 ### Context
@@ -67,6 +70,9 @@ Concretely:
 ## ADR-002 — `cross-provider-reviewer.ts` placement in the IFleet pipeline
 
 **Status:** DRAFT
+**Date:** 2026-05-20
+**Author:** T1 (split `20260520-2244-elevation-push`)
+**Decider:** Sebastian Puig (pending)
 **Affects:** Pipeline ordering — sits between `plan-reviewer.ts` and `diff-reviewer.ts`
 
 ### Context
@@ -114,6 +120,9 @@ Three placement candidates:
 ## ADR-003 — Audit findings as IFleet trace events
 
 **Status:** DRAFT
+**Date:** 2026-05-20
+**Author:** T1 (split `20260520-2244-elevation-push`)
+**Decider:** Sebastian Puig (pending)
 **Affects:** `SprintManager` event bus, `.audits/index.json` ↔ trace bidirectional mapping
 
 ### Context
@@ -160,6 +169,9 @@ Three new `TraceEvent.kind` values:
 ## ADR-004 — Lane scheduler ↔ IFleet daemon coordination
 
 **Status:** DRAFT
+**Date:** 2026-05-20
+**Author:** T1 (split `20260520-2244-elevation-push`)
+**Decider:** Sebastian Puig (pending)
 **Affects:** Future relationship between `~/.claude/scripts/lane-scheduler.mjs` (T4 shipped 2026-05-21 as observation-only) and `IFleet/src/orchestrator/daemon.ts`
 
 ### Context
@@ -198,13 +210,16 @@ Concretely:
 ### Open questions
 
 - Should the lane scheduler get a vote on *which* sprint IFleet runs next (prioritize audit-fix sprints over feature sprints when capacity is tight)? Suggest: NO in Phase 4 — too much coupling. Reconsider for Phase 5.
-- Lane TTL: if IFleet crashes mid-sprint, the entry stays in `active-lanes.json` forever. Suggest: each entry has a `heartbeat_ts` field; scheduler reaps entries older than 30 minutes.
+- Lane TTL: if IFleet crashes mid-sprint, the entry stays in `active-lanes.json` forever. Suggest: each entry has a `heartbeat_ts` field; scheduler reaps entries older than 30 minutes. **Resolved (2026-07-12):** `lane-scheduler-spec.md` shipped `lane-prune-stale.sh` with `STALE_AFTER_SEC=3600` (60-min default), superseding the 30-min suggestion here. When the IFleet fold-in lands, use 60-min as the authoritative TTL.
 
 ---
 
 ## ADR-005 — Proposer (M5) consuming audit findings
 
 **Status:** DRAFT
+**Date:** 2026-05-20
+**Author:** T1 (split `20260520-2244-elevation-push`)
+**Decider:** Sebastian Puig (pending)
 **Affects:** M5 Proposer architecture (spec drafted by T5 on 2026-05-20 — see docs/proposer-spec.md)
 
 ### Context

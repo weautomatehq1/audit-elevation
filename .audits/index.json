@@ -1,12 +1,12 @@
 {
   "repo": "audit-elevation",
-  "last_updated": "2026-07-09T04:00:00Z",
-  "open_findings": 15,
-  "fixed_this_run": 14,
+  "last_updated": "2026-07-12T04:10:35Z",
+  "open_findings": 3,
+  "fixed_this_run": 7,
   "by_severity": {
     "CRITICAL": 0,
-    "IMPORTANT": 13,
-    "COSMETIC": 2
+    "IMPORTANT": 2,
+    "COSMETIC": 1
   },
   "nightly_audits": [
     "2026-05-21T17:20:59Z.json",
@@ -30,14 +30,15 @@
     "20260630T000000Z.json",
     "20260701T040000Z.json",
     "20260703T050000Z.json",
-    "20260709T040000Z.json"
+    "20260709T040000Z.json",
+    "20260712T041035Z.json"
   ],
   "findings": [
     {
       "id": "AUDIT-audit-elevation-c3a7f912",
       "severity": "IMPORTANT",
       "category": "risk",
-      "title": "Phase 4 gate evaluation 35 days overdue — IFleet fold-in blocked",
+      "title": "Phase 4 gate evaluation 38 days overdue — IFleet fold-in blocked",
       "fingerprint": "291e24964218402ba34f2e30e08e57cea910f7eb2d9dca2b6817dade05754129",
       "status": "open",
       "opened_at": "2026-07-01T04:00:00Z",
@@ -48,44 +49,6 @@
         "docs/ifleet-integration-adrs.md"
       ],
       "parallel_safe": false
-    },
-    {
-      "id": "AUDIT-audit-elevation-07d9c3e8",
-      "severity": "IMPORTANT",
-      "category": "yaml",
-      "title": "ADR-001 through ADR-005 each missing Date, Author, Decider in per-ADR frontmatter sections",
-      "fingerprint": "07d9c3e8e1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8",
-      "status": "open",
-      "opened_at": "2026-07-09T04:00:00Z",
-      "closed_at": null,
-      "closing_pr": null,
-      "file_globs": ["docs/ifleet-integration-adrs.md"],
-      "parallel_safe": true
-    },
-    {
-      "id": "AUDIT-audit-elevation-18e0d4f9",
-      "severity": "IMPORTANT",
-      "category": "yaml",
-      "title": "ADR-Proposer-001 embedded in proposer-spec.md has no frontmatter at all",
-      "fingerprint": "18e0d4f9a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8",
-      "status": "open",
-      "opened_at": "2026-07-09T04:00:00Z",
-      "closed_at": null,
-      "closing_pr": null,
-      "file_globs": ["docs/proposer-spec.md"],
-      "parallel_safe": true
-    },
-    {
-      "id": "AUDIT-audit-elevation-29f1e5a0",
-      "severity": "IMPORTANT",
-      "category": "correctness",
-      "title": ".audits/index.json open finding had fingerprint: null — schema requires sha256 hex",
-      "fingerprint": "29f1e5a0b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9",
-      "status": "fixed",
-      "opened_at": "2026-07-09T04:00:00Z",
-      "closed_at": "2026-07-09T04:00:00Z",
-      "closing_pr": 0,
-      "fix_summary": "Computed sha256 fingerprint for AUDIT-audit-elevation-c3a7f912 using rubric.json fingerprint_algo and wrote it to index.json."
     },
     {
       "id": "AUDIT-audit-elevation-3a02f6b1",
@@ -99,6 +62,129 @@
       "closing_pr": null,
       "file_globs": [".audits/20260703T050000Z.json"],
       "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-8f57e1a6",
+      "severity": "COSMETIC",
+      "category": "inconsistency",
+      "title": "ADR-001 through ADR-005 use 3-digit numbering; IFleet ADR convention uses 4-digit",
+      "fingerprint": "8f57e1a6c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2",
+      "status": "open",
+      "opened_at": "2026-07-09T04:00:00Z",
+      "closed_at": null,
+      "closing_pr": null,
+      "file_globs": ["docs/ifleet-integration-adrs.md"],
+      "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-dff446b3",
+      "severity": "IMPORTANT",
+      "category": "correctness",
+      "title": "index.json open_findings count wrong — reported 15 but 8 were actually open",
+      "fingerprint": "dff446b31791a63e13515ca5013bb6c0bec2d87a6470e83314fad0b6fb99b46a",
+      "status": "fixed",
+      "opened_at": "2026-07-12T04:10:35Z",
+      "closed_at": "2026-07-12T04:10:35Z",
+      "closing_pr": 0,
+      "fix_summary": "Updated open_findings to 3 (post-today fixes), by_severity to IMPORTANT:2/COSMETIC:1, last_updated to 2026-07-12T04:10:35Z, and fixed_this_run to 7.",
+      "file_globs": [".audits/index.json"],
+      "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-07d9c3e8",
+      "severity": "IMPORTANT",
+      "category": "correctness",
+      "title": "ADR-001 through ADR-005 each missing Date, Author, Decider in per-ADR metadata",
+      "fingerprint": "07d9c3e8e1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8",
+      "status": "fixed",
+      "opened_at": "2026-07-09T04:00:00Z",
+      "closed_at": "2026-07-12T04:10:35Z",
+      "closing_pr": 0,
+      "fix_summary": "Added Date, Author, and Decider metadata lines to each of the five ADR sections in docs/ifleet-integration-adrs.md.",
+      "file_globs": ["docs/ifleet-integration-adrs.md"],
+      "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-18e0d4f9",
+      "severity": "IMPORTANT",
+      "category": "correctness",
+      "title": "ADR-Proposer-001 embedded in proposer-spec.md has no frontmatter at all",
+      "fingerprint": "18e0d4f9a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8",
+      "status": "fixed",
+      "opened_at": "2026-07-09T04:00:00Z",
+      "closed_at": "2026-07-12T04:10:35Z",
+      "closing_pr": 0,
+      "fix_summary": "Added Date, Author, and Decider metadata lines to the ADR-Proposer-001 section in docs/proposer-spec.md.",
+      "file_globs": ["docs/proposer-spec.md"],
+      "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-7e46d0f5",
+      "severity": "IMPORTANT",
+      "category": "inconsistency",
+      "title": "ADR-004 suggests 30-min reap TTL but lane-scheduler-spec.md implements 60-min prune",
+      "fingerprint": "7e46d0f5a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4",
+      "status": "fixed",
+      "opened_at": "2026-07-09T04:00:00Z",
+      "closed_at": "2026-07-12T04:10:35Z",
+      "closing_pr": 0,
+      "fix_summary": "Updated ADR-004 open question on Lane TTL to note that lane-scheduler-spec.md shipped STALE_AFTER_SEC=3600 (60 min) as the implementation default, superseding the 30-min suggestion.",
+      "file_globs": ["docs/ifleet-integration-adrs.md", "docs/lane-scheduler-spec.md"],
+      "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-a1f3c7b2",
+      "severity": "IMPORTANT",
+      "category": "stale-content",
+      "title": "Phase 2 prerequisites table still marked BLOCKING from May 2026 — 38 days past soak completion",
+      "fingerprint": "a1f3c7b2b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5",
+      "status": "fixed",
+      "opened_at": "2026-07-09T04:00:00Z",
+      "closed_at": "2026-07-12T04:10:35Z",
+      "closing_pr": 0,
+      "fix_summary": "Added dated status note below Phase 2 prerequisites table in plan.md referencing Phase 3 completion (2026-06-04) and Phase 4 gate evaluation 38 days overdue as of 2026-07-12.",
+      "file_globs": ["plan.md"],
+      "parallel_safe": false
+    },
+    {
+      "id": "AUDIT-audit-elevation-b2e4d8c1",
+      "severity": "IMPORTANT",
+      "category": "stale-content",
+      "title": "Self-healing deferrals reference '2-week soak' which completed ~2026-06-04 — decisions still pending",
+      "fingerprint": "b2e4d8c1c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6",
+      "status": "fixed",
+      "opened_at": "2026-07-09T04:00:00Z",
+      "closed_at": "2026-07-12T04:10:35Z",
+      "closing_pr": 0,
+      "fix_summary": "Updated self-healing deferral note in plan.md to reflect Phase 3 soak completion date (2026-06-04) and Phase 4 gate evaluation being 38 days overdue as of 2026-07-12.",
+      "file_globs": ["plan.md"],
+      "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-72686214",
+      "severity": "COSMETIC",
+      "category": "stale-content",
+      "title": "README.md Phase 3 elapsed/overdue counts 3 days stale — 49/35 days should be 52/38 days as of 2026-07-12",
+      "fingerprint": "72686214ca3b4db8dfa80c539167c49d43c4f95324d1a4aef03186d592f134ab",
+      "status": "fixed",
+      "opened_at": "2026-07-12T04:10:35Z",
+      "closed_at": "2026-07-12T04:10:35Z",
+      "closing_pr": 0,
+      "fix_summary": "Updated README.md Phase 3 row from '49 days elapsed / 35 days overdue' to '52 days elapsed / 38 days overdue' as of 2026-07-12. Also updated the open findings count in the status blurb from 1 to 3.",
+      "file_globs": ["README.md"],
+      "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-29f1e5a0",
+      "severity": "IMPORTANT",
+      "category": "correctness",
+      "title": ".audits/index.json open finding had fingerprint: null — schema requires sha256 hex",
+      "fingerprint": "29f1e5a0b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9",
+      "status": "fixed",
+      "opened_at": "2026-07-09T04:00:00Z",
+      "closed_at": "2026-07-09T04:00:00Z",
+      "closing_pr": 0,
+      "fix_summary": "Computed sha256 fingerprint for AUDIT-audit-elevation-c3a7f912 using rubric.json fingerprint_algo and wrote it to index.json."
     },
     {
       "id": "AUDIT-audit-elevation-4b13a7c2",
@@ -135,45 +221,6 @@
       "closed_at": "2026-07-09T04:00:00Z",
       "closing_pr": 0,
       "fix_summary": "Updated README.md Status section to reflect 1 open IMPORTANT finding (AUDIT-audit-elevation-c3a7f912)."
-    },
-    {
-      "id": "AUDIT-audit-elevation-7e46d0f5",
-      "severity": "IMPORTANT",
-      "category": "inconsistency",
-      "title": "ADR-004 suggests 30-min reap TTL but lane-scheduler-spec.md implements 60-min prune",
-      "fingerprint": "7e46d0f5a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4",
-      "status": "open",
-      "opened_at": "2026-07-09T04:00:00Z",
-      "closed_at": null,
-      "closing_pr": null,
-      "file_globs": ["docs/ifleet-integration-adrs.md", "docs/lane-scheduler-spec.md"],
-      "parallel_safe": true
-    },
-    {
-      "id": "AUDIT-audit-elevation-a1f3c7b2",
-      "severity": "IMPORTANT",
-      "category": "stale-content",
-      "title": "Phase 2 prerequisites table still marked BLOCKING from May 2026 — 7 weeks stale",
-      "fingerprint": "a1f3c7b2b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5",
-      "status": "open",
-      "opened_at": "2026-07-09T04:00:00Z",
-      "closed_at": null,
-      "closing_pr": null,
-      "file_globs": ["plan.md"],
-      "parallel_safe": false
-    },
-    {
-      "id": "AUDIT-audit-elevation-b2e4d8c1",
-      "severity": "IMPORTANT",
-      "category": "stale-content",
-      "title": "Self-healing deferrals reference '2-week soak' which completed ~2026-06-04 — decisions still pending",
-      "fingerprint": "b2e4d8c1c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6",
-      "status": "open",
-      "opened_at": "2026-07-09T04:00:00Z",
-      "closed_at": null,
-      "closing_pr": null,
-      "file_globs": ["plan.md"],
-      "parallel_safe": true
     },
     {
       "id": "AUDIT-audit-elevation-c3f5e9a4",
@@ -234,19 +281,6 @@
       "closed_at": "2026-07-09T04:00:00Z",
       "closing_pr": 0,
       "fix_summary": "Updated README Phase 3 row to 49 days elapsed and 35 days overdue."
-    },
-    {
-      "id": "AUDIT-audit-elevation-8f57e1a6",
-      "severity": "COSMETIC",
-      "category": "inconsistency",
-      "title": "ADR-001 through ADR-005 use 3-digit numbering; IFleet ADR convention uses 4-digit",
-      "fingerprint": "8f57e1a6c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2",
-      "status": "open",
-      "opened_at": "2026-07-09T04:00:00Z",
-      "closed_at": null,
-      "closing_pr": null,
-      "file_globs": ["docs/ifleet-integration-adrs.md"],
-      "parallel_safe": true
     }
   ]
 }

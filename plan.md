@@ -126,6 +126,8 @@ The `fingerprint` is deterministic — same bug surfacing as a regression gets s
 | Confirm flat-rate Codex subscription active | ⛔ NOT MET — unconfirmed | All Phase 2 work |
 | Decide auth (Codex CLI config) | ⬜ Pending | Phase 2 start |
 
+> ⚠️ **Status as of 2026-07-12:** Phase 3 soak completed 2026-06-04. Phase 4 gate evaluation is 38 days overdue (Sebastian decision pending — see README). Prerequisites above reflect the original 2026-05-20 state; nightly audits will update when Sebastian confirms Codex CLI status or formally defers Phase 2 post-soak.
+
 **Files to create:**
 - `~/.claude/skills/codex-review/SKILL.md` — new skill triggered by `/codex-review <PR#>` and auto-invoked by splittasks strict mode. Wraps `codex exec` with a focused review prompt.
 - `~/.claude/skills/codex-review/review-prompt.md` — the per-PR prompt template. Inputs: PR diff, PR title/body, optional `AUDIT-*` finding ID if cited.
@@ -323,7 +325,7 @@ If any criterion fails: don't fold into IFleet. Iterate on the standalone skills
 - Stop hooks that auto-trigger `/audit-scan` at session end — post-soak decision (risk: hides token cost from user)
 - PR-open hooks that auto-fire codex-review on every PR — post-soak decision (risk: noisy on draft PRs)
 - Background PM2 audit watcher (hourly diff-scoped) — explicitly deferred per Seb decision
-- **Self-healing (the loop that prevents repeat issues)** — fingerprint REGRESSION detection + auto-write `.claude/rules/audit-learnings.md` after 3 closures of same fingerprint. Deferred until the 2-week soak proves which fingerprints actually repeat. Schema field `fingerprint` is shipped in Phase 1 so data accumulates from day one.
+- **Self-healing (the loop that prevents repeat issues)** — fingerprint REGRESSION detection + auto-write `.claude/rules/audit-learnings.md` after 3 closures of same fingerprint. Deferred until the 2-week soak proves which fingerprints actually repeat. Schema field `fingerprint` is shipped in Phase 1 so data accumulates from day one. *(Soak completed 2026-06-04. Deferral continues pending Phase 4 gate decision — Sebastian, 38 days overdue as of 2026-07-12.)*
 - Auto-rule generation with no human gate — decided posture (when self-healing ships), but the *feature itself* is deferred
 - Fingerprint-driven auto-rule-generation in IFleet — Phase 4+ (lands with IFleet M4)
 - Proposer (nightly Discord-broadcast plan from `.audits/index.json` + ROADMAP.md) — IFleet M5
