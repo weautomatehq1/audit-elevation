@@ -1,12 +1,12 @@
 {
   "repo": "audit-elevation",
-  "last_updated": "2026-07-11T04:00:00Z",
-  "open_findings": 6,
-  "fixed_this_run": 2,
+  "last_updated": "2026-07-13T00:00:00Z",
+  "open_findings": 0,
+  "fixed_this_run": 9,
   "by_severity": {
     "CRITICAL": 0,
-    "IMPORTANT": 5,
-    "COSMETIC": 1
+    "IMPORTANT": 0,
+    "COSMETIC": 0
   },
   "nightly_audits": [
     "2026-05-21T17:20:59Z.json",
@@ -31,7 +31,8 @@
     "20260701T040000Z.json",
     "20260703T050000Z.json",
     "20260709T040000Z.json",
-    "20260711T040000Z.json"
+    "20260711T040000Z.json",
+    "20260713T000000Z.json"
   ],
   "findings": [
     {
@@ -72,10 +73,11 @@
       "category": "yaml",
       "title": "ADR-Proposer-001 embedded in proposer-spec.md has no frontmatter at all",
       "fingerprint": "18e0d4f9a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8",
-      "status": "open",
+      "status": "fixed",
       "opened_at": "2026-07-09T04:00:00Z",
-      "closed_at": null,
-      "closing_pr": null,
+      "closed_at": "2026-07-13T00:00:00Z",
+      "closing_pr": "audit/nightly-2026-07-13",
+      "fix_summary": "Added Date, Author, Decider, and Affects fields to ADR-Proposer-001 section in docs/proposer-spec.md.",
       "file_globs": ["docs/proposer-spec.md"],
       "parallel_safe": true
     },
@@ -97,10 +99,11 @@
       "category": "correctness",
       "title": "Finding ID in 20260703T050000Z.json uses descriptive text not 8 hex chars",
       "fingerprint": "3a02f6b1c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0",
-      "status": "open",
+      "status": "fixed",
       "opened_at": "2026-07-09T04:00:00Z",
-      "closed_at": null,
-      "closing_pr": null,
+      "closed_at": "2026-07-13T00:00:00Z",
+      "closing_pr": "audit/nightly-2026-07-13",
+      "fix_summary": "Renamed 'readme-stale-2026-07-03' suffix to sha256[:8]='740e2a40'; added missing fingerprint field. ID format now conforms to plan.md schema.",
       "file_globs": [".audits/20260703T050000Z.json"],
       "parallel_safe": true
     },
@@ -146,10 +149,11 @@
       "category": "inconsistency",
       "title": "ADR-004 suggests 30-min reap TTL but lane-scheduler-spec.md implements 60-min prune",
       "fingerprint": "7e46d0f5a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4",
-      "status": "open",
+      "status": "fixed",
       "opened_at": "2026-07-09T04:00:00Z",
-      "closed_at": null,
-      "closing_pr": null,
+      "closed_at": "2026-07-13T00:00:00Z",
+      "closing_pr": "audit/nightly-2026-07-13",
+      "fix_summary": "Updated ADR-0004 open question from '30 minutes' to '60 minutes' to match lane-scheduler-spec.md STALE_AFTER_SEC=3600 default. Summary table also updated. Noted original-draft vs. implemented divergence.",
       "file_globs": ["docs/ifleet-integration-adrs.md", "docs/lane-scheduler-spec.md"],
       "parallel_safe": true
     },
@@ -159,10 +163,11 @@
       "category": "stale-content",
       "title": "Phase 2 prerequisites table still marked BLOCKING from May 2026 — 7 weeks stale",
       "fingerprint": "a1f3c7b2b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5",
-      "status": "open",
+      "status": "fixed",
       "opened_at": "2026-07-09T04:00:00Z",
-      "closed_at": null,
-      "closing_pr": null,
+      "closed_at": "2026-07-13T00:00:00Z",
+      "closing_pr": "audit/nightly-2026-07-13",
+      "fix_summary": "Added ⚠️ note above table stating status reflects 2026-05-20 baseline; Phase 4 gate required before re-evaluation. Changed column header to 'Status (2026-05-20 baseline)'.",
       "file_globs": ["plan.md"],
       "parallel_safe": false
     },
@@ -172,10 +177,11 @@
       "category": "stale-content",
       "title": "Self-healing deferrals reference '2-week soak' which completed ~2026-06-04 — decisions still pending",
       "fingerprint": "b2e4d8c1c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6",
-      "status": "open",
+      "status": "fixed",
       "opened_at": "2026-07-09T04:00:00Z",
-      "closed_at": null,
-      "closing_pr": null,
+      "closed_at": "2026-07-13T00:00:00Z",
+      "closing_pr": "audit/nightly-2026-07-13",
+      "fix_summary": "Updated all 'post-soak' and '2-week soak' references in plan.md to include '(soak completed 2026-06-04; Phase 4 gate pending)'. Affected sections: §Decisions confirmed with Seb, §Phase 2.5, §Critical files not touched, §Out of scope.",
       "file_globs": ["plan.md"],
       "parallel_safe": true
     },
@@ -245,12 +251,47 @@
       "category": "inconsistency",
       "title": "ADR-001 through ADR-005 use 3-digit numbering; IFleet ADR convention uses 4-digit",
       "fingerprint": "8f57e1a6c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2",
-      "status": "open",
+      "status": "fixed",
       "opened_at": "2026-07-09T04:00:00Z",
-      "closed_at": null,
-      "closing_pr": null,
+      "closed_at": "2026-07-13T00:00:00Z",
+      "closing_pr": "audit/nightly-2026-07-13",
+      "fix_summary": "Renamed ## ADR-001 through ## ADR-005 to ## ADR-0001 through ## ADR-0005 in docs/ifleet-integration-adrs.md. Updated summary table ADR column from 3-digit to 4-digit.",
       "file_globs": ["docs/ifleet-integration-adrs.md"],
       "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-740e2a40",
+      "severity": "COSMETIC",
+      "category": "cosmetic",
+      "title": "README.md Phase 3 elapsed count and Phase 4 overdue count stale (53/39 days as of 2026-07-13)",
+      "fingerprint": "740e2a4021dc2563ef1a4eeed1e2d81afc90c6da13d233ad2962a4ddf217b6da",
+      "status": "fixed",
+      "opened_at": "2026-07-13T00:00:00Z",
+      "closed_at": "2026-07-13T00:00:00Z",
+      "closing_pr": "audit/nightly-2026-07-13",
+      "fix_summary": "Updated README.md Phase 3 row: 51→53 days elapsed, 37→39 days overdue, as of date 2026-07-11→2026-07-13. Updated open findings count to 0."
+    },
+    {
+      "id": "AUDIT-audit-elevation-proposer-date-2026-07-13",
+      "severity": "COSMETIC",
+      "category": "stale-content",
+      "title": "proposer-spec.md Status header says '37 days overdue as of 2026-07-11' — stale",
+      "status": "fixed",
+      "opened_at": "2026-07-13T00:00:00Z",
+      "closed_at": "2026-07-13T00:00:00Z",
+      "closing_pr": "audit/nightly-2026-07-13",
+      "fix_summary": "Updated '37 days overdue as of 2026-07-11' → '39 days overdue as of 2026-07-13' in docs/proposer-spec.md."
+    },
+    {
+      "id": "AUDIT-audit-elevation-ifleet-adrs-date-2026-07-13",
+      "severity": "COSMETIC",
+      "category": "stale-content",
+      "title": "ifleet-integration-adrs.md Author line says '37 days overdue as of 2026-07-11' — stale",
+      "status": "fixed",
+      "opened_at": "2026-07-13T00:00:00Z",
+      "closed_at": "2026-07-13T00:00:00Z",
+      "closing_pr": "audit/nightly-2026-07-13",
+      "fix_summary": "Updated '37 days overdue as of 2026-07-11' → '39 days overdue as of 2026-07-13' in docs/ifleet-integration-adrs.md Author line."
     }
   ]
 }

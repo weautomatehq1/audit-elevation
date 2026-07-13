@@ -19,7 +19,7 @@
 - Sequence: my call → **keystone first, then Codex reviewer**
 - Automation posture: **Hybrid** — Conservative default, `audit autopilot` keyword flips to self-driving for that session
 - Per-PR review chain: **Tiered** — feature PRs get Codex only (fast). Audit-fix PRs get full Codex + Claude `verifier` subagent sandwich (high-stakes, finding closure must be verified)
-- Self-healing (fingerprint → REGRESSION detection → auto-rule generation): **deferred** until after the 2-week soak with Phase 1+2 in production
+- Self-healing (fingerprint → REGRESSION detection → auto-rule generation): **deferred** until after the 2-week soak with Phase 1+2 in production (soak completed 2026-06-04; Phase 4 gate decision pending 39 days as of 2026-07-13)
 - Background audit watcher (PM2 daemon): **deferred** — manual scans only in Phase 1
 
 **Subagents are central, not optional.** First draft underused them. Corrected mental model:
@@ -120,7 +120,9 @@ The `fingerprint` is deterministic — same bug surfacing as a regression gets s
 
 **Blocked prerequisites (Sebastian owns — BLOCKING):**
 
-| Prerequisite | Status | Blocks |
+> ⚠️ **Status as of 2026-07-13 (39 days since Phase 3 soak completed 2026-06-04):** Prerequisites below were recorded at Phase 2 design time (2026-05-20) and were never formally re-evaluated after Phase 3 soak ended. Phase 4 gate decision is required before Phase 2 re-evaluation. See README.md for current Phase status.
+
+| Prerequisite | Status (2026-05-20 baseline) | Blocks |
 |---|---|---|
 | Install Codex CLI (`codex --version` must resolve) | ⛔ NOT MET — Codex CLI not on PATH | All Phase 2 work |
 | Confirm flat-rate Codex subscription active | ⛔ NOT MET — unconfirmed | All Phase 2 work |
@@ -173,8 +175,8 @@ Default behavior stays Conservative (you type the commands). One keyword flips a
 - `~/.claude/hooks/keyword-detector.mjs` — add `"audit autopilot"` to the trigger table mapping to the new skill.
 
 **What's deliberately NOT in Phase 2.5:**
-- Stop hook that auto-runs `/audit-scan` at session end — defer to post-soak (risk: hides token cost)
-- PR-open hook that auto-fires codex-review — defer to post-soak (risk: noisy on draft PRs)
+- Stop hook that auto-runs `/audit-scan` at session end — defer to post-soak (soak completed 2026-06-04; decision pending Phase 4 gate)
+- PR-open hook that auto-fires codex-review — defer to post-soak (soak completed 2026-06-04; decision pending Phase 4 gate)
 - Background PM2 watcher — explicitly deferred per Seb decision
 
 ### Phase 3 — Use it for 7–14 days, THEN decide what to fold into IFleet
@@ -209,11 +211,11 @@ Hard rule: **no IFleet PRs in Phase 3.** Just use the system. Track in a single 
 
 **Not touched in this plan:**
 - IFleet source (`~/dev/ai-products/IFleet/src/**`) — touched in a later plan
-- Stop hooks for auto-`/audit-scan` at session end — explicitly deferred to post-soak (risk: hides token cost)
-- PR-open hooks for auto-fire codex-review — deferred to post-soak (risk: noisy on draft PRs)
+- Stop hooks for auto-`/audit-scan` at session end — explicitly deferred to post-soak (soak completed 2026-06-04; decision pending Phase 4 gate)
+- PR-open hooks for auto-fire codex-review — deferred to post-soak (soak completed 2026-06-04; decision pending Phase 4 gate)
 - Lane scheduler daemon (Max-quota pacing) — deferred (Phase 4+)
 - Background audit watcher (PM2 hourly diff-scoped) — deferred per Seb decision
-- Self-healing: fingerprint REGRESSION + auto-rule generation — deferred until 2-week soak proves which fingerprints actually repeat
+- Self-healing: fingerprint REGRESSION + auto-rule generation — deferred until 2-week soak (completed 2026-06-04) proves which fingerprints actually repeat; Phase 4 gate decision pending
 
 ---
 
@@ -320,10 +322,10 @@ If any criterion fails: don't fold into IFleet. Iterate on the standalone skills
 
 - Lane scheduler daemon (Max-plan quota pacing) — Phase 4+
 - Continuous post-merge audit hook — Phase 4+
-- Stop hooks that auto-trigger `/audit-scan` at session end — post-soak decision (risk: hides token cost from user)
-- PR-open hooks that auto-fire codex-review on every PR — post-soak decision (risk: noisy on draft PRs)
+- Stop hooks that auto-trigger `/audit-scan` at session end — post-soak decision (soak completed 2026-06-04; Phase 4 gate pending)
+- PR-open hooks that auto-fire codex-review on every PR — post-soak decision (soak completed 2026-06-04; Phase 4 gate pending)
 - Background PM2 audit watcher (hourly diff-scoped) — explicitly deferred per Seb decision
-- **Self-healing (the loop that prevents repeat issues)** — fingerprint REGRESSION detection + auto-write `.claude/rules/audit-learnings.md` after 3 closures of same fingerprint. Deferred until the 2-week soak proves which fingerprints actually repeat. Schema field `fingerprint` is shipped in Phase 1 so data accumulates from day one.
+- **Self-healing (the loop that prevents repeat issues)** — fingerprint REGRESSION detection + auto-write `.claude/rules/audit-learnings.md` after 3 closures of same fingerprint. Deferred until the 2-week soak (completed 2026-06-04) proves which fingerprints actually repeat; Phase 4 gate decision pending (39 days overdue as of 2026-07-13). Schema field `fingerprint` is shipped in Phase 1 so data accumulates from day one.
 - Auto-rule generation with no human gate — decided posture (when self-healing ships), but the *feature itself* is deferred
 - Fingerprint-driven auto-rule-generation in IFleet — Phase 4+ (lands with IFleet M4)
 - Proposer (nightly Discord-broadcast plan from `.audits/index.json` + ROADMAP.md) — IFleet M5

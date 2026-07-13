@@ -5,11 +5,12 @@
   "scanner": "claude-sonnet-4-6-nightly",
   "findings": [
     {
-      "id": "AUDIT-audit-elevation-readme-stale-2026-07-03",
+      "id": "AUDIT-audit-elevation-740e2a40",
       "severity": "COSMETIC",
       "category": "cosmetic",
       "title": "README.md Phase 3 elapsed count and Phase 4 overdue count stale (41→43 days, 27→29 days)",
       "detail": "README.md status table Phase 3 row shows '41 days elapsed as of 2026-07-01' and 'Phase 4 gate evaluation 27 days overdue'. Today is 2026-07-03 (+2 days). Correct values: 43 days elapsed as of 2026-07-03; Phase 4 gate 29 days overdue.",
+      "fingerprint": "740e2a4021dc2563ef1a4eeed1e2d81afc90c6da13d233ad2962a4ddf217b6da",
       "file_globs": ["README.md"],
       "fix_sketch": "Update '41 days elapsed as of 2026-07-01' → '43 days elapsed as of 2026-07-03', and '27 days overdue' → '29 days overdue'.",
       "parallel_safe": true,
@@ -17,7 +18,7 @@
       "opened_at": "2026-07-03T05:00:00Z",
       "closed_at": "2026-07-03T05:00:00Z",
       "closing_pr": 0,
-      "fix_summary": "Fixed directly on branch audit/nightly-2026-07-03 without a formal PR (nightly audit branch)."
+      "fix_summary": "Fixed directly on branch audit/nightly-2026-07-03 without a formal PR (nightly audit branch). ID corrected from descriptive-text format to 8-hex-char format per plan.md schema (closes AUDIT-audit-elevation-3a02f6b1)."
     },
     {
       "id": "AUDIT-audit-elevation-c3a7f912",
