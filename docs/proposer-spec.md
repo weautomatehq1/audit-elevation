@@ -1,6 +1,6 @@
 # Proposer — IFleet M5 spec
 
-> **Status:** DRAFT — design only. No IFleet source code lands until Sebastian approves (Phase 4 gate pending — see README, 37 days overdue as of 2026-07-11).
+> **Status:** DRAFT — design only. No IFleet source code lands until Sebastian approves (Phase 4 gate pending — see README, 39 days overdue as of 2026-07-13).
 > **Author:** T5 (overnight split `20260520-2244-elevation-push`, 2026-05-20).
 > **Predecessors:** ROADMAP.md M5, ADR-0001 (single-shared-trace), SECURITY.md, NON_GOALS.md.
 > **Companion:** `~/.claude/skills/audit-broadcast/` — the channel the Proposer reuses for its morning DM/post.
@@ -140,6 +140,10 @@ These decisions block any IFleet PR. Sebastian answers on wake; T5 (or whoever's
 ## ADR-Proposer-001: Single-source-of-truth for ranking input
 
 **Status:** DRAFT — Sebastian to approve
+**Date:** 2026-05-20
+**Author:** T5 (overnight split `20260520-2244-elevation-push`)
+**Decider:** Sebastian Puig (pending review)
+**Affects:** M5 Proposer architecture — how inputs are read at proposal time
 
 **Context:** The Proposer reads from at least eight sources (ROADMAP, SPRINT, NON_GOALS, SECURITY, multiple `.audits/`, lane logs, learnings, yesterday's state). Any stale input produces a wrong proposal. If the proposal is wrong, Sebastian loses trust in the Proposer fast, and the M5 KPI ("0 noise complaints") fails. We need an explicit decision about how the Proposer determines which inputs are authoritative on a given morning.
 

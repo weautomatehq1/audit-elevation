@@ -11,7 +11,7 @@ Supersedes: None
 # IFleet integration ADRs — fold-in of the standalone elevation system
 
 **Status:** DRAFT (5 ADRs, awaiting Sebastian review)
-**Author:** T1 on split `20260520-2244-elevation-push` (authored 2026-05-20; soak completed 2026-06-04; Phase 4 gate evaluation 37 days overdue as of 2026-07-11)
+**Author:** T1 on split `20260520-2244-elevation-push` (authored 2026-05-20; soak completed 2026-06-04; Phase 4 gate evaluation 39 days overdue as of 2026-07-13)
 **Scope:** Architectural decisions for *eventually* folding the standalone audit + Codex + lane-scheduler + Proposer system into IFleet. No IFleet code changes proposed in this document — ADRs only.
 
 ## Why these ADRs exist now
@@ -22,7 +22,7 @@ ADRs follow the IFleet style (`docs/adr/0001-0003.md`): Status, Context, Decisio
 
 ---
 
-## ADR-001 — `codex-review` skill → IFleet `src/workers/codex.ts` wiring
+## ADR-0001 — `codex-review` skill → IFleet `src/workers/codex.ts` wiring
 
 **Status:** DRAFT
 **Date:** 2026-05-20
@@ -67,7 +67,7 @@ Concretely:
 
 ---
 
-## ADR-002 — `cross-provider-reviewer.ts` placement in the IFleet pipeline
+## ADR-0002 — `cross-provider-reviewer.ts` placement in the IFleet pipeline
 
 **Status:** DRAFT
 **Date:** 2026-05-20
@@ -117,7 +117,7 @@ Three placement candidates:
 
 ---
 
-## ADR-003 — Audit findings as IFleet trace events
+## ADR-0003 — Audit findings as IFleet trace events
 
 **Status:** DRAFT
 **Date:** 2026-05-20
@@ -166,7 +166,7 @@ Three new `TraceEvent.kind` values:
 
 ---
 
-## ADR-004 — Lane scheduler ↔ IFleet daemon coordination
+## ADR-0004 — Lane scheduler ↔ IFleet daemon coordination
 
 **Status:** DRAFT
 **Date:** 2026-05-20
@@ -210,11 +210,11 @@ Concretely:
 ### Open questions
 
 - Should the lane scheduler get a vote on *which* sprint IFleet runs next (prioritize audit-fix sprints over feature sprints when capacity is tight)? Suggest: NO in Phase 4 — too much coupling. Reconsider for Phase 5.
-- Lane TTL: if IFleet crashes mid-sprint, the entry stays in `active-lanes.json` forever. Suggest: each entry has a `heartbeat_ts` field; scheduler reaps entries older than 30 minutes.
+- Lane TTL: if IFleet crashes mid-sprint, the entry stays in `active-lanes.json` forever. Suggest: each entry has a `heartbeat_ts` field; scheduler reaps entries older than 60 minutes (matching `STALE_AFTER_SEC=3600` default in `lane-prune-stale.sh` per lane-scheduler-spec.md §2). Note: ADR-004 original draft said 30 minutes; actual implementation landed at 60 minutes — 60 minutes is the resolved value.
 
 ---
 
-## ADR-005 — Proposer (M5) consuming audit findings
+## ADR-0005 — Proposer (M5) consuming audit findings
 
 **Status:** DRAFT
 **Date:** 2026-05-20
@@ -270,11 +270,11 @@ Decision rules baked into the Proposer's morning prompt:
 
 | # | Decision | ADR | Default if no answer |
 |---|---|---|---|
-| 1 | Symlink vs copy for shared Codex review prompt | 001 | Copy + CI drift check |
-| 2 | Cross-provider reviewer own cost cap value | 002 | 15% of architect cost |
-| 3 | `.audits/.config.json` `IFLEET_MANAGED` flag schema | 003 | Boolean, default false |
-| 4 | Lane TTL / heartbeat interval | 004 | 30 min idle reap |
-| 5 | `#ifleet-proposals` channel creation | 005 | Reuse `#ifleet` (1504120127791042631) |
+| 1 | Symlink vs copy for shared Codex review prompt | 0001 | Copy + CI drift check |
+| 2 | Cross-provider reviewer own cost cap value | 0002 | 15% of architect cost |
+| 3 | `.audits/.config.json` `IFLEET_MANAGED` flag schema | 0003 | Boolean, default false |
+| 4 | Lane TTL / heartbeat interval | 0004 | 60 min idle reap (per lane-scheduler-spec.md `STALE_AFTER_SEC=3600`) |
+| 5 | `#ifleet-proposals` channel creation | 0005 | Reuse `#ifleet` (1504120127791042631) |
 
 ## Plain-language recap
 
