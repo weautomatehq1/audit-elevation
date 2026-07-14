@@ -36,13 +36,13 @@ Make audit findings *first-class on-disk work items* so:
 | **Phase 2 — Codex review + Tiered chain** | 🔴 BLOCKED — Codex CLI not installed; requires Sebastian setup | 2026-05-20 (design only) |
 | **Phase 2.5 — Hybrid automation** (SessionStart banner + `audit autopilot` keyword) | ✅ shipped | 2026-05-20 overnight |
 | **Online-eval-log v1** (Supabase-backed session-close capture) | ✅ shipped | 2026-05-21 |
-| **Phase 3 — Dogfood / 2-week soak** | 🟡 soak complete (51 days elapsed as of 2026-07-11) — ⚠️ Phase 4 gate evaluation 37 days overdue (soak completed 2026-06-04; Sebastian decision needed) | started 2026-05-21 |
+| **Phase 3 — Dogfood / 2-week soak** | 🟡 soak complete (54 days elapsed as of 2026-07-14) — ⚠️ Phase 4 gate evaluation 40 days overdue (soak completed 2026-06-04; Sebastian decision needed) | started 2026-05-21 |
 | **Phase 4 — Self-healing (fingerprint REGRESSION + DRAFT auto-rules)** | ✅ scaffolded | 2026-05-21 overnight |
 | **Phase 5 — Lane scheduler MVP (observation-only)** | ✅ scaffolded, opt-in PM2 entry | 2026-05-21 |
 | **Phase 6 — IFleet fold-in** | 📝 ADRs drafted, 5 Sebastian decisions queued | gated on Phase 3 soak |
 | **Phase 7 — Proposer (M5 of IFleet elevation)** | 📝 spec drafted | future |
 
-6 repos baselined (IFleet, factory, PhillUp, discord-claude-bot, ~/.claude, audit-elevation). As of 2026-07-11: **audit-elevation** has 8 open findings (7 IMPORTANT, 1 COSMETIC) — Phase 4 gate evaluation 37 days overdue (c3a7f912), plus 7 new findings from 2026-07-09 scan. IFleet and factory findings tracked in their own `.audits/index.json` files. The 52-finding baseline (6 CRITICAL / 37 IMPORTANT / 9 COSMETIC) was as of 2026-05-21 initial scan.
+6 repos baselined (IFleet, factory, PhillUp, discord-claude-bot, ~/.claude, audit-elevation). As of 2026-07-14: **audit-elevation** has 2 open findings (1 IMPORTANT, 1 COSMETIC) — Phase 4 gate evaluation 40 days overdue (requires Sebastian decision). IFleet and factory findings tracked in their own `.audits/index.json` files. The 52-finding baseline (6 CRITICAL / 37 IMPORTANT / 9 COSMETIC) was as of 2026-05-21 initial scan.
 
 ---
 

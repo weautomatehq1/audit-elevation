@@ -5,7 +5,7 @@
   "scanner": "claude-sonnet-4-6-nightly",
   "findings": [
     {
-      "id": "AUDIT-audit-elevation-readme-stale-2026-07-03",
+      "id": "AUDIT-audit-elevation-cc86b64f",
       "severity": "COSMETIC",
       "category": "cosmetic",
       "title": "README.md Phase 3 elapsed count and Phase 4 overdue count stale (41→43 days, 27→29 days)",

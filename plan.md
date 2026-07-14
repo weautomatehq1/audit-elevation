@@ -19,7 +19,7 @@
 - Sequence: my call → **keystone first, then Codex reviewer**
 - Automation posture: **Hybrid** — Conservative default, `audit autopilot` keyword flips to self-driving for that session
 - Per-PR review chain: **Tiered** — feature PRs get Codex only (fast). Audit-fix PRs get full Codex + Claude `verifier` subagent sandwich (high-stakes, finding closure must be verified)
-- Self-healing (fingerprint → REGRESSION detection → auto-rule generation): **deferred** until after the 2-week soak with Phase 1+2 in production
+- Self-healing (fingerprint → REGRESSION detection → auto-rule generation): **deferred** — soak completed 2026-06-04; decision pending Sebastian review (Phase 4 gate 40 days overdue as of 2026-07-14)
 - Background audit watcher (PM2 daemon): **deferred** — manual scans only in Phase 1
 
 **Subagents are central, not optional.** First draft underused them. Corrected mental model:
@@ -120,11 +120,13 @@ The `fingerprint` is deterministic — same bug surfacing as a regression gets s
 
 **Blocked prerequisites (Sebastian owns — BLOCKING):**
 
+> ⚠️ **Status as of 2026-07-14 (54 days since design):** No update received — prerequisites assumed still blocked. Sebastian must confirm before Phase 2 work begins.
+
 | Prerequisite | Status | Blocks |
 |---|---|---|
-| Install Codex CLI (`codex --version` must resolve) | ⛔ NOT MET — Codex CLI not on PATH | All Phase 2 work |
-| Confirm flat-rate Codex subscription active | ⛔ NOT MET — unconfirmed | All Phase 2 work |
-| Decide auth (Codex CLI config) | ⬜ Pending | Phase 2 start |
+| Install Codex CLI (`codex --version` must resolve) | ⛔ NOT MET — Codex CLI not on PATH (status as of 2026-07-14: unconfirmed) | All Phase 2 work |
+| Confirm flat-rate Codex subscription active | ⛔ NOT MET — unconfirmed (status as of 2026-07-14: unconfirmed) | All Phase 2 work |
+| Decide auth (Codex CLI config) | ⬜ Pending (status as of 2026-07-14: pending) | Phase 2 start |
 
 **Files to create:**
 - `~/.claude/skills/codex-review/SKILL.md` — new skill triggered by `/codex-review <PR#>` and auto-invoked by splittasks strict mode. Wraps `codex exec` with a focused review prompt.
