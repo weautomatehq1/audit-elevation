@@ -1,0 +1,38 @@
+{
+  "scan_id": "2026-07-15T04:00:00Z",
+  "repo": "audit-elevation",
+  "branch": "audit/nightly-2026-07-15",
+  "audited_at": "2026-07-15T04:00:00Z",
+  "summary": {
+    "total": 1,
+    "critical": 0,
+    "important": 0,
+    "cosmetic": 1,
+    "new_open": 0,
+    "new_fixed": 1,
+    "carried_open": 0
+  },
+  "findings": [
+    {
+      "id": "AUDIT-audit-elevation-a5c3639b",
+      "severity": "COSMETIC",
+      "category": "stale-content",
+      "title": "Phase 4 gate overdue day counts stale across 5 docs (39→41 days, 2026-07-13→2026-07-15)",
+      "fingerprint": "a5c3639b372a1dcde7e3cf944fe6a6af1d797936904414c1a4dd4fc4ebfc7faa",
+      "detail": "Seven day-count references across plan.md (×3), README.md (×2), docs/ifleet-integration-adrs.md (×1), docs/proposer-spec.md (×1), and docs/quota-pacing-design.md (×1) were stale. Phase 3 soak completed 2026-06-04; as of 2026-07-15 that is 41 days since completion (Phase 4 gate evaluation overdue). README soak-elapsed count updated from 53→55 days. quota-pacing-design.md had a slightly older figure (35 days as of 2026-07-09) also updated to 41 days as of 2026-07-15.",
+      "file_globs": [
+        "README.md",
+        "docs/ifleet-integration-adrs.md",
+        "docs/proposer-spec.md",
+        "docs/quota-pacing-design.md",
+        "plan.md"
+      ],
+      "fix_sketch": "Update all occurrences of '39 days as of 2026-07-13' to '41 days as of 2026-07-15'. Update '53 days elapsed' to '55 days elapsed' in README.md. Update '35 days overdue as of 2026-07-09' to '41 days overdue as of 2026-07-15' in quota-pacing-design.md.",
+      "parallel_safe": false,
+      "status": "fixed",
+      "opened_at": "2026-07-15T04:00:00Z",
+      "closed_at": "2026-07-15T04:00:00Z",
+      "closing_pr": "audit/nightly-2026-07-15"
+    }
+  ]
+}
