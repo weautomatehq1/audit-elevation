@@ -1,8 +1,8 @@
 {
   "repo": "audit-elevation",
-  "last_updated": "2026-07-13T00:00:00Z",
+  "last_updated": "2026-07-16T04:00:00Z",
   "open_findings": 0,
-  "fixed_this_run": 9,
+  "fixed_this_run": 1,
   "by_severity": {
     "CRITICAL": 0,
     "IMPORTANT": 0,
@@ -32,7 +32,8 @@
     "20260703T050000Z.json",
     "20260709T040000Z.json",
     "20260711T040000Z.json",
-    "20260713T000000Z.json"
+    "20260713T000000Z.json",
+    "20260716T040000Z.json"
   ],
   "findings": [
     {
@@ -292,6 +293,20 @@
       "closed_at": "2026-07-13T00:00:00Z",
       "closing_pr": "audit/nightly-2026-07-13",
       "fix_summary": "Updated '37 days overdue as of 2026-07-11' → '39 days overdue as of 2026-07-13' in docs/ifleet-integration-adrs.md Author line."
+    },
+    {
+      "id": "AUDIT-audit-elevation-fefc9d07",
+      "severity": "COSMETIC",
+      "category": "stale-content",
+      "title": "Phase 4 gate evaluation day count stale across README proposer-spec ifleet-integration-adrs plan",
+      "fingerprint": "fefc9d07",
+      "status": "fixed",
+      "opened_at": "2026-07-16T04:00:00Z",
+      "closed_at": "2026-07-16T04:00:00Z",
+      "closing_pr": "audit/nightly-2026-07-16",
+      "fix_summary": "Updated all occurrences: 53→56 days elapsed, 39→42 days overdue, 2026-07-13→2026-07-16.",
+      "file_globs": ["README.md", "docs/proposer-spec.md", "docs/ifleet-integration-adrs.md", "plan.md"],
+      "parallel_safe": false
     }
   ]
 }

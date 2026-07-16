@@ -1,0 +1,31 @@
+{
+  "scanned_at": "2026-07-16T04:00:00Z",
+  "repo": "audit-elevation",
+  "tool": "claude-audit-agent/nightly",
+  "summary": {
+    "new_findings": 1,
+    "fixed_this_run": 1,
+    "open_after": 0
+  },
+  "findings": [
+    {
+      "id": "AUDIT-audit-elevation-fefc9d07",
+      "fingerprint": "fefc9d07",
+      "severity": "COSMETIC",
+      "status": "fixed",
+      "category": "stale-content",
+      "title": "Phase 4 gate evaluation day count stale across README proposer-spec ifleet-integration-adrs plan",
+      "description": "Day counts referencing '39 days overdue as of 2026-07-13' and '53 days elapsed' were 3 days stale. Phase 3 soak completed 2026-06-04; as of 2026-07-16 the gate is 42 days overdue and Phase 3 is 56 days elapsed.",
+      "file_globs": [
+        "README.md",
+        "docs/proposer-spec.md",
+        "docs/ifleet-integration-adrs.md",
+        "plan.md"
+      ],
+      "fix_description": "Updated all occurrences: 53→56 days elapsed, 39→42 days overdue, 2026-07-13→2026-07-16.",
+      "closed_at": "2026-07-16T04:00:00Z",
+      "closing_pr": null,
+      "parallel_safe": false
+    }
+  ]
+}
