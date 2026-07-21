@@ -1,0 +1,26 @@
+{
+  "run_id": "20260721T040000Z",
+  "timestamp": "2026-07-21T04:00:00Z",
+  "repo": "weautomatehq1/audit-elevation",
+  "branch": "audit/nightly-2026-07-21",
+  "summary": {
+    "critical": 0,
+    "important_new": 0,
+    "important_fixed": 0,
+    "cosmetic_fixed": 1,
+    "open": 0
+  },
+  "new_findings": [],
+  "fixed_findings": [
+    {
+      "id": "AUDIT-ae-phase4-overdue-2026-07-21",
+      "severity": "COSMETIC",
+      "title": "README.md and plan.md Phase 4 gate overdue counts stale (45→47 days, elapsed 59→61 days)",
+      "files": ["README.md", "plan.md"],
+      "fix": "Updated Phase 4 gate decision overdue count 45→47 days (as of 2026-07-21), soak elapsed 59→61 days in README.md (Status table + summary paragraph) and plan.md (3 occurrences).",
+      "closed_at": "2026-07-21T04:00:00Z"
+    }
+  ],
+  "open_findings": [],
+  "notes": "0 open findings. Phase 4 gate decision is the only persistent blocker — requires Sebastian input."
+}
