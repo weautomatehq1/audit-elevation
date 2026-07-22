@@ -1,0 +1,31 @@
+{
+  "audit_id": "audit-20260722T043100Z",
+  "repo": "audit-elevation",
+  "scanned_at": "2026-07-22T04:31:00Z",
+  "scanner": "claude-sonnet-4-6-nightly",
+  "findings": [
+    {
+      "id": "AUDIT-audit-elevation-010c50fe",
+      "severity": "COSMETIC",
+      "category": "stale-content",
+      "title": "Phase 4 gate overdue day counts stale across 6 docs (41→48 days, 2026-07-15→2026-07-22)",
+      "detail": "README.md, plan.md (×3), docs/ifleet-integration-adrs.md, docs/proposer-spec.md, docs/quota-pacing-design.md, and docs/self-heal-pipeline.md all show '41 days overdue as of 2026-07-15'. Actual count as of 2026-07-22 is 48 days overdue. Also: elapsed counter '55 days' should be '62 days'; as-of date '2026-07-15' should be '2026-07-22'.",
+      "file_globs": [
+        "README.md",
+        "docs/ifleet-integration-adrs.md",
+        "docs/proposer-spec.md",
+        "docs/quota-pacing-design.md",
+        "docs/self-heal-pipeline.md",
+        "plan.md"
+      ],
+      "fix_sketch": "Update all '41 days overdue' → '48 days overdue', '55 days elapsed' → '62 days elapsed', and 'as of 2026-07-15' → 'as of 2026-07-22'.",
+      "parallel_safe": false,
+      "fingerprint": "010c50feafbf3070d515730b1cf09161e286b04df55f6cf0ac76a31076091928",
+      "status": "fixed",
+      "opened_at": "2026-07-22T04:31:00Z",
+      "closed_at": "2026-07-22T04:31:00Z",
+      "closing_pr": "audit/nightly-2026-07-22",
+      "fix_summary": "Updated stale day counts across 6 files: 41→48 days overdue, 55→62 days elapsed, as-of date 2026-07-15→2026-07-22."
+    }
+  ]
+}
