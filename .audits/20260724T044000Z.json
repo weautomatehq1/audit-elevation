@@ -1,0 +1,37 @@
+{
+  "scan_id": "20260724T044000Z",
+  "scanner": "claude-sonnet-4-6-nightly",
+  "scanned_at": "2026-07-24T04:40:00Z",
+  "repo": "weautomatehq1/audit-elevation",
+  "summary": {
+    "total_findings": 1,
+    "new_this_cycle": 1,
+    "fixed_this_cycle": 1,
+    "open_count": 0,
+    "carried_open_count": 0,
+    "by_severity": {
+      "CRITICAL": 0,
+      "IMPORTANT": 0,
+      "COSMETIC": 1
+    }
+  },
+  "carried_open_from_prior": [],
+  "findings": [
+    {
+      "id": "AUDIT-audit-elevation-28d60af7",
+      "title": "Phase 4 gate overdue day counts stale across 6 files (41→50 days, 2026-07-15→2026-07-24)",
+      "severity": "COSMETIC",
+      "status": "fixed",
+      "files": [
+        "README.md",
+        "plan.md",
+        "docs/quota-pacing-design.md",
+        "docs/proposer-spec.md",
+        "docs/ifleet-integration-adrs.md"
+      ],
+      "description": "Phase 4 gate evaluation overdue counters reference '41 days as of 2026-07-15'. Phase 3 soak completed 2026-06-04; as of 2026-07-24 (50 days later) the decision remains pending. Also updated Phase 3 elapsed: 55→64 days since Phase 3 started 2026-05-21.",
+      "fix": "Updated all occurrences of '41 days' to '50 days' and '55 days elapsed' to '64 days elapsed', with date references updated from 2026-07-15 to 2026-07-24 across 5 files."
+    }
+  ],
+  "open_findings": []
+}
