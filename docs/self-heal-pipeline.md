@@ -79,7 +79,7 @@ Field rules:
 ## How `/audit-fix` appends to `closed.json` (contract for T2 / future updates)
 
 > **FORWARD CONTRACT:** This section describes behavior `/audit-fix` MUST implement
-> in Phase 4. As of 2026-07-09 (Phase 4 gated on Sebastian decision — see README),
+> in Phase 4. As of 2026-07-25 (Phase 4 gated on Sebastian decision — see README),
 > `closed.json` is **not yet written**. This contract is written prescriptively so
 > T2/T4 implementers have a clear, auditable spec.
 
