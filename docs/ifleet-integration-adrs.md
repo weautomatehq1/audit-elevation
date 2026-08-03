@@ -11,7 +11,7 @@ Supersedes: None
 # IFleet integration ADRs — fold-in of the standalone elevation system
 
 **Status:** DRAFT (5 ADRs, awaiting Sebastian review)
-**Author:** T1 on split `20260520-2244-elevation-push` (authored 2026-05-20; soak completed 2026-06-04; Phase 4 gate evaluation 58 days overdue as of 2026-08-01)
+**Author:** T1 on split `20260520-2244-elevation-push` (authored 2026-05-20; soak completed 2026-06-04; Phase 4 gate evaluation 59 days overdue as of 2026-08-02)
 **Scope:** Architectural decisions for *eventually* folding the standalone audit + Codex + lane-scheduler + Proposer system into IFleet. No IFleet code changes proposed in this document — ADRs only.
 
 ## Why these ADRs exist now

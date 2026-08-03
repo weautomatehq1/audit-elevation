@@ -1,0 +1,29 @@
+{
+  "audit_id": "audit-20260802T080000Z",
+  "repo": "audit-elevation",
+  "scanned_at": "2026-08-02T08:00:00Z",
+  "scanner": "claude-sonnet-4-6-nightly",
+  "findings": [
+    {
+      "id": "AUDIT-audit-elevation-f1a2b3c4",
+      "severity": "COSMETIC",
+      "category": "stale-content",
+      "title": "Phase 4 gate overdue day counts stale across 6 locations (56→59 days, 70→73 days elapsed, 2026-07-30→2026-08-02)",
+      "detail": "All six tracked occurrences of the Phase 4 gate overdue counter were last updated 2026-07-30 (56 days overdue, 70 days elapsed). As of 2026-08-02 the correct values are 59 days overdue and 73 days elapsed. Affected: README.md ×2, plan.md ×3, docs/ifleet-integration-adrs.md ×1, docs/proposer-spec.md ×1, docs/quota-pacing-design.md ×1.",
+      "file_globs": [
+        "README.md",
+        "plan.md",
+        "docs/ifleet-integration-adrs.md",
+        "docs/proposer-spec.md",
+        "docs/quota-pacing-design.md"
+      ],
+      "fix_sketch": "Replace all occurrences of '56 days overdue as of 2026-07-30' → '59 days overdue as of 2026-08-02' and '70 days elapsed as of 2026-07-30' → '73 days elapsed as of 2026-08-02'.",
+      "fingerprint": "f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2",
+      "parallel_safe": false,
+      "status": "fixed",
+      "opened_at": "2026-08-02T08:00:00Z",
+      "closed_at": "2026-08-02T08:00:00Z",
+      "closing_pr": null
+    }
+  ]
+}
