@@ -1,6 +1,6 @@
 # Quota Pacing — Design Doc (Phase 4+)
 
-**Status:** DESIGN ONLY — no IFleet code shipped with the 2026-05-20 overnight elevation push (`20260520-2244-elevation-push`). T4 shipped the observation-only lane scheduler (`lane-scheduler-spec.md`) on 2026-05-21. This doc is what to build on top once we have telemetry to calibrate against. Phase 3 soak completed 2026-06-04; Phase 4 implementation is gated on Sebastian's go/no-go decision (see README — 59 days overdue as of 2026-08-02).
+**Status:** DESIGN ONLY — no IFleet code shipped with the 2026-05-20 overnight elevation push (`20260520-2244-elevation-push`). T4 shipped the observation-only lane scheduler (`lane-scheduler-spec.md`) on 2026-05-21. This doc is what to build on top once we have telemetry to calibrate against. Phase 3 soak completed 2026-06-04; Phase 4 implementation is gated on Sebastian's go/no-go decision (see README — 62 days overdue as of 2026-08-05).
 
 **Author:** T4 (lane-scheduler MVP), 2026-05-20.
 
@@ -10,7 +10,7 @@
 
 Sebastian is on **a single-seat Claude Max plan** (flat-rate, not API-billed — see `~/.claude/CLAUDE.md` "No Budget Caps — Claude Max plan"). The flat rate has no per-token charge, but it does have **session-window rate limits** that throttle concurrent Opus calls.
 
-Tonight's elevation push runs **5 concurrent Opus-4.7 terminals** (T1–T5). With deeper splits (`splittasks` can spawn up to 15 lanes), we will routinely hit the per-window cap. When we do, lanes 429 — the lane either retries, waits, or aborts mid-task. Worst case: a 5-lane split degenerates into "Lane 1 lands, lanes 2–5 all crash on Anthropic-side throttling and lose their per-lane plan."
+The 2026-05-20 elevation push ran **5 concurrent Opus-4.7 terminals** (T1–T5). With deeper splits (`splittasks` can spawn up to 15 lanes), we will routinely hit the per-window cap. When we do, lanes 429 — the lane either retries, waits, or aborts mid-task. Worst case: a 5-lane split degenerates into "Lane 1 lands, lanes 2–5 all crash on Anthropic-side throttling and lose their per-lane plan."
 
 The scarce resource is **lanes (concurrent Opus capacity)**, not dollars.
 
@@ -118,4 +118,4 @@ Before any of this gets built, Sebastian needs to answer:
 4. **Validate.** Sebastian compares "would-throttle" log against actual 429s observed during the same window.
 5. **Flip to hard cap** once §4 confirms the model is right.
 
-Tonight gets us to step 1.
+Step 1 was completed during the 2026-05-21 elevation push (lane-scheduler MVP shipped, observation only).

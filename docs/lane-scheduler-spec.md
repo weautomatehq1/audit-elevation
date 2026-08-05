@@ -137,4 +137,4 @@ The PM2 ecosystem file lives at `~/.claude/scripts/lane-scheduler.pm2.json`. Log
 - Token-bucket quota pacing (see `quota-pacing-design.md`).
 - IFleet integration: emit lane events to the IFleet event bus.
 - Discord brief on lane completion (via T5's audit-broadcast skill).
-- Web dashboard at `~/.omc/lane-scheduler/dashboard/` (not built tonight).
+- Web dashboard at `~/.omc/lane-scheduler/dashboard/` (deferred — Phase 4+).

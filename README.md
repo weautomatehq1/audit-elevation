@@ -36,13 +36,13 @@ Make audit findings *first-class on-disk work items* so:
 | **Phase 2 — Codex review + Tiered chain** | 🔴 BLOCKED — Codex CLI not installed; requires Sebastian setup | 2026-05-20 (design only) |
 | **Phase 2.5 — Hybrid automation** (SessionStart banner + `audit autopilot` keyword) | ✅ shipped | 2026-05-20 overnight |
 | **Online-eval-log v1** (Supabase-backed session-close capture) | ✅ shipped | 2026-05-21 |
-| **Phase 3 — Dogfood / 2-week soak** | 🟡 soak complete (73 days elapsed as of 2026-08-02) — ⚠️ Phase 4 gate evaluation 59 days overdue (soak completed 2026-06-04; Sebastian decision needed) | started 2026-05-21 |
+| **Phase 3 — Dogfood / 2-week soak** | 🟡 soak complete (76 days elapsed as of 2026-08-05) — ⚠️ Phase 4 gate evaluation 62 days overdue (soak completed 2026-06-04; Sebastian decision needed) ⚠️ Phase 3 ran in Codex-absent mode — 2 of 4 success criteria require Codex (≥5 Codex-closed findings; ≥1 Codex-unique catch) and were not satisfied. Phase 4 gate evaluation must decide: require Codex unblock and re-run soak, or waive Codex criteria and proceed with the remaining 2 criteria met. | started 2026-05-21 |
 | **Phase 4 — Self-healing (fingerprint REGRESSION + DRAFT auto-rules)** | ✅ scaffolded | 2026-05-21 overnight |
 | **Phase 5 — Lane scheduler MVP (observation-only)** | ✅ scaffolded, opt-in PM2 entry | 2026-05-21 |
-| **Phase 6 — IFleet fold-in** | 📝 ADRs drafted, 5 Sebastian decisions queued | gated on Phase 3 soak |
+| **Phase 6 — IFleet fold-in** | 📝 ADRs drafted, 5 Sebastian decisions queued | gated on Phase 4 decision (see Phase 4 row — 62 days overdue as of 2026-08-05) |
 | **Phase 7 — Proposer (M5 of IFleet elevation)** | 📝 spec drafted | future |
 
-6 repos baselined (IFleet, factory, PhillUp, discord-claude-bot, ~/.claude, audit-elevation). As of 2026-08-02: **audit-elevation** has 0 open findings (all previous open findings closed — see `.audits/index.json`) — Phase 4 gate evaluation 59 days overdue (c3a7f912 status updated). IFleet and factory findings tracked in their own `.audits/index.json` files. The 52-finding baseline (6 CRITICAL / 37 IMPORTANT / 9 COSMETIC) was as of 2026-05-21 initial scan.
+6 repos baselined (IFleet, factory, PhillUp, discord-claude-bot, ~/.claude, audit-elevation). As of 2026-08-05: **audit-elevation** has 0 open findings (all previous open findings closed — see `.audits/index.json`) — Phase 4 gate evaluation 62 days overdue (c3a7f912 status updated). IFleet and factory findings tracked in their own `.audits/index.json` files. The 52-finding baseline (6 CRITICAL / 37 IMPORTANT / 9 COSMETIC) was as of 2026-05-21 initial scan.
 
 ---
 
@@ -233,7 +233,7 @@ python3 ~/.claude/scripts/online-eval-stats.py --days 7 --repo IFleet --json | j
 | [docs/lane-scheduler-spec.md](./docs/lane-scheduler-spec.md) | Lane scheduler schema (`~/.omc/active-lanes.json`), helper scripts, observer daemon, PM2 opt-in. |
 | [docs/self-heal-pipeline.md](./docs/self-heal-pipeline.md) | Fingerprint → REGRESSION detection → DRAFT auto-rule generation. Lifecycle + failure modes. |
 | [docs/quota-pacing-design.md](./docs/quota-pacing-design.md) | Future design for Max-quota throttling. Not implemented — design only. |
-| [docs/ifleet-integration-adrs.md](./docs/ifleet-integration-adrs.md) | 5 ADRs for the eventual IFleet fold-in (Phase 6). Gated on Phase 3 soak. |
+| [docs/ifleet-integration-adrs.md](./docs/ifleet-integration-adrs.md) | 5 ADRs for the eventual IFleet fold-in (Phase 6). Gated on Phase 4 decision (see Phase 4 row — 62 days overdue as of 2026-08-05). |
 
 ---
 
