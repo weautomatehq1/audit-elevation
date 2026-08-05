@@ -23,7 +23,8 @@
       "status": "fixed",
       "opened_at": "2026-08-02T08:00:00Z",
       "closed_at": "2026-08-02T08:00:00Z",
-      "closing_pr": null
+      "closing_pr": 0,
+      "fix_summary": "Updated stale day counts in README.md (×2), plan.md (×3), docs/ifleet-integration-adrs.md (×1), docs/proposer-spec.md (×1), docs/quota-pacing-design.md (×1): 56→59 days overdue, 70→73 days elapsed, as-of date 2026-07-30→2026-08-02."
     }
   ]
 }

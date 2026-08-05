@@ -1,0 +1,78 @@
+{
+  "audit_id": "audit-20260804T043634Z",
+  "repo": "audit-elevation",
+  "scanned_at": "2026-08-04T04:36:34Z",
+  "scanner": "claude-sonnet-4-6-nightly",
+  "findings": [
+    {
+      "id": "AUDIT-audit-elevation-424cae0e",
+      "severity": "IMPORTANT",
+      "category": "correctness",
+      "title": "index.json by_severity shows COSMETIC: 1 while open_findings is 0, making field semantics ambiguous",
+      "detail": "The by_severity field in .audits/index.json showed {CRITICAL: 0, IMPORTANT: 0, COSMETIC: 1} while open_findings was 0. The field appears to have been tracking the previous run's fixed-finding count by severity rather than currently-open findings, but its position next to open_findings and its name imply it counts open findings by severity. Any tool consuming this field (e.g., the Proposer scoring algorithm, audit-status.sh, or the online-eval aggregator) would infer 1 open COSMETIC finding exists when none do, potentially inflating scoring or producing incorrect status banners.",
+      "file_globs": [".audits/index.json"],
+      "fix_sketch": "Reset by_severity to {CRITICAL: 0, IMPORTANT: 0, COSMETIC: 0} so it correctly reflects zero open findings. Alternatively, rename to fixed_this_run_by_severity to remove ambiguity.",
+      "fingerprint": "424cae0e02e07dc76a5b7e33d17b60bdf66f9c67f9128d6e52fd4eabe4eb53d9",
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-08-04T04:36:34Z",
+      "closed_at": "2026-08-04T04:36:34Z",
+      "closing_pr": 0,
+      "fix_summary": "Reset by_severity to {CRITICAL: 0, IMPORTANT: 0, COSMETIC: 0} in index.json to correctly reflect zero open findings. Also updated last_updated and fixed_this_run count."
+    },
+    {
+      "id": "AUDIT-audit-elevation-03554cf4",
+      "severity": "IMPORTANT",
+      "category": "correctness",
+      "title": "closing_pr: null in 20260802T080000Z.json violates schema — should be integer 0 for local-only fixes",
+      "detail": "The self-heal-pipeline.md spec is explicit: 'If the closure landed without a PR (rare; only for local-only repos), use 0 and explain in fix_summary.' The 20260802T080000Z.json scan file used null for closing_pr instead of the integer 0. The regression-detector verdict format REGRESSION:<original_id>:<closing_pr> requires an integer value; null would cause string-split parsing to produce 'null' as the third segment, breaking downstream regression tracking. Additionally the finding was missing its fix_summary field.",
+      "file_globs": [".audits/20260802T080000Z.json"],
+      "fix_sketch": "Change closing_pr from null to 0 and add fix_summary per the closed.json contract.",
+      "fingerprint": "03554cf4acb3d59f3ae17dea65b3f6bb9f39fb0639615ea0105e333543cb7718",
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-08-04T04:36:34Z",
+      "closed_at": "2026-08-04T04:36:34Z",
+      "closing_pr": 0,
+      "fix_summary": "Changed closing_pr from null to 0 and added fix_summary to 20260802T080000Z.json to conform to the schema defined in self-heal-pipeline.md."
+    },
+    {
+      "id": "AUDIT-audit-elevation-e13187c5",
+      "severity": "COSMETIC",
+      "category": "cosmetic",
+      "title": "audit_id in 20260730T041253Z.json uses 'nightly-YYYY-MM-DD' format instead of 'audit-<compacted-timestamp>'",
+      "detail": "The plan.md schema specifies the audit_id format as 'audit-<compacted-timestamp>' (e.g., 'audit-20260520T2300Z'). The 20260730T041253Z.json file uses 'nightly-2026-07-30', which is a different format. All other recent scan files use the correct 'audit-YYYYMMDDTHHMMSSZ' format. While non-breaking today, inconsistent audit_id formats would break any future tooling that parses audit_id to extract timestamps or identify scan provenance.",
+      "file_globs": [".audits/20260730T041253Z.json"],
+      "fix_sketch": "Change audit_id from 'nightly-2026-07-30' to 'audit-20260730T041253Z' to match the file's own timestamp and the schema convention.",
+      "fingerprint": "e13187c5bbf680c3362740db6e8f0898a62c7228ea6dbbb1d4732120c5df35cd",
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-08-04T04:36:34Z",
+      "closed_at": "2026-08-04T04:36:34Z",
+      "closing_pr": 0,
+      "fix_summary": "Updated audit_id in 20260730T041253Z.json from 'nightly-2026-07-30' to 'audit-20260730T041253Z' to conform to the schema."
+    },
+    {
+      "id": "AUDIT-audit-elevation-648e683b",
+      "severity": "COSMETIC",
+      "category": "stale-content",
+      "title": "Phase 4 gate overdue day counts stale across 5 docs (59→61 days, 73→75 days elapsed, 2026-08-02→2026-08-04)",
+      "detail": "All occurrences of the Phase 4 gate overdue counter were last updated 2026-08-02 (59 days overdue, 73 days elapsed). As of 2026-08-04 the correct values are 61 days overdue and 75 days elapsed. Affected: README.md ×2, plan.md ×3, docs/ifleet-integration-adrs.md ×1, docs/proposer-spec.md ×1, docs/quota-pacing-design.md ×1.",
+      "file_globs": [
+        "README.md",
+        "docs/ifleet-integration-adrs.md",
+        "docs/proposer-spec.md",
+        "docs/quota-pacing-design.md",
+        "plan.md"
+      ],
+      "fix_sketch": "Replace all occurrences of '59 days overdue as of 2026-08-02' → '61 days overdue as of 2026-08-04' and '73 days elapsed as of 2026-08-02' → '75 days elapsed as of 2026-08-04'.",
+      "fingerprint": "648e683b298c347c9fab6516e76d5162bd5e30c5efd8e230df90f69446140bc6",
+      "parallel_safe": false,
+      "status": "fixed",
+      "opened_at": "2026-08-04T04:36:34Z",
+      "closed_at": "2026-08-04T04:36:34Z",
+      "closing_pr": 0,
+      "fix_summary": "Updated stale day counts in README.md (×2), plan.md (×3), docs/ifleet-integration-adrs.md (×1), docs/proposer-spec.md (×1), docs/quota-pacing-design.md (×1): 59→61 days overdue, 73→75 days elapsed, as-of date 2026-08-02→2026-08-04."
+    }
+  ]
+}

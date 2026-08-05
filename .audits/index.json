@@ -1,12 +1,12 @@
 {
   "repo": "audit-elevation",
-  "last_updated": "2026-08-02T08:00:00Z",
+  "last_updated": "2026-08-04T04:36:34Z",
   "open_findings": 0,
-  "fixed_this_run": 1,
+  "fixed_this_run": 4,
   "by_severity": {
     "CRITICAL": 0,
     "IMPORTANT": 0,
-    "COSMETIC": 1
+    "COSMETIC": 0
   },
   "nightly_audits": [
     "2026-05-21T17:20:59Z.json",
@@ -40,7 +40,8 @@
     "20260728T040000Z.json",
     "20260730T041253Z.json",
     "20260801T040000Z.json",
-    "20260802T080000Z.json"
+    "20260802T080000Z.json",
+    "20260804T043634Z.json"
   ],
   "findings": [
     {
@@ -418,6 +419,68 @@
         "docs/ifleet-integration-adrs.md",
         "docs/proposer-spec.md",
         "docs/quota-pacing-design.md"
+      ],
+      "parallel_safe": false
+    },
+    {
+      "id": "AUDIT-audit-elevation-424cae0e",
+      "severity": "IMPORTANT",
+      "category": "correctness",
+      "title": "index.json by_severity shows COSMETIC: 1 while open_findings is 0, making field semantics ambiguous",
+      "fingerprint": "424cae0e02e07dc76a5b7e33d17b60bdf66f9c67f9128d6e52fd4eabe4eb53d9",
+      "status": "fixed",
+      "opened_at": "2026-08-04T04:36:34Z",
+      "closed_at": "2026-08-04T04:36:34Z",
+      "closing_pr": 0,
+      "fix_summary": "Reset by_severity to {CRITICAL: 0, IMPORTANT: 0, COSMETIC: 0} in index.json to correctly reflect zero open findings. Also updated last_updated and fixed_this_run count.",
+      "file_globs": [".audits/index.json"],
+      "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-03554cf4",
+      "severity": "IMPORTANT",
+      "category": "correctness",
+      "title": "closing_pr: null in 20260802T080000Z.json violates schema — should be integer 0 for local-only fixes",
+      "fingerprint": "03554cf4acb3d59f3ae17dea65b3f6bb9f39fb0639615ea0105e333543cb7718",
+      "status": "fixed",
+      "opened_at": "2026-08-04T04:36:34Z",
+      "closed_at": "2026-08-04T04:36:34Z",
+      "closing_pr": 0,
+      "fix_summary": "Changed closing_pr from null to 0 and added fix_summary to 20260802T080000Z.json to conform to the schema defined in self-heal-pipeline.md.",
+      "file_globs": [".audits/20260802T080000Z.json"],
+      "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-e13187c5",
+      "severity": "COSMETIC",
+      "category": "cosmetic",
+      "title": "audit_id in 20260730T041253Z.json uses 'nightly-YYYY-MM-DD' format instead of 'audit-<compacted-timestamp>'",
+      "fingerprint": "e13187c5bbf680c3362740db6e8f0898a62c7228ea6dbbb1d4732120c5df35cd",
+      "status": "fixed",
+      "opened_at": "2026-08-04T04:36:34Z",
+      "closed_at": "2026-08-04T04:36:34Z",
+      "closing_pr": 0,
+      "fix_summary": "Updated audit_id in 20260730T041253Z.json from 'nightly-2026-07-30' to 'audit-20260730T041253Z' to conform to the schema.",
+      "file_globs": [".audits/20260730T041253Z.json"],
+      "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-648e683b",
+      "severity": "COSMETIC",
+      "category": "stale-content",
+      "title": "Phase 4 gate overdue day counts stale across 5 docs (59→61 days, 73→75 days elapsed, 2026-08-02→2026-08-04)",
+      "fingerprint": "648e683b298c347c9fab6516e76d5162bd5e30c5efd8e230df90f69446140bc6",
+      "status": "fixed",
+      "opened_at": "2026-08-04T04:36:34Z",
+      "closed_at": "2026-08-04T04:36:34Z",
+      "closing_pr": 0,
+      "fix_summary": "Updated stale day counts in README.md (×2), plan.md (×3), docs/ifleet-integration-adrs.md (×1), docs/proposer-spec.md (×1), docs/quota-pacing-design.md (×1): 59→61 days overdue, 73→75 days elapsed, as-of date 2026-08-02→2026-08-04.",
+      "file_globs": [
+        "README.md",
+        "docs/ifleet-integration-adrs.md",
+        "docs/proposer-spec.md",
+        "docs/quota-pacing-design.md",
+        "plan.md"
       ],
       "parallel_safe": false
     }
