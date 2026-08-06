@@ -1,8 +1,8 @@
 {
   "repo": "audit-elevation",
-  "last_updated": "2026-08-04T04:36:34Z",
+  "last_updated": "2026-08-06T04:00:00Z",
   "open_findings": 0,
-  "fixed_this_run": 4,
+  "fixed_this_run": 5,
   "by_severity": {
     "CRITICAL": 0,
     "IMPORTANT": 0,
@@ -34,14 +34,14 @@
     "20260711T040000Z.json",
     "20260713T000000Z.json",
     "2026-07-15T04:00:00Z.json",
-    "20260717T040000Z.json",
     "20260719T040000Z.json",
     "20260723T040000Z.json",
     "20260728T040000Z.json",
     "20260730T041253Z.json",
     "20260801T040000Z.json",
     "20260802T080000Z.json",
-    "20260804T043634Z.json"
+    "20260804T043634Z.json",
+    "20260806T040000Z.json"
   ],
   "findings": [
     {
@@ -483,6 +483,82 @@
         "plan.md"
       ],
       "parallel_safe": false
+    },
+    {
+      "id": "AUDIT-audit-elevation-312b8eae",
+      "severity": "IMPORTANT",
+      "category": "inconsistency",
+      "title": "ADR-0005 summary table default contradicts Decision section channel choice",
+      "fingerprint": "312b8eae32c5fddcc5d45206b0a8f3661a9904f31f4f19392f967e66fa4ab2b8",
+      "status": "fixed",
+      "opened_at": "2026-08-06T04:00:00Z",
+      "closed_at": "2026-08-06T04:00:00Z",
+      "closing_pr": 0,
+      "fix_summary": "Updated summary table row 5 'Default if no answer' from 'Reuse #ifleet (1504120127791042631)' to 'New #ifleet-proposals channel (per ADR-0005 Decision section)' to align with the body text.",
+      "file_globs": ["docs/ifleet-integration-adrs.md"],
+      "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-705b84f3",
+      "severity": "IMPORTANT",
+      "category": "correctness",
+      "title": "index.json nightly_audits lists 20260717T040000Z.json which does not exist on disk",
+      "fingerprint": "705b84f32aa26ac7c7aa9ad69a14e15b95ccdad46b0b3f71e22e6d564183d48c",
+      "status": "fixed",
+      "opened_at": "2026-08-06T04:00:00Z",
+      "closed_at": "2026-08-06T04:00:00Z",
+      "closing_pr": 0,
+      "fix_summary": "Removed phantom '20260717T040000Z.json' entry from nightly_audits array in .audits/index.json.",
+      "file_globs": [".audits/index.json"],
+      "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-e0b431d0",
+      "severity": "COSMETIC",
+      "category": "stale-content",
+      "title": "Phase 4 gate overdue day counts stale across 6 locations (61→63 days, 75→77 days elapsed, 2026-08-04→2026-08-06)",
+      "fingerprint": "e0b431d015b173bda166030f0ad44247cd6a8cca11898f3eda6fa591924bd8c3",
+      "status": "fixed",
+      "opened_at": "2026-08-06T04:00:00Z",
+      "closed_at": "2026-08-06T04:00:00Z",
+      "closing_pr": 0,
+      "fix_summary": "Updated stale day counts in README.md (×2), plan.md (×3), docs/ifleet-integration-adrs.md (×1), docs/proposer-spec.md (×1), docs/quota-pacing-design.md (×1): 61→63 days overdue, 75→77 days elapsed, as-of date 2026-08-04→2026-08-06.",
+      "file_globs": [
+        "README.md",
+        "docs/ifleet-integration-adrs.md",
+        "docs/proposer-spec.md",
+        "docs/quota-pacing-design.md",
+        "plan.md"
+      ],
+      "parallel_safe": false
+    },
+    {
+      "id": "AUDIT-audit-elevation-ff6b45b5",
+      "severity": "COSMETIC",
+      "category": "inconsistency",
+      "title": "plan.md finding schema shows fix_sketch but omits fix_summary field used when closing",
+      "fingerprint": "ff6b45b597351f93e7993b38a20e1bac580cb582dd0368decb6457a6aa6de41e",
+      "status": "fixed",
+      "opened_at": "2026-08-06T04:00:00Z",
+      "closed_at": "2026-08-06T04:00:00Z",
+      "closing_pr": 0,
+      "fix_summary": "Added 'fix_summary' field (null for open, populated string when fixed) to finding object schema in plan.md §Phase 1.",
+      "file_globs": ["plan.md"],
+      "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-ddfd355d",
+      "severity": "COSMETIC",
+      "category": "inconsistency",
+      "title": "lane-list.sh uses STALE_AFTER while lane-prune-stale.sh uses STALE_AFTER_SEC for related but different timeouts",
+      "fingerprint": "ddfd355d03704e077ddd3e34977b42207479c479a7839495d5e4a33a90251d3a",
+      "status": "fixed",
+      "opened_at": "2026-08-06T04:00:00Z",
+      "closed_at": "2026-08-06T04:00:00Z",
+      "closing_pr": 0,
+      "fix_summary": "Clarified in lane-scheduler-spec.md that STALE_AFTER (seconds, default 600 = 10 min) and STALE_AFTER_SEC (seconds, default 3600 = 60 min) are intentionally separate thresholds: STALE_AFTER for warning in lane-list.sh, STALE_AFTER_SEC for reaping in lane-prune-stale.sh.",
+      "file_globs": ["docs/lane-scheduler-spec.md"],
+      "parallel_safe": true
     }
   ]
 }
