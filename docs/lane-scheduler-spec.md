@@ -74,8 +74,8 @@ All five are atomic via mkdir-based locking (`lane-lock.sh`). macOS has no `floc
 | `lane-register.sh <id> <kind> [globs] [model] [session_dir] [label] [eta]` | Append a lane entry (or replace existing entry with same `id`). Creates the file with the empty skeleton if missing. | yes |
 | `lane-heartbeat.sh <id>` | Update `last_heartbeat` to now-UTC. No-op if `id` isn't present. | yes |
 | `lane-unregister.sh <id> [reason]` | Remove from `lanes`, append a summary to `completed_today` with computed `duration_seconds`. `reason` defaults to `completed`. | yes |
-| `lane-list.sh` | Pretty-print active lanes. Color codes: green `OK`, yellow `STALE` (no heartbeat for >10 min, configurable via `STALE_AFTER`) or `NO-HB` (no `last_heartbeat` field at all). Strips ANSI color codes when `NO_COLOR` env var is set or stdout is not a TTY; status text (`OK`/`STALE`/`NO-HB`) is always emitted regardless of color mode. | read-only |
-| `lane-prune-stale.sh` | Move lanes whose `last_heartbeat` is >60 min old (`STALE_AFTER_SEC`, default 3600) into `completed_today` with `reason: "stale"` and `terminated: "stale"`. | yes |
+| `lane-list.sh` | Pretty-print active lanes. Color codes: green `OK`, yellow `STALE` (no heartbeat for >10 min, configurable via `STALE_AFTER` in seconds, default 600) or `NO-HB` (no `last_heartbeat` field at all). Strips ANSI color codes when `NO_COLOR` env var is set or stdout is not a TTY; status text (`OK`/`STALE`/`NO-HB`) is always emitted regardless of color mode. Note: `STALE_AFTER` (warning threshold, default 600s) and `STALE_AFTER_SEC` (reap threshold, default 3600s) are intentionally separate env vars. | read-only |
+| `lane-prune-stale.sh` | Move lanes whose `last_heartbeat` is >60 min old (`STALE_AFTER_SEC` in seconds, default 3600) into `completed_today` with `reason: "stale"` and `terminated: "stale"`. Note: distinct from `STALE_AFTER` used by `lane-list.sh` (warning-only, 10 min default). | yes |
 
 `lane-lock.sh` is sourced by the mutating helpers and is not standalone.
 

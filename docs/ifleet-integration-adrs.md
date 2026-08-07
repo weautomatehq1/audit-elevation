@@ -11,7 +11,7 @@ Supersedes: None
 # IFleet integration ADRs — fold-in of the standalone elevation system
 
 **Status:** DRAFT (5 ADRs, awaiting Sebastian review)
-**Author:** T1 on split `20260520-2244-elevation-push` (authored 2026-05-20; soak completed 2026-06-04; Phase 4 gate evaluation 61 days overdue as of 2026-08-04)
+**Author:** T1 on split `20260520-2244-elevation-push` (authored 2026-05-20; soak completed 2026-06-04; Phase 4 gate evaluation 63 days overdue as of 2026-08-06)
 **Scope:** Architectural decisions for *eventually* folding the standalone audit + Codex + lane-scheduler + Proposer system into IFleet. No IFleet code changes proposed in this document — ADRs only.
 
 ## Why these ADRs exist now
@@ -274,7 +274,7 @@ Decision rules baked into the Proposer's morning prompt:
 | 2 | Cross-provider reviewer own cost cap value | 0002 | 15% of architect cost |
 | 3 | `.audits/.config.json` `IFLEET_MANAGED` flag schema | 0003 | Boolean, default false |
 | 4 | Lane TTL / heartbeat interval | 0004 | 60 min idle reap (per lane-scheduler-spec.md `STALE_AFTER_SEC=3600`) |
-| 5 | `#ifleet-proposals` channel creation | 0005 | Reuse `#ifleet` (1504120127791042631) |
+| 5 | `#ifleet-proposals` channel creation | 0005 | New `#ifleet-proposals` channel (per ADR-0005 Decision section) |
 
 ## Plain-language recap
 
