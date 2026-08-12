@@ -3,7 +3,7 @@
   "repo": "audit-elevation",
   "scanned_at": "2026-08-11T04:00:00Z",
   "scanner": "claude-sonnet-4-6-nightly",
-  "rubric_version": "1.0",
+  "rubric_version": "1.0.0",
   "findings": [
     {
       "id": "AUDIT-audit-elevation-day-counts-20260811",
@@ -24,7 +24,7 @@
       "status": "fixed",
       "opened_at": "2026-08-11T04:00:00Z",
       "closed_at": "2026-08-11T04:00:00Z",
-      "closing_pr": null,
+      "closing_pr": 0,
       "fix_summary": "Updated stale day counts in README.md (×2), plan.md (×3), docs/ifleet-integration-adrs.md (×1), docs/proposer-spec.md (×1), docs/quota-pacing-design.md (×1): 63→68 days overdue, 77→82 days elapsed, as-of date 2026-08-06→2026-08-11."
     }
   ]

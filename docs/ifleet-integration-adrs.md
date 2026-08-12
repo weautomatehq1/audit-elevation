@@ -11,7 +11,7 @@ Supersedes: None
 # IFleet integration ADRs — fold-in of the standalone elevation system
 
 **Status:** DRAFT (5 ADRs, awaiting Sebastian review)
-**Author:** T1 on split `20260520-2244-elevation-push` (authored 2026-05-20; soak completed 2026-06-04; Phase 4 gate evaluation 68 days overdue as of 2026-08-11)
+**Author:** T1 on split `20260520-2244-elevation-push` (authored 2026-05-20; soak completed 2026-06-04; Phase 4 gate evaluation 69 days overdue as of 2026-08-12)
 **Scope:** Architectural decisions for *eventually* folding the standalone audit + Codex + lane-scheduler + Proposer system into IFleet. No IFleet code changes proposed in this document — ADRs only.
 
 ## Why these ADRs exist now
@@ -94,7 +94,7 @@ Three placement candidates:
 - Both PASS → merge OK
 - Either FAIL → block merge, attach both verdicts to PR
 - Either NEEDS_REVISION → re-queue to editor with combined feedback (max 3 retries, existing pattern)
-- Codex unavailable (rate-limited / CLI missing) → fall back to `diff-reviewer.ts` only, attach a `cross-provider: unavailable` banner (matches the Docker-unreachable fallback in ADR-0002)
+- Codex unavailable (rate-limited / CLI missing) → fall back to `diff-reviewer.ts` only, attach a `cross-provider: unavailable` banner (matches the Docker-unreachable fallback in IFleet repo ADR-0002)
 
 ### Alternatives considered
 

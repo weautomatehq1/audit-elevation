@@ -1,6 +1,6 @@
 # Proposer — IFleet M5 spec
 
-> **Status:** DRAFT — design only. No IFleet source code lands until Sebastian approves (Phase 4 gate pending — see README, 68 days overdue as of 2026-08-11).
+> **Status:** DRAFT — design only. No IFleet source code lands until Sebastian approves (Phase 4 gate pending — see README, 69 days overdue as of 2026-08-12).
 > **Author:** T5 (overnight split `20260520-2244-elevation-push`, 2026-05-20).
 > **Predecessors:** ROADMAP.md M5, ADR-0001 (single-shared-trace), SECURITY.md, NON_GOALS.md.
 > **Companion:** `~/.claude/skills/audit-broadcast/` — the channel the Proposer reuses for its morning DM/post.
@@ -46,7 +46,7 @@ Read-only. The Proposer never writes to source.
 
 ## 3. Ranking algorithm
 
-**Pre-filter (before scoring):** drop any finding with `status` not in `["open", "regression"]`. DUPLICATE findings are excluded from `index.json` by the regression-detector; if any appear (scanner bug), log a warning and skip them. COSMETIC findings with `status: "closed"` or `"fixed"` are also skipped — only open work items enter scoring.
+**Pre-filter (before scoring):** drop any finding with `status` not in `["open", "regression"]`. DUPLICATE findings are excluded from `index.json` by the regression-detector; if any appear (scanner bug), log a warning and skip them. Findings with any other status (`closed`, `fixed`, `verifying`, `fixing`) are also excluded — the first-sentence rule applies to all severities equally; only open work items enter scoring.
 
 Each candidate task gets a numeric score. Higher score → higher position in the morning plan.
 

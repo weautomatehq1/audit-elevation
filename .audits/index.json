@@ -1,8 +1,8 @@
 {
   "repo": "audit-elevation",
-  "last_updated": "2026-08-11T04:00:00Z",
-  "open_findings": 0,
-  "fixed_this_run": 1,
+  "last_updated": "2026-08-12T05:40:47Z",
+  "open_findings": 1,
+  "fixed_this_run": 6,
   "by_severity": {
     "CRITICAL": 0,
     "IMPORTANT": 0,
@@ -42,7 +42,8 @@
     "20260802T080000Z.json",
     "20260804T043634Z.json",
     "20260806T040000Z.json",
-    "20260811T040000Z.json"
+    "20260811T040000Z.json",
+    "20260812T054047Z.json"
   ],
   "findings": [
     {
@@ -560,6 +561,146 @@
       "fix_summary": "Clarified in lane-scheduler-spec.md that STALE_AFTER (seconds, default 600 = 10 min) and STALE_AFTER_SEC (seconds, default 3600 = 60 min) are intentionally separate thresholds: STALE_AFTER for warning in lane-list.sh, STALE_AFTER_SEC for reaping in lane-prune-stale.sh.",
       "file_globs": ["docs/lane-scheduler-spec.md"],
       "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-day-counts-20260811",
+      "severity": "COSMETIC",
+      "category": "cosmetic",
+      "title": "Phase 4 gate overdue day counts stale across 8 locations (63→68 days, 77→82 days elapsed, 2026-08-06→2026-08-11)",
+      "detail": "Phase 3 soak completed 2026-06-04. As of 2026-08-11: 68 days overdue (was 63 as of 2026-08-06), 82 days elapsed since Phase 3 start on 2026-05-21 (was 77). Stale references appear in README.md (×2), plan.md (×3), docs/ifleet-integration-adrs.md (×1), docs/proposer-spec.md (×1), docs/quota-pacing-design.md (×1).",
+      "file_globs": [
+        "README.md",
+        "docs/ifleet-integration-adrs.md",
+        "docs/proposer-spec.md",
+        "docs/quota-pacing-design.md",
+        "plan.md"
+      ],
+      "fix_sketch": "Replace '63 days overdue' with '68 days overdue', '77 days elapsed' with '82 days elapsed', and 'as of 2026-08-06' with 'as of 2026-08-11' across all 8 affected locations.",
+      "parallel_safe": false,
+      "fingerprint": "e0b431d015b173bda166030f0ad44247cd6a8cca11898f3eda6fa591924bd8c3",
+      "status": "fixed",
+      "opened_at": "2026-08-11T04:00:00Z",
+      "closed_at": "2026-08-11T04:00:00Z",
+      "closing_pr": 0,
+      "fix_summary": "Updated stale day counts in README.md (×2), plan.md (×3), docs/ifleet-integration-adrs.md (×1), docs/proposer-spec.md (×1), docs/quota-pacing-design.md (×1): 63→68 days overdue, 77→82 days elapsed, as-of date 2026-08-06→2026-08-11."
+    },
+    {
+      "id": "AUDIT-audit-elevation-7d6e1e5a",
+      "severity": "IMPORTANT",
+      "category": "correctness",
+      "title": "20260811T040000Z.json finding missing from index.json findings array",
+      "detail": "The finding AUDIT-audit-elevation-day-counts-20260811 (status: fixed) appears in .audits/20260811T040000Z.json and is counted in fixed_this_run: 1, but was absent from the index.json findings array. The index is a complete rollup of all findings across all scans; every finding should appear there for audit-trail completeness.",
+      "file_globs": [".audits/index.json"],
+      "fix_sketch": "Add the 2026-08-11 finding entry to the findings array in index.json, preserving its status: fixed and all fields from the scan file.",
+      "parallel_safe": true,
+      "fingerprint": "7d6e1e5a31cc7ef5363fb3a0f343b75e5746014ecf72c62ab4791f8cd16effed",
+      "status": "fixed",
+      "opened_at": "2026-08-12T05:40:47Z",
+      "closed_at": "2026-08-12T05:40:47Z",
+      "closing_pr": 0,
+      "fix_summary": "Added AUDIT-audit-elevation-day-counts-20260811 finding entry to index.json findings array with all fields from 20260811T040000Z.json."
+    },
+    {
+      "id": "AUDIT-audit-elevation-0f55c930",
+      "severity": "IMPORTANT",
+      "category": "correctness",
+      "title": "closing_pr: null in 20260811T040000Z.json — schema requires integer 0 for local-only fixes",
+      "detail": "The single finding in .audits/20260811T040000Z.json had closing_pr: null. Per self-heal-pipeline.md: 'If the closure landed without a PR (rare; only for local-only repos), use 0 and explain in fix_summary.' This is a recurring schema violation — the same issue was previously fixed for 20260802T080000Z.json as AUDIT-audit-elevation-03554cf4.",
+      "file_globs": [".audits/20260811T040000Z.json"],
+      "fix_sketch": "Change closing_pr from null to 0 in .audits/20260811T040000Z.json.",
+      "parallel_safe": true,
+      "fingerprint": "0f55c9307e8a7ab8303e111f4b168f374030460c58661570e1bfdc95ce5506c1",
+      "status": "fixed",
+      "opened_at": "2026-08-12T05:40:47Z",
+      "closed_at": "2026-08-12T05:40:47Z",
+      "closing_pr": 0,
+      "fix_summary": "Changed closing_pr from null to 0 in .audits/20260811T040000Z.json to conform to the schema."
+    },
+    {
+      "id": "AUDIT-audit-elevation-50362cc6",
+      "severity": "IMPORTANT",
+      "category": "correctness",
+      "title": "rubric_version '1.0' in 20260811T040000Z.json — rubric.json declares '1.0.0' (semver)",
+      "detail": "The scan file .audits/20260811T040000Z.json used rubric_version: '1.0', but rubric.json declares rubric_version: '1.0.0'. The rubric is the single source of truth for this field.",
+      "file_globs": [".audits/20260811T040000Z.json"],
+      "fix_sketch": "Change rubric_version from '1.0' to '1.0.0' in .audits/20260811T040000Z.json.",
+      "parallel_safe": true,
+      "fingerprint": "50362cc68d06557d2d906ad590396ef581146294bffcf540cd849b5a80da4f34",
+      "status": "fixed",
+      "opened_at": "2026-08-12T05:40:47Z",
+      "closed_at": "2026-08-12T05:40:47Z",
+      "closing_pr": 0,
+      "fix_summary": "Changed rubric_version from '1.0' to '1.0.0' in .audits/20260811T040000Z.json to match rubric.json declaration."
+    },
+    {
+      "id": "AUDIT-audit-elevation-b9f3c8f1",
+      "severity": "IMPORTANT",
+      "category": "correctness",
+      "title": "Finding ID 'AUDIT-audit-elevation-day-counts-20260811' does not conform to 8-hex-chars schema; fingerprint reuses previous finding's hash",
+      "detail": "plan.md specifies the ID format as 'AUDIT-<repo>-<8hexchars>' where 8hexchars are the first 8 hex characters of the finding's SHA256 fingerprint. The 2026-08-11 scan used a descriptive ID suffix ('day-counts-20260811'). Additionally, the stored fingerprint (e0b431d0...) is identical to the already-closed finding AUDIT-audit-elevation-e0b431d0 from 2026-08-06 — the scanner should have computed a fresh fingerprint for the distinct title. Cannot be corrected post-hoc without recomputing the SHA256.",
+      "file_globs": [".audits/20260811T040000Z.json"],
+      "fix_sketch": "Scanner must compute fresh fingerprints per rubric.json fingerprint_algo on each scan, deriving IDs from the first 8 hex chars of the result.",
+      "parallel_safe": true,
+      "fingerprint": "b9f3c8f1ceb9791c9792f9707358fc1e6a8323b0b19d22a2de3fe6dd691a5c9e",
+      "status": "open",
+      "opened_at": "2026-08-12T05:40:47Z",
+      "closed_at": null,
+      "closing_pr": null,
+      "fix_summary": null
+    },
+    {
+      "id": "AUDIT-audit-elevation-409aabc9",
+      "severity": "COSMETIC",
+      "category": "cosmetic",
+      "title": "Phase 4 gate overdue day counts stale across 8 locations (68→69 days, 82→83 days elapsed, 2026-08-11→2026-08-12)",
+      "detail": "Phase 3 soak completed 2026-06-04. As of 2026-08-12: 69 days overdue (was 68 as of 2026-08-11), 83 days elapsed since Phase 3 start on 2026-05-21 (was 82). Stale references appear in README.md (×2), plan.md (×3), docs/ifleet-integration-adrs.md (×1), docs/proposer-spec.md (×1), docs/quota-pacing-design.md (×1).",
+      "file_globs": [
+        "README.md",
+        "docs/ifleet-integration-adrs.md",
+        "docs/proposer-spec.md",
+        "docs/quota-pacing-design.md",
+        "plan.md"
+      ],
+      "fix_sketch": "Replace '68 days overdue' with '69 days overdue', '82 days elapsed' with '83 days elapsed', and 'as of 2026-08-11' with 'as of 2026-08-12' across all 8 affected locations.",
+      "parallel_safe": false,
+      "fingerprint": "409aabc9a684094dea2fe238f66408474130b3a270a7cb983f77d3f0d798763d",
+      "status": "fixed",
+      "opened_at": "2026-08-12T05:40:47Z",
+      "closed_at": "2026-08-12T05:40:47Z",
+      "closing_pr": 0,
+      "fix_summary": "Updated stale day counts in README.md (×2), plan.md (×3), docs/ifleet-integration-adrs.md (×1), docs/proposer-spec.md (×1), docs/quota-pacing-design.md (×1): 68→69 days overdue, 82→83 days elapsed, as-of date 2026-08-11→2026-08-12."
+    },
+    {
+      "id": "AUDIT-audit-elevation-ca992bdc",
+      "severity": "COSMETIC",
+      "category": "cosmetic",
+      "title": "ADR-0002 body contains self-referential cross-reference 'Docker-unreachable fallback in ADR-0002'",
+      "detail": "In docs/ifleet-integration-adrs.md, the Decision section of ADR-0002 reads: 'matches the Docker-unreachable fallback in ADR-0002'. Since this text appears inside ADR-0002 itself, a reader naturally interprets it as a circular reference. The intended reference is to IFleet's own internal ADR-0002 (at IFleet/docs/adr/).",
+      "file_globs": ["docs/ifleet-integration-adrs.md"],
+      "fix_sketch": "Qualify the reference to 'Docker-unreachable fallback in IFleet repo ADR-0002' to distinguish it from this document's ADR-0002.",
+      "parallel_safe": true,
+      "fingerprint": "ca992bdc064a98a217c047a9863d6938dd46a5cc010a73a6683d36476f8262ea",
+      "status": "fixed",
+      "opened_at": "2026-08-12T05:40:47Z",
+      "closed_at": "2026-08-12T05:40:47Z",
+      "closing_pr": 0,
+      "fix_summary": "Qualified 'Docker-unreachable fallback in ADR-0002' to 'Docker-unreachable fallback in IFleet repo ADR-0002' in the ADR-0002 Decision section of docs/ifleet-integration-adrs.md."
+    },
+    {
+      "id": "AUDIT-audit-elevation-0b726fdd",
+      "severity": "COSMETIC",
+      "category": "cosmetic",
+      "title": "proposer-spec.md §3 pre-filter description misleadingly implies only COSMETIC findings are skipped when closed/fixed",
+      "detail": "The third sentence of the Pre-filter block reads: 'COSMETIC findings with status: \"closed\" or \"fixed\" are also skipped'. This is redundant with the first sentence and misleadingly implies CRITICAL/IMPORTANT findings with those statuses might not be skipped. The correct invariant is that ALL findings with status outside [\"open\", \"regression\"] are skipped regardless of severity.",
+      "file_globs": ["docs/proposer-spec.md"],
+      "fix_sketch": "Remove or reword the redundant sentence to eliminate the misleading severity qualifier.",
+      "parallel_safe": true,
+      "fingerprint": "0b726fddc46feb8f674b86c5bf6218b180573ccd414c8c5d7dba1d893d819828",
+      "status": "fixed",
+      "opened_at": "2026-08-12T05:40:47Z",
+      "closed_at": "2026-08-12T05:40:47Z",
+      "closing_pr": 0,
+      "fix_summary": "Replaced 'COSMETIC findings with status: \"closed\" or \"fixed\" are also skipped' with a corrected sentence clarifying that the first-sentence rule applies to all severities equally."
     }
   ]
 }
