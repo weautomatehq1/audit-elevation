@@ -1,0 +1,30 @@
+{
+  "audit_id": "audit-20260816T040000Z",
+  "repo": "audit-elevation",
+  "scanned_at": "2026-08-16T04:00:00Z",
+  "scanner": "claude-sonnet-4-6-nightly",
+  "findings": [
+    {
+      "id": "AUDIT-audit-elevation-day-counts-20260816",
+      "severity": "COSMETIC",
+      "category": "stale-content",
+      "title": "Phase 4 gate overdue day counts stale across 8 locations (70→73 days, 84→87 days elapsed, 2026-08-13→2026-08-16)",
+      "detail": "Last audit ran 2026-08-13; today is 2026-08-16 (3 days elapsed). Standard nightly cosmetic pass updating all stale day-count references. Phase 4 gate overdue 70→73 days, Phase 3 elapsed 84→87 days across README.md, plan.md, docs/ifleet-integration-adrs.md, docs/proposer-spec.md, docs/quota-pacing-design.md.",
+      "file_globs": [
+        "README.md",
+        "docs/ifleet-integration-adrs.md",
+        "docs/proposer-spec.md",
+        "docs/quota-pacing-design.md",
+        "plan.md"
+      ],
+      "fix_sketch": "Updated all 70-day overdue counts to 73 days; 84-day elapsed counts to 87 days; all as-of dates from 2026-08-13 to 2026-08-16.",
+      "parallel_safe": false,
+      "fingerprint": "e0b431d015b173bda166030f0ad44247cd6a8cca11898f3eda6fa591924bd8c5",
+      "status": "fixed",
+      "opened_at": "2026-08-16T04:00:00Z",
+      "closed_at": "2026-08-16T04:00:00Z",
+      "closing_pr": 0,
+      "fix_summary": "Updated stale day counts in README.md (×2), plan.md (×3), docs/ifleet-integration-adrs.md (×1), docs/proposer-spec.md (×1), docs/quota-pacing-design.md (×1): 70→73 days overdue, 84→87 days elapsed, as-of date 2026-08-13→2026-08-16."
+    }
+  ]
+}
