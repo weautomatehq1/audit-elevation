@@ -1,6 +1,6 @@
 # Proposer — IFleet M5 spec
 
-> **Status:** DRAFT — design only. No IFleet source code lands until Sebastian approves (Phase 4 gate pending — see README, 70 days overdue as of 2026-08-13).
+> **Status:** DRAFT — design only. No IFleet source code lands until Sebastian approves (Phase 4 gate pending — see README, 72 days overdue as of 2026-08-15).
 > **Author:** T5 (overnight split `20260520-2244-elevation-push`, 2026-05-20).
 > **Predecessors:** ROADMAP.md M5, ADR-0001 (single-shared-trace), SECURITY.md, NON_GOALS.md.
 > **Companion:** `~/.claude/skills/audit-broadcast/` — the channel the Proposer reuses for its morning DM/post.
