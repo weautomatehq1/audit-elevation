@@ -1,0 +1,31 @@
+{
+  "audit_id": "audit-20260818T075425Z",
+  "repo": "audit-elevation",
+  "scanned_at": "2026-08-18T07:54:25Z",
+  "scanner": "claude-sonnet-4-6-nightly",
+  "rubric_version": "1.0",
+  "findings": [
+    {
+      "id": "AUDIT-audit-elevation-day-counts-20260818",
+      "severity": "COSMETIC",
+      "category": "cosmetic",
+      "title": "Phase 4 gate overdue day counts stale across 8 locations (68→75 days, 82→89 days elapsed, 2026-08-11→2026-08-18)",
+      "detail": "Phase 3 soak completed 2026-06-04. As of 2026-08-18: 75 days overdue (was 68 as of 2026-08-11 on main; 2026-08-13 and 2026-08-15 fixes were in detached-HEAD commits not merged to main), 89 days elapsed since Phase 3 start on 2026-05-21. Stale references appeared in README.md (×2), docs/ifleet-integration-adrs.md (×1), docs/proposer-spec.md (×1), docs/quota-pacing-design.md (×1), plan.md (×3).",
+      "file_globs": [
+        "README.md",
+        "docs/ifleet-integration-adrs.md",
+        "docs/proposer-spec.md",
+        "docs/quota-pacing-design.md",
+        "plan.md"
+      ],
+      "fix_sketch": "Replace '68 days overdue' with '75 days overdue', '82 days elapsed' with '89 days elapsed', and 'as of 2026-08-11' with 'as of 2026-08-18' across all 8 affected locations.",
+      "parallel_safe": false,
+      "fingerprint": "e0b431d015b173bda166030f0ad44247cd6a8cca11898f3eda6fa591924bd8c5",
+      "status": "fixed",
+      "opened_at": "2026-08-18T07:54:25Z",
+      "closed_at": "2026-08-18T07:54:25Z",
+      "closing_pr": null,
+      "fix_summary": "Updated stale day counts in README.md (×2), plan.md (×3), docs/ifleet-integration-adrs.md (×1), docs/proposer-spec.md (×1), docs/quota-pacing-design.md (×1): 68→75 days overdue, 82→89 days elapsed, as-of date 2026-08-11→2026-08-18. Note: 2026-08-13 and 2026-08-15 audit fixes were in detached-HEAD commits not merged to main; this commit bridges from the 2026-08-11 main baseline."
+    }
+  ]
+}
