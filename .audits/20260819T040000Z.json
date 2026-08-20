@@ -1,0 +1,22 @@
+{
+  "audit_id": "audit-20260819T040000Z",
+  "repo": "audit-elevation",
+  "scanned_at": "2026-08-19T04:00:00Z",
+  "scanner": "claude-sonnet-4-6-nightly",
+  "findings": [
+    {
+      "id": "AUDIT-audit-elevation-day-counts-20260819",
+      "severity": "COSMETIC",
+      "category": "cosmetic",
+      "title": "Day counts stale in README.md and plan.md (2 days since last audit)",
+      "detail": "Last audit was 2026-08-17. Phase 3 elapsed days and Phase 4 gate overdue count need updating: 88→90 days elapsed, 74→76 days overdue.",
+      "file_globs": ["README.md", "plan.md"],
+      "fix_sketch": "Replace 88→90 and 74→76 in README.md and plan.md, update date references from 2026-08-17→2026-08-19",
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-08-19T04:00:00Z",
+      "closed_at": "2026-08-19T04:10:00Z",
+      "closing_pr": null
+    }
+  ]
+}
