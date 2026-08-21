@@ -1,0 +1,47 @@
+{
+  "audit_id": "audit-20260820T040000Z",
+  "repo": "audit-elevation",
+  "scanned_at": "2026-08-20T04:00:00Z",
+  "scanner": "claude-sonnet-4-6-nightly",
+  "rubric_version": "1.0.0",
+  "findings": [
+    {
+      "id": "AUDIT-audit-elevation-51a6bb05",
+      "severity": "IMPORTANT",
+      "category": "correctness",
+      "title": "closing_pr: null in 20260815T040000Z.json violates schema — fixed finding must use integer 0",
+      "detail": "The finding in .audits/20260815T040000Z.json has status 'fixed' but closing_pr is null. Per self-heal-pipeline.md schema, closing_pr must be an integer GitHub PR number; for local-only fixes with no PR, the sentinel is 0 (not null). The same violation was caught and fixed in 20260802T080000Z.json (AUDIT-audit-elevation-03554cf4).",
+      "file_globs": [".audits/20260815T040000Z.json"],
+      "fix_sketch": "Change closing_pr from null to 0 in .audits/20260815T040000Z.json.",
+      "parallel_safe": true,
+      "fingerprint": "51a6bb0570683481b7427af7a8e651ad2d4b51ab0f4abfaf83b297f7a06109c5",
+      "status": "fixed",
+      "opened_at": "2026-08-20T04:00:00Z",
+      "closed_at": "2026-08-20T04:00:00Z",
+      "closing_pr": 0,
+      "fix_summary": "Changed closing_pr from null to 0 in .audits/20260815T040000Z.json to conform to self-heal-pipeline.md schema (integer 0 sentinel for local-only fixes without a PR)."
+    },
+    {
+      "id": "AUDIT-audit-elevation-29c36589",
+      "severity": "COSMETIC",
+      "category": "stale-content",
+      "title": "Phase 4 gate overdue day counts stale across 8 locations (74→77 days, 88→91 days elapsed, 2026-08-17→2026-08-20)",
+      "detail": "Phase 3 soak completed 2026-06-04. As of 2026-08-20: 77 days overdue (was 74 as of 2026-08-17), 91 days elapsed since Phase 3 start on 2026-05-21 (was 88). Stale references appear in README.md (×2), docs/ifleet-integration-adrs.md (×1), docs/proposer-spec.md (×1), docs/quota-pacing-design.md (×1), plan.md (×3).",
+      "file_globs": [
+        "README.md",
+        "docs/ifleet-integration-adrs.md",
+        "docs/proposer-spec.md",
+        "docs/quota-pacing-design.md",
+        "plan.md"
+      ],
+      "fix_sketch": "Replace '74 days overdue' with '77 days overdue', '88 days elapsed' with '91 days elapsed', and 'as of 2026-08-17' with 'as of 2026-08-20' across all 8 affected locations.",
+      "parallel_safe": false,
+      "fingerprint": "29c365899055c7a77c8b57376d5e9213f34603930f70024b58b74baef28a1ede",
+      "status": "fixed",
+      "opened_at": "2026-08-20T04:00:00Z",
+      "closed_at": "2026-08-20T04:00:00Z",
+      "closing_pr": 0,
+      "fix_summary": "Updated stale day counts in README.md (×2), plan.md (×3), docs/ifleet-integration-adrs.md (×1), docs/proposer-spec.md (×1), docs/quota-pacing-design.md (×1): 74→77 days overdue, 88→91 days elapsed, as-of date 2026-08-17→2026-08-20."
+    }
+  ]
+}
