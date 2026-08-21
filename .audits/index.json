@@ -1,6 +1,6 @@
 {
   "repo": "audit-elevation",
-  "last_updated": "2026-08-17T04:00:00Z",
+  "last_updated": "2026-08-21T04:30:00Z",
   "open_findings": 0,
   "fixed_this_run": 1,
   "by_severity": {
@@ -45,7 +45,8 @@
     "20260811T040000Z.json",
     "20260813T040000Z.json",
     "20260815T040000Z.json",
-    "20260817T040000Z.json"
+    "20260817T040000Z.json",
+    "20260821T043000Z.json"
   ],
   "findings": [
     {
@@ -589,6 +590,26 @@
       "closed_at": "2026-08-17T04:20:00Z",
       "closing_pr": 0,
       "fix_summary": "Updated stale day counts in README.md (×2), plan.md (×3), docs/ifleet-integration-adrs.md (×1), docs/proposer-spec.md (×1), docs/quota-pacing-design.md (×1): 68→74 days overdue, 82→88 days elapsed, as-of date 2026-08-11→2026-08-17.",
+      "file_globs": [
+        "README.md",
+        "plan.md",
+        "docs/ifleet-integration-adrs.md",
+        "docs/proposer-spec.md",
+        "docs/quota-pacing-design.md"
+      ],
+      "parallel_safe": false
+    },
+    {
+      "id": "AUDIT-audit-elevation-day-counts-20260821",
+      "severity": "COSMETIC",
+      "category": "stale-content",
+      "title": "Phase 4 gate overdue day counts stale across 6 locations (74→78 days, 88→92 days elapsed, 2026-08-17→2026-08-21)",
+      "fingerprint": "0fc595d6a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d9",
+      "status": "fixed",
+      "opened_at": "2026-08-21T04:30:00Z",
+      "closed_at": "2026-08-21T04:30:00Z",
+      "closing_pr": 0,
+      "fix_summary": "Updated stale day counts in README.md (×2), plan.md (×3), docs/ifleet-integration-adrs.md (×1), docs/proposer-spec.md (×1), docs/quota-pacing-design.md (×1): 74→78 days overdue, 88→92 days elapsed, as-of date 2026-08-17→2026-08-21.",
       "file_globs": [
         "README.md",
         "plan.md",
