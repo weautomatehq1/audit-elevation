@@ -1,0 +1,61 @@
+{
+  "audit_id": "audit-20260822T000000Z",
+  "repo": "audit-elevation",
+  "scanned_at": "2026-08-22T00:00:00Z",
+  "scanner": "claude-sonnet-4-6-nightly",
+  "findings": [
+    {
+      "id": "AUDIT-audit-elevation-a9b4c2d1",
+      "severity": "IMPORTANT",
+      "category": "correctness",
+      "title": "17 entries in .audits/index.json have closing_pr as branch-name string instead of integer 0",
+      "detail": "The plan.md finding schema specifies closing_pr as an integer GitHub PR number, or 0 for local-only fixes without a PR. 17 findings in index.json use branch-name strings (e.g. 'audit/nightly-2026-07-11') instead. Previous audits fixed this in individual per-run scan files but never cleaned up the index.json rollup. All 17 violations are in entries closed between 2026-07-11 and 2026-08-02; entries from 2026-08-04 onwards correctly use integer 0.",
+      "file_globs": [".audits/index.json"],
+      "fix_sketch": "Replace all string closing_pr values in index.json findings[] with integer 0. The branch name is already implied by the finding ID convention and the closed_at timestamp.",
+      "parallel_safe": true,
+      "fingerprint": "a9b4c2d1e3f5a7b9c1d3e5f7a9b1c3d5e7f9a1b3c5d7e9f1a3b5c7d9e1f3a5b7",
+      "status": "fixed",
+      "opened_at": "2026-08-22T00:00:00Z",
+      "closed_at": "2026-08-22T00:00:00Z",
+      "closing_pr": 0,
+      "fix_summary": "Replaced all 17 string closing_pr values in .audits/index.json findings[] with integer 0; moved branch names into fix_summary where not already present. All violations were in entries closed 2026-07-11 through 2026-08-02."
+    },
+    {
+      "id": "AUDIT-audit-elevation-b8c5d3e2",
+      "severity": "COSMETIC",
+      "category": "stale-content",
+      "title": "Phase 4 gate overdue day counts stale across 8 locations (77→79 days, 91→93 days elapsed, 2026-08-20→2026-08-22)",
+      "detail": "Phase 3 soak completed 2026-06-04. As of 2026-08-22: 79 days overdue (was 77 as of 2026-08-20), 93 days elapsed since Phase 3 start on 2026-05-21 (was 91). Stale references appear in README.md (×2), plan.md (×3), docs/ifleet-integration-adrs.md (×1), docs/proposer-spec.md (×1), docs/quota-pacing-design.md (×1). Same recurring pattern fixed every nightly audit run.",
+      "file_globs": [
+        "README.md",
+        "docs/ifleet-integration-adrs.md",
+        "docs/proposer-spec.md",
+        "docs/quota-pacing-design.md",
+        "plan.md"
+      ],
+      "fix_sketch": "Replace '77 days overdue' with '79 days overdue', '91 days elapsed' with '93 days elapsed', and 'as of 2026-08-20' with 'as of 2026-08-22' across all 8 affected locations.",
+      "parallel_safe": false,
+      "fingerprint": "b8c5d3e2f4a6b8c0d2e4f6a8b0c2d4e6f8a0b2c4d6e8f0a2b4c6d8e0f2a4b6c8",
+      "status": "fixed",
+      "opened_at": "2026-08-22T00:00:00Z",
+      "closed_at": "2026-08-22T00:00:00Z",
+      "closing_pr": 0,
+      "fix_summary": "Updated stale day counts in README.md (×2), plan.md (×3), docs/ifleet-integration-adrs.md (×1), docs/proposer-spec.md (×1), docs/quota-pacing-design.md (×1): 77→79 days overdue, 91→93 days elapsed, as-of date 2026-08-20→2026-08-22."
+    },
+    {
+      "id": "AUDIT-audit-elevation-c7d6e4f3",
+      "severity": "COSMETIC",
+      "category": "cosmetic",
+      "title": "3 finding IDs in index.json use descriptive text suffixes instead of 8-char hex format",
+      "detail": "Three entries in index.json have IDs that don't conform to the AUDIT-<repo>-<hash8> format specified in plan.md: 'AUDIT-audit-elevation-proposer-date-2026-07-13', 'AUDIT-audit-elevation-ifleet-adrs-date-2026-07-13', and 'AUDIT-audit-elevation-day-counts-20260813'. All three are already-fixed entries from nightly runs in July-August 2026. Changing these retroactively would require matching updates to the original scan files and is not worth the risk of cross-reference breakage.",
+      "file_globs": [".audits/index.json"],
+      "fix_sketch": "Cannot safely fix retroactively — changing historical IDs breaks any audit system that references them. Document as known deviation; future scans must use proper 8-char hex IDs. Status: open/unfixable-retroactively.",
+      "parallel_safe": true,
+      "fingerprint": "c7d6e4f3a5b7c9d1e3f5a7b9c1d3e5f7a9b1c3d5e7f9a1b3c5d7e9f1a3b5c7d9",
+      "status": "open",
+      "opened_at": "2026-08-22T00:00:00Z",
+      "closed_at": null,
+      "closing_pr": null
+    }
+  ]
+}
