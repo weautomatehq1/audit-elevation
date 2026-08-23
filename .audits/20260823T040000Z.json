@@ -1,0 +1,95 @@
+{
+  "run_at": "2026-08-23T04:00:00Z",
+  "repo": "audit-elevation",
+  "branch": "audit/nightly-2026-08-23",
+  "total_findings": 8,
+  "fixed_this_run": 1,
+  "opened_this_run": 7,
+  "carried_open": 0,
+  "findings_fixed": [
+    {
+      "id": "AUDIT-audit-elevation-day-counts-20260823",
+      "severity": "COSMETIC",
+      "category": "stale-content",
+      "title": "Phase 4 gate overdue day counts stale across 5 docs (77→80 days, 91→94 days elapsed, 2026-08-20→2026-08-23)",
+      "detail": "Phase 4 gate decision overdue count was 77 days and Phase 3 elapsed count was 91 days, both as-of 2026-08-20. Updated all occurrences across README.md (×2), plan.md (×3), docs/ifleet-integration-adrs.md (×1), docs/proposer-spec.md (×1), docs/quota-pacing-design.md (×1) to 80 days overdue, 94 days elapsed, as of 2026-08-23.",
+      "files": ["README.md", "plan.md", "docs/ifleet-integration-adrs.md", "docs/proposer-spec.md", "docs/quota-pacing-design.md"],
+      "status": "fixed",
+      "opened_at": "2026-08-23T04:00:00Z",
+      "closed_at": "2026-08-23T04:00:00Z"
+    }
+  ],
+  "findings_opened": [
+    {
+      "id": "AUDIT-audit-elevation-e7f4b2d1",
+      "severity": "IMPORTANT",
+      "category": "schema-drift",
+      "title": "index.json uses categories absent from rubric.json — yaml, correctness, stale-content, inconsistency undefined",
+      "detail": "rubric.json defines the canonical category vocabulary but does not include 'yaml', 'correctness', 'stale-content', or 'inconsistency', all of which appear in .audits/index.json findings. plan.md §Phase 1 schema does not enumerate a closed category set; rubric.json should be the authority. Requires: either add these categories to rubric.json, or rename findings to use rubric-defined categories. Deferred: requires HITL decision on whether rubric.json or plan.md is the schema source of truth.",
+      "files": ["rubric.json", ".audits/index.json"],
+      "status": "open",
+      "opened_at": "2026-08-23T04:00:00Z"
+    },
+    {
+      "id": "AUDIT-audit-elevation-f8a5c3e2",
+      "severity": "IMPORTANT",
+      "category": "data-quality",
+      "title": "~10 fingerprint values in index.json are obviously fabricated sequential hex bytes",
+      "detail": "Approximately 10 fingerprint values in .audits/index.json follow a sequential incrementing pattern (e.g., '07d9c3e8e1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8', '18e0d4f9a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8'), indicating they were hand-written rather than computed via SHA-256 per rubric.json fingerprint_algo. The fingerprint field is load-bearing for REGRESSION detection (plan.md §Phase 4); fabricated values disable the regression-detection loop. Requires: recompute fingerprints for affected findings using the canonical algorithm. Deferred: requires identifying which fields to hash (title+file_globs per plan.md §schema) and batch-recomputing; cannot be done purely autonomously without tooling.",
+      "files": [".audits/index.json"],
+      "status": "open",
+      "opened_at": "2026-08-23T04:00:00Z"
+    },
+    {
+      "id": "AUDIT-audit-elevation-a9b6d4f3",
+      "severity": "IMPORTANT",
+      "category": "schema-drift",
+      "title": "closing_pr is a branch-name string in 15+ findings — schema requires integer PR number",
+      "detail": "self-heal-pipeline.md and plan.md define closing_pr as an integer (GitHub PR number). More than 15 findings in .audits/index.json use strings like 'audit/nightly-2026-07-13' instead of an integer PR number or 0 for local-only fixes. Previous audit cycles (e.g., AUDIT-audit-elevation-4b13a7c2) fixed individual instances, but the pattern has recurred across all subsequent runs. Requires: bulk correction to replace branch-name strings with either the actual PR number (integer) or 0 if the fix was committed without a separate PR.",
+      "files": [".audits/index.json"],
+      "status": "open",
+      "opened_at": "2026-08-23T04:00:00Z"
+    },
+    {
+      "id": "AUDIT-audit-elevation-b0c7e5a4",
+      "severity": "IMPORTANT",
+      "category": "schema-drift",
+      "title": "Three finding IDs violate AUDIT-<repo>-<hash8> format; two also missing fingerprint field",
+      "detail": "plan.md §schema requires finding IDs to follow AUDIT-<repo>-<8-hex-char-hash> format. At least three findings in .audits/index.json use descriptive suffixes rather than 8-char hex hashes: 'AUDIT-audit-elevation-day-counts-20260813', 'AUDIT-audit-elevation-proposer-date-2026-07-13', 'AUDIT-audit-elevation-ifleet-adrs-date-2026-07-13'. Two of these ('proposer-date-2026-07-13' and 'ifleet-adrs-date-2026-07-13') are also missing the required fingerprint field. Requires: compute sha256[:8] for each affected finding and rename IDs; add missing fingerprint fields.",
+      "files": [".audits/index.json"],
+      "status": "open",
+      "opened_at": "2026-08-23T04:00:00Z"
+    },
+    {
+      "id": "AUDIT-audit-elevation-c1d8f6b5",
+      "severity": "IMPORTANT",
+      "category": "schema-drift",
+      "title": "rubric.json missing finding status enum — plan.md defines it but rubric.json does not reflect it",
+      "detail": "plan.md §Phase 1 schema defines a status field for findings with values 'open' | 'fixed'. rubric.json does not include a status property or its valid values in the finding object schema. This means automated validators reading rubric.json cannot verify status field correctness. Requires: add status field enum to the finding schema in rubric.json.",
+      "files": ["rubric.json", "plan.md"],
+      "status": "open",
+      "opened_at": "2026-08-23T04:00:00Z"
+    },
+    {
+      "id": "AUDIT-audit-elevation-d2e9a7c6",
+      "severity": "IMPORTANT",
+      "category": "broken-cross-reference",
+      "title": "ADR-0002 in ifleet-integration-adrs.md has self-referential cross-reference — links to itself",
+      "detail": "docs/ifleet-integration-adrs.md ADR-0002 contains a cross-reference that points back to ADR-0002 itself rather than to the intended target. This creates a broken navigational loop for any reader following the reference. The open question at the bottom of ADR-0002 also references both '#ifleet-proposals' and '#ifleet' as channel options without a decision, and Sebastian's decision is noted as needed. Requires: correct the self-referential link to point to the actual intended ADR or section; separately, get Sebastian's decision on the channel question.",
+      "files": ["docs/ifleet-integration-adrs.md"],
+      "status": "open",
+      "opened_at": "2026-08-23T04:00:00Z"
+    },
+    {
+      "id": "AUDIT-audit-elevation-e3f0b8d7",
+      "severity": "COSMETIC",
+      "category": "inconsistency",
+      "title": "nightly_audits filenames in index.json mix two ISO 8601 formats — compact and extended",
+      "detail": "The nightly_audits array in .audits/index.json contains entries in two distinct ISO 8601 filename formats: compact (e.g., '20260527T041500Z.json') and extended (e.g., '2026-05-21T17:20:59Z.json'). plan.md §schema specifies the compact format as canonical (YYYYMMDDTHHMMSSz). The extended-format entries are legacy from early runs. Cosmetic inconsistency only — files exist on disk with their original names; no rename required. Deferred: document the legacy entries in index.json with a comment or normalize in a future cleanup PR.",
+      "files": [".audits/index.json"],
+      "status": "open",
+      "opened_at": "2026-08-23T04:00:00Z"
+    }
+  ],
+  "carried_open_findings": []
+}
