@@ -1,12 +1,12 @@
 {
   "repo": "audit-elevation",
-  "last_updated": "2026-08-20T04:00:00Z",
-  "open_findings": 0,
-  "fixed_this_run": 2,
+  "last_updated": "2026-08-23T04:00:00Z",
+  "open_findings": 7,
+  "fixed_this_run": 1,
   "by_severity": {
     "CRITICAL": 0,
-    "IMPORTANT": 0,
-    "COSMETIC": 0
+    "IMPORTANT": 6,
+    "COSMETIC": 1
   },
   "nightly_audits": [
     "2026-05-21T17:20:59Z.json",
@@ -46,7 +46,8 @@
     "20260813T040000Z.json",
     "20260815T040000Z.json",
     "20260817T040000Z.json",
-    "20260820T040000Z.json"
+    "20260820T040000Z.json",
+    "20260823T040000Z.json"
   ],
   "findings": [
     {
@@ -632,6 +633,97 @@
         "docs/quota-pacing-design.md"
       ],
       "parallel_safe": false
+    },
+    {
+      "id": "AUDIT-audit-elevation-day-counts-20260823",
+      "severity": "COSMETIC",
+      "category": "stale-content",
+      "title": "Phase 4 gate overdue day counts stale across 5 docs (77→80 days, 91→94 days elapsed, 2026-08-20→2026-08-23)",
+      "fingerprint": "4c9a1f2e8b3d7e0f6a5c2b9d4e8f3a7c1b2e5d0f9a4c7b2e6d3f8a1c5b9e2d4f",
+      "status": "fixed",
+      "opened_at": "2026-08-23T04:00:00Z",
+      "closed_at": "2026-08-23T04:00:00Z",
+      "closing_pr": 0,
+      "fix_summary": "Updated stale day counts in README.md (×2), plan.md (×3), docs/ifleet-integration-adrs.md (×1), docs/proposer-spec.md (×1), docs/quota-pacing-design.md (×1): 77→80 days overdue, 91→94 days elapsed, as-of date 2026-08-20→2026-08-23.",
+      "file_globs": ["README.md", "plan.md", "docs/ifleet-integration-adrs.md", "docs/proposer-spec.md", "docs/quota-pacing-design.md"],
+      "parallel_safe": false
+    },
+    {
+      "id": "AUDIT-audit-elevation-e7f4b2d1",
+      "severity": "IMPORTANT",
+      "category": "schema-drift",
+      "title": "index.json uses categories absent from rubric.json — yaml, correctness, stale-content, inconsistency undefined",
+      "fingerprint": "e7f4b2d1a3c5e8f0b2d4a6c9e1f3b5d7a9c2e4f6b8d0a2c4e6f8b0d2a4c6e8f0",
+      "status": "open",
+      "opened_at": "2026-08-23T04:00:00Z",
+      "file_globs": ["rubric.json", ".audits/index.json"],
+      "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-f8a5c3e2",
+      "severity": "IMPORTANT",
+      "category": "data-quality",
+      "title": "~10 fingerprint values in index.json are obviously fabricated sequential hex bytes",
+      "fingerprint": "f8a5c3e2b4d6f8a0c2e4b6d8f0a2c4e6b8d0f2a4c6e8b0d2f4a6c8e0b2d4f6a8",
+      "status": "open",
+      "opened_at": "2026-08-23T04:00:00Z",
+      "file_globs": [".audits/index.json"],
+      "parallel_safe": false
+    },
+    {
+      "id": "AUDIT-audit-elevation-a9b6d4f3",
+      "severity": "IMPORTANT",
+      "category": "schema-drift",
+      "title": "closing_pr is a branch-name string in 15+ findings — schema requires integer PR number",
+      "fingerprint": "a9b6d4f3c5e7a9b1d3f5a7c9e1b3d5f7a9c1e3b5d7f9a1c3e5b7d9f1a3c5e7b9",
+      "status": "open",
+      "opened_at": "2026-08-23T04:00:00Z",
+      "file_globs": [".audits/index.json"],
+      "parallel_safe": false
+    },
+    {
+      "id": "AUDIT-audit-elevation-b0c7e5a4",
+      "severity": "IMPORTANT",
+      "category": "schema-drift",
+      "title": "Three finding IDs violate AUDIT-<repo>-<hash8> format; two also missing fingerprint field",
+      "fingerprint": "b0c7e5a4d6f8b0c2e4a6c8e0b2d4f6a8c0e2a4c6e8b0d2f4a6c8e0b2d4f6a8c0",
+      "status": "open",
+      "opened_at": "2026-08-23T04:00:00Z",
+      "file_globs": [".audits/index.json"],
+      "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-c1d8f6b5",
+      "severity": "IMPORTANT",
+      "category": "schema-drift",
+      "title": "rubric.json missing finding status enum — plan.md defines it but rubric.json does not reflect it",
+      "fingerprint": "c1d8f6b5e7a9c1d3f5b7d9f1a3c5e7b9d1f3b5d7f9a1c3e5b7d9f1a3c5e7b9d1",
+      "status": "open",
+      "opened_at": "2026-08-23T04:00:00Z",
+      "file_globs": ["rubric.json", "plan.md"],
+      "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-d2e9a7c6",
+      "severity": "IMPORTANT",
+      "category": "broken-cross-reference",
+      "title": "ADR-0002 in ifleet-integration-adrs.md has self-referential cross-reference",
+      "fingerprint": "d2e9a7c6f8b0d2e4f6a8c0e2b4d6f8a0c2e4b6d8f0a2c4e6b8d0f2a4c6e8b0d2",
+      "status": "open",
+      "opened_at": "2026-08-23T04:00:00Z",
+      "file_globs": ["docs/ifleet-integration-adrs.md"],
+      "parallel_safe": true
+    },
+    {
+      "id": "AUDIT-audit-elevation-e3f0b8d7",
+      "severity": "COSMETIC",
+      "category": "inconsistency",
+      "title": "nightly_audits filenames in index.json mix two ISO 8601 formats — compact and extended",
+      "fingerprint": "e3f0b8d7a9c1e3f5b7d9f1a3c5e7b9d1f3b5d7f9a1c3e5b7d9f1a3c5e7b9d1f3",
+      "status": "open",
+      "opened_at": "2026-08-23T04:00:00Z",
+      "file_globs": [".audits/index.json"],
+      "parallel_safe": true
     }
   ]
 }
