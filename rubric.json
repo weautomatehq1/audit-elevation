@@ -21,7 +21,17 @@
     "overconfidence": "Places where execution happened without enough questioning",
     "risk": "Unconsidered consequences or side effects of changes made",
     "redo": "Work that may need to be redone before it surfaces later",
-    "cosmetic": "Style, duplication, or hygiene with no functional impact"
+    "cosmetic": "Style, duplication, or hygiene with no functional impact",
+    "correctness": "Data or logic that is factually wrong or contradicts the schema/spec",
+    "stale-content": "Content that was accurate at time of writing but is now out of date",
+    "inconsistency": "Two parts of the repo that contradict each other",
+    "data-quality": "Integrity problems in data files (fabricated values, bad formats)",
+    "schema-drift": "Implementation diverged from the schema or spec that defines it",
+    "broken-cross-reference": "A link, anchor, or named reference that no longer resolves"
+  },
+  "finding_status": {
+    "open": "Finding is unresolved — no fix has been applied",
+    "fixed": "Finding was resolved — fix_summary is populated"
   },
   "fingerprint_algo": {
     "version": "sha256-v1",

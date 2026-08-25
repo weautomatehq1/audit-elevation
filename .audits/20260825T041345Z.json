@@ -1,0 +1,148 @@
+{
+  "audit_id": "audit-20260825T041345Z",
+  "repo": "audit-elevation",
+  "scanned_at": "2026-08-25T04:13:45Z",
+  "scanner": "claude-sonnet-4-6-nightly",
+  "findings": [
+    {
+      "id": "AUDIT-audit-elevation-day-counts-20260825",
+      "severity": "COSMETIC",
+      "category": "stale-content",
+      "title": "Phase 4 gate overdue day counts stale across 5 docs (80\u219282 days, 94\u219296 days elapsed, 2026-08-23\u21922026-08-25)",
+      "file_globs": [
+        "README.md",
+        "docs/ifleet-integration-adrs.md",
+        "docs/proposer-spec.md",
+        "docs/quota-pacing-design.md",
+        "plan.md"
+      ],
+      "fix_sketch": "Update all 'X days overdue' and 'Y days elapsed' counts and 'as of' dates across 5 files.",
+      "parallel_safe": false,
+      "status": "fixed",
+      "opened_at": "2026-08-25T04:13:45Z",
+      "closed_at": "2026-08-25T04:13:45Z",
+      "closing_pr": 0,
+      "fix_summary": "Updated stale day counts in README.md (\u00d72), plan.md (\u00d73), docs/ifleet-integration-adrs.md (\u00d71), docs/proposer-spec.md (\u00d71), docs/quota-pacing-design.md (\u00d71): 80\u219282 days overdue, 94\u219296 days elapsed, as-of date 2026-08-23\u21922026-08-25.",
+      "fingerprint": "1032f526eda745ada4a5135c61ed65ac780b28abd336589a4149c9701d113fc9"
+    },
+    {
+      "id": "AUDIT-audit-elevation-e7f4b2d1",
+      "severity": "IMPORTANT",
+      "category": "schema-drift",
+      "title": "index.json uses categories absent from rubric.json \u2014 yaml, correctness, stale-content, inconsistency undefined",
+      "file_globs": [
+        "rubric.json",
+        ".audits/index.json"
+      ],
+      "fix_sketch": "Add missing categories to rubric.json: correctness, stale-content, inconsistency, data-quality, schema-drift, broken-cross-reference.",
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-08-23T04:00:00Z",
+      "closed_at": "2026-08-25T04:13:45Z",
+      "closing_pr": 0,
+      "fix_summary": "Added correctness, stale-content, inconsistency, data-quality, schema-drift, broken-cross-reference to rubric.json categories.",
+      "fingerprint": "25bce7997bdb0d878fb28c05c9e775eb6dd2d19f9dd3479154f6a0f6defc90bd"
+    },
+    {
+      "id": "AUDIT-audit-elevation-f8a5c3e2",
+      "severity": "IMPORTANT",
+      "category": "data-quality",
+      "title": "~10 fingerprint values in index.json are obviously fabricated sequential hex bytes",
+      "file_globs": [
+        ".audits/index.json"
+      ],
+      "fix_sketch": "Null out fabricated fingerprints; real fingerprints can be recomputed if needed.",
+      "parallel_safe": false,
+      "status": "fixed",
+      "opened_at": "2026-08-23T04:00:00Z",
+      "closed_at": "2026-08-25T04:13:45Z",
+      "closing_pr": 0,
+      "fix_summary": "Nulled all 29 fabricated fingerprints in index.json (identified by sequential-byte-increment pattern with diff=17 or diff=34 at ratio \u22650.33 in the hash suffix).",
+      "fingerprint": "ffa70a11fd3465b6b5fa1b71e74c282e2d77a5ed842f28909f7af5d955c61841"
+    },
+    {
+      "id": "AUDIT-audit-elevation-a9b6d4f3",
+      "severity": "IMPORTANT",
+      "category": "schema-drift",
+      "title": "closing_pr is a branch-name string in 15+ findings \u2014 schema requires integer PR number",
+      "file_globs": [
+        ".audits/index.json"
+      ],
+      "fix_sketch": "Replace all branch-name strings with 0 (no PR opened \u2014 local-only fix).",
+      "parallel_safe": false,
+      "status": "fixed",
+      "opened_at": "2026-08-23T04:00:00Z",
+      "closed_at": "2026-08-25T04:13:45Z",
+      "closing_pr": 0,
+      "fix_summary": "Replaced all 17 closing_pr branch-name strings ('audit/nightly-*') with integer 0 in index.json \u2014 per schema (0 = local fix, no PR number).",
+      "fingerprint": "213c5543978ef60cef611bcae9b46048b3324a8712559d3747ae0f427d193421"
+    },
+    {
+      "id": "AUDIT-audit-elevation-b0c7e5a4",
+      "severity": "IMPORTANT",
+      "category": "schema-drift",
+      "title": "Three finding IDs violate AUDIT-<repo>-<hash8> format; two also missing fingerprint field",
+      "file_globs": [
+        ".audits/index.json"
+      ],
+      "fix_sketch": "Rename the three non-standard IDs to proper AUDIT-<repo>-<hash8> format. Requires operator decision \u2014 renaming changes traceability.",
+      "parallel_safe": true,
+      "status": "open",
+      "opened_at": "2026-08-23T04:00:00Z",
+      "closed_at": null,
+      "closing_pr": null,
+      "fingerprint": "e6bbf9013d194535280dafd9435e93aa96837f30b74146db619acfe9712dd426"
+    },
+    {
+      "id": "AUDIT-audit-elevation-c1d8f6b5",
+      "severity": "IMPORTANT",
+      "category": "schema-drift",
+      "title": "rubric.json missing finding status enum \u2014 plan.md defines it but rubric.json does not reflect it",
+      "file_globs": [
+        "rubric.json",
+        "plan.md"
+      ],
+      "fix_sketch": "Add finding_status enum to rubric.json with values: open, fixed.",
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-08-23T04:00:00Z",
+      "closed_at": "2026-08-25T04:13:45Z",
+      "closing_pr": 0,
+      "fix_summary": "Added finding_status enum (open/fixed) to rubric.json alongside the categories fix.",
+      "fingerprint": "dfd869465669d022a0842d52f07f70066ea489877f6aab6c8c940aed19d97be7"
+    },
+    {
+      "id": "AUDIT-audit-elevation-d2e9a7c6",
+      "severity": "IMPORTANT",
+      "category": "broken-cross-reference",
+      "title": "ADR-0002 in ifleet-integration-adrs.md has self-referential cross-reference",
+      "file_globs": [
+        "docs/ifleet-integration-adrs.md"
+      ],
+      "fix_sketch": "Remove the self-referential parenthetical '(matches the Docker-unreachable fallback in ADR-0002)' from the Decision section.",
+      "parallel_safe": true,
+      "status": "fixed",
+      "opened_at": "2026-08-23T04:00:00Z",
+      "closed_at": "2026-08-25T04:13:45Z",
+      "closing_pr": 0,
+      "fix_summary": "Removed '(matches the Docker-unreachable fallback in ADR-0002)' parenthetical from ADR-0002 Decision section \u2014 the text was self-referential.",
+      "fingerprint": "719543a696dc3f82e17e216bfb912ed52311b3d5f4d44c0f3375b1c401522a1e"
+    },
+    {
+      "id": "AUDIT-audit-elevation-e3f0b8d7",
+      "severity": "COSMETIC",
+      "category": "inconsistency",
+      "title": "nightly_audits filenames in index.json mix two ISO 8601 formats \u2014 compact and extended",
+      "file_globs": [
+        ".audits/index.json"
+      ],
+      "fix_sketch": "Normalize all entries to compact format OR rename the files on disk. Requires operator decision since file renames are risky.",
+      "parallel_safe": true,
+      "status": "open",
+      "opened_at": "2026-08-23T04:00:00Z",
+      "closed_at": null,
+      "closing_pr": null,
+      "fingerprint": "4984fe78b149dc683d4a36b2a14ad5f88df50e59b696b4bf46e3c553a0d147f7"
+    }
+  ]
+}

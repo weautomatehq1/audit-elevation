@@ -1,6 +1,6 @@
 # Quota Pacing — Design Doc (Phase 4+)
 
-**Status:** DESIGN ONLY — no IFleet code shipped with the 2026-05-20 overnight elevation push (`20260520-2244-elevation-push`). T4 shipped the observation-only lane scheduler (`lane-scheduler-spec.md`) on 2026-05-21. This doc is what to build on top once we have telemetry to calibrate against. Phase 3 soak completed 2026-06-04; Phase 4 implementation is gated on Sebastian's go/no-go decision (see README — 80 days overdue as of 2026-08-23).
+**Status:** DESIGN ONLY — no IFleet code shipped with the 2026-05-20 overnight elevation push (`20260520-2244-elevation-push`). T4 shipped the observation-only lane scheduler (`lane-scheduler-spec.md`) on 2026-05-21. This doc is what to build on top once we have telemetry to calibrate against. Phase 3 soak completed 2026-06-04; Phase 4 implementation is gated on Sebastian's go/no-go decision (see README — 82 days overdue as of 2026-08-25).
 
 **Author:** T4 (lane-scheduler MVP), 2026-05-20.
 
